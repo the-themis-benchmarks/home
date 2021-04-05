@@ -1,0 +1,141 @@
+{
+	"WordPress-vanilla-debug--#6530.apk": {
+		"classfiles": ["WordPress-#6530/WordPress/build/intermediates/classes/vanilla/debug"
+			,"WordPress-#6530/libs/editor/WordPressEditor/build/intermediates/classes/debug"
+			,"WordPress-#6530/libs/networking/WordPressNetworking/build/intermediates/classes/debug"
+			,"WordPress-#6530/libs/utils/WordPressUtils/build/intermediates/classes/debug"],
+		"sourcefiles": ["WordPress-#6530/WordPress/src/main/java/"
+			,"WordPress-#6530/WordPress/src/debug/java/"
+			,"WordPress-#6530/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#6530/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#6530/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#6986.apk": {
+		"classfiles": ["WordPress-#6986/WordPress/build/intermediates/classes/vanilla/debug"
+			,"WordPress-#6986/libs/editor/WordPressEditor/build/intermediates/classes/debug"
+			,"WordPress-#6986/libs/networking/WordPressNetworking/build/intermediates/classes/debug"
+			,"WordPress-#6986/libs/utils/WordPressUtils/build/intermediates/classes/debug"],
+		"sourcefiles": ["WordPress-#6986/WordPress/src/main/java/"
+			,"WordPress-#6986/WordPress/src/debug/java/"
+			,"WordPress-#6986/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#6986/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#6986/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#7182.apk": {
+		"classfiles": ["WordPress-#7182/WordPress/build/intermediates/classes/vanilla/debug"
+			,"WordPress-#7182/libs/editor/WordPressEditor/build/intermediates/classes/debug"
+			,"WordPress-#7182/libs/networking/WordPressNetworking/build/intermediates/classes/debug"
+			,"WordPress-#7182/libs/login/WordPressLoginFlow/build/intermediates/classes/debug"
+			,"WordPress-#7182/libs/utils/WordPressUtils/build/intermediates/classes/debug"],
+		"sourcefiles": ["WordPress-#7182/WordPress/src/main/java/"
+			,"WordPress-#7182/WordPress/src/debug/java/"
+			,"WordPress-#7182/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#7182/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#7182/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#7182/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#7468.apk": {
+		"classfiles": ["WordPress-#7468/WordPress/build/intermediates/classes/vanilla/debug"
+			,"WordPress-#7468/libs/editor/WordPressEditor/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#7468/libs/login/WordPressLoginFlow/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#7468/libs/networking/WordPressNetworking/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#7468/libs/utils/WordPressUtils/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"],
+		"sourcefiles": ["WordPress-#7468/WordPress/src/main/java/"
+			,"WordPress-#7468/WordPress/src/debug/java/"
+			,"WordPress-#7468/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#7468/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#7468/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#7468/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#8659.apk": {
+		"classfiles": ["WordPress-#8659/WordPress/build/intermediates/classes/vanilla/debug"
+			,"WordPress-#8659/libs/editor/WordPressEditor/build/intermediates/classes/debug"
+			,"WordPress-#8659/libs/login/WordPressLoginFlow/build/intermediates/classes/debug"
+			,"WordPress-#8659/libs/networking/WordPressNetworking/build/intermediates/classes/debug"
+			,"WordPress-#8659/libs/utils/WordPressUtils/build/intermediates/classes/debug"],
+		"sourcefiles": ["WordPress-#8659/WordPress/src/main/java/"
+			,"WordPress-#8659/WordPress/src/debug/java/"
+			,"WordPress-#8659/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#8659/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#8659/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#8659/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#10302.apk": {
+		"classfiles": ["WordPress-#10302/WordPress/build/intermediates/javac/vanillaDebug/compileVanillaDebugJavaWithJavac/classes"
+			,"WordPress-#10302/libs/editor/WordPressEditor/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10302/libs/login/WordPressLoginFlow/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10302/libs/networking/WordPressNetworking/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10302/libs/utils/WordPressUtils/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"],
+		"sourcefiles": ["WordPress-#10302/WordPress/src/main/java/"
+			,"WordPress-#10302/WordPress/src/debug/java/"
+			,"WordPress-#10302/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#10302/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#10302/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#10302/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#10363.apk": {
+		"classfiles": ["WordPress-#10363/WordPress/build/intermediates/javac/vanillaDebug/compileVanillaDebugJavaWithJavac/classes"
+			,"WordPress-#10363/libs/editor/WordPressEditor/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10363/libs/login/WordPressLoginFlow/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10363/libs/networking/WordPressNetworking/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10363/libs/utils/WordPressUtils/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"],
+		"sourcefiles": ["WordPress-#10363/WordPress/src/main/java/"
+			,"WordPress-#10363/WordPress/src/debug/java/"
+			,"WordPress-#10363/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#10363/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#10363/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#10363/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#10547.apk": {
+		"classfiles": ["WordPress-#10547/WordPress/build/intermediates/javac/vanillaDebug/compileVanillaDebugJavaWithJavac/classes"
+			,"WordPress-#10547/libs/editor/WordPressEditor/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10547/libs/login/WordPressLoginFlow/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10547/libs/networking/WordPressNetworking/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"
+			,"WordPress-#10547/libs/utils/WordPressUtils/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes"],
+		"sourcefiles": ["WordPress-#10547/WordPress/src/main/java/"
+			,"WordPress-#10547/WordPress/src/debug/java/"
+			,"WordPress-#10547/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#10547/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#10547/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#10547/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#10876.apk": {
+		"classfiles": ["WordPress-#10876/WordPress/build/intermediates/javac/vanillaDebug/classes/"
+			,"WordPress-#10876/libs/editor/WordPressEditor/build/intermediates/javac/debug/classes"
+			,"WordPress-#10876/libs/login/WordPressLoginFlow/build/intermediates/javac/debug/classes"
+			,"WordPress-#10876/libs/networking/WordPressNetworking/build/intermediates/javac/debug/classes"
+			,"WordPress-#10876/libs/utils/WordPressUtils/build/intermediates/javac/debug/classes"],
+		"sourcefiles": ["WordPress-#10876/WordPress/src/main/java/"
+			,"WordPress-#10876/WordPress/src/debug/java/"
+			,"WordPress-#10876/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#10876/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#10876/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#10876/libs/editor/WordPressEditor/src/main/java/"]
+	},
+	"WordPress-vanilla-debug--#11135.apk": {
+		"classfiles": ["WordPress-#11135/WordPress/build/intermediates/javac/vanillaDebug/classes/"
+			,"WordPress-#11135/libs/editor/WordPressEditor/build/intermediates/javac/debug/classes"
+			,"WordPress-#11135/libs/login/WordPressLoginFlow/build/intermediates/javac/debug/classes"
+			,"WordPress-#11135/libs/networking/WordPressNetworking/build/intermediates/javac/debug/classes"
+			,"WordPress-#11135/libs/utils/WordPressUtils/build/intermediates/javac/debug/classes"],
+		"sourcefiles": ["WordPress-#11135/WordPress/src/main/java/"
+			,"WordPress-#11135/WordPress/src/debug/java/"
+			,"WordPress-#11135/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#11135/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#11135/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#11135/libs/editor/WordPressEditor/src/main/java/"]
+	},
+		"WordPress-vanilla-debug--#11992.apk": {
+		"classfiles": ["WordPress-#11992/WordPress/build/intermediates/javac/vanillaDebug/classes/"
+			,"WordPress-#11992/libs/editor/WordPressEditor/build/intermediates/javac/debug/classes"
+			,"WordPress-#11992/libs/login/WordPressLoginFlow/build/intermediates/javac/debug/classes"
+			,"WordPress-#11992/libs/networking/WordPressNetworking/build/intermediates/javac/debug/classes"
+			,"WordPress-#11992/libs/utils/WordPressUtils/build/intermediates/javac/debug/classes"],
+		"sourcefiles": ["WordPress-#11992/WordPress/src/main/java/"
+			,"WordPress-#11992/WordPress/src/debug/java/"
+			,"WordPress-#11992/libs/utils/WordPressUtils/src/main/java/"
+			,"WordPress-#11992/libs/networking/WordPressNetworking/src/main/java/"
+			,"WordPress-#11992/libs/login/WordPressLoginFlow/src/main/java/"
+			,"WordPress-#11992/libs/editor/WordPressEditor/src/main/java/"]
+	}
+}

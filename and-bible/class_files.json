@@ -1,0 +1,54 @@
+{
+	"and-bible-3.0.286-#261.apk": {
+      "classfiles": ["and-bible-#261/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/",
+                      "and-bible-#261/app/build/tmp/kotlin-classes/debug/"
+      ],
+      "sourcefiles": ["and-bible-#261/app/src/main/java/",
+                      "and-bible-#261/db/src/main/java/"
+                    ]
+    },
+
+	"and-bible-build-309-#375.apk": {
+
+      "classfiles": ["and-bible-#375/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/",
+                    "and-bible-#375/app/build/tmp/kotlin-classes/debug/"
+      ],
+      "sourcefiles": ["and-bible-#375/app/src/main/java/",
+                      "and-bible-#375/db/src/main/java/"
+                    ]
+
+    },
+
+    "and-bible-build-327-#480.apk": {
+      "classfiles": ["and-bible-#480/app/build/intermediates/javac/debug/classes/",
+                     "and-bible-#480/app/build/tmp/kotlin-classes/",
+                     "and-bible-#480/db/build/intermediates/javac/debug/classes/",
+                     "and-bible-#480/db/build/tmp/kotlin-classes/debug/"
+      ],
+      "sourcefiles": ["and-bible-#480/app/src/main/java/",
+                      "and-bible-#480/db/src/main/java/"
+                    ]
+    },
+
+    "and-bible-build-369-#697.apk": {
+      "classfiles": ["and-bible-#697/app/build/intermediates/javac/debug/classes/",
+                     "and-bible-#697/app/build/tmp/kotlin-classes/",
+                     "and-bible-#697/db/build/intermediates/javac/debug/classes/",
+                     "and-bible-#697/db/build/tmp/kotlin-classes/debug/"
+      ],
+      "sourcefiles": ["and-bible-#697/app/src/main/java/",
+                      "and-bible-#697/db/src/main/java/"
+                    ]
+    },
+
+    "and-bible-build-377-#703.apk": {
+      "classfiles": ["and-bible-#703/app/build/intermediates/javac/debug/classes/",
+                      "and-bible-#703/app/build/tmp/kotlin-classes/",
+                      "and-bible-#703/db/build/tmp/kotlin-classes/debug/",
+                      "and-bible-#703/db/build/intermediates/javac/debug/classes/"
+                    ],
+      "sourcefiles": ["and-bible-#703/app/src/main/java/",
+                      "and-bible-#703/db/src/main/java/"
+                    ]
+    }
+}

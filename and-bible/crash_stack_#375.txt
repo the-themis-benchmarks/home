@@ -1,0 +1,21 @@
+ FATAL EXCEPTION: main
+ Process: net.bible.android.activity, PID: 5369
+ kotlin.TypeCastException: null cannot be cast to non-null type org.crosswire.jsword.book.Book
+ 	at net.bible.service.history.HistoryManager.setDumpString(HistoryManager.kt:122)
+ 	at net.bible.android.control.page.window.WindowRepository.restoreState(WindowRepository.kt:335)
+ 	at net.bible.android.view.activity.page.MainBibleActivity.openTab(MainBibleActivity.kt:521)
+ 	at net.bible.android.view.activity.page.MainBibleActivity.access$openTab(MainBibleActivity.kt:112)
+ 	at net.bible.android.view.activity.page.MainBibleActivity$chooseTab$1.onClick(MainBibleActivity.kt:595)
+ 	at com.android.internal.app.AlertController$AlertParams$3.onItemClick(AlertController.java:1108)
+ 	at android.widget.AdapterView.performItemClick(AdapterView.java:310)
+ 	at android.widget.AbsListView.performItemClick(AbsListView.java:1145)
+ 	at android.widget.AbsListView$PerformClick.run(AbsListView.java:3042)
+ 	at android.widget.AbsListView$3.run(AbsListView.java:3879)
+ 	at android.os.Handler.handleCallback(Handler.java:739)
+ 	at android.os.Handler.dispatchMessage(Handler.java:95)
+ 	at android.os.Looper.loop(Looper.java:148)
+ 	at android.app.ActivityThread.main(ActivityThread.java:5417)
+ 	at java.lang.reflect.Method.invoke(Native Method)
+ 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+ 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+

@@ -1,0 +1,17 @@
+it.feio.android.omninotes.foss E/ACRA: ACRA caught a NumberFormatException for it.feio.android.omninotes.foss
+    java.lang.NumberFormatException: Invalid long: "null"
+        at java.lang.Long.invalidLong(Long.java:124)
+        at java.lang.Long.parseLong(Long.java:345)
+        at java.lang.Long.parseLong(Long.java:321)
+        at it.feio.android.omninotes.DetailFragment.lambda$initViewReminder$2(DetailFragment.java:602)
+        at it.feio.android.omninotes.DetailFragment.access$lambda$2(DetailFragment.java)
+        at it.feio.android.omninotes.DetailFragment$$Lambda$3.onClick(Unknown Source)
+        at android.view.View.performClick(View.java:5198)
+        at android.view.View$PerformClick.run(View.java:21147)
+        at android.os.Handler.handleCallback(Handler.java:739)
+        at android.os.Handler.dispatchMessage(Handler.java:95)
+        at android.os.Looper.loop(Looper.java:148)
+        at android.app.ActivityThread.main(ActivityThread.java:5417)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)

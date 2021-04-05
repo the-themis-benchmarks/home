@@ -1,0 +1,11 @@
+To login, we cannot use emails. Try following:
+
+1. click log in
+2. click "Log in by entering your site address"
+3. entering testkkksite.wordpress.com and click next
+4. enter username testkkksite and password W11j141993, click next
+5. click continue to finish login.
+
+When collcting coverage, all R$sth.java files of the libs should be removed. They are in the `libs/[libName]/Wordpress[lib]/build/intermediates/classes/debug`. Or we don't include libs at all.
+
+For issue #10302 (do not need login)

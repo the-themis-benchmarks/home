@@ -1,0 +1,14 @@
+E AndroidRuntime: FATAL EXCEPTION: main
+E AndroidRuntime: Process: net.bible.android.activity, PID: 7575
+E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke interface method 'org.crosswire.jsword.index.IndexStatus org.crosswire.jsword.book.Book.getIndexStatus()' on a null object reference
+E AndroidRuntime: 	at net.bible.android.view.activity.search.SearchIndexProgressStatus.jobFinished(SearchIndexProgressStatus.java:73)
+E AndroidRuntime: 	at net.bible.android.view.activity.base.ProgressActivityBase.updateProgress(ProgressActivityBase.kt:121)
+E AndroidRuntime: 	at net.bible.android.view.activity.base.ProgressActivityBase$initialiseView$uiUpdaterRunnable$1.run(ProgressActivityBase.kt:77)
+E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:751)
+E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:95)
+E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:154)
+E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6119)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+

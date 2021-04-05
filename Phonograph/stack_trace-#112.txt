@@ -1,0 +1,4 @@
+03-27 10:49:03.495 E/AndroidRuntime(7838): Process: com.kabouzeid.gramophone, PID: 7838
+03-27 10:49:03.495 E/AndroidRuntime(7838): java.lang.RuntimeException: Unable to start activity ComponentInfo{com.kabouzeid.gramophone/com.kabouzeid.gramophone.appshortcuts.AppShortcutLauncherActivity}: java.lang.RuntimeException: android.os.TransactionTooLargeException: data parcel size 1614956 bytes
+03-27 10:49:03.495 E/AndroidRuntime(7838): 	at com.kabouzeid.gramophone.appshortcuts.AppShortcutLauncherActivity.startServiceWithSongs(Unknown Source)
+03-27 10:49:03.495 E/AndroidRuntime(7838): 	at com.kabouzeid.gramophone.appshortcuts.AppShortcutLauncherActivity.onCreate(Unknown Source)

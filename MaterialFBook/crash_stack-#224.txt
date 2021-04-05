@@ -1,0 +1,38 @@
+W SurfaceFlinger: couldn't log to binary event log: overflow.
+W audio_hw_generic: Not supplying enough data to HAL, expected position 4364030 , only wrote 4111920
+I chromium: [INFO:CONSOLE(1)] "Uncaught SyntaxError: Unexpected token ;", source: https://mobile.facebook.com/login.php?next=https%3A%2F%2Fmobile.facebook.com%2Fhome.php%3Fsk%3Dh_chr%26refsrc%3Dhttps%253A%252F%252Fm.facebook.com%252Fhome.php&refsrc=https%3A%2F%2Fm.facebook.com%2Fhome.php&_rdr (1)
+W ResourceType: No known package when getting value for resource number 0x020b001b
+W System.err: android.content.res.Resources$NotFoundException: Resource ID #0x20b001b
+W System.err: 	at android.content.res.ResourcesImpl.getValue(ResourcesImpl.java:190)
+W System.err: 	at android.content.res.Resources.getInteger(Resources.java:1055)
+W System.err: 	at org.chromium.ui.base.DeviceFormFactor.b(PG:11)
+W System.err: 	at org.chromium.ui.base.DeviceFormFactor.a(PG:4)
+W System.err: 	at bCE.onCreateActionMode(PG:5)
+W System.err: 	at com.android.internal.policy.DecorView$ActionModeCallback2Wrapper.onCreateActionMode(DecorView.java:2286)
+W System.err: 	at com.android.internal.policy.DecorView.startActionMode(DecorView.java:860)
+W System.err: 	at com.android.internal.policy.DecorView.startActionModeForChild(DecorView.java:816)
+W System.err: 	at android.view.ViewGroup.startActionModeForChild(ViewGroup.java:828)
+W System.err: 	at android.view.ViewGroup.startActionModeForChild(ViewGroup.java:828)
+W System.err: 	at android.view.ViewGroup.startActionModeForChild(ViewGroup.java:828)
+W System.err: 	at android.view.ViewGroup.startActionModeForChild(ViewGroup.java:828)
+W System.err: 	at android.view.ViewGroup.startActionModeForChild(ViewGroup.java:828)
+W System.err: 	at android.view.ViewGroup.startActionModeForChild(ViewGroup.java:828)
+W System.err: 	at android.view.ViewGroup.startActionModeForChild(ViewGroup.java:828)
+W System.err: 	at android.view.ViewGroup.startActionModeForChild(ViewGroup.java:828)
+W System.err: 	at android.view.View.startActionMode(View.java:5828)
+W System.err: 	at org.chromium.content.browser.selection.SelectionPopupControllerImpl.y(PG:144)
+W System.err: 	at org.chromium.content.browser.selection.SelectionPopupControllerImpl.showSelectionMenu(PG:113)
+W System.err: 	at android.os.MessageQueue.nativePollOnce(Native Method)
+W System.err: 	at android.os.MessageQueue.next(MessageQueue.java:323)
+W System.err: 	at android.os.Looper.loop(Looper.java:136)
+W System.err: 	at android.app.ActivityThread.main(ActivityThread.java:6119)
+W System.err: 	at java.lang.reflect.Method.invoke(Native Method)
+W System.err: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+W System.err: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+F chromium: [FATAL:jni_android.cc(256)] Please include Java exception stack in crash report
+
+    
+    --------- beginning of crash
+2020-07-18 15:44:19.550 24681-24681/me.zeeroooo.materialfb A/libc: Fatal signal 5 (SIGTRAP), code 1 (TRAP_BRKPT), fault addr 0x7085b0c6e4 in tid 24681 (oooo.materialfb), pid 24681 (oooo.materialfb)
+
+this is a native crash.

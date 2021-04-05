@@ -1,0 +1,7 @@
+To log in, first input https://shared02.opsone-cloud.ch/ as the server address, then input e-mail and password.
+
+Test account:
+
+    - server address: https://shared02.opsone-cloud.ch/
+    - account: droid_fuzzing_{1_9}@163.com / droid.fuzzing
+

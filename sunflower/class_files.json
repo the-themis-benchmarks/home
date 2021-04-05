@@ -1,0 +1,8 @@
+{
+	"sunflower-0.1.6-#239.apk": {
+		"classfiles": ["sunflower-#239/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/"
+		],
+		"sourcefiles": ["sunflower-#239/app/src/main/java/"
+		]
+	}
+}

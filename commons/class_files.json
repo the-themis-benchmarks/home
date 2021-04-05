@@ -1,0 +1,30 @@
+{
+	"commons-2.11.0-#3244.apk": {
+		"classfiles": ["commons-#3244/app/build/intermediates/javac/prodDebug/compileProdDebugJavaWithJavac/classes/",
+						"commons-#3244/data-client/build/intermediates/javac/debug/classes/"
+		],
+		"sourcefiles": ["commons-#3244/app/src/main/java/"]
+	},
+
+	"commons-2.9.0-#2123.apk": {
+		"classfiles": ["commons-#2123/app/build/intermediates/classes/prod/debug/",
+						"commons-#2123/data-client/build/tmp/kotlin-classes/"
+		],
+		"sourcefiles": ["commons-#2123/app/src/main/java/"]
+	},
+
+	"commons-2.7.1-#1581.apk": {
+		"classfiles": ["commons-#1581/app/build/intermediates/classes/prod/debug/"],
+		"sourcefiles": ["commons-#1581/app/src/main/java/"]
+	},
+
+	"commons-2.6.7-#1391.apk": {
+		"classfiles": ["commons-#1391/app/build/intermediates/classes/prod/debug/"],
+		"sourcefiles": ["commons-#1391/app/src/main/java/"]
+	},
+
+	"commons-2.6.7-#1385.apk": {
+		"classfiles": ["commons-#1385/app/build/intermediates/classes/prod/debug/"],
+		"sourcefiles": ["commons-#1385/app/src/main/java/"]
+	}
+}

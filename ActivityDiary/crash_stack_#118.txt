@@ -1,0 +1,13 @@
+ FATAL EXCEPTION: main
+ Process: de.rampro.activitydiary.debug, PID: 8448
+ java.lang.IllegalArgumentException: position (0) too small
+ 	at de.rampro.activitydiary.ui.generic.DetailRecyclerViewAdapter.getDiaryImageIdAt(DetailRecyclerViewAdapter.java:156)
+ 	at de.rampro.activitydiary.ui.history.HistoryRecyclerViewAdapter$1.onClick(HistoryRecyclerViewAdapter.java:87)
+ 	at android.support.v7.app.AlertController$ButtonHandler.handleMessage(AlertController.java:162)
+ 	at android.os.Handler.dispatchMessage(Handler.java:102)
+ 	at android.os.Looper.loop(Looper.java:148)
+ 	at android.app.ActivityThread.main(ActivityThread.java:5417)
+ 	at java.lang.reflect.Method.invoke(Native Method)
+ 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+ 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+

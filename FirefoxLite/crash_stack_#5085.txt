@@ -1,0 +1,19 @@
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: FATAL EXCEPTION: main
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: Process: org.mozilla.rocket.debug.ting, PID: 11671
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String android.os.BaseBundle.getString(java.lang.String)' on a null object reference
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at org.mozilla.focus.settings.SettingsFragment.onCreate(SettingsFragment.kt:53)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.app.Fragment.performCreate(Fragment.java:2336)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.app.FragmentManagerImpl.moveToState(FragmentManager.java:949)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.app.BackStackRecord.setLastIn(BackStackRecord.java:860)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.app.BackStackRecord.calculateFragments(BackStackRecord.java:900)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.app.BackStackRecord.run(BackStackRecord.java:728)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.app.FragmentManagerImpl.execPendingActions(FragmentManager.java:1578)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.app.FragmentManagerImpl$1.run(FragmentManager.java:483)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:751)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:95)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:154)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6119)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+07-04 14:42:16.141 11671 11671 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+

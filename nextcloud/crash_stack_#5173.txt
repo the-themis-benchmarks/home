@@ -1,0 +1,21 @@
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: Process: com.nextcloud.client, PID: 9430
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke interface method 'android.view.MenuItem android.view.MenuItem.setVisible(boolean)' on a null object reference
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at com.owncloud.android.ui.fragment.OCFileListFragment.onPrepareOptionsMenu(OCFileListFragment.java:796)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.fragment.app.Fragment.performPrepareOptionsMenu(Fragment.java:2723)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.fragment.app.FragmentManagerImpl.dispatchPrepareOptionsMenu(FragmentManagerImpl.java:2743)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.fragment.app.FragmentController.dispatchPrepareOptionsMenu(FragmentController.java:398)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.fragment.app.FragmentActivity.onPreparePanel(FragmentActivity.java:489)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.appcompat.view.WindowCallbackWrapper.onPreparePanel(WindowCallbackWrapper.java:99)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.appcompat.app.AppCompatDelegateImpl$AppCompatWindowCallback.onPreparePanel(AppCompatDelegateImpl.java:2857)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.appcompat.view.WindowCallbackWrapper.onPreparePanel(WindowCallbackWrapper.java:99)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.appcompat.app.ToolbarActionBar$ToolbarCallbackWrapper.onPreparePanel(ToolbarActionBar.java:522)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.appcompat.app.ToolbarActionBar.populateOptionsMenu(ToolbarActionBar.java:456)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at androidx.appcompat.app.ToolbarActionBar$1.run(ToolbarActionBar.java:56)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:739)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:95)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:148)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:5417)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+07-15 18:58:11.260  9430  9430 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+

@@ -1,0 +1,18 @@
+{
+	"nextcloud-#1918.apk": {
+		"classfiles": ["nextcloud-#1918/build/intermediates/classes/generic/debug"],
+		"sourcefiles": ["nextcloud-#1918/src/main/java/"]
+	},
+	"nextcloud-#4026.apk": {
+		"classfiles": ["nextcloud-#4026/build/intermediates/javac/genericDebug/compileGenericDebugJavaWithJavac/classes"],
+		"sourcefiles": ["nextcloud-#4026/src/main/java/"]
+	},
+	"nextcloud-#4792.apk": {
+		"classfiles": ["nextcloud-#4792/build/intermediates/javac/genericDebug/classes"],
+		"sourcefiles": ["nextcloud-#4792/src/main/java/"]
+	},
+	"nextcloud-#5173.apk": {
+		"classfiles": ["nextcloud-#5173/build/intermediates/javac/genericDebug/classes"],
+		"sourcefiles": ["nextcloud-#5173/src/main/java/"]
+	}
+}

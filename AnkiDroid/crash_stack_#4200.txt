@@ -1,0 +1,39 @@
+ FATAL EXCEPTION: AsyncTask #3
+ Process: com.ichi2.anki, PID: 8733
+ java.lang.RuntimeException: An error occurred while executing doInBackground()
+ 	at android.os.AsyncTask$3.done(AsyncTask.java:325)
+ 	at java.util.concurrent.FutureTask.finishCompletion(FutureTask.java:354)
+ 	at java.util.concurrent.FutureTask.setException(FutureTask.java:223)
+ 	at java.util.concurrent.FutureTask.run(FutureTask.java:242)
+ 	at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:243)
+ 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+ 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+ 	at java.lang.Thread.run(Thread.java:761)
+ Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'com.ichi2.libanki.Note com.ichi2.libanki.Card.note()' on a null object reference
+ 	at com.ichi2.async.DeckTask.doInBackgroundUpdateNote(DeckTask.java:400)
+ 	at com.ichi2.async.DeckTask.doInBackground(DeckTask.java:247)
+ 	at com.ichi2.async.DeckTask.doInBackground(DeckTask.java:66)
+ 	at android.os.AsyncTask$2.call(AsyncTask.java:305)
+ 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+ 	... 4 more
+
+--- 4.4 ---
+
+E/AndroidRuntime( 9199): FATAL EXCEPTION: AsyncTask #4
+E/AndroidRuntime( 9199): Process: com.ichi2.anki, PID: 9199
+E/AndroidRuntime( 9199): java.lang.RuntimeException: An error occured while executing doInBackground()
+E/AndroidRuntime( 9199): 	at android.os.AsyncTask$3.done(AsyncTask.java:300)
+E/AndroidRuntime( 9199): 	at java.util.concurrent.FutureTask.finishCompletion(FutureTask.java:355)
+E/AndroidRuntime( 9199): 	at java.util.concurrent.FutureTask.setException(FutureTask.java:222)
+E/AndroidRuntime( 9199): 	at java.util.concurrent.FutureTask.run(FutureTask.java:242)
+E/AndroidRuntime( 9199): 	at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:231)
+E/AndroidRuntime( 9199): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+E/AndroidRuntime( 9199): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+E/AndroidRuntime( 9199): 	at java.lang.Thread.run(Thread.java:841)
+E/AndroidRuntime( 9199): Caused by: java.lang.NullPointerException
+E/AndroidRuntime( 9199): 	at com.ichi2.async.DeckTask.doInBackgroundUpdateNote(DeckTask.java:400)
+E/AndroidRuntime( 9199): 	at com.ichi2.async.DeckTask.doInBackground(DeckTask.java:247)
+E/AndroidRuntime( 9199): 	at com.ichi2.async.DeckTask.doInBackground(DeckTask.java:66)
+E/AndroidRuntime( 9199): 	at android.os.AsyncTask$2.call(AsyncTask.java:288)
+E/AndroidRuntime( 9199): 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+E/AndroidRuntime( 9199): 	... 4 more

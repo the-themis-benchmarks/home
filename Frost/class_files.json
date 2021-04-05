@@ -1,0 +1,8 @@
+{
+	"Frost-debug-2.2.1-#1323.apk": {
+		"classfiles": ["Frost-#1323/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/",
+						"Frost-#1323/app/build/tmp/kotlin-classes/debug/"
+		],
+		"sourcefiles": ["Frost-#1323/app/src/main/kotlin/"]
+	}
+}

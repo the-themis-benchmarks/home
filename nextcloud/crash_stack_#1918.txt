@@ -1,0 +1,27 @@
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: FATAL EXCEPTION: main
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: Process: com.nextcloud.client, PID: 5065
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: java.lang.ClassCastException: com.owncloud.android.ui.preview.PreviewImageActivity cannot be cast to com.owncloud.android.ui.activity.FileDisplayActivity
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at com.owncloud.android.ui.preview.PreviewImageFragment.onOptionsItemSelected(PreviewImageFragment.java:432)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v4.app.Fragment.performOptionsItemSelected(Fragment.java:2487)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v4.app.FragmentManagerImpl.dispatchOptionsItemSelected(FragmentManager.java:3307)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v4.app.FragmentController.dispatchOptionsItemSelected(FragmentController.java:344)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v4.app.FragmentActivity.onMenuItemSelected(FragmentActivity.java:374)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v7.app.AppCompatActivity.onMenuItemSelected(AppCompatActivity.java:195)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v7.view.WindowCallbackWrapper.onMenuItemSelected(WindowCallbackWrapper.java:108)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v7.app.AppCompatDelegateImplV9.onMenuItemSelected(AppCompatDelegateImplV9.java:674)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v7.view.menu.MenuBuilder.dispatchMenuItemSelected(MenuBuilder.java:822)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v7.view.menu.MenuItemImpl.invoke(MenuItemImpl.java:171)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v7.view.menu.MenuBuilder.performItemAction(MenuBuilder.java:973)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.support.v7.view.menu.MenuPopup.onItemClick(MenuPopup.java:127)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.widget.AdapterView.performItemClick(AdapterView.java:310)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.widget.AbsListView.performItemClick(AbsListView.java:1145)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.widget.AbsListView$PerformClick.run(AbsListView.java:3042)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.widget.AbsListView$3.run(AbsListView.java:3879)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:739)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:95)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:148)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:5417)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+07-16 17:12:01.275  5065  5065 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+

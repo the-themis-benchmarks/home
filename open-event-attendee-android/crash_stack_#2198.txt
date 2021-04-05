@@ -1,0 +1,76 @@
+--- The medium-difficult one (used in the study) ---
+
+E AndroidRuntime: FATAL EXCEPTION: main
+E AndroidRuntime: Process: com.eventyay.attendee, PID: 6765
+E AndroidRuntime: androidx.fragment.app.Fragment$InstantiationException: Unable to instantiate fragment org.fossasia.openevent.general.search.type.SearchTypeFragment: calling Fragment constructor caused an exception
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.instantiate(Fragment.java:532)
+E AndroidRuntime: 	at androidx.fragment.app.FragmentContainer.instantiate(FragmentContainer.java:57)
+E AndroidRuntime: 	at androidx.fragment.app.FragmentManagerImpl$6.instantiate(FragmentManagerImpl.java:2850)
+E AndroidRuntime: 	at androidx.navigation.fragment.FragmentNavigator.instantiateFragment(FragmentNavigator.java:132)
+E AndroidRuntime: 	at androidx.navigation.fragment.FragmentNavigator.navigate(FragmentNavigator.java:162)
+E AndroidRuntime: 	at androidx.navigation.fragment.FragmentNavigator.navigate(FragmentNavigator.java:58)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:859)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:793)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:730)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:716)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:907)
+E AndroidRuntime: 	at org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:127)
+E AndroidRuntime: 	at android.view.View.performClick(View.java:5637)
+E AndroidRuntime: 	at android.view.View$PerformClick.run(View.java:22429)
+E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:751)
+E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:95)
+E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:154)
+E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6119)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+E AndroidRuntime: Caused by: java.lang.reflect.InvocationTargetException
+E AndroidRuntime: 	at java.lang.reflect.Constructor.newInstance0(Native Method)
+E AndroidRuntime: 	at java.lang.reflect.Constructor.newInstance(Constructor.java:430)
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.instantiate(Fragment.java:514)
+E AndroidRuntime: 	... 20 more
+E AndroidRuntime: Caused by: java.lang.IllegalStateException: Fragment SearchTypeFragment{e9e272b (46dc30b8-abb8-4d15-8c2d-f2f19a5d5479)} not attached to a context.
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.requireContext(Fragment.java:765)
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.getResources(Fragment.java:829)
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.getString(Fragment.java:851)
+E AndroidRuntime: 	at org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt:31)
+E AndroidRuntime: 	... 23 more
+
+
+---- The easy one ----
+
+E AndroidRuntime: FATAL EXCEPTION: main
+E AndroidRuntime: Process: com.eventyay.attendee, PID: 6480
+E AndroidRuntime: androidx.fragment.app.Fragment$InstantiationException: Unable to instantiate fragment org.fossasia.openevent.general.search.type.SearchTypeFragment: calling Fragment constructor caused an exception
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.instantiate(Fragment.java:532)
+E AndroidRuntime: 	at androidx.fragment.app.FragmentContainer.instantiate(FragmentContainer.java:57)
+E AndroidRuntime: 	at androidx.fragment.app.FragmentManagerImpl$6.instantiate(FragmentManagerImpl.java:2850)
+E AndroidRuntime: 	at androidx.navigation.fragment.FragmentNavigator.instantiateFragment(FragmentNavigator.java:132)
+E AndroidRuntime: 	at androidx.navigation.fragment.FragmentNavigator.navigate(FragmentNavigator.java:162)
+E AndroidRuntime: 	at androidx.navigation.fragment.FragmentNavigator.navigate(FragmentNavigator.java:58)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:859)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:793)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:730)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:716)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:907)
+E AndroidRuntime: 	at org.fossasia.openevent.general.search.SearchFragment$onCreateView$3.onClick(SearchFragment.kt:94)
+E AndroidRuntime: 	at android.view.View.performClick(View.java:5637)
+E AndroidRuntime: 	at android.view.View$PerformClick.run(View.java:22429)
+E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:751)
+E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:95)
+E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:154)
+E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6119)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+E AndroidRuntime: Caused by: java.lang.reflect.InvocationTargetException
+E AndroidRuntime: 	at java.lang.reflect.Constructor.newInstance0(Native Method)
+E AndroidRuntime: 	at java.lang.reflect.Constructor.newInstance(Constructor.java:430)
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.instantiate(Fragment.java:514)
+E AndroidRuntime: 	... 20 more
+E AndroidRuntime: Caused by: java.lang.IllegalStateException: Fragment SearchTypeFragment{210e96c (54f5a98c-7178-4297-b203-0a7911ba0f66)} not attached to a context.
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.requireContext(Fragment.java:765)
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.getResources(Fragment.java:829)
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.getString(Fragment.java:851)
+E AndroidRuntime: 	at org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt:31)
+E AndroidRuntime: 	... 23 more

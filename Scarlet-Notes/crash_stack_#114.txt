@@ -1,0 +1,13 @@
+E AndroidRuntime: FATAL EXCEPTION: main
+E AndroidRuntime: Process: com.bijoysingh.quicknote, PID: 19150
+E AndroidRuntime: java.lang.Exception: Invalid Search Mode
+E AndroidRuntime: 	at com.maubis.scarlet.base.support.SearchConfigKt.getNotesForMode(SearchConfig.kt:121)
+E AndroidRuntime: 	at com.maubis.scarlet.base.support.SearchConfigKt.filterSearchWithoutFolder(SearchConfig.kt:68)
+E AndroidRuntime: 	at com.maubis.scarlet.base.support.SearchConfigKt.unifiedSearchSynchronous(SearchConfig.kt:57)
+E AndroidRuntime: 	at com.maubis.scarlet.base.MainActivity$unifiedSearchSynchronous$$inlined$map$lambda$1.invokeSuspend(MainActivity.kt:273)
+E AndroidRuntime: 	at kotlin.coroutines.jvm.internal.BaseContinuationImpl.resumeWith(ContinuationImpl.kt:32)
+E AndroidRuntime: 	at kotlinx.coroutines.DispatchedTask.run(Dispatched.kt:233)
+E AndroidRuntime: 	at kotlinx.coroutines.scheduling.CoroutineScheduler.runSafely(CoroutineScheduler.kt:594)
+E AndroidRuntime: 	at kotlinx.coroutines.scheduling.CoroutineScheduler.access$runSafely(CoroutineScheduler.kt:60)
+E AndroidRuntime: 	at kotlinx.coroutines.scheduling.CoroutineScheduler$Worker.run(CoroutineScheduler.kt:742)
+

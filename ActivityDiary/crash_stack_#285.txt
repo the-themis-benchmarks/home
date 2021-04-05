@@ -1,0 +1,22 @@
+ FATAL EXCEPTION: main
+ Process: de.rampro.activitydiary.debug, PID: 28390
+ java.lang.NumberFormatException: For input string: ""
+ 	at java.lang.Integer.parseInt(Integer.java:620)
+ 	at java.lang.Integer.parseInt(Integer.java:643)
+ 	at de.rampro.activitydiary.ui.settings.SettingsActivity.updateLocationAge(SettingsActivity.java:238)
+ 	at de.rampro.activitydiary.ui.settings.SettingsActivity.onSharedPreferenceChanged(SettingsActivity.java:135)
+ 	at android.app.SharedPreferencesImpl$EditorImpl.notifyListeners(SharedPreferencesImpl.java:560)
+ 	at android.app.SharedPreferencesImpl$EditorImpl.apply(SharedPreferencesImpl.java:443)
+ 	at android.support.v7.preference.Preference.tryCommit(Preference.java:1613)
+ 	at android.support.v7.preference.Preference.persistString(Preference.java:1644)
+ 	at android.support.v7.preference.EditTextPreference.setText(EditTextPreference.java:69)
+ 	at android.support.v7.preference.EditTextPreferenceDialogFragmentCompat.onDialogClosed(EditTextPreferenceDialogFragmentCompat.java:96)
+ 	at android.support.v7.preference.PreferenceDialogFragmentCompat.onDismiss(PreferenceDialogFragmentCompat.java:270)
+ 	at android.app.Dialog$ListenersHandler.handleMessage(Dialog.java:1361)
+ 	at android.os.Handler.dispatchMessage(Handler.java:105)
+ 	at android.os.Looper.loop(Looper.java:164)
+ 	at android.app.ActivityThread.main(ActivityThread.java:6541)
+ 	at java.lang.reflect.Method.invoke(Native Method)
+ 	at com.android.internal.os.Zygote$MethodAndArgsCaller.run(Zygote.java:240)
+ 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:767)
+

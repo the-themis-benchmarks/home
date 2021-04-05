@@ -1,0 +1,22 @@
+E AndroidRuntime: FATAL EXCEPTION: main
+E AndroidRuntime: Process: org.wordpress.android, PID: 14210
+E AndroidRuntime: org.greenrobot.eventbus.EventBusException: Invoking subscriber failed
+E AndroidRuntime: 	at org.greenrobot.eventbus.EventBus.handleSubscriberException(EventBus.java:505)
+E AndroidRuntime: 	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:487)
+E AndroidRuntime: 	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:479)
+E AndroidRuntime: 	at org.greenrobot.eventbus.HandlerPoster.handleMessage(HandlerPoster.java:67)
+E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:148)
+E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:5417)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+E AndroidRuntime: Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'void org.wordpress.android.ui.accounts.SmartLockHelper.saveCredentialsInSmartLock(java.lang.String, java.lang.String, java.lang.String, android.net.Uri)' on a null object reference
+E AndroidRuntime: 	at org.wordpress.android.ui.accounts.LoginActivity.saveCredentialsInSmartLock(LoginActivity.java:498)
+E AndroidRuntime: 	at org.wordpress.android.login.LoginBaseFormFragment.saveCredentialsInSmartLock(LoginBaseFormFragment.java:274)
+E AndroidRuntime: 	at org.wordpress.android.login.LoginUsernamePasswordFragment.finishLogin(LoginUsernamePasswordFragment.java:460)
+E AndroidRuntime: 	at org.wordpress.android.login.LoginUsernamePasswordFragment.onSiteChanged(LoginUsernamePasswordFragment.java:513)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:485)
+E AndroidRuntime: 	... 8 more
+

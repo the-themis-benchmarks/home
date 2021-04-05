@@ -1,0 +1,10 @@
+{
+	"osmeditor4android-debug-#729.apk": {
+		"classfiles": ["osmeditor4android-#729/build/intermediates/classes/debug"],
+		"sourcefiles": ["osmeditor4android-#729/src/main/java/"]
+	},
+	"osmeditor4android-debug-#637.apk": {
+		"classfiles": ["osmeditor4android-#637/build/intermediates/classes/debug"],
+		"sourcefiles": ["osmeditor4android-#637/src/main/java/"]
+	}
+}

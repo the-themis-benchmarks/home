@@ -1,0 +1,36 @@
+E AndroidRuntime: FATAL EXCEPTION: main
+E AndroidRuntime: Process: com.amaze.filemanager, PID: 5932
+E AndroidRuntime: java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+E AndroidRuntime: 	at java.util.ArrayList.get(ArrayList.java:411)
+E AndroidRuntime: 	at com.amaze.filemanager.asynchronous.asynctasks.DeleteTask.onPostExecute(DeleteTask.java:175)
+E AndroidRuntime: 	at com.amaze.filemanager.asynchronous.asynctasks.DeleteTask.onPostExecute(DeleteTask.java:51)
+E AndroidRuntime: 	at android.os.AsyncTask.finish(AsyncTask.java:667)
+E AndroidRuntime: 	at android.os.AsyncTask.-wrap1(AsyncTask.java)
+E AndroidRuntime: 	at android.os.AsyncTask$InternalHandler.handleMessage(AsyncTask.java:684)
+E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:154)
+E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6119)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+
+--- Android 4.4 ---
+
+E/AndroidRuntime(12478): FATAL EXCEPTION: main
+E/AndroidRuntime(12478): Process: com.amaze.filemanager, PID: 12478
+E/AndroidRuntime(12478): java.lang.IndexOutOfBoundsException: Invalid index 0, size is 0
+E/AndroidRuntime(12478): 	at java.util.ArrayList.throwIndexOutOfBoundsException(ArrayList.java:255)
+E/AndroidRuntime(12478): 	at java.util.ArrayList.get(ArrayList.java:308)
+E/AndroidRuntime(12478): 	at com.amaze.filemanager.asynchronous.asynctasks.DeleteTask.onPostExecute(DeleteTask.java:175)
+E/AndroidRuntime(12478): 	at com.amaze.filemanager.asynchronous.asynctasks.DeleteTask.onPostExecute(DeleteTask.java:51)
+E/AndroidRuntime(12478): 	at android.os.AsyncTask.finish(AsyncTask.java:632)
+E/AndroidRuntime(12478): 	at android.os.AsyncTask.access$600(AsyncTask.java:177)
+E/AndroidRuntime(12478): 	at android.os.AsyncTask$InternalHandler.handleMessage(AsyncTask.java:645)
+E/AndroidRuntime(12478): 	at android.os.Handler.dispatchMessage(Handler.java:102)
+E/AndroidRuntime(12478): 	at android.os.Looper.loop(Looper.java:136)
+E/AndroidRuntime(12478): 	at android.app.ActivityThread.main(ActivityThread.java:5017)
+E/AndroidRuntime(12478): 	at java.lang.reflect.Method.invokeNative(Native Method)
+E/AndroidRuntime(12478): 	at java.lang.reflect.Method.invoke(Method.java:515)
+E/AndroidRuntime(12478): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:779)
+E/AndroidRuntime(12478): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:595)
+E/AndroidRuntime(12478): 	at dalvik.system.NativeStart.main(Native Method)

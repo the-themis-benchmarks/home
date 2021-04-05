@@ -1,0 +1,27 @@
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: FATAL EXCEPTION: main
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: Process: com.nextcloud.client, PID: 18839
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String com.owncloud.android.datamodel.OCFile.getRemotePath()' on a null object reference
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: 	at com.owncloud.android.ui.dialog.CreateFolderDialogFragment.onClick(CreateFolderDialogFragment.java:139)
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: 	at androidx.appcompat.app.AlertController$ButtonHandler.handleMessage(AlertController.java:167)
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:148)
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:5417)
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+07-15 20:20:28.171 18839 18839 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+
+--- 4.4 ---
+
+08-06 09:55:21.498 E/AndroidRuntime(15696): FATAL EXCEPTION: main
+08-06 09:55:21.498 E/AndroidRuntime(15696): Process: com.nextcloud.client, PID: 15696
+08-06 09:55:21.498 E/AndroidRuntime(15696): java.lang.NullPointerException
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at com.owncloud.android.ui.dialog.CreateFolderDialogFragment.onClick(CreateFolderDialogFragment.java:139)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at androidx.appcompat.app.AlertController$ButtonHandler.handleMessage(AlertController.java:167)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at android.os.Handler.dispatchMessage(Handler.java:102)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at android.os.Looper.loop(Looper.java:136)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at android.app.ActivityThread.main(ActivityThread.java:5017)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at java.lang.reflect.Method.invokeNative(Native Method)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at java.lang.reflect.Method.invoke(Method.java:515)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:779)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:595)
+08-06 09:55:21.498 E/AndroidRuntime(15696): 	at dalvik.system.NativeStart.main(Native Method)

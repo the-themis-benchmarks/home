@@ -1,0 +1,30 @@
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: FATAL EXCEPTION: main
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: Process: org.mozilla.rocket.debug.ting, PID: 13717
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: java.lang.RuntimeException: Cannot create an instance of class org.mozilla.rocket.home.HomeViewModel
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.lifecycle.ViewModelProvider$NewInstanceFactory.create(ViewModelProvider.java:221)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.lifecycle.ViewModelProvider.get(ViewModelProvider.java:187)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.lifecycle.ViewModelProvider.get(ViewModelProvider.java:150)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at org.mozilla.focus.tabs.tabtray.TabTrayFragment.onCreateView(TabTrayFragment.java:195)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.Fragment.performCreateView(Fragment.java:2698)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentStateManager.createView(FragmentStateManager.java:320)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager.moveToState(FragmentManager.java:1187)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager.moveToState(FragmentManager.java:1356)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager.moveFragmentToExpectedState(FragmentManager.java:1434)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager.moveToState(FragmentManager.java:1497)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.BackStackRecord.executeOps(BackStackRecord.java:447)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager.executeOps(FragmentManager.java:2169)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager.executeOpsTogether(FragmentManager.java:1992)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager.removeRedundantOperationsAndExecute(FragmentManager.java:1947)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager.execPendingActions(FragmentManager.java:1849)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.fragment.app.FragmentManager$4.run(FragmentManager.java:413)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:751)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:95)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:154)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6119)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: Caused by: java.lang.InstantiationException: java.lang.Class<org.mozilla.rocket.home.HomeViewModel> has no zero argument constructor
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at java.lang.Class.newInstance(Native Method)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	at androidx.lifecycle.ViewModelProvider$NewInstanceFactory.create(ViewModelProvider.java:219)
+07-04 15:07:36.612 13717 13717 E AndroidRuntime: 	... 22 more

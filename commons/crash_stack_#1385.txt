@@ -1,0 +1,15 @@
+E AndroidRuntime: FATAL EXCEPTION: RxCachedThreadScheduler-1
+E AndroidRuntime: Process: fr.free.nrw.commons.debug, PID: 15670
+E AndroidRuntime: java.lang.NullPointerException: Callable returned null
+E AndroidRuntime: 	at io.reactivex.internal.functions.ObjectHelper.requireNonNull(ObjectHelper.java:39)
+E AndroidRuntime: 	at io.reactivex.internal.operators.observable.ObservableFromCallable.subscribeActual(ObservableFromCallable.java:42)
+E AndroidRuntime: 	at io.reactivex.Observable.subscribe(Observable.java:10901)
+E AndroidRuntime: 	at io.reactivex.internal.operators.observable.ObservableSubscribeOn$SubscribeTask.run(ObservableSubscribeOn.java:96)
+E AndroidRuntime: 	at io.reactivex.Scheduler$DisposeTask.run(Scheduler.java:452)
+E AndroidRuntime: 	at io.reactivex.internal.schedulers.ScheduledRunnable.run(ScheduledRunnable.java:61)
+E AndroidRuntime: 	at io.reactivex.internal.schedulers.ScheduledRunnable.call(ScheduledRunnable.java:52)
+E AndroidRuntime: 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+E AndroidRuntime: 	at java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:272)
+E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+E AndroidRuntime: 	at java.lang.Thread.run(Thread.java:761)

@@ -1,0 +1,17 @@
+E AndroidRuntime: java.lang.RuntimeException: Failure delivering result ResultInfo{who=null, request=3, result=-1, data=Intent { dat=content://com.android.externalstorage.documents/tree/1A15-2E1A: flg=0xc3 }} to activity {com.amaze.filemanager/com.amaze.filemanager.activities.MainActivity}: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Object java.util.ArrayList.get(int)' on a null object reference
+E AndroidRuntime: 	at android.app.ActivityThread.deliverResults(ActivityThread.java:4089)
+E AndroidRuntime: 	at android.app.ActivityThread.handleSendResult(ActivityThread.java:4132)
+E AndroidRuntime: 	at android.app.ActivityThread.-wrap20(ActivityThread.java)
+E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1533)
+E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:154)
+E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6119)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:886)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:776)
+E AndroidRuntime: Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.Object java.util.ArrayList.get(int)' on a null object reference
+E AndroidRuntime: 	at com.amaze.filemanager.activities.MainActivity.onActivityResult(MainActivity.java:1573)
+E AndroidRuntime: 	at android.app.Activity.dispatchActivityResult(Activity.java:6932)
+E AndroidRuntime: 	at android.app.ActivityThread.deliverResults(ActivityThread.java:4085)
+E AndroidRuntime: 	... 9 more
+

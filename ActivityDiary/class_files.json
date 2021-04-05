@@ -1,0 +1,12 @@
+{
+	"ActivityDiary-1.1.8-debug-#118.apk": {
+		"classfiles": ["ActivityDiary-#118/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/"],
+		"sourcefiles": ["ActivityDiary-#285/app/src/main/java/"]
+	},
+
+	"ActivityDiary-1.4.0-debug-#285.apk": {
+		"classfiles": ["ActivityDiary-#285/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/"],
+		"sourcefiles": ["ActivityDiary-#285/app/src/main/java/"]
+	}
+
+}

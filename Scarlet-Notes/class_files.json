@@ -1,0 +1,12 @@
+{
+	"Scarlet-Notes-6.9.5-#114.apk": {
+		"classfiles": ["Scarlet-Notes-#114/app/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/",
+						"Scarlet-Notes-#114/base/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/",
+						"Scarlet-Notes-#114/markdown/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/"
+		],
+		"sourcefiles": ["Scarlet-Notes-#114/base/src/main/java/",
+						"Scarlet-Notes-#114/markdown/src/main/java/",
+						"Scarlet-Notes-#114/app/src/main/java/"
+		]
+	}
+}

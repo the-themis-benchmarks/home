@@ -1,0 +1,17 @@
+E AndroidRuntime: FATAL EXCEPTION: pool-1-thread-7
+E AndroidRuntime: Process: org.wordpress.android, PID: 27243
+E AndroidRuntime: org.greenrobot.eventbus.EventBusException: Invoking subscriber failed
+E AndroidRuntime: 	at org.greenrobot.eventbus.EventBus.handleSubscriberException(EventBus.java:505)
+E AndroidRuntime: 	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:487)
+E AndroidRuntime: 	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:479)
+E AndroidRuntime: 	at org.greenrobot.eventbus.AsyncPoster.run(AsyncPoster.java:46)
+E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1113)
+E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:588)
+E AndroidRuntime: 	at java.lang.Thread.run(Thread.java:818)
+E AndroidRuntime: Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'void org.wordpress.android.fluxc.model.PostModel.setDateLocallyChanged(java.lang.String)' on a null object reference
+E AndroidRuntime: 	at org.wordpress.android.fluxc.store.PostStore.updatePost(PostStore.java:548)
+E AndroidRuntime: 	at org.wordpress.android.fluxc.store.PostStore.onAction(PostStore.java:365)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at org.greenrobot.eventbus.EventBus.invokeSubscriber(EventBus.java:485)
+E AndroidRuntime: 	... 5 more
+

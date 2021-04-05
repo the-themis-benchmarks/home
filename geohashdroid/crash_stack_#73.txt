@@ -1,0 +1,18 @@
+E AndroidRuntime: FATAL EXCEPTION: AsyncTask #3
+0E AndroidRuntime: Process: net.exclaimindustries.geohashdroid, PID: 21699
+0E AndroidRuntime: java.lang.RuntimeException: An error occurred while executing doInBackground()
+0E AndroidRuntime: 	at android.os.AsyncTask$3.done(AsyncTask.java:325)
+0E AndroidRuntime: 	at java.util.concurrent.FutureTask.finishCompletion(FutureTask.java:354)
+0E AndroidRuntime: 	at java.util.concurrent.FutureTask.setException(FutureTask.java:223)
+0E AndroidRuntime: 	at java.util.concurrent.FutureTask.run(FutureTask.java:242)
+0E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1133)
+0E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:607)
+0E AndroidRuntime: 	at java.lang.Thread.run(Thread.java:761)
+0E AndroidRuntime: Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String net.exclaimindustries.geohashdroid.util.Graticule.getLatitudeString(boolean)' on a null object reference
+0E AndroidRuntime: 	at net.exclaimindustries.geohashdroid.util.HashBuilder$StockRunner.runStock(HashBuilder.java:148)
+0E AndroidRuntime: 	at net.exclaimindustries.geohashdroid.services.StockService.onHandleWork(StockService.java:305)
+0E AndroidRuntime: 	at androidx.core.app.JobIntentService$CommandProcessor.doInBackground(JobIntentService.java:392)
+0E AndroidRuntime: 	at androidx.core.app.JobIntentService$CommandProcessor.doInBackground(JobIntentService.java:383)
+0E AndroidRuntime: 	at android.os.AsyncTask$2.call(AsyncTask.java:305)
+0E AndroidRuntime: 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+0E AndroidRuntime: 	... 3 more

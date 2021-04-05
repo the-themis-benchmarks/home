@@ -1,0 +1,23 @@
+E AndroidRuntime: Process: org.wordpress.android, PID: 26681
+E AndroidRuntime: java.lang.NullPointerException: Attempt to invoke virtual method 'boolean org.wordpress.android.ui.FilteredRecyclerView.isRefreshing()' on a null object reference
+E AndroidRuntime: 	at org.wordpress.android.ui.reader.ReaderPostListFragment.onSaveInstanceState(ReaderPostListFragment.java:825)
+E AndroidRuntime: 	at androidx.fragment.app.Fragment.performSaveInstanceState(Fragment.java:2766)
+E AndroidRuntime: 	at androidx.fragment.app.FragmentManagerImpl.saveFragmentBasicState(FragmentManagerImpl.java:2289)
+E AndroidRuntime: 	at androidx.fragment.app.FragmentManagerImpl.saveAllState(FragmentManagerImpl.java:2348)
+E AndroidRuntime: 	at androidx.fragment.app.FragmentController.saveAllState(FragmentController.java:151)
+E AndroidRuntime: 	at androidx.fragment.app.FragmentActivity.onSaveInstanceState(FragmentActivity.java:513)
+E AndroidRuntime: 	at androidx.appcompat.app.AppCompatActivity.onSaveInstanceState(AppCompatActivity.java:533)
+E AndroidRuntime: 	at android.app.Activity.performSaveInstanceState(Activity.java:1298)
+E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnSaveInstanceState(Instrumentation.java:1289)
+E AndroidRuntime: 	at android.app.ActivityThread.callCallActivityOnSaveInstanceState(ActivityThread.java:4088)
+E AndroidRuntime: 	at android.app.ActivityThread.performStopActivityInner(ActivityThread.java:3490)
+E AndroidRuntime: 	at android.app.ActivityThread.handleStopActivity(ActivityThread.java:3550)
+E AndroidRuntime: 	at android.app.ActivityThread.-wrap20(ActivityThread.java)
+E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1373)
+E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:148)
+E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:5417)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+

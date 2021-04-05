@@ -1,0 +1,40 @@
+{
+	"AnkiDroid-debug-2.6beta6-#4200.apk": {
+		"classfiles": ["AnkiDroid-#4200/AnkiDroid/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/"],
+		"sourcefiles": ["AnkiDroid-#4200/AnkiDroid/src/main/java/", "AnkiDroid-#4200/api/src/main/java/"]
+	},
+	"AnkiDroid-debug-2.7beta1-#4451.apk": {
+		"classfiles": ["AnkiDroid-#4451/AnkiDroid/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/"],
+		"sourcefiles": ["AnkiDroid-#4451/AnkiDroid/src/main/java/", "AnkiDroid-#4451/api/src/main/java/"]
+	},
+	"AnkiDroid-debug-2.9.1-#5638.apk": {
+		"classfiles": ["AnkiDroid-#5638/AnkiDroid/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/",
+						"AnkiDroid-#5638/api/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/"
+						],
+		"sourcefiles": ["AnkiDroid-#5638/AnkiDroid/src/main/java/", "AnkiDroid-#5638/api/src/main/java/"]
+	},
+	"AnkiDroid-debug-2.9alpha4-#4707.apk": {
+		"classfiles": ["AnkiDroid-#4707/AnkiDroid/build/intermediates/classes/debug/",
+						"AnkiDroid-#4707/api/build/intermediates/javac/debug/classes/"
+						],
+		"sourcefiles": ["AnkiDroid-#4707/AnkiDroid/src/main/java/", "AnkiDroid-#4707/api/src/main/java/"]
+	},
+	"AnkiDroid-debug-2.9-#4977.apk": {
+		"classfiles": ["AnkiDroid-#4977/AnkiDroid/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/",
+						"AnkiDroid-#4977/api/build/intermediates/javac/debug/classes/"
+						],
+		"sourcefiles": ["AnkiDroid-#4977/AnkiDroid/src/main/java/", "AnkiDroid-#4977/api/src/main/java/"]
+	},
+	"AnkiDroid-debug-2.9.4-#5756.apk": {
+		"classfiles": ["AnkiDroid-#5756/AnkiDroid/build/intermediates/javac/debug/classes/",
+						"AnkiDroid-#5756/api/build/intermediates/javac/debug/classes/"
+						],
+		"sourcefiles": ["AnkiDroid-#5756/AnkiDroid/src/main/java/", "AnkiDroid-#5756/api/src/main/java/"]
+	},
+	"AnkiDroid-debug-2.10beta3-#6145.apk": {
+		"classfiles": ["AnkiDroid-#6145/AnkiDroid/build/intermediates/javac/debug/classes/",
+						"AnkiDroid-#6145/api/build/intermediates/javac/debug/classes/"
+						],
+		"sourcefiles": ["AnkiDroid-#6145/AnkiDroid/src/main/java/", "AnkiDroid-#6145/api/src/main/java/"]
+	}
+}

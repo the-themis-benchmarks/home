@@ -1,0 +1,20 @@
+E AndroidRuntime: FATAL EXCEPTION: main
+E AndroidRuntime: Process: com.google.samples.apps.sunflower, PID: 26802
+E AndroidRuntime: java.lang.IllegalArgumentException: navigation destination com.google.samples.apps.sunflower:id/action_plant_list_fragment_to_plant_detail_fragment is unknown to this NavController
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:691)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:648)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:634)
+E AndroidRuntime: 	at androidx.navigation.NavController.navigate(NavController.java:712)
+E AndroidRuntime: 	at com.google.samples.apps.sunflower.adapters.PlantAdapter$createOnClickListener$1.onClick(PlantAdapter.kt:51)
+E AndroidRuntime: 	at android.view.View.performClick(View.java:6597)
+E AndroidRuntime: 	at android.view.View.performClickInternal(View.java:6574)
+E AndroidRuntime: 	at android.view.View.access$3100(View.java:778)
+E AndroidRuntime: 	at android.view.View$PerformClick.run(View.java:25885)
+E AndroidRuntime: 	at android.os.Handler.handleCallback(Handler.java:873)
+E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:99)
+E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:193)
+E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:6718)
+E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+E AndroidRuntime: 	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:493)
+E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:858)
+

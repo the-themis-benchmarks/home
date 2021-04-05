@@ -1,0 +1,23 @@
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: Process: com.nextcloud.client, PID: 13673
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: java.lang.RuntimeException: Unable to start activity ComponentInfo{com.nextcloud.client/com.owncloud.android.ui.activity.FileDisplayActivity}: java.lang.IllegalStateException: This Activity already has an action bar supplied by the window decor. Do not request Window.FEATURE_SUPPORT_ACTION_BAR and set windowActionBar to false in your theme to use a Toolbar instead.
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2416)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.app.ActivityThread.handleLaunchActivity(ActivityThread.java:2476)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.app.ActivityThread.-wrap11(ActivityThread.java)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.app.ActivityThread$H.handleMessage(ActivityThread.java:1344)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.os.Handler.dispatchMessage(Handler.java:102)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.os.Looper.loop(Looper.java:148)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.app.ActivityThread.main(ActivityThread.java:5417)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at java.lang.reflect.Method.invoke(Native Method)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:726)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:616)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: Caused by: java.lang.IllegalStateException: This Activity already has an action bar supplied by the window decor. Do not request Window.FEATURE_SUPPORT_ACTION_BAR and set windowActionBar to false in your theme to use a Toolbar instead.
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at androidx.appcompat.app.AppCompatDelegateImpl.setSupportActionBar(AppCompatDelegateImpl.java:345)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at androidx.appcompat.app.AppCompatActivity.setSupportActionBar(AppCompatActivity.java:130)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at com.owncloud.android.ui.activity.ToolbarActivity.setupToolbar(ToolbarActivity.java:69)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at com.owncloud.android.ui.activity.ToolbarActivity.setupToolbar(ToolbarActivity.java:99)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at com.owncloud.android.ui.activity.FileDisplayActivity.onCreate(FileDisplayActivity.java:244)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.app.Activity.performCreate(Activity.java:6237)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.app.Instrumentation.callActivityOnCreate(Instrumentation.java:1107)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	at android.app.ActivityThread.performLaunchActivity(ActivityThread.java:2369)
+07-15 19:28:27.018 13673 13673 E AndroidRuntime: 	... 9 more
+
