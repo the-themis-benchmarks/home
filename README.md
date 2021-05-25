@@ -22,7 +22,7 @@ For each bug, we provide:
 
 - Metadata for supporting evaluation (e.g., bug explanation, login script, configuration files used by the Themis's infrastructure)
 
-- the app source code w.r.t each bug (omitted for anonymity)
+- the app source code w.r.t each bug 
 
 
 ### List of crash bugs
@@ -137,7 +137,58 @@ optional arguments:
   --offset OFFSET       device offset number
 ```
 
-### Example of setup and usage:
+-----------
+
+
+# 1. Getting Started
+
+## 1.1 Running Themis in Virtual Machine
+
+You can download the VM image from [this link](https://onedrive.live.com/?authkey=%21ABRsl37nSOVmzYs&id=3E5C3CBC930D729%211714&cid=03E5C3CBC930D729) on Google Drive (publicly accessible).
+
+### Requirements
+
+* You need to enable virtualization technology in your computer's BIOS, see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable virtualization technology in the computer. Some computers have turned on virtualization by default. 
+* Your computer needs at least 16G of memory, and at least 40G of storage.
+* VirtualBox: we built our artifact by using version 6.1.20.
+* Download the zip file `SetDroid_VM.zip`(SHA256: ec274b5c23257ad1b94bc3733076b0092fd199b0b8dab5a74d852e5dfa659bf2), and extract it.
+
+### Setting up
+
+* You can download the zip file `Video.zip` and extract it to get the video tutorial of the artifact, /Video/Setting up.mp4 intoduce how to set up the artifact.
+* Open VirtualBox, click "File", click "Import Appliance", then select the file named "SetDroid.ova" from the extracted contents (this step will take about five to ten minutes to complete). 
+* After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
+* Click "Settings", click "System", click "Processor", and check "Enable Nested VT-x/AMD-V"
+* Run the virtual machine. The username and the password are both "setdroid".
+* If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, it may be because you did not disable the Hyper-V option. You can disable Hyper-V launch temporarly. See [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about that.
+
+### Run
+
+* You can download the zip file `Video.zip` and extract it to get the video tutorial of the artifact, /Video/Run.mp4 intoduce how to run the artifact.
+* Open the terminal and execute the following command:
+```
+/home/setdroid/Android/Sdk/emulator/emulator -avd Android8.0 -read-only -port 5554 &
+```
+* Wait for the first Android emulator to start. After the emulator is successfully started, return to the command-line interface, press enter, and then execute the following command:
+```
+/home/setdroid/Android/Sdk/emulator/emulator -avd Android8.0 -read-only -port 5556 &
+```
+* Wait for the second Android emulator to start. After the emulator is successfully started, return to the command-line interface, press enter, and then execute the following command:
+```
+cd /home/setdroid/SetDroid/Tool 
+```
+* Then execute the following command (this step will take about five to ten minutes to complete):
+```
+python3 start.py -app_path /home/setdroid/SetDroid/App/a2dp.Vol.apk -append_device emulator-5554 -append_device emulator-5556 -android_system emulator8 -append_strategy display_immediate_1 -testcase_count 1 -choice 0 -event_num 50
+```
+* At this point, SetDroid will start to run a round of example policy (Oracle checking rule I -immediate -display -1) on the example app ( A2DP Volume), which contains 50 events.
+* The target app can be modified by the configuration parameter ```-app_path```. The number of runs can be modified by the configuration parameter ```-testcase_count```. The number of events contained in each test can be modified by the configuration parameter ```-event_num```. Setting change strategy can be changed through the configuration parameter ```-append_strategy```. You can also add more strategies to make them be executed in sequence.
+* For example, the following command represents the sequential execution of two strategies (Oracle checking rule I - lazy - permission) and (Oracle checking rule II - language) on Amaze. Each strategy is executed 10 times, and each test contains 100 events (this command will take about one to two hours to complete, and you can interrupt the command through ```Ctrl-C``` at any time):
+```
+python3 start.py -app_path /home/setdroid/SetDroid/App/com.amaze.filemanager.apk -append_device emulator-5554 -append_device emulator-5556 -android_system emulator8 -append_strategy permssion_lazy_1 -append_strategy language -testcase_count 10 -event_num 100
+```
+
+# Getting Started (Example of Usage)
 
 1. Setup Android environment on your local machine
 
