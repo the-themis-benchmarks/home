@@ -1,14 +1,14 @@
 # The Themis Benchmark
 
 Themis is a collection of real-world, reproducible crash bugs (collected from 
-open-source Android apps) and a supporting, extensible infrastructure 
-with the goal of benchmarking automated GUI testing for Android and beyond. 
+open-source Android apps) and a unified, extensible infrastructure 
+for benchmarking automated GUI testing for Android and beyond. 
 
 # Contents of Themis
 
 ## Themis's bug dataset
 
-Themis currently contains *52* reproducible crash bugs. All these bugs are labeled by
+Themis now contains *52* reproducible crash bugs. All these bugs are labeled by
 the app developers as "critical bugs" (i.e., important bugs), which affected the 
 major app functionalities and the larger percentage of app users.
 
@@ -25,7 +25,7 @@ For each bug, we provide:
 - the app source code w.r.t each bug (omitted for anonymity)
 
 
-### List of Critical Crash Bugs
+### List of crash bugs
 Issue Id | App | Bug report, data | Version | Category | GitHub Stars | Reproducible? | Network? | Login? | Setting? 
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 1 | *[AmazeFileManager](https://github.com/TeamAmaze/AmazeFileManager)* | [#1837](https://github.com/TeamAmaze/AmazeFileManager/issues/1837), [data](https://github.com/the-themis-benchmarks/home/tree/master/AmazeFileManager) | 3.4.2 | File Manager | 3.0K | 6.0/7.1 | no | no| no 
@@ -84,13 +84,25 @@ Issue Id | App | Bug report, data | Version | Category | GitHub Stars | Reproduc
 
 ## Themis's Infrastructure
 
-### Example of usage:
-(execute the command under scripts/)
-```
-python3 themis.py --avd Android7.1_commons_3244 --apk ../apps-android-commons/commons-2.11.0-#3244.apk -n 1 --repeat 3 -o ../monkey-results/ --login ../apps-android-commons/login-2.11.0-#3244.py --monkey --offset 1
-```
+Themis contains a unified, extensible infrastructure for benchmarking automated GUI testing
+for Android. Any testing tools can be easily integrated into this infrastructure and
+deployed on a given machine with one line of command. 
 
-### Details of usage:
+
+### List of Supported Tools 
+Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Instrumentation | Supported SDKs | Implementation Basis 
+--- | --- | --- | --- | --- | --- | --- | --- | 
+Monkey | - | yes | Random Testing | no | no | Any | -
+Ape | ICSE'19 | yes | Model-based | no | no | 6.0/7.1 | Monkey-based
+Humanoid | ASE'19 | yes | Deep learning-based | no | no | Any | DroidBot-based
+ComboDroid | ICSE'20 | yes | Model-based | no | yes | 6.0/7.1 | Monkey-based
+TimeMachine | ICSE'20 | yes | State-based | no | yes | 4.4/7.1 | Monkey-based
+Q-testing | ISSTA'20 | no | reinforcement learning-based | no | no | 4.4/7.1/9.0 | -
+Stoat | FSE'17 | yes | Model-based | no | no | Any | A3E-based 
+Sapienz | ISSTA'16 | no | Search-based | no | no | 4.4 | Monkey-based
+ 
+
+### The command line of deployment:
 ```
 usage: themis.py [-h] [--avd AVD_NAME] [--apk APK] [-n NUMBER_OF_DEVICES]
                 [--apk-list APK_LIST] -o O [--time TIME] [--repeat REPEAT]
@@ -125,18 +137,20 @@ optional arguments:
   --offset OFFSET       device offset number
 ```
 
-### List of Supported Tools 
-Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Instrumentation | Supported SDKs | Implementation Basis 
---- | --- | --- | --- | --- | --- | --- | --- | 
-Monkey | - | yes | Random Testing | no | no | Any | -
-Ape | ICSE'19 | yes | Model-based | no | no | 6.0/7.1 | Monkey-based
-Humanoid | ASE'19 | yes | Deep learning-based | no | no | Any | DroidBot-based
-ComboDroid | ICSE'20 | yes | Model-based | no | yes | 6.0/7.1 | Monkey-based
-TimeMachine | ICSE'20 | yes | State-based | no | yes | 4.4/7.1 | Monkey-based
-Q-testing | ISSTA'20 | no | reinforcement learning-based | no | no | 4.4/7.1/9.0 | -
-Stoat | FSE'17 | yes | Model-based | no | no | Any | A3E-based 
-Sapienz | ISSTA'16 | no | Search-based | no | no | 4.4 | Monkey-based
- 
+### Example of setup and usage:
+
+1. Setup Android environment on your local machine
+
+2. Create an Android emulator ``avd_Android7.1`` with SDK version 7.1 (API level 25): 
+```
+avdmanager create avd --force --name avd_Android7.1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 512M --device 'Nexus 7'
+```
+
+3. Deploy a testing tool on a given bug  
+```
+cd scripts/
+python3 themis.py --avd avd_Android7.1 --apk ../apps-android-commons/commons-2.11.0-#3244.apk -n 1 --repeat 3 -o ../monkey-results/ --login ../apps-android-commons/login-2.11.0-#3244.py --monkey --offset 1
+``` 
 
 ## Prepare you evaluation:
  
