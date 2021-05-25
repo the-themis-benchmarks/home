@@ -144,27 +144,25 @@ optional arguments:
 
 ## 1.1 Running Themis in Virtual Machine
 
-You can download the VM image from [this link](https://onedrive.live.com/?authkey=%21ABRsl37nSOVmzYs&id=3E5C3CBC930D729%211714&cid=03E5C3CBC930D729) on Google Drive (publicly accessible).
+You can download the Themis package `Themis_VM.zip` from [this link]() on Google Drive (publicly accessible).
 
 ### Requirements
 
-* You need to enable virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Some computers have turned on virtualization by default. 
+* You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default have virtualization turned on. 
 * Your computer needs at least 16G of memory, and at least 40G of storage.
-* VirtualBox: we built our artifact by using version 6.1.20.
-* Download the zip file `SetDroid_VM.zip`(SHA256: ec274b5c23257ad1b94bc3733076b0092fd199b0b8dab5a74d852e5dfa659bf2), and extract it.
+* We built our artifact by using VirtualBox [v6.1.20](). After installing virtualbox, you may need to reboot the computer.
 
 ### Setting up
 
-* You can download the zip file `Video.zip` and extract it to get the video tutorial of the artifact, /Video/Setting up.mp4 intoduce how to set up the artifact.
-* Open VirtualBox, click "File", click "Import Appliance", then select the file named "SetDroid.ova" from the extracted contents (this step will take about five to ten minutes to complete). 
+* Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
+* Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
 * After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
 * Click "Settings", click "System", click "Processor", and check "Enable Nested VT-x/AMD-V"
-* Run the virtual machine. The username and the password are both "setdroid".
+* Run the virtual machine. The username and the password are both `Themis`.
 * If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, it may be because you did not disable the Hyper-V option. You can disable Hyper-V launch temporarly. See [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about that.
 
 ### Run
 
-* You can download the zip file `Video.zip` and extract it to get the video tutorial of the artifact, /Video/Run.mp4 intoduce how to run the artifact.
 * Open the terminal and execute the following command:
 ```
 /home/setdroid/Android/Sdk/emulator/emulator -avd Android8.0 -read-only -port 5554 &
