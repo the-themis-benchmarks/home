@@ -1,7 +1,7 @@
 # The Themis Benchmark
 
 Themis is a collection of real-world, reproducible crash bugs (collected from 
-a number of open-source Android apps) and a supporting, extensible infrastructure 
+open-source Android apps) and a supporting, extensible infrastructure 
 with the goal of benchmarking automated GUI testing for Android and beyond. 
 
 # Contents of Themis
@@ -9,7 +9,7 @@ with the goal of benchmarking automated GUI testing for Android and beyond.
 ## Themis's bug dataset
 
 Themis currently contains *52* reproducible crash bugs. All these bugs are labeled by
-the app developers as "critical bugs" (i.e., important bugs), which usually affected the 
+the app developers as "critical bugs" (i.e., important bugs), which affected the 
 major app functionalities and the larger percentage of app users.
 
 For each bug, we provide:
