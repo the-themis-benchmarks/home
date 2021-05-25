@@ -148,7 +148,7 @@ You can download the VM image from [this link](https://onedrive.live.com/?authke
 
 ### Requirements
 
-* You need to enable virtualization technology in your computer's BIOS, see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable virtualization technology in the computer. Some computers have turned on virtualization by default. 
+* You need to enable virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Some computers have turned on virtualization by default. 
 * Your computer needs at least 16G of memory, and at least 40G of storage.
 * VirtualBox: we built our artifact by using version 6.1.20.
 * Download the zip file `SetDroid_VM.zip`(SHA256: ec274b5c23257ad1b94bc3733076b0092fd199b0b8dab5a74d852e5dfa659bf2), and extract it.
