@@ -148,67 +148,53 @@ You can download the Themis package `Themis_VM.zip` from [this link]() on Google
 
 ### Requirements
 
-* You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default have virtualization turned on. 
+* You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default have this virtualization option turned on. 
 * Your computer needs at least 16G of memory, and at least 40G of storage.
 * We built our artifact by using VirtualBox [v6.1.20](). After installing virtualbox, you may need to reboot the computer.
 
 ### Setting up
 
-* Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
-* Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
-* After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
-* Click "Settings", click "System", click "Processor", and check "Enable Nested VT-x/AMD-V"
-* Run the virtual machine. The username and the password are both `Themis`.
-* If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, it may be because you did not disable the Hyper-V option. You can disable Hyper-V launch temporarly. See [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about that.
+1. Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
+2. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
+3. After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
+4. Click "Settings", click "System", click "Processor", and check "Enable Nested VT-x/AMD-V"
+5. Run the virtual machine. The username and the password are both `Themis`.
+6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
 ### Run
 
-* Open the terminal and execute the following command:
+1. switch to Themis's scripts directory
+
 ```
-/home/setdroid/Android/Sdk/emulator/emulator -avd Android8.0 -read-only -port 5554 &
-```
-* Wait for the first Android emulator to start. After the emulator is successfully started, return to the command-line interface, press enter, and then execute the following command:
-```
-/home/setdroid/Android/Sdk/emulator/emulator -avd Android8.0 -read-only -port 5556 &
-```
-* Wait for the second Android emulator to start. After the emulator is successfully started, return to the command-line interface, press enter, and then execute the following command:
-```
-cd /home/setdroid/SetDroid/Tool 
-```
-* Then execute the following command (this step will take about five to ten minutes to complete):
-```
-python3 start.py -app_path /home/setdroid/SetDroid/App/a2dp.Vol.apk -append_device emulator-5554 -append_device emulator-5556 -android_system emulator8 -append_strategy display_immediate_1 -testcase_count 1 -choice 0 -event_num 50
-```
-* At this point, SetDroid will start to run a round of example policy (Oracle checking rule I -immediate -display -1) on the example app ( A2DP Volume), which contains 50 events.
-* The target app can be modified by the configuration parameter ```-app_path```. The number of runs can be modified by the configuration parameter ```-testcase_count```. The number of events contained in each test can be modified by the configuration parameter ```-event_num```. Setting change strategy can be changed through the configuration parameter ```-append_strategy```. You can also add more strategies to make them be executed in sequence.
-* For example, the following command represents the sequential execution of two strategies (Oracle checking rule I - lazy - permission) and (Oracle checking rule II - language) on Amaze. Each strategy is executed 10 times, and each test contains 100 events (this command will take about one to two hours to complete, and you can interrupt the command through ```Ctrl-C``` at any time):
-```
-python3 start.py -app_path /home/setdroid/SetDroid/App/com.amaze.filemanager.apk -append_device emulator-5554 -append_device emulator-5556 -android_system emulator8 -append_strategy permssion_lazy_1 -append_strategy language -testcase_count 10 -event_num 100
+cd themis/scripts
 ```
 
-# Getting Started (Example of Usage)
+2. run a testing tool on a target bug
 
-1. Setup Android environment on your local machine
-
-2. Create an Android emulator ``avd_Android7.1`` with SDK version 7.1 (API level 25): 
 ```
-avdmanager create avd --force --name avd_Android7.1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 512M --device 'Nexus 7'
-```
-
-3. Deploy a testing tool on a given bug  
-```
-cd scripts/
 python3 themis.py --avd avd_Android7.1 --apk ../apps-android-commons/commons-2.11.0-#3244.apk -n 1 --repeat 3 -o ../monkey-results/ --login ../apps-android-commons/login-2.11.0-#3244.py --monkey --offset 1
-``` 
-
-## Prepare you evaluation:
- 
-- Create an avd: 
-```
-avdmanager create avd --force --name Android7.1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 512M --device 'Nexus 7'
 ```
 
-- Modify the avd configuration (config.ini): 
+3. inspect the output files
+
+
+## 1.2 Setup Themis from scratch 
+
+In practice, we recommend the users to setup our artifact on native machines rather than virtual machines to ensure the optimal testing performance. Thus, we provide the instructions to setup Themis from scratch.
+
+1. setup Android development environment on your local native machine
+
+2. create an Android emulator before running Themis (see [this link](https://stackoverflow.com/questions/43275238/how-to-set-system-images-path-when-creating-an-android-avd) for creating an emulator using [avdmanager](https://developer.android.com/studio/command-line/avdmanager)).
+
+- An example: create an Android emulator ``avd_Android7.1`` with SDK version 7.1 (API level 25), X86 ABI image and Google APIs: 
+```
+sdkmanager "system-images;android-25;google_apis;x86"
+avdmanager create avd --force --name avd_Android7.1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 1024M --device 'Nexus 7'
+```
+3. (optional) modify the emulator configuration to ensure optimal testing performance of testing tools (config.ini): 
+
+- Here, we set an emulator with 2GB RAM, 1GB SdCard, 1GB internal storage and 256MB heap size.
+
 ```
 sdcard.size=1024M
 disk.dataPartition.size=1024M
@@ -216,12 +202,18 @@ vm.heapSize=256
 hw.ramSize=2048
 ``` 
 
-- Install [uiautomator2](https://github.com/openatx/uiautomator2) for executing login script
+4. (optional but recommended) copy dummy documents into emulators to allow file access from the apps under test
+
+```
+emulator -avd avd_Android7.1 -port 5554 &
+cd themis/scripts
+bash -x copy_dummy_documents.sh emulator-5554
+emu kill emulator-5554
+```
+
+5. install [uiautomator2](https://github.com/openatx/uiautomator2), which is used for executing login scripts
+
 ```
 pip3 install --upgrade --pre uiautomator2
 ```
 
-- Copy dummy documents into emulators
-```
-bash copy_dummy_documents.sh $avd_serial
-```
