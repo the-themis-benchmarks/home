@@ -172,8 +172,19 @@ cd themis/scripts
 2. run a testing tool on a target bug
 
 ```
-python3 themis.py --avd avd_Android7.1 --apk ../apps-android-commons/commons-2.11.0-#3244.apk -n 1 --repeat 3 -o ../monkey-results/ --login ../apps-android-commons/login-2.11.0-#3244.py --monkey --offset 1
+python3 themis.py --avd avd_Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 3 --time 1h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey --offset 1
 ```
+
+Here, 
+* `--avd avd_Android7.1` specifies the emulator for running 
+* `--apk ../commons/commons-2.11.0-#3244.apk` specifies the target bug is from `commons`'s bug #3244 (v2.11.0) 
+* `-n 1` denotes only one emulator instance will be created
+* `--repeat 3` denotes the testing process will be repeated for 3 rounds
+* `--time 1h` allocates 1 hour for one round of testing
+* `-o ../monkey-results/` specifies the output directory of testing results
+* `--login ../commons/login-2.11.0-#3244.py` specifies the login script (which will be executed before GUI testing) if the app requires user credentials
+* `--monkey` specifies the testing tool
+* `--offset 1` indicates the emulator's serial starts from `emulator-5556` (Android emulators' serials start from `emulator-5554` and end at `emulator-5584`, and by default 16 emulators at most are allowed to run in parallel on one native machine)
 
 3. inspect the output files
 
