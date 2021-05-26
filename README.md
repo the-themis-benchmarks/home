@@ -223,9 +223,11 @@ Here,
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-If everything is okay, you should see the following logs.
+If everything is okay, you should see the following outputs.
 
-````
+<details>
+<summary>click to see the sample outputs...</summary>
+<pre><code>
 allocate emulators: emulator-5554
 the apk list to fuzz: ['../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk']
 True
@@ -497,12 +499,6 @@ OK: killing emulator, bye bye
 OK
 + echo '@@@@@@ Finish (emulator-5554): ' de.rampro.activitydiary.debug @@@@@@@
 @@@@@@ Finish (emulator-5554):  de.rampro.activitydiary.debug @@@@@@@
-````
-
-<details>
-<summary>click</summary>
-<pre><code>
-System.out.println("Hello to see U!");
 </code></pre>
 </details>
 
