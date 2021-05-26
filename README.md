@@ -93,13 +93,13 @@ deployed on a given machine with one line of command.
 Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Instrumentation | Supported SDKs | Implementation Basis 
 --- | --- | --- | --- | --- | --- | --- | --- | 
 Monkey | - | yes | Random Testing | no | no | Any | -
-Ape | ICSE'19 | yes | Model-based | no | no | 6.0/7.1 | Monkey-based
-Humanoid | ASE'19 | yes | Deep learning-based | no | no | Any | DroidBot-based
-ComboDroid | ICSE'20 | yes | Model-based | no | yes | 6.0/7.1 | Monkey-based
-TimeMachine | ICSE'20 | yes | State-based | no | yes | 4.4/7.1 | Monkey-based
-Q-testing | ISSTA'20 | no | reinforcement learning-based | no | no | 4.4/7.1/9.0 | -
-Stoat | FSE'17 | yes | Model-based | no | no | Any | A3E-based 
-Sapienz | ISSTA'16 | no | Search-based | no | no | 4.4 | Monkey-based
+[Ape](https://github.com/tianxiaogu/ape) | ICSE'19 | yes | Model-based | no | no | 6.0/7.1 | Monkey-based
+[Humanoid](https://github.com/yzygitzh/Humanoid) | ASE'19 | yes | Deep learning-based | no | no | Any | DroidBot-based
+[ComboDroid](https://github.com/skull591/ComboDroid-Artifact) | ICSE'20 | yes | Model-based | no | yes | 6.0/7.1 | Monkey-based
+[TimeMachine](https://github.com/DroidTest/TimeMachine) | ICSE'20 | yes | State-based | no | yes | 4.4/7.1 | Monkey-based
+[Q-testing](https://github.com/anlalalu/Q-testing) | ISSTA'20 | no | reinforcement learning-based | no | no | 4.4/7.1/9.0 | -
+[Stoat](https://github.com/tingsu/Stoat) | FSE'17 | yes | Model-based | no | no | Any | A3E-based 
+[Sapienz](https://github.com/Rhapsod/sapienz) | ISSTA'16 | no | Search-based | no | no | 4.4 | Monkey-based
  
 
 ### The command line of deployment:
@@ -146,11 +146,17 @@ The directory structure of Themis is as follows:
 
     Themis
        |
-       |--- scripts:           scripts for running testing tools and analyzing testing results.
+       |--- scripts:                    scripts for running testing tools and analyzing testing results.
            |
-           |--- bin:           
+           |--- themis.py:              the main script for deploying themis.
            |
-       |--- tools:             The supported auotmated testing tools.
+           |--- check_crash.py:         the script to check whether a tool find the bugs.
+           |
+           |--- compute_coverage.py:    the script to compute the code coverage achieved by a tool.
+           |
+           |--- compare_bug_triggering_time.py: the script to pairwisely compare bug-triggering times between different tools.          
+           |
+       |--- tools:                       the supported auotmated testing tools.
            |
            |--- Humanoid
            |
