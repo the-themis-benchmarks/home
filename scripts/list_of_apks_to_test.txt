@@ -1,0 +1,3 @@
+../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk
+../AnkiDroid/AnkiDroid-debug-2.9alpha4-#4707.apk
+../Scarlet-Notes/Scarlet-Notes-6.9.5-#114.apk
