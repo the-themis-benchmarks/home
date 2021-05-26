@@ -224,9 +224,8 @@ Here,
 * `--monkey` specifies the testing tool
 
 If everything is okay, you should see the following outputs.
-
 <details>
-<summary>click to see the sample outputs...</summary>
+<summary>**click to see the sample outputs.**</summary>
 <pre><code>
 allocate emulators: emulator-5554
 the apk list to fuzz: ['../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk']
