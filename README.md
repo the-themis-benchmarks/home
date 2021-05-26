@@ -139,6 +139,38 @@ optional arguments:
 
 -----------
 
+Implementation details
+----------------------
+
+The directory structure of Themis is as follows:
+
+    Themis
+       |
+       |--- scripts:           scripts for running testing tools and analyzing testing results.
+           |
+           |--- bin:           
+           |
+       |--- tools:             The supported auotmated testing tools.
+           |
+           |--- Humanoid
+           |
+           |--- TimeMachine
+           |
+           |--- Q-testing
+           |
+           |--- Ape
+           |
+           |--- ComboDroid
+           |
+           |--- Monkey
+           |
+       |--- app_1:             The bugs collected from app_1.
+       |
+       |--- app_2:             The bugs collected from app_2.
+       |
+       |--- ...
+       |
+       |--- app_N              The bugs collected from app_n.
 
 # 1. Getting Started
 
