@@ -199,7 +199,9 @@ You can download the Themis package `Themis_VM.zip` from [this link]() on Google
 5. Run the virtual machine. The username and the password are both `Themis`.
 6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
-### Run
+### Quick test
+
+Take the quick test to get familar with Themis and check whether it is ready to go.
 
 1. switch to Themis's scripts directory
 
@@ -207,7 +209,301 @@ You can download the Themis package `Themis_VM.zip` from [this link]() on Google
 cd themis/scripts
 ```
 
-2. run a testing tool on a target bug
+2. run Monkey on one target bug
+
+```
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 1m -o ../monkey-results/ --monkey
+```
+
+Here, 
+* `--no-headless` shows the GUI (do not add this option if you run Themis on the servers without GUI)
+* `--avd Android7.1` specifies the emulator for running 
+* `--apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk` specifies the target bug is from `ActivityDiary`'s bug `#118` (`v1.1.8`) 
+* `--time 1m` allocates 1 minutes for one round of testing
+* `-o ../monkey-results/` specifies the output directory of testing results
+* `--monkey` specifies the testing tool
+
+If everything is okay, you should see the following logs.
+
+```
+allocate emulators: emulator-5554
+the apk list to fuzz: ['../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk']
+True
+Now allocate the apk: ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk on emulator-5554
+its login script: ""
+wait the allocated devices to finish...
+execute monkey: bash -x run_monkey.sh ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk emulator-5554 Android7.1 ../monkey-results/ 0.5m "" ""
++ APK_FILE=../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk
++ AVD_SERIAL=emulator-5554
++ AVD_NAME=Android7.1
++ OUTPUT_DIR=../monkey-results/
++ TEST_TIME=0.5m
++ HEADLESS=
++ LOGIN_SCRIPT=
++ RETRY_TIMES=5
+++ seq 1 5
++ for i in $(seq 1 $RETRY_TIMES)
++ echo 'try to start the emulator (emulator-5554)...'
+try to start the emulator (emulator-5554)...
++ sleep 5
++ avd_port=5554
++ sleep 5
++ emulator -port 5554 -avd Android7.1 -read-only
+emulator: Requested console port 5554: Inferring adb port 5555.
+qemu-system-i386: warning: TSC frequency mismatch between VM (2903985 kHz) and host (2903991 kHz), and TSC scaling unavailable
+qemu-system-i386: warning: TSC frequency mismatch between VM (2903985 kHz) and host (2903991 kHz), and TSC scaling unavailable
++ wait_for_device emulator-5554
++ avd_serial=emulator-5554
++ timeout 5s adb -s emulator-5554 wait-for-device
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ i=0
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#0 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#0 times) ...
++ sleep 5
+++ expr 0 + 1
++ i=1
++ [[ 1 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#1 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#1 times) ...
++ sleep 5
+++ expr 1 + 1
++ i=2
++ [[ 2 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#2 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#2 times) ...
++ sleep 5
+++ expr 2 + 1
++ i=3
++ [[ 3 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#3 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#3 times) ...
++ sleep 5
+++ expr 3 + 1
++ i=4
++ [[ 4 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#4 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#4 times) ...
++ sleep 5
+++ expr 4 + 1
++ i=5
++ [[ 5 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#5 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#5 times) ...
++ sleep 5
+++ expr 5 + 1
++ i=6
++ [[ 6 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#6 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#6 times) ...
++ sleep 5
+++ expr 6 + 1
++ i=7
++ [[ 7 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#7 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#7 times) ...
++ sleep 5
+++ expr 7 + 1
++ i=8
++ [[ 8 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#8 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#8 times) ...
++ sleep 5
+++ expr 8 + 1
++ i=9
++ [[ 9 == 10 ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ echo '   Waiting for emulator (emulator-5554) to fully boot (#9 times) ...'
+   Waiting for emulator (emulator-5554) to fully boot (#9 times) ...
++ sleep 5
+++ expr 9 + 1
++ i=10
++ [[ 10 == 10 ]]
++ echo 'Cannot connect to the device: (emulator-5554) after (#10 times)...'
+Cannot connect to the device: (emulator-5554) after (#10 times)...
++ break
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
+adb: device offline
++ OUT=
++ [[ '' != \s\t\o\p\p\e\d ]]
++ adb -s emulator-5554 emu kill
+OK: killing emulator, bye bye
+OK
++ echo 'try to restart the emulator (emulator-5554)...'
+try to restart the emulator (emulator-5554)...
++ [[ 10 == RETRY_TIMES ]]
++ for i in $(seq 1 $RETRY_TIMES)
++ echo 'try to start the emulator (emulator-5554)...'
+try to start the emulator (emulator-5554)...
++ sleep 5
+emulator: WARNING: Not saving state: RAM not mapped as shared
++ avd_port=5554
++ sleep 5
++ emulator -port 5554 -avd Android7.1 -read-only
+emulator: Requested console port 5554: Inferring adb port 5555.
+qemu-system-i386: warning: TSC frequency mismatch between VM (2903985 kHz) and host (2903991 kHz), and TSC scaling unavailable
+qemu-system-i386: warning: TSC frequency mismatch between VM (2903985 kHz) and host (2903991 kHz), and TSC scaling unavailable
++ wait_for_device emulator-5554
++ avd_serial=emulator-5554
++ timeout 5s adb -s emulator-5554 wait-for-device
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
++ OUT=stopped
++ i=0
++ [[ stopped != \s\t\o\p\p\e\d ]]
+++ adb -s emulator-5554 shell getprop init.svc.bootanim
++ OUT=stopped
++ [[ stopped != \s\t\o\p\p\e\d ]]
++ break
++ echo '  emulator (emulator-5554) is booted!'
+  emulator (emulator-5554) is booted!
++ adb -s emulator-5554 root
+restarting adbd as root
+++ date +%Y-%m-%d-%H-%M-%S
++ current_date_time=2021-05-26-16-58-44
+++ basename ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk
++ apk_file_name=ActivityDiary-1.1.8-debug-#118.apk
++ result_dir=../monkey-results//ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2021-05-26-16-58-44
++ mkdir -p ../monkey-results//ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2021-05-26-16-58-44
++ echo '** CREATING RESULT DIR (emulator-5554): ' ../monkey-results//ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2021-05-26-16-58-44
+** CREATING RESULT DIR (emulator-5554):  ../monkey-results//ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2021-05-26-16-58-44
++ [[ '' != '' ]]
++ adb -s emulator-5554 install -g ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk
++ echo '** INSTALL APP (emulator-5554)'
+** INSTALL APP (emulator-5554)
++ sleep 10
+++ aapt dump badging ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk
+++ grep package
+++ awk '{print $2}'
+++ sed s/name=//g
+++ sed 's/'\''//g'
++ app_package_name=de.rampro.activitydiary.debug
++ echo '** PROCESSING APP (emulator-5554): ' de.rampro.activitydiary.debug
+** PROCESSING APP (emulator-5554):  de.rampro.activitydiary.debug
++ echo '** START LOGCAT (emulator-5554) '
+** START LOGCAT (emulator-5554) 
++ adb -s emulator-5554 logcat -c
++ echo '** START COVERAGE (emulator-5554) '
+** START COVERAGE (emulator-5554) 
++ adb -s emulator-5554 logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E '*:F' '*:S'
++ echo '** RUN MONKEY (emulator-5554)'
+** RUN MONKEY (emulator-5554)
++ adb -s emulator-5554 shell date +%Y-%m-%d-%H:%M:%S
++ bash dump_coverage.sh emulator-5554 de.rampro.activitydiary.debug ../monkey-results//ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2021-05-26-16-58-44
++ timeout 0.5m adb -s emulator-5554 shell monkey -p de.rampro.activitydiary.debug -v --throttle 200 --ignore-crashes --ignore-timeouts --ignore-security-exceptions --bugreport 1000000
++ tee ../monkey-results//ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2021-05-26-16-58-44/monkey.log
+:Monkey: seed=1622177363949 count=1000000
+:AllowPackage: de.rampro.activitydiary.debug
+:IncludeCategory: android.intent.category.LAUNCHER
+:IncludeCategory: android.intent.category.MONKEY
+// Event percentages:
+//   0: 15.0%
+//   1: 10.0%
+//   2: 2.0%
+//   3: 15.0%
+//   4: -0.0%
+//   5: -0.0%
+//   6: 25.0%
+//   7: 15.0%
+//   8: 2.0%
+//   9: 2.0%
+//   10: 1.0%
+//   11: 13.0%
+:Switch: #Intent;action=android.intent.action.MAIN;category=android.intent.category.LAUNCHER;launchFlags=0x10200000;component=de.rampro.activitydiary.debug/de.rampro.activitydiary.ui.main.MainActivity;end
+    // Allowing start of Intent { act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] cmp=de.rampro.activitydiary.debug/de.rampro.activitydiary.ui.main.MainActivity } in package de.rampro.activitydiary.debug
+:Sending Trackball (ACTION_MOVE): 0:(3.0,0.0)
+:Sending Touch (ACTION_DOWN): 0:(6.0,111.0)
+:Sending Touch (ACTION_UP): 0:(75.08969,0.25681877)
+:Sending Touch (ACTION_DOWN): 0:(461.0,414.0)
+:Sending Touch (ACTION_UP): 0:(463.19458,413.57645)
+:Sending Touch (ACTION_DOWN): 0:(443.0,1154.0)
+:Sending Touch (ACTION_UP): 0:(337.0955,1190.089)
+:Sending Touch (ACTION_DOWN): 0:(392.0,379.0)
+:Sending Touch (ACTION_UP): 0:(404.1744,297.83728)
+:Sending Trackball (ACTION_MOVE): 0:(-1.0,-4.0)
+:Sending Touch (ACTION_DOWN): 0:(739.0,89.0)
+:Sending Touch (ACTION_UP): 0:(800.0,146.10786)
+:Sending Trackball (ACTION_MOVE): 0:(-3.0,4.0)
+:Sending Touch (ACTION_DOWN): 0:(749.0,443.0)
+:Sending Touch (ACTION_UP): 0:(747.92065,456.49356)
+:Sending Touch (ACTION_DOWN): 0:(485.0,814.0)
+:Sending Touch (ACTION_UP): 0:(492.87933,804.6225)
+:Sending Trackball (ACTION_MOVE): 0:(-4.0,-4.0)
+:Sending Trackball (ACTION_MOVE): 0:(0.0,2.0)
+:Sending Touch (ACTION_DOWN): 0:(454.0,119.0)
+:Sending Touch (ACTION_UP): 0:(465.00302,121.41099)
+:Sending Touch (ACTION_DOWN): 0:(476.0,305.0)
+:Sending Touch (ACTION_UP): 0:(476.1956,313.51404)
++ adb -s emulator-5554 shell date +%Y-%m-%d-%H:%M:%S
++ echo '** STOP MONKEY (emulator-5554)'
+** STOP MONKEY (emulator-5554)
+++ adb -s emulator-5554 shell ps
+++ grep monkey
+++ awk '{print $2}'
++ adb -s emulator-5554 shell kill 17521
++ echo '** STOP COVERAGE (emulator-5554)'
+** STOP COVERAGE (emulator-5554)
+++ ps aux
+++ grep 'dump_coverage.sh emulator-5554'
+++ grep -v grep
+++ awk '{print $2}'
++ kill 1248836
++ echo '** STOP LOGCAT (emulator-5554)'
+** STOP LOGCAT (emulator-5554)
+++ ps aux
+++ grep 'emulator-5554 logcat'
+++ grep -v grep
+++ awk '{print $2}'
++ kill 1248835
++ sleep 5
++ adb -s emulator-5554 emu kill
+OK: killing emulator, bye bye
+OK
++ echo '@@@@@@ Finish (emulator-5554): ' de.rampro.activitydiary.debug @@@@@@@
+@@@@@@ Finish (emulator-5554):  de.rampro.activitydiary.debug @@@@@@@
+```
+
+3. inspect the output files
+
+### Whole evaluation
+
+. run a testing tool on a target bug
 
 ```
 python3 themis.py --avd avd_Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 3 --time 1h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey --offset 1
@@ -223,9 +519,6 @@ Here,
 * `--login ../commons/login-2.11.0-#3244.py` specifies the login script (which will be executed before GUI testing) if the app requires user credentials
 * `--monkey` specifies the testing tool
 * `--offset 1` indicates the emulator's serial starts from `emulator-5556` (Android emulators' serials start from `emulator-5554` and end at `emulator-5584`, and by default 16 emulators at most are allowed to run in parallel on one native machine)
-
-3. inspect the output files
-
 
 ## 1.2 Setup Themis from scratch 
 
