@@ -257,7 +257,7 @@ if __name__ == '__main__':
 
     ap.add_argument('--avd', type=str, dest='avd_name')
     ap.add_argument('--apk', type=str, dest='apk')
-    ap.add_argument('-n', type=int, dest='number_of_devices', default=8,
+    ap.add_argument('-n', type=int, dest='number_of_devices', default=1,
                     help="number of available emulators for testing")
     ap.add_argument('--apk-list', type=str, dest='apk_list', help="list of apks under test")
     ap.add_argument('-o', required=True, help="output dir")

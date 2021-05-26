@@ -199,17 +199,17 @@ You can download the Themis package `Themis_VM.zip` from [this link]() on Google
 5. Run the virtual machine. The username and the password are both `Themis`.
 6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
-### Quick test
+### ==Quick Test==
 
 Take the quick test to get familar with Themis and check whether it is ready to go.
 
-1. switch to Themis's scripts directory
+**1. switch to Themis's scripts directory**
 
 ```
 cd themis/scripts
 ```
 
-2. run Monkey on one target bug
+**2. run Monkey on one target bug**
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 1m -o ../monkey-results/ --monkey
@@ -501,9 +501,11 @@ OK
 </code></pre>
 </details>
 
-3. inspect the output files
+**3. inspect the output files**
 
-### Whole evaluation
+
+
+### ==Whole Evaluation==
 
 . run a testing tool on a target bug
 
