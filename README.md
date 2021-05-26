@@ -225,7 +225,7 @@ Here,
 
 If everything is okay, you should see the following logs.
 
-```
+````
 allocate emulators: emulator-5554
 the apk list to fuzz: ['../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk']
 True
@@ -497,7 +497,14 @@ OK: killing emulator, bye bye
 OK
 + echo '@@@@@@ Finish (emulator-5554): ' de.rampro.activitydiary.debug @@@@@@@
 @@@@@@ Finish (emulator-5554):  de.rampro.activitydiary.debug @@@@@@@
-```
+````
+
+<details>
+<summary>click</summary>
+<pre><code>
+System.out.println("Hello to see U!");
+</code></pre>
+</details>
 
 3. inspect the output files
 
