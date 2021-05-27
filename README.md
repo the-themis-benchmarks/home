@@ -627,5 +627,14 @@ emu kill emulator-5554
 pip3 install --upgrade --pre uiautomator2
 ```
 
-# 3. Extend Themis 
+# 3. Extend Themis for Future Research
 
+1. The tools are forked from the original tool repo, so it is easy to rerun the updated tools, and also contribute new features into the original tools
+
+2. how to add new bugs (we are also planning to integrate other types of bugs, other sources of benchmarks) and new tools (e.g., we already extend Themis with FastBot, a commercial testing tool)
+
+3. we provide coverage profiling and scripts (if the users want this feature)
+
+4. cater for other research purpose (e.g., fault localization, program repair, etc.)
+
+4. 
