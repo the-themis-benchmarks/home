@@ -92,7 +92,7 @@ deployed on a given machine with one line of command.
 ### List of Supported Tools 
 Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Instrumentation | Supported SDKs | Implementation Basis 
 --- | --- | --- | --- | --- | --- | --- | --- | 
-Monkey | - | yes | Random Testing | no | no | Any | -
+[Monkey](https://developer.android.com/studio/test/monkey?hl=en) | - | yes | Random Testing | no | no | Any | -
 [Ape](https://github.com/tianxiaogu/ape) | ICSE'19 | yes | Model-based | no | no | 6.0/7.1 | Monkey-based
 [Humanoid](https://github.com/yzygitzh/Humanoid) | ASE'19 | yes | Deep learning-based | no | no | Any | DroidBot-based
 [ComboDroid](https://github.com/skull591/ComboDroid-Artifact) | ICSE'20 | yes | Model-based | no | yes | 6.0/7.1 | Monkey-based
@@ -102,7 +102,7 @@ Monkey | - | yes | Random Testing | no | no | Any | -
 [Sapienz](https://github.com/Rhapsod/sapienz) | ISSTA'16 | no | Search-based | no | no | 4.4 | Monkey-based
  
 
-### The command line of deployment:
+### The command line for deployment:
 ```
 usage: themis.py [-h] [--avd AVD_NAME] [--apk APK] [-n NUMBER_OF_DEVICES]
                 [--apk-list APK_LIST] -o O [--time TIME] [--repeat REPEAT]
@@ -178,19 +178,17 @@ The directory structure of Themis is as follows:
        |
        |--- app_N              The bugs collected from app_n.
 
-# 1. Getting Started
-
-## 1.1 Running Themis in Virtual Machine
+# 1. Getting Started (Run Themis in Virtual Machine)
 
 You can download the Themis package `Themis_VM.zip` from [this link]() on Google Drive (publicly accessible).
 
-### Requirements
+## Requirements
 
 * You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default have this virtualization option turned on. 
 * Your computer needs at least 16G of memory, and at least 40G of storage.
 * We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). After installing virtualbox, you may need to reboot the computer.
 
-### Setting up
+## Setting up
 
 1. Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
 2. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
@@ -199,9 +197,9 @@ You can download the Themis package `Themis_VM.zip` from [this link]() on Google
 5. Run the virtual machine. The username and the password are both `Themis`.
 6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
-### ==Quick Test==
+## ==Quick Test==
 
-Take the quick test to get familar with Themis and check whether it is ready to go.
+Take the quick test to get familar with Themis and validate whether it is ready to go.
 
 **1. switch to Themis's scripts directory**
 
@@ -223,7 +221,8 @@ Here,
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-If everything is okay, you should see the following outputs.
+If everything is okay, you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, and (4) the following similar texts are outputted on the terminal.
+
 <details>
 <summary>**click to see the sample outputs.**</summary>
 <pre><code>
@@ -505,12 +504,74 @@ OK
 
 
 
-### ==Whole Evaluation==
+## ==Whole Evaluation==
 
-. run a testing tool on a target bug
+**1. validate the supported tools**
+
+Themis now supports 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and locate under `themis/tools`.
+
+* `Monkey`: distributed with Android SDKs
+* `Ape`: https://github.com/the-themis-benchmarks/Ape-bin
+* `combodroid`: https://github.com/the-themis-benchmarks/combodroid
+* `Humanoid`: https://github.com/the-themis-benchmarks/Humanoid
+* `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
+* `TimeMachine`: https://github.com/the-themis-benchmarks/TimeMachine
+
+Note that these tools are the modified/enhanced versions of their originals because we coordinate with the authors of these tools to assure correct and rigorous setup (e.g., get the tool bugs fixed by the authors before our evaluation). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper). 
+
+For example, see [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to validate all the modifications/enhancement which were made in `TimeMachine`.
+
+**2. validate the whole evaluation**
+
+Our original evaluation setup (see **Section 3.3** in the accepted paper) is: 
 
 ```
-python3 themis.py --avd avd_Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 3 --time 1h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey --offset 1
+We deployed our experiment on a 64-bit Ubuntu 18.04 machine (64
+cores, AMD 2990WX CPU, and 128GB RAM). We chose Android 7.1
+emulators (API level 25) since all selected tools support this version.
+Each emulator is configured with 2GB RAM, 1GB SDCard, 1GB
+internal storage, and X86 ABI image. Different types of external
+files (including PNGs/MP3s/PDFs/TXTs/DOCXs) are stored on the
+SDCard to facilitate file access from apps.
+
+We allocated one device (i.e., one emulator) for each bug/tool 
+in one run (one run required 6 hours), and repeated
+5 runs for each bug/tool. he whole evaluation took over
+52×5×6×7 = 10,920 machine hours (not including Sapienz). Due to
+Android’s limitation, we can only run 16 emulators in parallel on
+one physical machine. Thus, the evaluation took us around 28 days,
+in addition to around one week for deployment preparation.
+```
+
+Considering the large evaluation cost, we recommend you to try 1-2 tools on 1-2 bugs to validate
+the artifact if you do not have enough resources. Of course, to allow full validation, we also provided all the data files for inspection.
+
+(1) For example, the following command deploys `Monkey` to test the target bug in `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours.
+
+```
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 6h -o ../monkey-results/ --monkey
+```
+
+After the evaluation terminates, you can inspect whether the target bug was found or not, how long does it take to find the bug and how many times the bug was found.
+
+```
+python3 check_crash.py --monkey --app ActivityDiary --simple -o ../monkey-results
+```
+
+E.g., an example output could be 
+
+```
+ssss
+```
+
+From the log, we can see Monkey ...
+
+(2) Note that you can change `--monkey` to `--ape`, `--combo`, `--humandroid`,  `--qtesting` or `--timemachine` to try the corresponding tool (also need to change the output directory `-o ../monkey-results/` to the corresponding directory, e.g., `-o ../ape-results`). You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
+
+
+(3) For example, a full usage scenairo
+```
+python3 themis.py --avd avd_Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 1 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey --offset 1
 ```
 
 Here, 
@@ -524,7 +585,10 @@ Here,
 * `--monkey` specifies the testing tool
 * `--offset 1` indicates the emulator's serial starts from `emulator-5556` (Android emulators' serials start from `emulator-5554` and end at `emulator-5584`, and by default 16 emulators at most are allowed to run in parallel on one native machine)
 
-## 1.2 Setup Themis from scratch 
+**3. validate the data files**
+
+
+# 2. Use Themis for Your Own (Setup Themis from scratch)
 
 In practice, we recommend the users to setup our artifact on native machines rather than virtual machines to ensure the optimal testing performance. Thus, we provide the instructions to setup Themis from scratch.
 
@@ -562,4 +626,6 @@ emu kill emulator-5554
 ```
 pip3 install --upgrade --pre uiautomator2
 ```
+
+# 3. Extend Themis 
 
