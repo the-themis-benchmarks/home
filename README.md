@@ -572,9 +572,8 @@ in addition to around one week for deployment preparation.
 
 *Considering the large evaluation cost, we recommend you to try running 1-2 tools on 1-2 bugs at your will to validate
 the artifact if you do not have enough resources/time. 
-Of course, to allow full validation, we provided all the data files from our evaluation.
-To replicate the whole evaluation, we strongly recommend you to build/use Themis from scratch on a local native machine or a server.
-*
+Of course, to allow full validation, we provided all the data files of our evaluation for inspection.
+To replicate the whole evaluation, we strongly recommend you to build/use Themis from scratch (detailed in Part 3 of this README) on a local native machine or a server.*
 
 ** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate how to replicate our evaluation. ** 
 
