@@ -184,9 +184,9 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 
 ## Prerequisite
 
-* You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default have this virtualization option turned on. 
+* You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default already have this virtualization option turned on. 
 * Your computer needs at least 16G of memory, and at least 40G of storage.
-* We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS type. After installing virtualbox, you may need to reboot the computer. 
+* We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS type. After installing VirtualBox, you may need to reboot the computer. 
 
 ## Setup Virtual Machine
 
@@ -201,13 +201,13 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 
 Take the quick test to get familar with Themis and validate whether it is ready for evaluation.
 
-**1. open a terminal and switch to Themis's scripts directory**
+**Step 1. open a terminal and switch to Themis's scripts directory**
 
 ```
 cd themis/scripts
 ```
 
-**2. run Monkey on one target bug**
+**Step 2. run Monkey on one target bug**
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 10m -o ../monkey-results/ --monkey
@@ -221,10 +221,10 @@ Here,
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-*Expected results:* you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, and (4) the following sample texts are outputted on the terminal during testing.
+*Expected results:* you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, (4) the following sample texts are outputted on the terminal during testing, and (5) the emulator is automatically closed at the end.
 
 <details>
-<summary>**click to see the sample outputs.**</summary>
+<summary>**click to see the sample output on the terminal of a successful run.**</summary>
 <pre><code>
 allocate emulators: emulator-5554
 the apk list to fuzz: ['../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk']
@@ -500,9 +500,9 @@ OK
 </code></pre>
 </details>
 
-**3. inspect the output files**
+**Step 3. inspect the output files**
 
-If step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `themis/monkey-results/`). 
+If Step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `themis/monkey-results/`). 
 
 ```
 $ cd ../monkey-results/
@@ -526,7 +526,7 @@ If you can see all these files and these files are non-empty (use `ls -l` to che
 
 **1. Validate the supported tools (Table 2 in the accepted paper)**
 
-Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are located under `themis/tools`.
+Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are put under `themis/tools`.
 
 * `Monkey`: distributed with Android SDKs
 * `Ape`: https://github.com/the-themis-benchmarks/Ape-bin
@@ -535,9 +535,9 @@ Themis now supports and maintains 6 state-of-the-art fully-automated testing too
 * `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
 * `TimeMachine`: https://github.com/the-themis-benchmarks/TimeMachine
 
-Note that these tools are the modified/enhanced versions of their originals because we coordinate with the authors of these tools to assure correct and rigorous setup (e.g., report the encountered tool bugs to the authors for fixing). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper).
+Note that these tools are the modified/enhanced versions of their originals because we coordinated with the authors of these tools to assure correct and rigorous setup (e.g., report the encountered tool bugs to the authors for fixing). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper).
 
-Specifically, we track the tool modifications for developer or reviewer validation. `Monkey`, `Humanoid` and `Q-testing` involves slight manual efforts to intergarte into Themis, `Ape` and `Combodroid` were modifled by the tool authors, while `TimeMachine` was modified by us (view [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to check all the modifications/enhancements made in `TimeMachine`).
+Specifically, we track the tool modifications to facilitate review and validation. We spent slight efforts to integrate `Monkey`, `Ape`, `Humanoid` and `Q-testing` into Themis. `Combodroid` was modifled by its author and intergrated into Themis, while `TimeMachine` was modified by us and later verified by its authors (view [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to check all the modifications/enhancements made in `TimeMachine`).
 
 **2. Validate the bug dataset (Table 3 in the accepted paper)**
 
