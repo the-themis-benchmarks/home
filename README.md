@@ -180,13 +180,13 @@ The directory structure of Themis is as follows:
 
 # 2. Instructions for Artifact Evaluation
 
-For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the Themis package `Themis_VM.zip` from [this link]() on Google Drive (publicly accessible).
+For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the VM package `Themis_VM.zip` from [this link]() on Google Drive (fully-anonymized and publicly accessible).
 
 ## Prerequisite
 
 * You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default have this virtualization option turned on. 
 * Your computer needs at least 16G of memory, and at least 40G of storage.
-* We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS. After installing virtualbox, you may need to reboot the computer.
+* We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS type. After installing virtualbox, you may need to reboot the computer. 
 
 ## Setup Virtual Machine
 
@@ -210,18 +210,18 @@ cd themis/scripts
 **2. run Monkey on one target bug**
 
 ```
-python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 1m -o ../monkey-results/ --monkey
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 10m -o ../monkey-results/ --monkey
 ```
 
 Here, 
-* `--no-headless` shows the GUI (do not add this option if you run Themis on the servers without GUI)
-* `--avd Android7.1` specifies the emulator for running 
-* `--apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk` specifies the target bug is from `ActivityDiary`'s bug `#118` (`v1.1.8`) 
-* `--time 1m` allocates 1 minutes for one round of testing
+* `--no-headless` shows the emulator GUI. 
+* `--avd Android7.1` specifies the name of the emulator (which has already been created in the VM).
+* `--apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk` specifies the target bug which is `ActivityDiary`'s bug `#118` in `v1.1.8`.
+* `--time 10m` allocates 10 minutes for the testing tool to find the bug 
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-If this step succeeds, you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, and (4) the following similar texts are outputted on the terminal.
+*Expected results:* you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, and (4) the following sample texts are outputted on the terminal during testing.
 
 <details>
 <summary>**click to see the sample outputs.**</summary>
@@ -232,7 +232,7 @@ True
 Now allocate the apk: ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk on emulator-5554
 its login script: ""
 wait the allocated devices to finish...
-execute monkey: bash -x run_monkey.sh ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk emulator-5554 Android7.1 ../monkey-results/ 0.5m "" ""
+execute monkey: bash -x run_monkey.sh ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk emulator-5554 Android7.1 ../monkey-results/ 10m "" ""
 + APK_FILE=../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk
 + AVD_SERIAL=emulator-5554
 + AVD_NAME=Android7.1
@@ -426,7 +426,7 @@ restarting adbd as root
 ** RUN MONKEY (emulator-5554)
 + adb -s emulator-5554 shell date +%Y-%m-%d-%H:%M:%S
 + bash dump_coverage.sh emulator-5554 de.rampro.activitydiary.debug ../monkey-results//ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2021-05-26-16-58-44
-+ timeout 0.5m adb -s emulator-5554 shell monkey -p de.rampro.activitydiary.debug -v --throttle 200 --ignore-crashes --ignore-timeouts --ignore-security-exceptions --bugreport 1000000
++ timeout 10m adb -s emulator-5554 shell monkey -p de.rampro.activitydiary.debug -v --throttle 200 --ignore-crashes --ignore-timeouts --ignore-security-exceptions --bugreport 1000000
 + tee ../monkey-results//ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2021-05-26-16-58-44/monkey.log
 :Monkey: seed=1622177363949 count=1000000
 :AllowPackage: de.rampro.activitydiary.debug
@@ -502,8 +502,7 @@ OK
 
 **3. inspect the output files**
 
-If step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `themis/monkey-results/`). If you can see all these files, the quick test succeeds.
-
+If step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `themis/monkey-results/`). 
 
 ```
 $ cd ../monkey-results/
@@ -514,10 +513,13 @@ $ ls
   coverage_1.ec   # the coverage data file  (used for computing coverage)
   coverage_2.ec 
   install.log     # the log of app installation
-  logcat.log      # the system log of emulator (this file contains the crash stack trace if the target bug was triggered)
-  monkey.log      # the log of Monkey (the events that Monkey generates)
+  logcat.log      # the system log of emulator (this file contains the crash stack traces if the target bug was triggered)
+  monkey.log      # the log of Monkey (including the events that Monkey generates)
   monkey_testing_time_on_emulator.txt  # the first line is the starting testing time, and the second line is the ending testing time
 ```
+
+If you can see all these files and these files are non-empty (use `ls -l` to check), the quick test succeeds. Note that the number of coverage files varies according to the testing time. In practice, Themis notifies an app to dump coverage data every five minutes.
+
 
 
 ## Whole Evaluation (for In-depth Review)
@@ -533,16 +535,16 @@ Themis now supports and maintains 6 state-of-the-art fully-automated testing too
 * `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
 * `TimeMachine`: https://github.com/the-themis-benchmarks/TimeMachine
 
-Note that these tools are the modified/enhanced versions of their originals because we coordinate with the authors of these tools to assure correct and rigorous setup (e.g., report the obvious tool bugs to the authors). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper). 
+Note that these tools are the modified/enhanced versions of their originals because we coordinate with the authors of these tools to assure correct and rigorous setup (e.g., report the encountered tool bugs to the authors for fixing). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper).
 
-For example, see [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to validate all the modifications/enhancement which were made in `TimeMachine`.
+Specifically, we track the tool modifications for developer or reviewer validation. `Monkey`, `Humanoid` and `Q-testing` involves slight manual efforts to intergarte into Themis, `Ape` and `Combodroid` were modifled by the tool authors, while `TimeMachine` was modified by us (view [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to check all the modifications/enhancements in `TimeMachine`).
 
 **2. Validate the bug dataset (Table 3 in the accepted paper)**
 
 Themis now contains *52* reproducible crash bugs. For each bug, you can view:
 * its metadata (e.g., original bug report, buggy app version) 
-* bug data (stack trace, executable apk, bug-triggering script/video, number of steps to reproduce) 
-* property (e.g., the bug can be reproduced on which Android SDKs, does the app require network and login, does the bug involve changing system settings).
+* its bug data (stack trace, executable apk, bug-triggering script/video) 
+* its property (e.g., the minimal number of user actions to reproduce the bug, the Android SDKs on which the bug can be reproduced, does the app require network or login, does the bug involve changing system settings).
 
 **3. Validate the bug finding results of these tools (Table 3, Table 4, Figure 1 in the accepted paper)**
 
