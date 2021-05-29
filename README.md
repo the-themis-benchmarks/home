@@ -146,6 +146,8 @@ The directory structure of Themis is as follows:
 
     Themis
        |
+       |--- esecfse2021-paper1009.pdf   the accepted paper of Themis
+       |
        |--- scripts:                    scripts for running testing tools and analyzing testing results.
            |
            |--- themis.py:              the main script for deploying themis.
@@ -568,8 +570,11 @@ one physical machine. Thus, the evaluation took us around 28 days,
 in addition to around one week for deployment preparation.
 ```
 
-*Considering the large evaluation cost, we recommend you to try 1-2 tools on 1-2 bugs at your will to validate
-the artifact if you do not have enough resources/time. Of course, to allow full validation, we also provided all the data files from our evaluation.*
+*Considering the large evaluation cost, we recommend you to try running 1-2 tools on 1-2 bugs at your will to validate
+the artifact if you do not have enough resources/time. 
+Of course, to allow full validation, we provided all the data files from our evaluation.
+To replicate the whole evaluation, we strongly recommend you to build/use Themis from scratch on a local native machine or a server.
+*
 
 ** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate how to replicate our evaluation. ** 
 
