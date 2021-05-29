@@ -4,7 +4,7 @@ Themis is a collection of real-world, reproducible crash bugs (collected from
 open-source Android apps) and a unified, extensible infrastructure 
 for benchmarking automated GUI testing for Android and beyond. 
 
-# Contents of Themis
+# 1. Contents of Themis
 
 ## Themis's bug dataset
 
@@ -13,6 +13,8 @@ the app developers as "critical bugs" (i.e., important bugs), which affected the
 major app functionalities and the larger percentage of app users.
 
 For each bug, we provide:
+
+- The original bug report of the bug
 
 - An executable APK (Jacoco-instrumented for coverage collection),
  
@@ -26,7 +28,7 @@ For each bug, we provide:
 
 
 ### List of crash bugs
-Issue Id | App | Bug report, data | Version | Category | GitHub Stars | Reproducible? | Network? | Login? | Setting? 
+Issue Id | App | Bug report, data | Version | Category | GitHub Stars | Reproducible? | Network? | Login? | System Setting? 
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 1 | *[AmazeFileManager](https://github.com/TeamAmaze/AmazeFileManager)* | [#1837](https://github.com/TeamAmaze/AmazeFileManager/issues/1837), [data](https://github.com/the-themis-benchmarks/home/tree/master/AmazeFileManager) | 3.4.2 | File Manager | 3.0K | 6.0/7.1 | no | no| no 
 2 | *[AmazeFileManager](https://github.com/TeamAmaze/AmazeFileManager)* | [#1796](https://github.com/TeamAmaze/AmazeFileManager/issues/1796), [data](https://github.com/the-themis-benchmarks/home/tree/master/AmazeFileManager) | 3.3.2  | File Manager | 3.0K | 4.4/6.0/7.1 | no | no  | no 
@@ -103,6 +105,7 @@ Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Ins
  
 
 ### The command line for deployment:
+
 ```
 usage: themis.py [-h] [--avd AVD_NAME] [--apk APK] [-n NUMBER_OF_DEVICES]
                 [--apk-list APK_LIST] -o O [--time TIME] [--repeat REPEAT]
@@ -137,10 +140,7 @@ optional arguments:
   --offset OFFSET       device offset number
 ```
 
------------
-
-Implementation details
-----------------------
+### Implementation details
 
 The directory structure of Themis is as follows:
 
@@ -156,19 +156,19 @@ The directory structure of Themis is as follows:
            |
            |--- compare_bug_triggering_time.py: the script to pairwisely compare bug-triggering times between different tools.          
            |
-       |--- tools:                       the supported auotmated testing tools.
+       |--- tools:                      the supported auotmated testing tools.
            |
-           |--- Humanoid
+           |--- Humanoid                the tool Humanoid 
            |
-           |--- TimeMachine
+           |--- TimeMachine             the tool TimeMachine
+           | 
+           |--- Q-testing               the tool Q-testing
            |
-           |--- Q-testing
+           |--- Ape                     the tool Ape
            |
-           |--- Ape
+           |--- ComboDroid              the tool ComboDroid
            |
-           |--- ComboDroid
-           |
-           |--- Monkey
+           |--- Monkey                  the tool Monkey
            |
        |--- app_1:             The bugs collected from app_1.
        |
@@ -178,17 +178,17 @@ The directory structure of Themis is as follows:
        |
        |--- app_N              The bugs collected from app_n.
 
-# 1. Getting Started (Run Themis in Virtual Machine)
+# 2. Instructions for Artifact Evaluation
 
-You can download the Themis package `Themis_VM.zip` from [this link]() on Google Drive (publicly accessible).
+For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the Themis package `Themis_VM.zip` from [this link]() on Google Drive (publicly accessible).
 
-## Requirements
+## Prerequisite
 
 * You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default have this virtualization option turned on. 
 * Your computer needs at least 16G of memory, and at least 40G of storage.
 * We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS. After installing virtualbox, you may need to reboot the computer.
 
-## Setting up
+## Setup Virtual Machine
 
 1. Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
 2. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
@@ -197,11 +197,11 @@ You can download the Themis package `Themis_VM.zip` from [this link]() on Google
 5. Run the virtual machine. The username and the password are both `Themis`.
 6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
-## ==Quick Test==
+## Getting Started (for Initial Review)
 
-Take the quick test to get familar with Themis and validate whether it is ready to go.
+Take the quick test to get familar with Themis and validate whether it is ready for evaluation.
 
-**1. switch to Themis's scripts directory**
+**1. open a terminal and switch to Themis's scripts directory**
 
 ```
 cd themis/scripts
@@ -502,7 +502,7 @@ OK
 
 **3. inspect the output files**
 
-If step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `themis/monkey-results/`)
+If step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `themis/monkey-results/`). If you can see all these files, the quick test succeeds.
 
 
 ```
@@ -520,11 +520,11 @@ $ ls
 ```
 
 
-## ==Whole Evaluation==
+## Whole Evaluation (for In-depth Review)
 
-**1. validate the supported tools**
+**1. Validate the supported tools (Table 2 in the accepted paper)**
 
-Themis now supports 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and locate under `themis/tools`.
+Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are located under `themis/tools`.
 
 * `Monkey`: distributed with Android SDKs
 * `Ape`: https://github.com/the-themis-benchmarks/Ape-bin
@@ -533,11 +533,18 @@ Themis now supports 6 state-of-the-art fully-automated testing tools for Android
 * `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
 * `TimeMachine`: https://github.com/the-themis-benchmarks/TimeMachine
 
-Note that these tools are the modified/enhanced versions of their originals because we coordinate with the authors of these tools to assure correct and rigorous setup (e.g., get the tool bugs fixed by the authors before our evaluation). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper). 
+Note that these tools are the modified/enhanced versions of their originals because we coordinate with the authors of these tools to assure correct and rigorous setup (e.g., report the obvious tool bugs to the authors). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper). 
 
 For example, see [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to validate all the modifications/enhancement which were made in `TimeMachine`.
 
-**2. validate the whole evaluation**
+**2. Validate the bug dataset (Table 3 in the accepted paper)**
+
+Themis now contains *52* reproducible crash bugs. For each bug, you can view:
+* its metadata (e.g., original bug report, buggy app version) 
+* bug data (stack trace, executable apk, bug-triggering script/video, number of steps to reproduce) 
+* property (e.g., the bug can be reproduced on which Android SDKs, does the app require network and login, does the bug involve changing system settings).
+
+**3. Validate the bug finding results of these tools (Table 3, Table 4, Figure 1 in the accepted paper)**
 
 Our original evaluation setup (see **Section 3.3** in the accepted paper) is: 
 
@@ -559,16 +566,36 @@ one physical machine. Thus, the evaluation took us around 28 days,
 in addition to around one week for deployment preparation.
 ```
 
-Considering the large evaluation cost, we recommend you to try 1-2 tools on 1-2 bugs to validate
-the artifact if you do not have enough resources. Of course, to allow full validation, we also provided all the data files for inspection.
+*Considering the large evaluation cost, we recommend you to try 1-2 tools on 1-2 bugs with 1-2 hours to validate
+the artifact if you do not have enough resources/time. Of course, to allow full validation, we also provided all the data files for inspection. *
 
-(1) For example, the following command deploys `Monkey` to test the target bug in `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours (note that you can shorten the testing time, e.g., `--time 1h` for 1 hour or `--time 30m` for 30 minutes)
+In the following, we take `Monkey` as an example to illustrate how to replicate our evaluation. 
+
+(1) deploy `Monkey` to test the target bug in `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs (**this step will take 30 hours to finish if one emulator is available**)
 
 ```
-python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 6h -o ../monkey-results/ --monkey
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --monkey 
 ```
 
-(2) When the run terminates, you can inspect whether the target bug was found or not, how long does it take to find the bug and how many times the bug was found by using the command below.
+Here, 
+* `--no-headless` shows the GUI (do not add this option if you run Themis on the servers without GUI)
+* `--avd Android7.1` specifies the emulator for running 
+* `--apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk` specifies the target bug is from `ActivityDiary`'s bug `#118` (`v1.1.8`) 
+* `-n 1` denotes one emulator instance will be created (in practice at most 16 emulators are allowed to run in parallel on one native machine)
+* `--repeat 5` denotes the testing process will be repeated for 5 runs (these 5 runs will be distributed to the available emulator instances)
+* `--time 6h` allocates 6 hours for one run of testing
+* `-o ../monkey-results/` specifies the output directory of testing results
+* `--monkey` specifies the testing tool
+
+If you do not have have enough resources/time, we recommend you to shorten the testing time, e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes. We do not recommend to use more than one emulators in the VM because of limited memory.
+
+Thus, you can use the following command (**this step will take 5 hours to finish when one emulator is used**).
+
+```
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 5 --time 1h -o ../monkey-results/ --monkey 
+```
+
+(2) When the run terminates, you can inspect in each run whether the target bug was found or not, how long does it take to find the bug and how many times the bug was found by using the command below.
 
 ```
 python3 check_crash.py --monkey -o ../monkey-results/ --app ActivityDiary --id \#118 --simple
@@ -579,7 +606,7 @@ Here,
 * `--simple` allows Themis to output the checking result to the terminal
 * You can omit `--id \#118` to check all the target bugs of app `ActivityDiary`; you can substitute `--simple` with `--csv FILE_PATH` to output the checking results into a CSV file. Use `-h` to see the detailed list of commands.
 
-E.g., an example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found):
+E.g., an example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found after one run):
 
 ```
 ActivityDiary
@@ -595,7 +622,7 @@ the start testing time (parsed) is: 2020-06-24 20:39:33
 
 ```
 
-E.g., another example output could be (In this case, the target bug, `AnkiDroid`'s `#4451`, was found by 1 time after running Monkey for 55 minutes):
+E.g., another example output could be (In this case, the target bug, `AnkiDroid`'s `#4451`, was found by 1 time after running Monkey for 55 minutes after one run):
 
 ```
 AnkiDroid
@@ -614,34 +641,20 @@ the start testing time (parsed) is: 2020-06-26 00:59:34
 
 ```
 
-### Additional Notes
+### Notes
 
 (1) you can substitute `--monkey` with `--ape`, `--combo`, `--humandroid`,  `--qtesting` or `--timemachine` to try the corresponding tool (also you need to change the output directory `-o ../monkey-results/` to the corresponding directory, e.g., `-o ../ape-results`). You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
 
 
-(2) More examples of using Themis
-
-** An example of full deployment in our original evaluation setup: run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 5 runs (each run requires 6 hours)
+(2) If the app under test requires user login, you should specify the login script. For example, if we run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login:
 
 ```
-python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 5 --repeat 5 --time 6h -o ../monkey-results/ --monkey --offset 1
-```
-
-Here, 
-* `-n 5` denotes five emulator instances will be created at the same time (by default, at most 16 emulators are allowed to run in parallel on one native machine)
-* `--repeat 5` denotes the testing process will be repeated for 5 rounds (these 5 runs will be evenly distributed to the available emulator instances)
-* `--time 1h` allocates 1 hour for one round of testing
-* `--offset 1` indicates the emulator's serial will start from `emulator-5556` (by default, Android emulators' serials start from `emulator-5554` and end at `emulator-5584`)
-
-
-** An example of full deployment in our original evaluation setup: run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login
-
-```
-python3 themis.py --avd Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 5 --repeat 5 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey --offset 1
+python3 themis.py --avd Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey 
 ```
 
 Here, 
 * `--login ../commons/login-2.11.0-#3244.py` specifies the login script (which will be executed before GUI testing) 
+
 
 **3. validate the data files**
 
