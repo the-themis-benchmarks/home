@@ -221,7 +221,7 @@ Here,
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-If everything is okay, you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, and (4) the following similar texts are outputted on the terminal.
+If this step succeeds, you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, and (4) the following similar texts are outputted on the terminal.
 
 <details>
 <summary>**click to see the sample outputs.**</summary>
@@ -502,6 +502,22 @@ OK
 
 **3. inspect the output files**
 
+If step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `themis/monkey-results/`)
+
+
+```
+$ cd ../monkey-results/
+$ ls
+  ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2020-06-24-20:39:27/         # the output directory
+$ cd ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2020-06-24-20:39:27/
+$ ls
+  coverage_1.ec   # the coverage data file  (used for computing coverage)
+  coverage_2.ec 
+  install.log     # the log of app installation
+  logcat.log      # the system log of emulator (this file contains the crash stack trace if the target bug was triggered)
+  monkey.log      # the log of Monkey (the events that Monkey generates)
+  monkey_testing_time_on_emulator.txt  # the first line is the starting testing time, and the second line is the ending testing time
+```
 
 
 ## ==Whole Evaluation==
@@ -546,44 +562,86 @@ in addition to around one week for deployment preparation.
 Considering the large evaluation cost, we recommend you to try 1-2 tools on 1-2 bugs to validate
 the artifact if you do not have enough resources. Of course, to allow full validation, we also provided all the data files for inspection.
 
-(1) For example, the following command deploys `Monkey` to test the target bug in `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours.
+(1) For example, the following command deploys `Monkey` to test the target bug in `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours (note that you can shorten the testing time, e.g., `--time 1h` for 1 hour or `--time 30m` for 30 minutes)
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 6h -o ../monkey-results/ --monkey
 ```
 
-After the evaluation terminates, you can inspect whether the target bug was found or not, how long does it take to find the bug and how many times the bug was found.
+(2) When the run terminates, you can inspect whether the target bug was found or not, how long does it take to find the bug and how many times the bug was found by using the command below.
 
 ```
-python3 check_crash.py --monkey --app ActivityDiary --simple -o ../monkey-results
+python3 check_crash.py --monkey -o ../monkey-results/ --app ActivityDiary --id \#118 --simple
+```
+Here, 
+* `--app ActivityDiary` specifies the target app
+* `--id \#118` specifies the target bug id
+* `--simple` allows Themis to output the checking result to the terminal
+* You can omit `--id \#118` to check all the target bugs of app `ActivityDiary`; you can substitute `--simple` with `--csv FILE_PATH` to output the checking results into a CSV file. Use `-h` to see the detailed list of commands.
+
+E.g., an example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found):
+
+```
+ActivityDiary
+
+
+=========
+
+
+[ActivityDiary, #118] scanning (ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5554.Android7.1#2020-06-24-20:39:27) 
+[ActivityDiary, #118] testing time: 2020-06-24-20:39:33 
+the start testing time is: 2020-06-24-20:39:33
+the start testing time (parsed) is: 2020-06-24 20:39:33
+
 ```
 
-E.g., an example output could be 
+E.g., another example output could be (In this case, the target bug, `AnkiDroid`'s `#4451`, was found by 1 time after running Monkey for 55 minutes):
 
 ```
-ssss
+AnkiDroid
+
+
+=========
+
+
+[AnkiDroid, #4451] scanning (AnkiDroid-debug-2.7beta1-#4451.apk.monkey.result.emulator-5556.Android7.1#2020-06-26-00:59:33) 
+[AnkiDroid, #4451] testing time: 2020-06-26-00:59:34 
+[AnkiDroid, #4451] testing time: 2020-06-26-06:59:35 
+the start testing time is: 2020-06-26-00:59:34
+the start testing time (parsed) is: 2020-06-26 00:59:34
+[AnkiDroid, #4451] the crash was triggered (1) times
+[AnkiDroid, #4451] the time duration: ['55'] (mins)
+
 ```
 
-From the log, we can see Monkey ...
+### Additional Notes
 
-(2) Note that you can change `--monkey` to `--ape`, `--combo`, `--humandroid`,  `--qtesting` or `--timemachine` to try the corresponding tool (also need to change the output directory `-o ../monkey-results/` to the corresponding directory, e.g., `-o ../ape-results`). You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
+(1) you can substitute `--monkey` with `--ape`, `--combo`, `--humandroid`,  `--qtesting` or `--timemachine` to try the corresponding tool (also you need to change the output directory `-o ../monkey-results/` to the corresponding directory, e.g., `-o ../ape-results`). You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
 
 
-(3) For example, a full usage scenairo
+(2) More examples of using Themis
+
+** An example of full deployment in our original evaluation setup: run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 5 runs (each run requires 6 hours)
+
 ```
-python3 themis.py --avd avd_Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 1 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey --offset 1
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 5 --repeat 5 --time 6h -o ../monkey-results/ --monkey --offset 1
 ```
 
 Here, 
-* `--avd avd_Android7.1` specifies the emulator for running 
-* `--apk ../commons/commons-2.11.0-#3244.apk` specifies the target bug is from `commons`'s bug #3244 (v2.11.0) 
-* `-n 1` denotes only one emulator instance will be created
-* `--repeat 3` denotes the testing process will be repeated for 3 rounds
+* `-n 5` denotes five emulator instances will be created at the same time (by default, at most 16 emulators are allowed to run in parallel on one native machine)
+* `--repeat 5` denotes the testing process will be repeated for 5 rounds (these 5 runs will be evenly distributed to the available emulator instances)
 * `--time 1h` allocates 1 hour for one round of testing
-* `-o ../monkey-results/` specifies the output directory of testing results
-* `--login ../commons/login-2.11.0-#3244.py` specifies the login script (which will be executed before GUI testing) if the app requires user credentials
-* `--monkey` specifies the testing tool
-* `--offset 1` indicates the emulator's serial starts from `emulator-5556` (Android emulators' serials start from `emulator-5554` and end at `emulator-5584`, and by default 16 emulators at most are allowed to run in parallel on one native machine)
+* `--offset 1` indicates the emulator's serial will start from `emulator-5556` (by default, Android emulators' serials start from `emulator-5554` and end at `emulator-5584`)
+
+
+** An example of full deployment in our original evaluation setup: run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login
+
+```
+python3 themis.py --avd Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 5 --repeat 5 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey --offset 1
+```
+
+Here, 
+* `--login ../commons/login-2.11.0-#3244.py` specifies the login script (which will be executed before GUI testing) 
 
 **3. validate the data files**
 
