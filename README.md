@@ -781,5 +781,5 @@ optional arguments:
                         compute the average coverage of all runs
 ```
 
-5. Other research purpose (e.g., fault localization, program repair, etc.)
+5. Themis can also benefit other research (e.g., fault localization, program repair, etc.)
 
