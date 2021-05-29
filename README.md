@@ -608,6 +608,8 @@ Thus, you can use the following command (**this step will take 2 hours to finish
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 2 --time 1h -o ../monkey-results/ --monkey 
 ```
 
+应该给出明确的instruction，如何验证结果
+
 (2) When the testing terminates, you can inspect whether the target bug was found or not in each run, how long does it take to find the bug, and how many times the bug was found by using the command below.
 
 ```
@@ -652,6 +654,8 @@ the start testing time (parsed) is: 2020-06-26 00:59:34
 [AnkiDroid, #4451] the time duration: ['55'] (mins)
 
 ```
+
+应该给出明确的instructions验证结果
 
 ### Notes
 
