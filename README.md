@@ -673,7 +673,7 @@ Here,
 
 # 3. Instructions for Reusing Themis
 
-## Use Themis on local native machines or remote servers
+## Build and Use Themis from Scratch
 
 In practice, we *strongly recommend* the users to setup our artifact on local native machines or remote servers rather than virtual machines to ensure (1) the optimal testing performance and (2) evaluation efficiency. Thus, we provide the instructions to setup Themis from scratch.
 
