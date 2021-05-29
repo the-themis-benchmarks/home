@@ -664,7 +664,7 @@ Here,
 
 ## Use Themis on local native machines or remote servers
 
-In practice, we recommend the users to setup our artifact on local native machines or remote servers rather than virtual machines to ensure (1) the optimal testing performance and (2) evaluation efficiency. Thus, we provide the instructions to setup Themis from scratch.
+In practice, we *strongly recommend* the users to setup our artifact on local native machines or remote servers rather than virtual machines to ensure (1) the optimal testing performance and (2) evaluation efficiency. Thus, we provide the instructions to setup Themis from scratch.
 
 1. setup Android development environment on your machine
 
@@ -705,9 +705,21 @@ pip3 install --upgrade --pre uiautomator2
 
 ## Extend Themis for Future Research
 
-1. The tools are forked from the original tool repo, so it is easy to rerun the updated tools, and also contribute new features into the original tools
+1. Optimize and enhance existing tools
 
-2. how to add new bugs (we are also planning to integrate other types of bugs, other sources of benchmarks) and new tools (e.g., we already extend Themis with FastBot, a commercial testing tool)
+**Section 4.2 and 4.3** in the accepted paper point out many optimization opportunities and future research for improving existing testing tools. By using Themis, 
+
+* The tool authors or other researchers can debug/validate the tool improvement and evaluate/compare with new emerging tools, and even 
+* Themis forked testing tools from their original repositories. Thus, it is easy to contribute new enhancement features to the original tools by pull requests.
+
+2. Add new crash bugs or non-crashing bugs into Themis
+
+ 
+how to add new bugs (we are also planning to integrate other types of bugs, other sources of benchmarks) and new tools (e.g., we already extend Themis with FastBot, a commercial testing tool)
+
+3. Add new testing tools into Themis
+
+
 
 3. we provide coverage profiling and scripts (if the users want this feature)
 
