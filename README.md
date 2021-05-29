@@ -753,6 +753,12 @@ In the accepted paper, **Section 4.2 and 4.3** point out many optimization oppor
 Themis now supports coverage profiling by running
 
 ```
+python3 compute_coverage.py -o ../monkey-results --monkey --app ActivityDiary --id \#118 --acc_csv
+```
+
+The main usage is:
+
+```
 usage: compute_coverage.py [-h] -o O [-v] [--monkey] [--ape] [--timemachine] [--combo] [--humandroid] [--qtesting] [--stoat] [--app APP_NAME] [--id ISSUE_ID] [--acc_csv ACC_CSV] [--single_csv SINGLE_CSV]
                            [--average_csv AVERAGE_CSV]
 
@@ -766,7 +772,6 @@ optional arguments:
   --combo
   --humandroid
   --qtesting
-  --stoat
   --app APP_NAME
   --id ISSUE_ID
   --acc_csv ACC_CSV     compute the accumulative coverage of all runs
