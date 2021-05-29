@@ -156,7 +156,14 @@ The directory structure of Themis is as follows:
            |
            |--- compute_coverage.py:    the script to compute the code coverage achieved by a tool.
            |
-           |--- compare_bug_triggering_time.py: the script to pairwisely compare bug-triggering times between different tools.          
+           |--- compare_bug_triggering_time.py: the script to pairwisely compare bug-triggering times between different tools.        
+           |
+           |--- run_monkey.sh           the internal shell script to invokte Monkey, Ape, Humanoid, ComboDroid, TimeMachine and Q-testing
+           |--- run_ape.sh
+           |--- run_humanoid.sh
+           |--- run_qtesting.sh
+           |--- run_timemachine.sh
+           |--- run_combodroid.sh
            |
        |--- tools:                      the supported auotmated testing tools.
            |
@@ -577,7 +584,7 @@ To replicate the whole evaluation, we strongly recommend you to build/use Themis
 
 ** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate how to replicate our evaluation. ** 
 
-(1) run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs (**this step will take 30 hours to finish: run 5 rounds of testing and one emulator is used**)
+(1) run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs (**this step will take 30 hours to finish because of 5 runs of testing on one emulator**)
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --monkey 
@@ -595,13 +602,13 @@ Here,
 
 If you do not have enough resources/time, we recommend you to shorten the testing time (e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes). We recommend you to use only one or two emulators (e.g., `-n 1` for 1 emulator or `-n 2` for 2 emulators) in the VM because of limited memory.
 
-Thus, you can use the following command (**this step will take 2 hours to finish: run 2 rounds of testing and one emulator is used**).
+Thus, you can use the following command (**this step will take 2 hours to finish because of 2 runs of testing on one emulator**).
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 2 --time 1h -o ../monkey-results/ --monkey 
 ```
 
-(2) When the testing terminates, you can inspect whether the target bug was found or not in each run, how long does it take to find the bug and how many times the bug was found by using the command below.
+(2) When the testing terminates, you can inspect whether the target bug was found or not in each run, how long does it take to find the bug, and how many times the bug was found by using the command below.
 
 ```
 python3 check_crash.py --monkey -o ../monkey-results/ --app ActivityDiary --id \#118 --simple
@@ -609,7 +616,7 @@ python3 check_crash.py --monkey -o ../monkey-results/ --app ActivityDiary --id \
 Here, 
 * `--app ActivityDiary` specifies the target app (You can omit this option to check all the tested apps and their bugs).
 * `--id \#118` specifies the target bug id (You can omit this option to check all the target bugs of app `ActivityDiary`).
-* `--simple` outputs the checking result to the terminal for quick check (You can substitute `--simple` with `--csv FILE_PATH` to output the checking results into a CSV file. 
+* `--simple` outputs the checking result to the terminal for quick check (You can substitute `--simple` with `--csv FILE_PATH` to output the checking results into a CSV file). 
 * Use `-h` to see the detailed list of command options.
 
 An example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found by Moneky in one run):
@@ -670,7 +677,7 @@ Here,
 
 In practice, we *strongly recommend* the users to setup our artifact on local native machines or remote servers rather than virtual machines to ensure (1) the optimal testing performance and (2) evaluation efficiency. Thus, we provide the instructions to setup Themis from scratch.
 
-1. setup Android development environment on your machine
+1. setup Android development environment and `Python 3` on your machine 
 
 2. create an Android emulator before running Themis (see [this link](https://stackoverflow.com/questions/43275238/how-to-set-system-images-path-when-creating-an-android-avd) for creating an emulator using [avdmanager](https://developer.android.com/studio/command-line/avdmanager)).
 
@@ -707,27 +714,67 @@ pip3 install --upgrade --pre uiautomator2
 
 6. If you run Themis on remote servers, please omit the option `--no-headless` which turns off the emulator GUI.
 
+
+7. Install all the necessary dependecies required by the respective testing tools.
+
 ## Extend Themis for Future Research
 
-1. Optimize and enhance existing tools
+1. Add new crash bugs into Themis
 
-**Section 4.2 and 4.3** in the accepted paper point out many optimization opportunities and future research for improving existing testing tools. By using Themis, 
+Take `ActivityDiary-1.1.8-debug-#118.apk` as an example, the basic steps to add such a bug into Themis's dataset include:
+* build the buggy app version into an executable apk file (i.e., `ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk`, where `ActivityDiary` is the app name, `1.1.8` is the code version, `#118` is the original issue id.)
+* reproduce the bug and record the stack trace (i.e., `ActivityDiary/crash_stack_#118.txt`)
+* write a bug-triggering script in `uiautomator2` and record a bug-triggering video (i.e., `ActivityDiary/script-#118.py` and `ActivityDiary/video-#118.mp4`)
+* add a JSON file to facilitate coverage computation (used by `TimeMachine`) which describes its class files and source files (i.e., `ActivityDiary/class_files.json`)
 
-* The tool authors or other researchers can debug/validate the tool improvement and evaluate/compare with new emerging tools, and even 
-* Themis forked testing tools from their original repositories. Thus, it is easy to contribute new enhancement features to the original tools by pull requests.
+The basic steps to add such a bug into Themis's infrastructure include:
+* In `scripts/check_crash.py`, one should add the app name into list `ALL_APPS` and the crash signature (i.e., the crash type info and the partial crash trace  related to the app itself) into dict `app_crash_data`.
 
-2. Add new crash bugs or non-crashing bugs into Themis
+*In the future, we plan to (1) add the crash bugs from other existing benchmarks, (2) add crash bugs with different levels of severity rather than only critical ones, and (3) add non-crashing bugs (e.g., UI bugs) into Themis. For non-crashing bugs, we can manually codify the bug-triggering condition into specific assertions in the app code so that Themis can be reused to evaluate the existing tools on finding non-crashing bugs by violating the assertions. We are already working on (2).*
 
- 
-how to add new bugs (we are also planning to integrate other types of bugs, other sources of benchmarks) and new tools (e.g., we already extend Themis with FastBot, a commercial testing tool)
+2. Add new testing tools into Themis
 
-3. Add new testing tools into Themis
+Take `Monkey` as an example, the basic steps to add a new tool into Themis's infrastructure include:
+* add an internal shell script to invoke the new tool (see `scripts/run_monkey.sh`) which defines (1) the concrete command line of invoking the tool, (2) the outputs of the tool, and (3) the tool-specific configurations before running
+* add the call of this shell script in `scripts/themis.py` (see function `run_monkey`)
+* add the code of parsing the outputs of the new tool in `scripts/check_crash.py`.
 
+In fact, we already have integrated [FastBot](https://github.com/bytedance/Fastbot_Android), an industrial testing tool from ByteDance, into Themis. 
 
+3. Optimize and enhance existing supported tools
 
-3. we provide coverage profiling and scripts (if the users want this feature)
+In the accepted paper, **Section 4.2 and 4.3** point out many optimization opportunities and future research for improving existing testing tools. By using Themis, 
 
-4. cater for other research purpose (e.g., fault localization, program repair, etc.)
+* The tool authors or other researchers can debug/validate the tool improvement and evaluate/compare with new testing tools 
+* We can contribute new enhancement features to the original tools by pull requests because Themis forked the testing tools from their original repositories.
 
-4. 
+4. Coverage profiling and analysis
+
+Themis now supports coverage profiling by running
+
+```
+usage: compute_coverage.py [-h] -o O [-v] [--monkey] [--ape] [--timemachine] [--combo] [--humandroid] [--qtesting] [--stoat] [--app APP_NAME] [--id ISSUE_ID] [--acc_csv ACC_CSV] [--single_csv SINGLE_CSV]
+                           [--average_csv AVERAGE_CSV]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o O                  the output directory of testing results
+  -v
+  --monkey
+  --ape
+  --timemachine
+  --combo
+  --humandroid
+  --qtesting
+  --stoat
+  --app APP_NAME
+  --id ISSUE_ID
+  --acc_csv ACC_CSV     compute the accumulative coverage of all runs
+  --single_csv SINGLE_CSV
+                        compute the coverage of single runs
+  --average_csv AVERAGE_CSV
+                        compute the average coverage of all runs
+```
+
+5. Other research purpose (e.g., fault localization, program repair, etc.)
 
