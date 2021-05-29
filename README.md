@@ -660,7 +660,7 @@ Here,
 **3. validate the data files**
 
 
-# 2. Instructions for Reusing Themis
+# 3. Instructions for Reusing Themis
 
 ## Use Themis on local native machines or remote servers
 
@@ -703,7 +703,7 @@ pip3 install --upgrade --pre uiautomator2
 
 6. If you run Themis on remote servers, please omit the option `--no-headless` which turns off the emulator GUI.
 
-# Extend Themis for Future Research
+## Extend Themis for Future Research
 
 1. The tools are forked from the original tool repo, so it is easy to rerun the updated tools, and also contribute new features into the original tools
 
