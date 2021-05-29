@@ -186,7 +186,7 @@ You can download the Themis package `Themis_VM.zip` from [this link]() on Google
 
 * You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default have this virtualization option turned on. 
 * Your computer needs at least 16G of memory, and at least 40G of storage.
-* We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). After installing virtualbox, you may need to reboot the computer.
+* We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS. After installing virtualbox, you may need to reboot the computer.
 
 ## Setting up
 
