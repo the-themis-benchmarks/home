@@ -537,7 +537,7 @@ Themis now supports and maintains 6 state-of-the-art fully-automated testing too
 
 Note that these tools are the modified/enhanced versions of their originals because we coordinate with the authors of these tools to assure correct and rigorous setup (e.g., report the encountered tool bugs to the authors for fixing). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper).
 
-Specifically, we track the tool modifications for developer or reviewer validation. `Monkey`, `Humanoid` and `Q-testing` involves slight manual efforts to intergarte into Themis, `Ape` and `Combodroid` were modifled by the tool authors, while `TimeMachine` was modified by us (view [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to check all the modifications/enhancements in `TimeMachine`).
+Specifically, we track the tool modifications for developer or reviewer validation. `Monkey`, `Humanoid` and `Q-testing` involves slight manual efforts to intergarte into Themis, `Ape` and `Combodroid` were modifled by the tool authors, while `TimeMachine` was modified by us (view [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to check all the modifications/enhancements made in `TimeMachine`).
 
 **2. Validate the bug dataset (Table 3 in the accepted paper)**
 
@@ -561,55 +561,54 @@ SDCard to facilitate file access from apps.
 
 We allocated one device (i.e., one emulator) for each bug/tool 
 in one run (one run required 6 hours), and repeated
-5 runs for each bug/tool. he whole evaluation took over
+5 runs for each bug/tool. The whole evaluation took over
 52×5×6×7 = 10,920 machine hours (not including Sapienz). Due to
 Android’s limitation, we can only run 16 emulators in parallel on
 one physical machine. Thus, the evaluation took us around 28 days,
 in addition to around one week for deployment preparation.
 ```
 
-*Considering the large evaluation cost, we recommend you to try 1-2 tools on 1-2 bugs with 1-2 hours to validate
-the artifact if you do not have enough resources/time. Of course, to allow full validation, we also provided all the data files for inspection. *
+*Considering the large evaluation cost, we recommend you to try 1-2 tools on 1-2 bugs at your will to validate
+the artifact if you do not have enough resources/time. Of course, to allow full validation, we also provided all the data files from our evaluation.*
 
-In the following, we take `Monkey` as an example to illustrate how to replicate our evaluation. 
+** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate how to replicate our evaluation. ** 
 
-(1) deploy `Monkey` to test the target bug in `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs (**this step will take 30 hours to finish if one emulator is available**)
+(1) run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs (**this step will take 30 hours to finish: run 5 rounds of testing and one emulator is used**)
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --monkey 
 ```
 
 Here, 
-* `--no-headless` shows the GUI (do not add this option if you run Themis on the servers without GUI)
-* `--avd Android7.1` specifies the emulator for running 
-* `--apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk` specifies the target bug is from `ActivityDiary`'s bug `#118` (`v1.1.8`) 
+* `--no-headless` shows the emulator GUI 
+* `--avd Android7.1` specifies the name of the emulator (which has already been created in the VM).
+* `--apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk` specifies the target bug which is `ActivityDiary`'s bug `#118` in `v1.1.8`.
 * `-n 1` denotes one emulator instance will be created (in practice at most 16 emulators are allowed to run in parallel on one native machine)
 * `--repeat 5` denotes the testing process will be repeated for 5 runs (these 5 runs will be distributed to the available emulator instances)
-* `--time 6h` allocates 6 hours for one run of testing
+* `--time 6h` allocates 6 hours for the testing tool to find the bug 
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-If you do not have have enough resources/time, we recommend you to shorten the testing time, e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes. We do not recommend to use more than one emulators in the VM because of limited memory.
+If you do not have enough resources/time, we recommend you to shorten the testing time (e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes). We recommend you to use only one or two emulators (e.g., `-n 1` for 1 emulator or `-n 2` for 2 emulators) in the VM because of limited memory.
 
-Thus, you can use the following command (**this step will take 5 hours to finish when one emulator is used**).
+Thus, you can use the following command (**this step will take 2 hours to finish: run 2 rounds of testing and one emulator is used**).
 
 ```
-python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 5 --time 1h -o ../monkey-results/ --monkey 
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 2 --time 1h -o ../monkey-results/ --monkey 
 ```
 
-(2) When the run terminates, you can inspect in each run whether the target bug was found or not, how long does it take to find the bug and how many times the bug was found by using the command below.
+(2) When the testing terminates, you can inspect whether the target bug was found or not in each run, how long does it take to find the bug and how many times the bug was found by using the command below.
 
 ```
 python3 check_crash.py --monkey -o ../monkey-results/ --app ActivityDiary --id \#118 --simple
 ```
 Here, 
-* `--app ActivityDiary` specifies the target app
-* `--id \#118` specifies the target bug id
-* `--simple` allows Themis to output the checking result to the terminal
-* You can omit `--id \#118` to check all the target bugs of app `ActivityDiary`; you can substitute `--simple` with `--csv FILE_PATH` to output the checking results into a CSV file. Use `-h` to see the detailed list of commands.
+* `--app ActivityDiary` specifies the target app (You can omit this option to check all the tested apps and their bugs).
+* `--id \#118` specifies the target bug id (You can omit this option to check all the target bugs of app `ActivityDiary`).
+* `--simple` outputs the checking result to the terminal for quick check (You can substitute `--simple` with `--csv FILE_PATH` to output the checking results into a CSV file. 
+* Use `-h` to see the detailed list of command options.
 
-E.g., an example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found after one run):
-
+An example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found by Moneky in one run):
 ```
 ActivityDiary
 
@@ -624,7 +623,7 @@ the start testing time (parsed) is: 2020-06-24 20:39:33
 
 ```
 
-E.g., another example output could be (In this case, the target bug, `AnkiDroid`'s `#4451`, was found by 1 time after running Monkey for 55 minutes after one run):
+Another example output could be (In this case, the target bug, `AnkiDroid`'s `#4451`, was found by 1 time after running Monkey for 55 minutes in one run):
 
 ```
 AnkiDroid
@@ -645,10 +644,10 @@ the start testing time (parsed) is: 2020-06-26 00:59:34
 
 ### Notes
 
-(1) you can substitute `--monkey` with `--ape`, `--combo`, `--humandroid`,  `--qtesting` or `--timemachine` to try the corresponding tool (also you need to change the output directory `-o ../monkey-results/` to the corresponding directory, e.g., `-o ../ape-results`). You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
+(1) you can substitute `--monkey` with `--ape`, `--combo`, `--humandroid`,  `--qtesting` or `--timemachine` to try the corresponding tool. You also need to change the output directory `-o ../monkey-results/` to a distinct directory, e.g., `-o ../ape-results`. You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
 
 
-(2) If the app under test requires user login, you should specify the login script. For example, if we run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login:
+(2) If the app under test requires user login, you should specify the login script. Themis will call the login script before testing. For example, if we run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login, the command line should be:
 
 ```
 python3 themis.py --avd Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey 
@@ -661,11 +660,13 @@ Here,
 **3. validate the data files**
 
 
-# 2. Use Themis for Your Own (Setup Themis from scratch)
+# 2. Instructions for Reusing Themis
 
-In practice, we recommend the users to setup our artifact on native machines rather than virtual machines to ensure the optimal testing performance. Thus, we provide the instructions to setup Themis from scratch.
+## Use Themis on local native machines or remote servers
 
-1. setup Android development environment on your local native machine
+In practice, we recommend the users to setup our artifact on local native machines or remote servers rather than virtual machines to ensure (1) the optimal testing performance and (2) evaluation efficiency. Thus, we provide the instructions to setup Themis from scratch.
+
+1. setup Android development environment on your machine
 
 2. create an Android emulator before running Themis (see [this link](https://stackoverflow.com/questions/43275238/how-to-set-system-images-path-when-creating-an-android-avd) for creating an emulator using [avdmanager](https://developer.android.com/studio/command-line/avdmanager)).
 
@@ -674,9 +675,9 @@ In practice, we recommend the users to setup our artifact on native machines rat
 sdkmanager "system-images;android-25;google_apis;x86"
 avdmanager create avd --force --name avd_Android7.1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 1024M --device 'Nexus 7'
 ```
-3. (optional) modify the emulator configuration to ensure optimal testing performance of testing tools (config.ini): 
+3. (optional) modify the emulator configuration to ensure optimal testing performance of testing tools: 
 
-- Here, we set an emulator with 2GB RAM, 1GB SdCard, 1GB internal storage and 256MB heap size.
+In our evaluation, we set an emulator with 2GB RAM, 1GB SdCard, 1GB internal storage and 256MB heap size.
 
 ```
 sdcard.size=1024M
@@ -700,7 +701,9 @@ emu kill emulator-5554
 pip3 install --upgrade --pre uiautomator2
 ```
 
-# 3. Extend Themis for Future Research
+6. If you run Themis on remote servers, please omit the option `--no-headless` which turns off the emulator GUI.
+
+# Extend Themis for Future Research
 
 1. The tools are forked from the original tool repo, so it is easy to rerun the updated tools, and also contribute new features into the original tools
 
