@@ -533,7 +533,7 @@ If you can see all these files and these files are non-empty (use `ls -l` to che
 
 ## Whole Evaluation (for In-depth Review)
 
-**1. Validate the supported tools (Table 2 in the accepted paper)**
+**I. Validate the supported tools (Table 2 in the accepted paper)**
 
 Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are put under `themis/tools`.
 
@@ -548,14 +548,14 @@ Note that these tools are the modified/enhanced versions of their originals beca
 
 Specifically, we track the tool modifications to facilitate review and validation. We spent slight efforts to integrate `Monkey`, `Ape`, `Humanoid` and `Q-testing` into Themis. `Combodroid` was modifled by its author and intergrated into Themis, while `TimeMachine` was modified by us and later verified by its authors (view [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to check all the modifications/enhancements made in `TimeMachine`).
 
-**2. Validate the bug dataset (Table 3 in the accepted paper)**
+**II. Validate the bug dataset (Table 3 in the accepted paper)**
 
 Themis now contains *52* reproducible crash bugs. For each bug, you can view:
 * its metadata (e.g., original bug report, buggy app version) 
 * its bug data (stack trace, executable apk, bug-triggering script/video) 
 * its property (e.g., the minimal number of user actions to reproduce the bug, the Android SDKs on which the bug can be reproduced, does the app require network or login, does the bug involve changing system settings).
 
-**3. Validate the bug finding results of these tools (Table 3, Table 4, Figure 1 in the accepted paper)**
+**III. Validate the bug finding results of these tools (Table 3, Table 4, Figure 1 in the accepted paper)**
 
 Our original evaluation setup (see **Section 3.3** in the accepted paper) is: 
 
@@ -579,12 +579,17 @@ in addition to around one week for deployment preparation.
 
 *Considering the large evaluation cost, we recommend you to try running 1-2 tools on 1-2 bugs at your will to validate
 the artifact if you do not have enough resources/time. 
-Of course, to allow full validation, we provided all the data files of our evaluation for inspection.
-To replicate the whole evaluation, we strongly recommend you to build/use Themis from scratch (detailed in Part 3 of this README) on a local native machine or a server.*
+Of course, to replicate the whole evaluation, we provide the instructions to follow and 
+all the data files of our evaluation for inspection.*
 
-** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate how to replicate our evaluation. ** 
+** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate 
+how to replicate the whole evaluation, and how to validate the artifact if you do not have enough resources/time** 
 
-(1) run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs (**this step will take 30 hours to finish because of 5 runs of testing on one emulator**)
+*To replicate the whole evaluation*:
+
+**Step 1.** run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs. 
+**This step will take 30 hours to finish because of 5 runs of testing on one emulator**. We do not recommend to run
+more than one emulators because of the limited memory in the VM. 
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --monkey 
@@ -600,17 +605,7 @@ Here,
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-If you do not have enough resources/time, we recommend you to shorten the testing time (e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes). We recommend you to use only one or two emulators (e.g., `-n 1` for 1 emulator or `-n 2` for 2 emulators) in the VM because of limited memory.
-
-Thus, you can use the following command (**this step will take 2 hours to finish because of 2 runs of testing on one emulator**).
-
-```
-python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 2 --time 1h -o ../monkey-results/ --monkey 
-```
-
-应该给出明确的instruction，如何验证结果，比如说最后会在对应目录下产生2个输出目录。
-
-(2) When the testing terminates, you can inspect whether the target bug was found or not in each run, how long does it take to find the bug, and how many times the bug was found by using the command below.
+**Step 2.** When the testing terminates, you can inspect whether the target bug was found or not in each run, how long does it take to find the bug, and how many times the bug was found by using the command below.
 
 ```
 python3 check_crash.py --monkey -o ../monkey-results/ --app ActivityDiary --id \#118 --simple
@@ -621,7 +616,7 @@ Here,
 * `--simple` outputs the checking result to the terminal for quick check (You can substitute `--simple` with `--csv FILE_PATH` to output the checking results into a CSV file). 
 * Use `-h` to see the detailed list of command options.
 
-An example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found by Moneky in the five runs):
+An example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found by Moneky in all the five runs):
 
 <details>
 <summary>**click to see the sample output.**</summary>
@@ -712,7 +707,27 @@ the start testing time (parsed) is: 2020-06-26 00:59:34
 </code></pre>
 </details>
 
+*How to validate: You can validate the artifact by comparing the above testing results with our original testing results 
+recorded in this data file. This data file gives the detailed testing result for each of 52 bugs by all the testing tools.
+For example, `Monkey` did not found the target bug in `ActivityDiary-1.1.8-debug-#118.apk` (see column `Monkey` and 
+row `ActivityDiary`'s `#118`), while `Monkey` found the target bug in `AnkiDroid-debug-2.7beta1-#4451.apk` in one out of five run
+(see column `Monkey` and row `AnkiDroid`'s `#4451`).
+
 应该给出明确的instructions验证结果：通过检查发现2次运行，monkey对ActivityDiary，一次也没找到，对应到Table 3中就没有×，对应的Table4中就是 0/5; monkey对AnkiDroid又是另外一个情况。然后联系具体的文件。
+
+
+If you do not have enough resources/time, we recommend you to try running 1-2 tools on 1-2 bugs at your will to validate
+the artifact.
+
+For example, in *Step 1*, we recommend you to shorten the testing time (e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes). 
+Thus, you can use the following command (**this step will take 2 hours to finish because of 2 runs of testing on one emulator**).
+
+```
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 2 --time 1h -o ../monkey-results/ --monkey 
+```
+
+You can follow *Step 2* to check the bug finding results.
+
 
 ### Notes
 
