@@ -621,8 +621,11 @@ Here,
 * `--simple` outputs the checking result to the terminal for quick check (You can substitute `--simple` with `--csv FILE_PATH` to output the checking results into a CSV file). 
 * Use `-h` to see the detailed list of command options.
 
-An example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found by Moneky in one run):
-```
+An example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found by Moneky in the five runs):
+
+<details>
+<summary>**click to see the sample output on the terminal of a successful run.**</summary>
+<pre><code>
 ActivityDiary
 
 
@@ -634,7 +637,31 @@ ActivityDiary
 the start testing time is: 2020-06-24-20:39:33
 the start testing time (parsed) is: 2020-06-24 20:39:33
 
-```
+
+[ActivityDiary, #118] scanning (ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5556.Android7.1#2020-06-24-20:39:32) 
+[ActivityDiary, #118] testing time: 2020-06-24-20:39:36 
+the start testing time is: 2020-06-24-20:39:36
+the start testing time (parsed) is: 2020-06-24 20:39:36
+
+
+[ActivityDiary, #118] scanning (ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5558.Android7.1#2020-06-24-20:39:37) 
+[ActivityDiary, #118] testing time: 2020-06-24-20:39:43 
+the start testing time is: 2020-06-24-20:39:43
+the start testing time (parsed) is: 2020-06-24 20:39:43
+
+
+[ActivityDiary, #118] scanning (ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5560.Android7.1#2020-06-24-20:39:42) 
+[ActivityDiary, #118] testing time: 2020-06-24-20:39:47 
+the start testing time is: 2020-06-24-20:39:47
+the start testing time (parsed) is: 2020-06-24 20:39:47
+
+
+[ActivityDiary, #118] scanning (ActivityDiary-1.1.8-debug-#118.apk.monkey.result.emulator-5562.Android7.1#2020-06-24-20:39:47) 
+[ActivityDiary, #118] testing time: 2020-06-24-20:39:52 
+the start testing time is: 2020-06-24-20:39:52
+the start testing time (parsed) is: 2020-06-24 20:39:52
+</code></pre>
+</details>
 
 Another example output could be (In this case, the target bug, `AnkiDroid`'s `#4451`, was found by 1 time after running Monkey for 55 minutes in one run):
 
