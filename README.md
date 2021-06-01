@@ -624,7 +624,7 @@ Here,
 An example output could be (In this case, the target bug, `ActivityDiary`'s `#118`, was not found by Moneky in the five runs):
 
 <details>
-<summary>**click to see the sample output on the terminal of a successful run.**</summary>
+<summary>**click to see the sample output.**</summary>
 <pre><code>
 ActivityDiary
 
@@ -665,11 +665,40 @@ the start testing time (parsed) is: 2020-06-24 20:39:52
 
 Another example output could be (In this case, the target bug, `AnkiDroid`'s `#4451`, was found by 1 time after running Monkey for 55 minutes in one run):
 
-```
+<details>
+<summary>**click to see the sample output.**</summary>
+<pre><code>
 AnkiDroid
 
 
 =========
+
+[AnkiDroid, #4451] scanning (AnkiDroid-debug-2.7beta1-#4451.apk.monkey.result.emulator-5554.Android7.1#2020-06-26-00:59:31) 
+[AnkiDroid, #4451] testing time: 2020-06-26-00:59:32 
+[AnkiDroid, #4451] testing time: 2020-06-26-06:59:32 
+the start testing time is: 2020-06-26-00:59:32
+the start testing time (parsed) is: 2020-06-26 00:59:32
+
+
+[AnkiDroid, #4451] scanning (AnkiDroid-debug-2.7beta1-#4451.apk.monkey.result.emulator-5576.Android7.1#2020-06-26-12:04:55) 
+[AnkiDroid, #4451] testing time: 2020-06-26-12:04:57 
+[AnkiDroid, #4451] testing time: 2020-06-26-18:04:57 
+the start testing time is: 2020-06-26-12:04:57
+the start testing time (parsed) is: 2020-06-26 12:04:57
+
+
+[AnkiDroid, #4451] scanning (AnkiDroid-debug-2.7beta1-#4451.apk.monkey.result.emulator-5574.Android7.1#2020-06-26-12:04:55) 
+[AnkiDroid, #4451] testing time: 2020-06-26-12:04:56 
+[AnkiDroid, #4451] testing time: 2020-06-26-18:04:56 
+the start testing time is: 2020-06-26-12:04:56
+the start testing time (parsed) is: 2020-06-26 12:04:56
+
+
+[AnkiDroid, #4451] scanning (AnkiDroid-debug-2.7beta1-#4451.apk.monkey.result.emulator-5558.Android7.1#2020-06-26-00:59:38) 
+[AnkiDroid, #4451] testing time: 2020-06-26-00:59:39 
+[AnkiDroid, #4451] testing time: 2020-06-26-06:59:40 
+the start testing time is: 2020-06-26-00:59:39
+the start testing time (parsed) is: 2020-06-26 00:59:39
 
 
 [AnkiDroid, #4451] scanning (AnkiDroid-debug-2.7beta1-#4451.apk.monkey.result.emulator-5556.Android7.1#2020-06-26-00:59:33) 
@@ -680,7 +709,8 @@ the start testing time (parsed) is: 2020-06-26 00:59:34
 [AnkiDroid, #4451] the crash was triggered (1) times
 [AnkiDroid, #4451] the time duration: ['55'] (mins)
 
-```
+</code></pre>
+</details>
 
 应该给出明确的instructions验证结果：通过检查发现2次运行，monkey对ActivityDiary，一次也没找到，对应到Table 3中就没有×，对应的Table4中就是 0/5; monkey对AnkiDroid又是另外一个情况。然后联系具体的文件。
 
