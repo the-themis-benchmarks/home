@@ -527,7 +527,7 @@ $ ls
   monkey_testing_time_on_emulator.txt  # the first line is the starting testing time, and the second line is the ending testing time
 ```
 
-If you can see all these files and these files are non-empty (use `ls -l` to check), the quick test succeeds. Note that the number of coverage files varies according to the testing time. In practice, Themis notifies an app to dump coverage data every five minutes.
+**How to validate**: If you can see all these files and these files are non-empty (use `ls -l` to check), the quick test succeeds. Note that the number of coverage files varies according to the testing time. In practice, Themis notifies an app to dump coverage data every five minutes.
 
 
 
@@ -712,9 +712,8 @@ recorded in [this data file](). This data file gives the detailed testing result
 For example, `Monkey` did not found the target bug in `ActivityDiary-1.1.8-debug-#118.apk` (see column `Monkey` and 
 row `ActivityDiary`'s `#118` for the value `0/5`), while `Monkey` found the target bug in `AnkiDroid-debug-2.7beta1-#4451.apk` in one out of five run
 (see column `Monkey` and row `AnkiDroid`'s `#4451` for the value `1/5`).
-
-应该给出明确的instructions验证结果：通过检查发现2次运行，monkey对ActivityDiary，一次也没找到，对应到Table 3中就没有×，对应的Table4中就是 0/5; monkey对AnkiDroid又是另外一个情况。然后联系具体的文件。
-
+In this way, you can validate the data in **Table 3** (`*` indicates the tool finds the bug in at least one run) 
+and **Table 4** in the accepted paper (the breakdown of which bugs were successfully in how many runs).  
 
 *If you do not have enough resources/time, we recommend you to try running 1-2 tools on 1-2 bugs at your will to validate
 the artifact.*
