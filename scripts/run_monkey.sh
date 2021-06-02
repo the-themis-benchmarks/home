@@ -79,6 +79,7 @@ then
 
 else
     # install the app
+    sleep 5 # wait for a few seconds before installation to avoid such error: "adb: connect error for write: closed"
     adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
     echo "** INSTALL APP (${AVD_SERIAL})"
 fi
