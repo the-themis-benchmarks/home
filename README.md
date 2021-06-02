@@ -194,7 +194,7 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 ## Prerequisite
 
 * You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default already have this virtualization option turned on. 
-* Your computer needs at least 16G of memory, and at least 40G of storage.
+* Your computer needs at least 8 CPU cores (4 cores may also work), 16G of memory, and at least 40G of storage. 
 * We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS type. After installing VirtualBox, you may need to reboot the computer. 
 
 ## Setup Virtual Machine
@@ -202,7 +202,7 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 1. Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
 2. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
 3. After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
-4. Click "Settings", click "System", click "Processor", and check "Enable Nested VT-x/AMD-V"
+4. Click "Settings", click "System", click "Processor", and select 4-8 CPU cores, and check "Enable Nested VT-x/AMD-V".
 5. Run the virtual machine. The username and the password are both `Themis`.
 6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
