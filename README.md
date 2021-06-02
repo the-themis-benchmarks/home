@@ -528,7 +528,7 @@ $ ls
 ```
 
 **How to validate**: If you can see all these files and these files are non-empty (use `ls -l` to check), the quick test succeeds. Note that the number of coverage data files (e.g., `coverage_1.ec`) varies according to the testing time. In practice, Themis notifies an app to dump coverage data every five minutes.
-
+Please note that the outuput files of different testing tools may vary (but all the other tools have these similar types of output files like `Monkey`).
 
 
 ## Whole Evaluation (for In-depth Review)
