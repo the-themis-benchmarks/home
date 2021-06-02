@@ -541,6 +541,7 @@ Themis now supports and maintains 6 state-of-the-art fully-automated testing too
 * `Ape`: https://github.com/the-themis-benchmarks/ape-bin
 * `combodroid`: https://github.com/the-themis-benchmarks/combodroid
 * `Humanoid`: https://github.com/the-themis-benchmarks/Humanoid
+  `droidbot` (the tool on which Humanoid is built on): https://github.com/the-themis-benchmarks/droidbot/tree/themis-branch
 * `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
 * `TimeMachine`: https://github.com/the-themis-benchmarks/TimeMachine
 
