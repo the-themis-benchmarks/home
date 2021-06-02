@@ -213,7 +213,7 @@ Take the quick test to get familar with Themis and validate whether it is ready 
 **Step 1. open a terminal and switch to Themis's scripts directory**
 
 ```
-cd themis/scripts
+cd the-themis-benchmark/scripts
 ```
 
 **Step 2. run Monkey on one target bug**
