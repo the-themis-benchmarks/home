@@ -194,7 +194,7 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 ## Prerequisite
 
 * You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default already have this virtualization option turned on. 
-* Your computer needs at least 16G of memory, and at least 40G of storage.
+* Your computer needs at least 8 CPU cores (4 cores may also work), 16G of memory, and at least 40G of storage. 
 * We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS type. After installing VirtualBox, you may need to reboot the computer. 
 
 ## Setup Virtual Machine
@@ -202,7 +202,7 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 1. Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
 2. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
 3. After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
-4. Click "Settings", click "System", click "Processor", and check "Enable Nested VT-x/AMD-V"
+4. Click "Settings", click "System", click "Processor", and select 4-8 CPU cores (8-cores is preferred), and check "Enable Nested VT-x/AMD-V". Click "Memory", and set memory size to at least 8GB (16GB is preferred). Overall, you can allocate more memory and CPU cores if your system permits.
 5. Run the virtual machine. The username and the password are both `Themis`.
 6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
@@ -527,7 +527,7 @@ $ ls
   monkey_testing_time_on_emulator.txt  # the first line is the starting testing time, and the second line is the ending testing time
 ```
 
-**How to validate**: If you can see all these files and these files are non-empty (use `ls -l` to check), the quick test succeeds. Note that the number of coverage files varies according to the testing time. In practice, Themis notifies an app to dump coverage data every five minutes.
+**How to validate**: If you can see all these files and these files are non-empty (use `ls -l` to check), the quick test succeeds. Note that the number of coverage data files (e.g., `coverage_1.ec`) varies according to the testing time. In practice, Themis notifies an app to dump coverage data every five minutes.
 
 
 
@@ -538,7 +538,7 @@ $ ls
 Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are put under `themis/tools`.
 
 * `Monkey`: distributed with Android SDKs
-* `Ape`: https://github.com/the-themis-benchmarks/Ape-bin
+* `Ape`: https://github.com/the-themis-benchmarks/ape-bin
 * `combodroid`: https://github.com/the-themis-benchmarks/combodroid
 * `Humanoid`: https://github.com/the-themis-benchmarks/Humanoid
 * `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
