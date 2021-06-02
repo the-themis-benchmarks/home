@@ -127,7 +127,7 @@ adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H-%M-%S" >> $result_dir/combo_testing_
 # jump to combodroid's dir
 cd $COMBO_DIR
 config_file_name=`basename $config_file`
-timeout 6h ./ComboDroid.sh $config_file_name 2>&1 | tee $result_dir/combodroid.log 
+timeout $TEST_TIME ./ComboDroid.sh $config_file_name 2>&1 | tee $result_dir/combodroid.log 
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H-%M-%S" >> $result_dir/combo_testing_time_on_emulator.txt
 
 # stop coverage dumping
