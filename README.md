@@ -538,7 +538,7 @@ $ ls
 Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are put under `themis/tools`.
 
 * `Monkey`: distributed with Android SDKs
-* `Ape`: https://github.com/the-themis-benchmarks/Ape-bin
+* `Ape`: https://github.com/the-themis-benchmarks/ape-bin
 * `combodroid`: https://github.com/the-themis-benchmarks/combodroid
 * `Humanoid`: https://github.com/the-themis-benchmarks/Humanoid
 * `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
