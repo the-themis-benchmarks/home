@@ -764,7 +764,7 @@ avdmanager create avd --force --name avd_Android7.1 --package 'system-images;and
 ```
 3. (optional) modify the emulator configuration to ensure optimal testing performance of testing tools: 
 
-In our evaluation, we set an emulator with 2GB RAM, 1GB SdCard, 1GB internal storage and 256MB heap size.
+In our evaluation, we set an emulator with 2GB RAM, 1GB SdCard, 1GB internal storage and 256MB heap size (the file for modification is: `~/.android/avd/Android7.1.avd/config.ini`)
 
 ```
 sdcard.size=1024M
