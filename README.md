@@ -761,14 +761,14 @@ Remember to execute `deactivate` when you finish the running to exit from the sp
 (4) For `TimeMachine`, we cannot build `TimeMachine` within this VM because `TimeMachine` tests apps within VirtualBox and Docker by iteself. We strongly recommend to build `TimeMachine` on the native machines.
 
 
-(5) If the app under test requires user login (see the Table of bug dataset), you should specify the login script. Themis will call the login script before testing. For example, if we run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login, the command line should be:
+(5) If the app under test requires user login (see the Table of bug dataset), you should specify the login script. Themis will call the login script before testing. For example, if we run `Monkey` on `../nextcloud/nextcloud-#5173.apk` which requires user login, the command line should be:
 
 ```
-python3 themis.py --avd Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey 
+python3 themis.py --no-headless --avd Android7.1 --apk ../nextcloud/nextcloud-#5173.apk --time 10m -o ../monkey-results/ --login ../nextcloud/login-#5173.py --monkey 
 ```
 
 Here, 
-* `--login ../commons/login-2.11.0-#3244.py` specifies the login script (which will be executed before GUI testing) 
+* `--login ../nextcloud/login-#5173.py` specifies the login script (which will be executed before GUI testing) 
 
 
 # 3. Instructions for Reusing Themis

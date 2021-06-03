@@ -5,7 +5,7 @@ import time
 import uiautomator2 as u2
 
 
-def wait(seconds=10):
+def wait(seconds=20):
     for i in range(0, seconds):
         print("wait 1 second ..")
         time.sleep(1)
