@@ -255,18 +255,18 @@ if __name__ == '__main__':
     # by default, we run each bug/tool for 6h & 5r.
     # Each emulator is configured as 2GB RAM, 1GB internal storage and 1GB SDCard
 
-    ap.add_argument('--avd', type=str, dest='avd_name')
+    ap.add_argument('--avd', type=str, dest='avd_name', help="the device name")
     ap.add_argument('--apk', type=str, dest='apk')
     ap.add_argument('-n', type=int, dest='number_of_devices', default=1,
-                    help="number of available emulators for testing")
+            help="number of emulators created for testing, by default: 1")
     ap.add_argument('--apk-list', type=str, dest='apk_list', help="list of apks under test")
     ap.add_argument('-o', required=True, help="output dir")
     ap.add_argument('--time', type=str, default='6h', help="the fuzzing time in hours (e.g., 6h), minutes (e.g., 6m),"
                                                            " or seconds (e.g., 6s), default: 6h")
-    ap.add_argument('--repeat', type=int, default=1, help="the repeated number of runs")
+    ap.add_argument('--repeat', type=int, default=1, help="the repeated number of runs, default: 1")
     ap.add_argument('--max-emu', type=int, default=16, help="the maximum allowed number of emulators")
     ap.add_argument('--no-headless', dest='no_headless', default=False, action='store_true', help="show gui")
-    ap.add_argument('--login', type=str, dest='login_script', help="the script for login")
+    ap.add_argument('--login', type=str, dest='login_script', help="the script for app login")
     ap.add_argument('--wait', type=int, dest='idle_time',
                     help="the idle time to wait before starting the fuzzing")
 
@@ -280,9 +280,9 @@ if __name__ == '__main__':
     ap.add_argument('--stoat', default=False, action='store_true')
     ap.add_argument('--sapienz', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')
-    ap.add_argument('--weighted', default=False, action='store_true')
+    # ap.add_argument('--weighted', default=False, action='store_true')
 
-    ap.add_argument('--offset', type=int, default=0, help="device offset number")
+    ap.add_argument('--offset', type=int, default=0, help="device offset number w.r.t emulator-5554")
 
     args = ap.parse_args()
 
