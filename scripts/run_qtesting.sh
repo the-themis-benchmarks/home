@@ -105,6 +105,11 @@ cp $APK_FILE $QTESTING_TOOL/subjects/$unique_apk_file_name
 echo "APK_NAME = ${unique_apk_file_name}" >> $config_file
 echo "" >> $config_file
 echo "" >> $config_file
+echo "# For instrumented APKs" >> $config_file
+echo "APP_SOURCE_PATH = /Users/Your_Name/Projects/test" >> $config_file
+echo "MANIFEST_FILE = /Users/Your_Name/Projects/test/src/main/AndroidManifest.xml" >> $config_file
+echo "" >> $config_file
+echo "" >> $config_file
 echo "[Setting]" >> $config_file
 echo "DEVICE_ID = ${AVD_SERIAL}" >> $config_file
 echo "TIME_LIMIT = 21600" >> $config_file
@@ -127,7 +132,7 @@ echo "** RUN Q-testing (${AVD_SERIAL})"
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/qtesting_testing_time_on_emulator.txt
 cd ${QTESTING_TOOL} || exit
 config_file_name=`basename $config_file`
-timeout 6h ./Q-testing/main -r $config_file_name > $result_dir/q-testing.log 2>&1 # ensure the program can normally exit
+timeout $TEST_TIME ./Q-testing/main -r $config_file_name > $result_dir/q-testing.log 2>&1 # ensure the program can normally exit
 # add an additional package: -p com.android.camera
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/qtesting_testing_time_on_emulator.txt
 

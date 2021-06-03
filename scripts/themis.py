@@ -71,13 +71,13 @@ def run_timemachine(apk, avd_serial, avd_name, output_dir, testing_time, screen_
     os.system(command)
 
 
-def run_humandroid(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_humandroid.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+def run_humanoid(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
+    command = 'bash -x run_humanoid.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                                   output_dir,
                                                                   testing_time,
                                                                   screen_option,
                                                                   login_script)
-    print('execute humandroid: %s' % command)
+    print('execute humanoid: %s' % command)
     os.system(command)
 
 
@@ -217,8 +217,8 @@ def main(args: Namespace):
                 p.apply_async(run_combodroid_login, args=(current_apk, avd_serial, args.avd_name,
                                                           args.o, args.time, screen_option,
                                                           login_script,))
-            elif args.humandroid:
-                p.apply_async(run_humandroid, args=(current_apk, avd_serial, args.avd_name,
+            elif args.humanoid:
+                p.apply_async(run_humanoid, args=(current_apk, avd_serial, args.avd_name,
                                                     args.o, args.time, screen_option,
                                                     login_script,))
             elif args.weighted:
@@ -276,7 +276,7 @@ if __name__ == '__main__':
     ap.add_argument('--timemachine', default=False, action='store_true')
     ap.add_argument('--combo', default=False, action='store_true')
     ap.add_argument('--combo-login', default=False, dest='combo_login', action='store_true')
-    ap.add_argument('--humandroid', default=False, action='store_true')
+    ap.add_argument('--humanoid', default=False, action='store_true')
     ap.add_argument('--stoat', default=False, action='store_true')
     ap.add_argument('--sapienz', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')

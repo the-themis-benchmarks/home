@@ -103,9 +103,9 @@ echo "** RUN Humandroid (${AVD_SERIAL})"
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/humandroid_testing_time_on_emulator.txt
 if [[ $LOGIN_SCRIPT != "" ]]
 then
-    droidbot -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -random -policy dfs_greedy -humanoid localhost:50405 -grant_perm -is_emulator 2>&1 | tee $result_dir/humandroid.log
+    timeout $TEST_TIME droidbot -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -random -policy dfs_greedy -humanoid localhost:50405 -grant_perm -is_emulator 2>&1 | tee $result_dir/humandroid.log
 else
-    droidbot -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -random -policy dfs_greedy -humanoid localhost:50405 -grant_perm -is_emulator 2>&1 | tee $result_dir/humandroid.log
+    timeout $TEST_TIME droidbot -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -random -policy dfs_greedy -humanoid localhost:50405 -grant_perm -is_emulator 2>&1 | tee $result_dir/humandroid.log
 fi
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/humandroid_testing_time_on_emulator.txt
 
