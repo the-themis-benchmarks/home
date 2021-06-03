@@ -732,10 +732,10 @@ You can follow the similar instructions in **Step 2** to check the bug finding r
 
 ### Notes
 
-(1) You can substitute `--monkey` with `--ape`, `--combo`, `--qtesting` or `--timemachine` to directly run the corresponding tool. You may need to change the output directory `-o ../monkey-results/` to a distinct directory, e.g., `-o ../ape-results`. You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
+(1) You can substitute `--monkey` with `--ape` or `--combo` to directly run the corresponding tool. You may need to change the output directory `-o ../monkey-results/` to a distinct directory, e.g., `-o ../ape-results`. You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
 
 
-(2) Specifically, for `humanoid`, before running, you need to setup the specific running environment of Humanoid. Open a termina, and run:
+(2) Specifically, for `humanoid`, before running, you need to setup the specific running environment of Humanoid. Open a terminal, and run:
 ```
 cd /home/themis/the-themis-benchmark/tools/Humanoid-tool
 source venv/bin/activate   # Humanoid depends on tensorflow 1.12, which requires specific Python version
@@ -749,8 +749,22 @@ cd /home/themis/the-themis-benchmark/scripts/
 python3 themis.py --no-headless --avd Android7.1_Humanoid --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 10m -o ../humanoid-results --humandroid
 ```
 
+(3) Specifically, for `Q-testing`, before running, you need to setup the specific running environment of Humanoid. Open a terminal, and run:
+```
+cd /home/themis/the-themis-benchmark/tools/Q-testing
+source venv/bin/activate   # Q-testing depends on Python 2.7
+```
+And then, run the command line:
+```
+cd /home/themis/the-themis-benchmark/scripts/
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 10m -o ../qtesting-results/ --qtest
+ing
+```
 
-(3) If the app under test requires user login, you should specify the login script. Themis will call the login script before testing. For example, if we run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login, the command line should be:
+(4) Specifically, for `TimeMachine`, it depends on VirtualBox and docker by iteself. Thus, we cannot build `TimeMachine` within this VM because. `TimeMachine` can be built on native machines.
+
+
+(5) If the app under test requires user login, you should specify the login script. Themis will call the login script before testing. For example, if we run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login, the command line should be:
 
 ```
 python3 themis.py --avd Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey 
