@@ -580,7 +580,7 @@ all the data files of our evaluation for inspection.*
 ** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate 
 how to replicate the whole evaluation, and how to validate the artifact if you do not have enough resources/time** 
 
-*<u>To replicate the whole evaluation</u>*:
+[**To replicate the whole evaluation**]:
 
 **Step 1.** run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs. 
 **This step will take 30 hours to finish because of 5 runs of testing on one emulator**. We do not recommend to run
@@ -599,6 +599,18 @@ Here,
 * `--time 6h` allocates 6 hours for the testing tool to find the bug 
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
+
+[**If you do not have enough resources/time, we recommend you to try running 1-2 tools on 1-2 bugs at your will to validate
+the artifact**]:
+
+For example, in **Step 1**, we recommend you to shorten the testing time (e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes). 
+Thus, you can use the following command (**this step will take 2 hours to finish because of 2 runs of testing on one emulator**).
+
+```
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 2 --time 1h -o ../monkey-results/ --monkey 
+```
+
+You can follow the similar instructions in **Step 2** to check the bug finding results.
 
 **Step 2.** When the testing terminates, you can inspect whether the target bug was found or not in each run, how long does it take to find the bug, and how many times the bug was found by using the command below.
 
@@ -710,18 +722,6 @@ row `ActivityDiary`'s `#118` for the value `0/5`), while `Monkey` found the targ
 (see column `Monkey` and row `AnkiDroid`'s `#4451` for the value `1/5`).
 In this way, you can validate the data in **Table 3** (`*` indicates the tool finds the bug in at least one run) 
 and **Table 4** in the accepted paper (the breakdown of which bugs were successfully in how many runs).  
-
-*If you do not have enough resources/time, we recommend you to try running 1-2 tools on 1-2 bugs at your will to validate
-the artifact.*
-
-For example, in **Step 1**, we recommend you to shorten the testing time (e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes). 
-Thus, you can use the following command (**this step will take 2 hours to finish because of 2 runs of testing on one emulator**).
-
-```
-python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 2 --time 1h -o ../monkey-results/ --monkey 
-```
-
-You can follow the similar instructions in **Step 2** to check the bug finding results.
 
 
 ### Notes
