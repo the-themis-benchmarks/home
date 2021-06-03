@@ -28,7 +28,7 @@ For each bug, we provide:
 
 
 ### List of crash bugs
-Issue Id | App | Bug report, data | Version | Category | GitHub Stars | Reproducible? | Network? | Login? | System Setting? 
+Issue Id | App | Bug report, Bug data | Code Version | App Category | GitHub Stars | Reproducible (Android SDK)? | Network? | Login? | System Setting? 
 --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | 
 1 | *[AmazeFileManager](https://github.com/TeamAmaze/AmazeFileManager)* | [#1837](https://github.com/TeamAmaze/AmazeFileManager/issues/1837), [data](https://github.com/the-themis-benchmarks/home/tree/master/AmazeFileManager) | 3.4.2 | File Manager | 3.0K | 6.0/7.1 | no | no| no 
 2 | *[AmazeFileManager](https://github.com/TeamAmaze/AmazeFileManager)* | [#1796](https://github.com/TeamAmaze/AmazeFileManager/issues/1796), [data](https://github.com/the-themis-benchmarks/home/tree/master/AmazeFileManager) | 3.3.2  | File Manager | 3.0K | 4.4/6.0/7.1 | no | no  | no 
@@ -107,37 +107,33 @@ Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Ins
 ### The command line for deployment:
 
 ```
-usage: themis.py [-h] [--avd AVD_NAME] [--apk APK] [-n NUMBER_OF_DEVICES]
-                [--apk-list APK_LIST] -o O [--time TIME] [--repeat REPEAT]
-                [--max-emu MAX_EMU] [--no-headless] [--login LOGIN_SCRIPT]
-                [--wait IDLE_TIME] [--monkey] [--ape] [--timemachine]
-                [--combo] [--combo-login] [--humandroid] [--stoat] [--sapienz]
-                [--offset OFFSET]
+usage: themis.py [-h] [--avd AVD_NAME] [--apk APK] [-n NUMBER_OF_DEVICES] [--apk-list APK_LIST] -o O [--time TIME] [--repeat REPEAT] [--max-emu MAX_EMU] [--no-headless] [--login LOGIN_SCRIPT]
+                 [--wait IDLE_TIME] [--monkey] [--ape] [--timemachine] [--combo] [--combo-login] [--humanoid] [--stoat] [--sapienz] [--qtesting] [--weighted] [--offset OFFSET]
 
 optional arguments:
   -h, --help            show this help message and exit
-  --avd AVD_NAME
+  --avd AVD_NAME        the device name
   --apk APK
-  -n NUMBER_OF_DEVICES  number of available emulators for testing
+  -n NUMBER_OF_DEVICES  number of emulators created for testing, by default: 1
   --apk-list APK_LIST   list of apks under test
   -o O                  output dir
-  --time TIME           the fuzzing time in hours (e.g., 6h), minutes (e.g.,
-                        6m), or seconds (e.g., 6s), default: 6h
-  --repeat REPEAT       the repeated number of runs
+  --time TIME           the fuzzing time in hours (e.g., 6h), minutes (e.g., 6m), or seconds (e.g., 6s), default: 6h
+  --repeat REPEAT       the repeated number of runs, default: 1
   --max-emu MAX_EMU     the maximum allowed number of emulators
   --no-headless         show gui
-  --login LOGIN_SCRIPT  the script for login
+  --login LOGIN_SCRIPT  the script for app login
   --wait IDLE_TIME      the idle time to wait before starting the fuzzing
   --monkey
   --ape
   --timemachine
   --combo
   --combo-login
-  --humandroid
-  --qtesting
+  --humanoid
   --stoat
   --sapienz
-  --offset OFFSET       device offset number
+  --qtesting
+  --weighted
+  --offset OFFSET       device offset number w.r.t emulator-5554
 ```
 
 ### Implementation details
