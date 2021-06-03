@@ -22,9 +22,9 @@ For each bug, we provide:
 
 - The stack trace of the bug 
 
-- Metadata for supporting evaluation (e.g., bug explanation, login script, configuration files used by the Themis's infrastructure)
+- Metadata for supporting evaluation (e.g., app login scripts and configuration files used by Themis for code coverage computation)
 
-- the app source code w.r.t each bug 
+- The app source code w.r.t each bug 
 
 
 ### List of crash bugs
