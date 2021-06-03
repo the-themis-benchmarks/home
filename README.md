@@ -211,7 +211,7 @@ Take the quick test to get familar with Themis and validate whether it is ready 
 cd the-themis-benchmark/scripts
 ```
 
-**Step 2. run Monkey on one target bug**
+**Step 2. run Monkey on one target bug for 10 minutes**
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 10m -o ../monkey-results/ --monkey
@@ -241,7 +241,7 @@ execute monkey: bash -x run_monkey.sh ../ActivityDiary/ActivityDiary-1.1.8-debug
 + AVD_SERIAL=emulator-5554
 + AVD_NAME=Android7.1
 + OUTPUT_DIR=../monkey-results/
-+ TEST_TIME=0.5m
++ TEST_TIME=10m
 + HEADLESS=
 + LOGIN_SCRIPT=
 + RETRY_TIMES=5
@@ -506,7 +506,7 @@ OK
 
 **Step 3. inspect the output files**
 
-If Step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `themis/monkey-results/`). 
+If Step 2 succeeds, you can see the outputs under `../monkey-results/` (i.e., `/home/themis/the-themis-benchmark/monkey-results`). 
 
 ```
 $ cd ../monkey-results/
@@ -535,8 +535,7 @@ Themis now supports and maintains 6 state-of-the-art fully-automated testing too
 * `Monkey`: distributed with Android SDKs
 * `Ape`: https://github.com/the-themis-benchmarks/ape-bin
 * `combodroid`: https://github.com/the-themis-benchmarks/combodroid
-* `Humanoid`: https://github.com/the-themis-benchmarks/Humanoid
-  `droidbot` (the tool on which Humanoid is built on): https://github.com/the-themis-benchmarks/droidbot/tree/themis-branch
+* `Humanoid`: https://github.com/the-themis-benchmarks/Humanoid, which depends on `droidbot` (https://github.com/the-themis-benchmarks/droidbot/tree/themis-branch)
 * `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
 * `TimeMachine`: https://github.com/the-themis-benchmarks/TimeMachine
 
@@ -549,7 +548,7 @@ Specifically, we track the tool modifications to facilitate review and validatio
 Themis now contains *52* reproducible crash bugs. For each bug, you can view:
 * its metadata (e.g., original bug report, buggy app version) 
 * its bug data (stack trace, executable apk, bug-triggering script/video) 
-* its property (e.g., the minimal number of user actions to reproduce the bug, the Android SDKs on which the bug can be reproduced, does the app require network or login, does the bug involve changing system settings).
+* its property (e.g., the Android SDKs on which the bug can be reproduced, does the app require network or login, does the bug involve changing system settings). We also give the minimal number of user actions to reproduce the bug (listed in Table 3 in the accepted paper).
 
 **III. Validate the bug finding results of these tools (Table 3, Table 4, Figure 1 in the accepted paper)**
 
@@ -581,7 +580,7 @@ all the data files of our evaluation for inspection.*
 ** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate 
 how to replicate the whole evaluation, and how to validate the artifact if you do not have enough resources/time** 
 
-*To replicate the whole evaluation*:
+*<u>To replicate the whole evaluation</u>*:
 
 **Step 1.** run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs. 
 **This step will take 30 hours to finish because of 5 runs of testing on one emulator**. We do not recommend to run
