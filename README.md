@@ -732,10 +732,25 @@ You can follow the similar instructions in **Step 2** to check the bug finding r
 
 ### Notes
 
-(1) you can substitute `--monkey` with `--ape`, `--combo`, `--humandroid`,  `--qtesting` or `--timemachine` to try the corresponding tool. You also need to change the output directory `-o ../monkey-results/` to a distinct directory, e.g., `-o ../ape-results`. You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
+(1) You can substitute `--monkey` with `--ape`, `--combo`, `--qtesting` or `--timemachine` to directly run the corresponding tool. You may need to change the output directory `-o ../monkey-results/` to a distinct directory, e.g., `-o ../ape-results`. You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
 
 
-(2) If the app under test requires user login, you should specify the login script. Themis will call the login script before testing. For example, if we run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login, the command line should be:
+(2) Specifically, for `humanoid`, before running, you need to setup the specific running environment of Humanoid. Open a termina, and run:
+```
+cd /home/themis/the-themis-benchmark/tools/Humanoid-tool
+source venv/bin/activate   # Humanoid depends on tensorflow 1.12, which requires specific Python version
+cd Humanoid
+python3 agent.py -c config.json   # start the server of Humanoid
+```
+
+Open a new terminal, run `Humanoid` (which internally runs `droidbot`) on the emulator `Android7.1_Humanoid` (with specific screen size):
+```
+cd /home/themis/the-themis-benchmark/scripts/
+python3 themis.py --no-headless --avd Android7.1_Humanoid --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 10m -o ../humanoid-results --humandroid
+```
+
+
+(3) If the app under test requires user login, you should specify the login script. Themis will call the login script before testing. For example, if we run `Monkey` on `../commons/commons-2.11.0-#3244.apk` which requires user login, the command line should be:
 
 ```
 python3 themis.py --avd Android7.1 --apk ../commons/commons-2.11.0-#3244.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --login ../commons/login-2.11.0-#3244.py --monkey 
@@ -792,7 +807,7 @@ pip3 install --upgrade --pre uiautomator2
 6. If you run Themis on remote servers, please omit the option `--no-headless` which turns off the emulator GUI.
 
 
-7. Install all the necessary dependecies required by the respective testing tools.
+7. Install all the necessary dependecies required by the respective testing tools (see the repository of each tools).
 
 ## Extend Themis for Future Research
 
