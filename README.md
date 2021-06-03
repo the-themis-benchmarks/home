@@ -132,7 +132,6 @@ optional arguments:
   --stoat
   --sapienz
   --qtesting
-  --weighted
   --offset OFFSET       device offset number w.r.t emulator-5554
 ```
 
@@ -198,7 +197,7 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 1. Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
 2. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
 3. After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
-4. Click "Settings", click "System", click "Processor", and select 4-8 CPU cores (8-cores is preferred), and check "Enable Nested VT-x/AMD-V". Click "Memory", and set memory size to at least 8GB (16GB is preferred). Overall, you can allocate more memory and CPU cores if your system permits.
+4. Click "Settings", click "System", click "Processor", and allocate 4-8 CPU cores (8-cores is preferred), and check "Enable Nested VT-x/AMD-V". Click "Memory", and set memory size to at least 8GB (16GB is preferred). Overall, you can allocate more memory and CPU cores if your system permits to ensure smooth evaluation.
 5. Run the virtual machine. The username and the password are both `Themis`.
 6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
