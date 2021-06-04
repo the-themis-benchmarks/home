@@ -1,4 +1,4 @@
-# bug reproduction script for bug #637 of osmeditor
+# bug reproduction script for bug #729 of osmeditor
 import os
 import sys
 import time
@@ -44,91 +44,45 @@ if __name__ == '__main__':
         print("SUCCESS")
     wait(10)
 
-    out = d(resourceId="de.blau.android:id/menu_config").click()
+    out = d(resourceId="de.blau.android:id/map_view").click()
     if not out:
         print("SUCCESS")
     wait()
 
-    for x in range(2):
-        out = d(resourceId="de.blau.android:id/list").swipe("up", steps=10)
-        if out:
-            print("SUCCESS")
-        wait(1)
-
-    out = d(text="Validator preferences").click()
+    out = d(resourceId="de.blau.android:id/floatingLock").click()
     if not out:
         print("SUCCESS")
     wait()
 
-    for x in range(6):
-        out = d(resourceId="de.blau.android:id/listViewResurvey").child(index="0").child(index="0").child(text="amenity").click()
-        if not out:
-            print("SUCCESS")
-        wait()
-
-        out = d(text="DELETE").click()
-        if not out:
-            print("SUCCESS")
-        wait()
-
-    out = d(text="name").click()
+    out = d(resourceId="de.blau.android:id/map_view").click()
     if not out:
         print("SUCCESS")
     wait()
 
-    out = d(text="DELETE").click()
+    out = d(resourceId="android:id/select_dialog_listview").child(textContains="Footway").click()
     if not out:
         print("SUCCESS")
     wait()
 
-    out = d(text="opening_hours").click()
+    out = d(resourceId="de.blau.android:id/cab_stub").child(index="0").click()
     if not out:
         print("SUCCESS")
     wait()
 
-    out = d(text="DELETE").click()
+    out = d(text="Presets").click()
     if not out:
         print("SUCCESS")
     wait()
 
-    out = d(text="wheelchair").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(text="DELETE").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(resourceId="de.blau.android:id/listViewResurvey").child(index="0").child(index="0").child(
-        text="shop").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(resourceId="de.blau.android:id/resurvey_value").set_text("*")
+    out = d(text="Preset search string").set_text("search")
     if out:
         print("SUCCESS")
     wait()
 
-    out = d(resourceId="de.blau.android:id/display").set_text("0")
-    if out:
-        print("SUCCESS")
-    wait()
-
-    out = d(text="SAVE").click()
+    out = d(className="android.widget.EditText", text="search").click(offset=(0.95, 0.5))
     if not out:
         print("SUCCESS")
     wait()
-
-    out = d(text="DONE").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    d.press("back")
-    print("SUCCESS")
 
     while True:
         d.service("uiautomator").stop()

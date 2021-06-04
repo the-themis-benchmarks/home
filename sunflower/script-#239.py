@@ -1,5 +1,4 @@
-# bug reproduction script for bug #114 of Scarlet-Notes
-# This one requires two songs in the music folder
+# bug reproduction script for bug #239 of sunflower
 import os
 import sys
 import time
@@ -18,101 +17,33 @@ if __name__ == '__main__':
     avd_serial = sys.argv[1]
     d = u2.connect(avd_serial)
 
-    d.app_start("com.bijoysingh.quicknote")
+    d.app_start("com.google.samples.apps.sunflower")
     wait()
 
     current_app = d.app_current()
     print(current_app)
     while True:
-        if current_app['package'] == "com.bijoysingh.quicknote":
+        if current_app['package'] == "com.google.samples.apps.sunflower":
             break
         #d.app_start("org.odk.collect.android")
         time.sleep(2)
     wait()
 
-    out = d(resourceId="com.bijoysingh.quicknote:id/lithoBottomToolbar").child(index="0").child(index="1").click()
+    out = d(description="Navigate up").click()
     if not out:
         print("SUCCESS")
     wait()
 
-    out = d(text="Add Notebook").set_text("myBook")
-    if out:
+    out = d(text="Plant list").click()
+    if not out:
         print("SUCCESS")
     wait()
 
-    d.press("enter")
+    x1, y1 = d(text="Beet").center()
+    x2, y2 = d(text="Avocado").center()
+
+    d(className="androidx.recyclerview.widget.RecyclerView").gesture((x1, y1), (x2, y2), (x1, y1), (x2, y2), steps=50)
     print("SUCCESS")
-    wait()
-
-    out = d(text="myBook").click()
-    if out:
-        print("SUCCESS")
-    wait()
-
-
-    out = d(resourceId="com.bijoysingh.quicknote:id/lithoBottomToolbar", index="2").child(index="0").child(index="3").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(text="Add Heading…").set_text("Note1")
-    if out:
-        print("SUCCESS")
-    wait()
-
-    d.press("back")
-    print("SUCCESS")
-    wait()
-
-    d.press("back")
-    print("SUCCESS")
-    wait()
-
-    out = d(resourceId="com.bijoysingh.quicknote:id/lithoBottomToolbar", index="2").child(index="0").child(index="3").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(text="Add Heading…").set_text("Note2")
-    if out:
-        print("SUCCESS")
-    wait()
-
-    d.press("back")
-    print("SUCCESS")
-    wait()
-
-    d.press("back")
-    print("SUCCESS")
-    wait()
-
-    out = d(text="Note1").long_click()
-    if out:
-        print("SUCCESS")
-    wait()
-
-    d.press("back")
-    wait()
-
-    out = d(text="Lock Note").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(resourceId="com.bijoysingh.quicknote:id/lithoBottomToolbar", index="2").child(index="0").child(index="0").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(text="Locked").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(resourceId="com.bijoysingh.quicknote:id/lithoPreBottomToolbar", index="1").click(offset=(0.05, 0.5))
-    if not out:
-        print("SUCCESS")
-    wait()
 
     while True:
         d.service("uiautomator").stop()

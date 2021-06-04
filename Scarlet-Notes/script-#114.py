@@ -1,5 +1,4 @@
 # bug reproduction script for bug #114 of Scarlet-Notes
-# This one requires two songs in the music folder
 import os
 import sys
 import time
@@ -18,24 +17,98 @@ if __name__ == '__main__':
     avd_serial = sys.argv[1]
     d = u2.connect(avd_serial)
 
-    d.app_start("com.kabouzeid.gramophone.debug")
+    d.app_start("com.bijoysingh.quicknote")
     wait()
 
     current_app = d.app_current()
     print(current_app)
     while True:
-        if current_app['package'] == "com.kabouzeid.gramophone.debug":
+        if current_app['package'] == "com.bijoysingh.quicknote":
             break
         #d.app_start("org.odk.collect.android")
         time.sleep(2)
     wait()
 
-    out = d(text="GET STARTED").click()
+    out = d(resourceId="com.bijoysingh.quicknote:id/lithoBottomToolbar").child(index="0").child(index="1").click()
     if not out:
         print("SUCCESS")
     wait()
 
-    out = d(text="SHUFFLE ALL").click()
+    out = d(text="Add Notebook").set_text("myBook")
+    if out:
+        print("SUCCESS")
+    wait()
+
+    d.press("enter")
+    print("SUCCESS")
+    wait()
+
+    out = d(text="myBook").click()
+    if out:
+        print("SUCCESS")
+    wait()
+
+
+    out = d(resourceId="com.bijoysingh.quicknote:id/lithoBottomToolbar", index="2").child(index="0").child(index="3").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(text="Add Heading…").set_text("Note1")
+    if out:
+        print("SUCCESS")
+    wait()
+
+    d.press("back")
+    print("SUCCESS")
+    wait()
+
+    d.press("back")
+    print("SUCCESS")
+    wait()
+
+    out = d(resourceId="com.bijoysingh.quicknote:id/lithoBottomToolbar", index="2").child(index="0").child(index="3").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(text="Add Heading…").set_text("Note2")
+    if out:
+        print("SUCCESS")
+    wait()
+
+    d.press("back")
+    print("SUCCESS")
+    wait()
+
+    d.press("back")
+    print("SUCCESS")
+    wait()
+
+    out = d(text="Note1").long_click()
+    if out:
+        print("SUCCESS")
+    wait()
+
+    d.press("back")
+    wait()
+
+    out = d(text="Lock Note").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(resourceId="com.bijoysingh.quicknote:id/lithoBottomToolbar", index="2").child(index="0").child(index="0").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(text="Locked").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(resourceId="com.bijoysingh.quicknote:id/lithoPreBottomToolbar", index="1").click(offset=(0.05, 0.5))
     if not out:
         print("SUCCESS")
     wait()

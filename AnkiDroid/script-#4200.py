@@ -10,13 +10,51 @@ def wait(seconds=2):
         print("wait 1 second ..")
         time.sleep(1)
 
+def enAbleDontKeepA(d):
+    d.press("home")
+    wait()
+
+    out = d(resourceId="com.android.launcher3:id/layout").child(index="1").child(index="2").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(text="Search Apps…").set_text("Settings")
+    if out:
+        print("SUCCESS")
+    wait()
+
+    out = d(resourceId="com.android.launcher3:id/icon", text="Settings").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(description="Search settings").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(text="Search…").set_text("keep activities")
+    if out:
+        print("SUCCESS")
+    wait()
+
+    out = d(text="Don’t keep activities").click()
+    if not out:
+        print("SUCCESS")
+    wait()
+
+    out = d(text="Don’t keep activities").click()
+    if not out:
+        print("SUCCESS")
+    wait()
 
 if __name__ == '__main__':
 
     avd_serial = sys.argv[1]
     d = u2.connect(avd_serial)
 
-    d.shell("settings put global always_finish_activities 1")
+    enAbleDontKeepA(d)
 
     d.app_start("com.ichi2.anki")
     wait()
@@ -85,7 +123,7 @@ if __name__ == '__main__':
         print("Success: press save")
     wait()
 
-    d.shell("settings put global always_finish_activities 0")
+
     while True:
         d.service("uiautomator").stop()
         time.sleep(2)

@@ -1,4 +1,4 @@
-# bug reproduction script for bug #2198 of attendee
+# bug reproduction script for bug #10302 of wordpress
 import os
 import sys
 import time
@@ -17,34 +17,25 @@ if __name__ == '__main__':
     avd_serial = sys.argv[1]
     d = u2.connect(avd_serial)
 
-    d.app_start("com.eventyay.attendee")
+
+    d.app_start("org.wordpress.android")
     wait()
 
     current_app = d.app_current()
     print(current_app)
     while True:
-        if current_app['package'] == "com.eventyay.attendee":
+        if current_app['package'] == "org.wordpress.android":
             break
         #d.app_start("org.odk.collect.android")
         time.sleep(2)
     wait()
 
-    out = d(text="Skip").click()
+    out = d(className="android.widget.Button", resourceId="org.wordpress.android:id/login_button").click()
     if not out:
-        print("SUCCESS")
-    wait()
+        print("SUCCESS: press login button")
 
-    out = d(text="Skip for now").click()
-    if not out:
-        print("SUCCESS")
     wait()
-
-    out = d(resourceId="com.eventyay.attendee:id/searchFragment").click()
-    if not out:
-        print("SUCCESS")
-    wait()
-
-    out = d(text="Anything").click()
+    out = d(text="HELP").click()
     if not out:
         print("SUCCESS")
     wait()

@@ -18,6 +18,9 @@ if __name__ == '__main__':
     avd_serial = sys.argv[1]
     d = u2.connect(avd_serial)
 
+    os.system("adb push music1.mp3 sdcard/Music")
+    os.system("adb push music2.mp3 sdcard/Music")
+
     d.app_start("com.kabouzeid.gramophone.debug")
     wait()
 
