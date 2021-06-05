@@ -840,7 +840,7 @@ Take `Monkey` as an example, the basic steps to add a new tool into Themis's inf
 * add the call of this shell script in `scripts/themis.py` (see function `run_monkey`)
 * add the code of parsing the outputs of the new tool in `scripts/check_crash.py`.
 
-In fact, we already have successfully integrated [FastBot](https://github.com/bytedance/Fastbot_Android), an industrial testing tool developed by ByteDance, into Themis. 
+In fact, we already have successfully integrated [FastBot](https://github.com/bytedance/Fastbot_Android), an industrial testing tool developed by ByteDance, into Themis. See [the script](https://github.com/the-themis-benchmarks/home/blob/master/scripts/run_fastbot.sh) for supporting FastBot.
 
 ### 3. Optimize and enhance existing supported tools
 
