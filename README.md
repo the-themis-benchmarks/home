@@ -776,16 +776,23 @@ Here,
 
 In practice, we *strongly recommend* the users to setup our artifact on local native machines or remote servers rather than virtual machines to ensure (1) the optimal testing performance and (2) evaluation efficiency. Thus, we provide the instructions to setup Themis from scratch.
 
-1. setup Android development environment and `Python 3` on your machine 
+### Prerequisite
 
-2. create an Android emulator before running Themis (see [this link](https://stackoverflow.com/questions/43275238/how-to-set-system-images-path-when-creating-an-android-avd) for creating an emulator using [avdmanager](https://developer.android.com/studio/command-line/avdmanager)).
+1. Ubuntu 18.04/20.04
+2. Python 3 
+3. Android environment (Android 7.1 or above)
+4. Docker (needed by `TimeMachine`)
+
+### Steps
+
+1. create an Android emulator before running Themis (see [this link](https://stackoverflow.com/questions/43275238/how-to-set-system-images-path-when-creating-an-android-avd) for creating an emulator using [avdmanager](https://developer.android.com/studio/command-line/avdmanager)).
 
 - An example: create an Android emulator ``Android7.1`` with SDK version 7.1 (API level 25), X86 ABI image and Google APIs: 
 ```
 sdkmanager "system-images;android-25;google_apis;x86"
 avdmanager create avd --force --name Android7.1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 1024M --device 'Nexus 7'
 ```
-3. (optional) modify the emulator configuration to ensure optimal testing performance of testing tools: 
+2. (optional) modify the emulator configuration to ensure optimal testing performance of testing tools: 
 
 In our evaluation, we set an emulator with 2GB RAM, 1GB SdCard, 1GB internal storage and 256MB heap size (the file for modification usually is: `~/.android/avd/Android7.1.avd/config.ini`)
 
@@ -796,7 +803,7 @@ vm.heapSize=256
 hw.ramSize=2048
 ``` 
 
-4. (optional but recommended) copy dummy documents into emulators to allow file access from the apps under test
+3. (optional but recommended) copy dummy documents into emulators to allow file access from the apps under test
 
 ```
 emulator -avd avd_Android7.1 -port 5554 &
@@ -805,16 +812,16 @@ bash -x copy_dummy_documents.sh emulator-5554
 adb emu kill emulator-5554
 ```
 
-5. install [uiautomator2](https://github.com/openatx/uiautomator2), which is used for executing login scripts
+4. install [uiautomator2](https://github.com/openatx/uiautomator2), which is used for executing login scripts
 
 ```
 pip3 install --upgrade --pre uiautomator2
 ```
 
-6. If you run Themis on remote servers, please omit the option `--no-headless` which turns off the emulator GUI.
+5. If you run Themis on remote servers, please omit the option `--no-headless` which turns off the emulator GUI.
 
 
-7. Install all the necessary dependecies required by the respective testing tools. Please see the README.md of each tool in its Themis's repository. 
+6. Install all the necessary dependecies required by the respective testing tools. Please see the README.md of each tool in its Themis's repository. 
 We provided the detailed building instructions.
 
 ## Extend Themis for Future Research
