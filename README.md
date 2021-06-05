@@ -713,7 +713,7 @@ the start testing time (parsed) is: 2020-06-26 00:59:34
 </details>
 
 **How to validate**: You can validate the artifact by comparing the above testing results in **Step 2** with our original testing results 
-recorded in [this data file](). This data file gives the detailed testing results for each of the 52 bugs by all the testing tools.
+recorded in [this data file](https://github.com/the-themis-benchmarks/home/blob/master/Themis_evaluation_data.xlsx). This data file gives the detailed testing results for each of the 52 bugs by all the testing tools.
 For example, `Monkey` did not found the target bug in `ActivityDiary-1.1.8-debug-#118.apk` (see column `Monkey` and 
 row `ActivityDiary`'s `#118` for the value `0/5`), while `Monkey` found the target bug in `AnkiDroid-debug-2.7beta1-#4451.apk` in one out of five run
 (see column `Monkey` and row `AnkiDroid`'s `#4451` for the value `1/5`).
