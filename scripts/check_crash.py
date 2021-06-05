@@ -413,7 +413,7 @@ def main(args: Namespace):
                                                           "timemachine-output/run_time.log")
                     testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
 
-                if args.humandroid:
+                if args.humanoid:
                     # Humandroid
                     logcat_file_path = os.path.join(result_dir, "logcat.log")
                     login_file_path = os.path.join(result_dir, "login.log")
@@ -787,7 +787,7 @@ if __name__ == '__main__':
     ap.add_argument('--ape', default=False, action='store_true')
     ap.add_argument('--timemachine', default=False, action='store_true')
     ap.add_argument('--combo', default=False, action='store_true')
-    ap.add_argument('--humandroid', default=False, action='store_true')
+    ap.add_argument('--humanoid', default=False, action='store_true')
     ap.add_argument('--sapienz', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')
     ap.add_argument('--weighted', default=False, action='store_true')
