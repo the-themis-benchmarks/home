@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/290040967.svg)](https://zenodo.org/badge/latestdoi/290040967)
+
 # The Themis Benchmark
 
 Themis is a collection of real-world, reproducible crash bugs (collected from 
