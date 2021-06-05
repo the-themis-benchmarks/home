@@ -18,7 +18,7 @@ For each bug, we provide:
 
 - An executable APK (Jacoco-instrumented for coverage collection),
  
-- A bug-reproducing script (python-based script for bug inspection) and a video 
+- A bug-reproducing script and a video 
 
 - The stack trace of the bug 
 
@@ -87,12 +87,12 @@ Issue Id | App | Bug report, Bug data | Code Version | App Category | GitHub Sta
 ## Themis's Infrastructure
 
 Themis contains a unified, extensible infrastructure for benchmarking automated GUI testing
-for Android. Any testing tools can be easily integrated into this infrastructure and
+for Android. Any testing tool can be easily integrated into this infrastructure and
 deployed on a given machine with one line of command. 
 
 
 ### List of Supported Tools 
-Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Instrumentation | Supported SDKs | Implementation Basis 
+Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Instrumentation? | Supported SDKs | Implementation Basis 
 --- | --- | --- | --- | --- | --- | --- | --- | 
 [Monkey](https://developer.android.com/studio/test/monkey?hl=en) | - | yes | Random Testing | no | no | Any | -
 [Ape](https://github.com/tianxiaogu/ape) | ICSE'19 | yes | Model-based | no | no | 6.0/7.1 | Monkey-based
@@ -114,7 +114,7 @@ optional arguments:
   -h, --help            show this help message and exit
   --avd AVD_NAME        the device name
   --apk APK
-  -n NUMBER_OF_DEVICES  number of emulators created for testing, by default: 1
+  -n NUMBER_OF_DEVICES  number of emulators created for testing, default: 1
   --apk-list APK_LIST   list of apks under test
   -o O                  output dir
   --time TIME           the fuzzing time in hours (e.g., 6h), minutes (e.g., 6m), or seconds (e.g., 6s), default: 6h
@@ -153,7 +153,7 @@ The directory structure of Themis is as follows:
            |
            |--- compare_bug_triggering_time.py: the script to pairwisely compare bug-triggering times between different tools.        
            |
-           |--- run_monkey.sh           the internal shell script to invokte Monkey, Ape, Humanoid, ComboDroid, TimeMachine and Q-testing
+           |--- run_monkey.sh           the internal shell script to invoke Monkey, Ape, Humanoid, ComboDroid, TimeMachine and Q-testing
            |--- run_ape.sh
            |--- run_humanoid.sh
            |--- run_qtesting.sh
@@ -184,13 +184,13 @@ The directory structure of Themis is as follows:
 
 # 2. Instructions for Artifact Evaluation
 
-For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the VM package `Themis_VM.zip` from [this link]() on Google Drive (fully-anonymized and publicly accessible).
+For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the VM package `Themis_VM.zip` from [this link]() on Google Drive.
 
 ## Prerequisite
 
-* You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/questions/35456063/enable-intel-vt-x-intel-virtualization-technology-intel-vt-x) for how to enable the virtualization technology). Most computers by default already have this virtualization option turned on. 
+* You need to enable the virtualization technology in your computer's BIOS (see [this link](https://stackoverflow.com/a/35456158) for how to enable the virtualization technology). Most computers by default already have this virtualization option turned on. 
 * Your computer needs at least 8 CPU cores (4 cores may also work), 16G of memory, and at least 40G of storage. 
-* We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS type. After installing VirtualBox, you may need to reboot the computer. 
+* We built our artifact by using VirtualBox [v6.1.20](https://www.virtualbox.org/wiki/Download_Old_Builds_6_1). Please install VirtualBox based on your OS type. *After installing VirtualBox, you may need to reboot the computer*. 
 
 ## Setup Virtual Machine
 
@@ -198,7 +198,7 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 2. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
 3. After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
 4. Click "Settings", click "System", click "Processor", and allocate 4-8 CPU cores (8-cores is preferred), and check "Enable Nested VT-x/AMD-V". Click "Memory", and set memory size to at least 8GB (16GB is preferred). Overall, you can allocate more memory and CPU cores if your system permits to ensure smooth evaluation.
-5. Run the virtual machine. The username and the password are both `Themis`.
+5. Run the virtual machine. The username is `themis` and the password is `themis-benchmark`.
 6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
 ## Getting Started (for Initial Review)
@@ -225,7 +225,7 @@ Here,
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-*Expected results:* you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, (4) the following sample texts are outputted on the terminal during testing, and (5) the emulator is automatically closed at the end.
+**Expected results:** you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, (4) the following sample texts are outputted on the terminal during testing, and (5) the emulator is automatically closed at the end.
 
 <details>
 <summary>**click to see the sample output on the terminal of a successful run.**</summary>
@@ -530,7 +530,7 @@ Please note that the outuput files of different testing tools may vary (but all 
 
 **I. Validate the supported tools (Table 2 in the accepted paper)**
 
-Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are put under `themis/tools`.
+Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are put under `the-themis-benchmark/tools`.
 
 * `Monkey`: distributed with Android SDKs
 * `Ape`: https://github.com/the-themis-benchmarks/ape-bin
@@ -584,7 +584,7 @@ how to replicate the whole evaluation, and how to validate the artifact if you d
 
 **Step 1.** run `Monkey` on `ActivityDiary-1.1.8-debug-#118.apk` for 6 hours and repeat this process for 5 runs. 
 **This step will take 30 hours to finish because of 5 runs of testing on one emulator**. We do not recommend to run
-more than one emulators in the VM because of the limited memory and performance. 
+more than one emulators in the VM because of the limited memory and performance. If you do not have enough resource/time, see the instruction below.
 
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 5 --time 6h -o ../monkey-results/ --monkey 
@@ -600,7 +600,7 @@ Here,
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
 
-[**Validate the artifact If you do not have enough resources/time: run 1-2 tools on 1-2 bugs at your will with limited testing time**]:
+[**Validate the artifact if you do not have enough resources/time: run 1-2 tools on 1-2 bugs at your will with limited testing time**]:
 
 For example, in **Step 1**, we recommend you to shorten the testing time (e.g., use `--time 1h` for 1 hour or `--time 30m` for 30 minutes). 
 Thus, you can use the following command (**this step will take 2 hours to finish because of 2 runs of testing on one emulator**).
@@ -608,8 +608,6 @@ Thus, you can use the following command (**this step will take 2 hours to finish
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk -n 1 --repeat 2 --time 1h -o ../monkey-results/ --monkey 
 ```
-
-You can follow the similar instructions in **Step 2** (see below) to check the bug finding results.
 
 **Step 2.** When the testing terminates, you can inspect whether the target bug was found or not in each run, how long does it take to find the bug, and how many times the bug was found by using the command below.
 
@@ -720,12 +718,12 @@ For example, `Monkey` did not found the target bug in `ActivityDiary-1.1.8-debug
 row `ActivityDiary`'s `#118` for the value `0/5`), while `Monkey` found the target bug in `AnkiDroid-debug-2.7beta1-#4451.apk` in one out of five run
 (see column `Monkey` and row `AnkiDroid`'s `#4451` for the value `1/5`).
 In this way, you can validate the data in **Table 3** (`*` indicates the tool finds the bug in at least one run) 
-and **Table 4** in the accepted paper (the breakdown of which bugs were successfully in how many runs).  
+and **Table 4** in the accepted paper (the breakdown of which bugs were successfully found in how many runs).  
 
 
 ### Notes
 
-(1) You can substitute `--monkey` with `--ape` or `--combo` to directly run the corresponding tool. You may need to change the output directory `-o ../monkey-results/` to a distinct directory, e.g., `-o ../ape-results`. You can follow the similar steps described above to inspect whether the target bug was found or not and the related info.
+(1) You can substitute `--monkey` with `--ape` or `--combo` in the command line in **Step 1** to directly run the corresponding tool. You may need to change the output directory `-o ../monkey-results/` to a distinct directory, e.g., `-o ../ape-results`. You can follow the similar steps described in **Step 2** to inspect whether the target bug was found or not and the related info.
 
 
 (2) Specifically, for `humanoid`, before running, you need to setup the specific virtual Python environment of Humanoid. Open a terminal, and run:
@@ -752,13 +750,13 @@ source venv/bin/activate   # Q-testing depends on Python 2.7
 And then, run the command line:
 ```
 cd /home/themis/the-themis-benchmark/scripts/
-python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 10m -o ../qtesting-results/ --qtest
+python3 themis.py --no-headless --avd Android7.1 --apk ../ActivityDiary/ActivityDiary-1.1.8-debug-#118.apk --time 10m -o ../qtesting-results/ --qtesting
 ing
 ```
 
 Remember to execute `deactivate` when you finish the running to exit from the specific virtual Python environment.
 
-(4) For `TimeMachine`, we cannot build `TimeMachine` within this VM because `TimeMachine` tests apps within VirtualBox and Docker by iteself. We strongly recommend to build `TimeMachine` on the native machines.
+(4) For `TimeMachine`, we cannot build `TimeMachine` within this VM because `TimeMachine` tests apps by using Docker on which it runs another layer of VirtualBox. Thus, we strongly recommend to build `TimeMachine` on the native machines if you want to evaluate it (see the instructions in its repo: https://github.com/the-themis-benchmarks/TimeMachine).
 
 
 (5) If the app under test requires user login (see the Table of bug dataset), you should specify the login script. Themis will call the login script before testing. For example, if we run `Monkey` on `../nextcloud/nextcloud-#5173.apk` which requires user login, the command line should be:
@@ -769,7 +767,7 @@ python3 themis.py --no-headless --avd Android7.1 --apk ../nextcloud/nextcloud-#5
 
 Here, 
 * `--login ../nextcloud/login-#5173.py` specifies the login script (which will be executed before GUI testing) 
-* In practice, we use the emulator snapshot to store the app login state beforehand.
+* In practice, we use the emulator snapshot to save the app login state directly.
 
 # 3. Instructions for Reusing Themis
 
@@ -781,10 +779,10 @@ In practice, we *strongly recommend* the users to setup our artifact on local na
 
 2. create an Android emulator before running Themis (see [this link](https://stackoverflow.com/questions/43275238/how-to-set-system-images-path-when-creating-an-android-avd) for creating an emulator using [avdmanager](https://developer.android.com/studio/command-line/avdmanager)).
 
-- An example: create an Android emulator ``avd_Android7.1`` with SDK version 7.1 (API level 25), X86 ABI image and Google APIs: 
+- An example: create an Android emulator ``Android7.1`` with SDK version 7.1 (API level 25), X86 ABI image and Google APIs: 
 ```
 sdkmanager "system-images;android-25;google_apis;x86"
-avdmanager create avd --force --name avd_Android7.1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 1024M --device 'Nexus 7'
+avdmanager create avd --force --name Android7.1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 1024M --device 'Nexus 7'
 ```
 3. (optional) modify the emulator configuration to ensure optimal testing performance of testing tools: 
 
