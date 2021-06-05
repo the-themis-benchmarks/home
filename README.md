@@ -186,7 +186,7 @@ The directory structure of Themis is as follows:
 
 # 2. Instructions for Artifact Evaluation
 
-For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the VM package `Themis_VM.zip` from [this link]() on Google Drive.
+For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the VM package `Themis_VM.zip` from [this link](https://drive.google.com/file/d/14vFcjGQgTup8qwwsdZFF7XPubtHB5bgl/view?usp=sharing) on Google Drive.
 
 ## Prerequisite
 
