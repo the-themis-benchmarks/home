@@ -280,7 +280,7 @@ if __name__ == '__main__':
     ap.add_argument('--stoat', default=False, action='store_true')
     ap.add_argument('--sapienz', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')
-    # ap.add_argument('--weighted', default=False, action='store_true')
+    ap.add_argument('--weighted', default=False, action='store_true')
 
     ap.add_argument('--offset', type=int, default=0, help="device offset number w.r.t emulator-5554")
 
