@@ -186,7 +186,7 @@ The directory structure of Themis is as follows:
 
 # 2. Instructions for Artifact Evaluation
 
-For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the VM package `Themis_VM.zip` from [this link](https://drive.google.com/file/d/14vFcjGQgTup8qwwsdZFF7XPubtHB5bgl/view?usp=sharing) on Google Drive.
+For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the VM image `Themis.ova` (15GB) from [this link](https://drive.google.com/file/d/14vFcjGQgTup8qwwsdZFF7XPubtHB5bgl/view?usp=sharing) on Google Drive.
 
 ## Prerequisite
 
@@ -196,12 +196,11 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 
 ## Setup Virtual Machine
 
-1. Extract the downloaded file `Themis_VM.zip` and get the VM image file `Themis.ova`.
-2. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
-3. After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
-4. Click "Settings", click "System", click "Processor", and allocate 4-8 CPU cores (8-cores is preferred), and check "Enable Nested VT-x/AMD-V". Click "Memory", and set memory size to at least 8GB (16GB is preferred). Overall, you can allocate more memory and CPU cores if your system permits to ensure smooth evaluation.
-5. Run the virtual machine. The username is `themis` and the password is `themis-benchmark`.
-6. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
+1. Open VirtualBox, click "File", click "Import Appliance", then import the file named `Themis.ova` (this step may take about five to ten minutes to complete). 
+2. After the import is completed, you should see "vm" as one of the listed VMs in your VirtualBox.
+3. Click "Settings", click "System", click "Processor", and allocate 4-8 CPU cores (8-cores is preferred), and check "Enable Nested VT-x/AMD-V". Click "Memory", and set memory size to at least 8GB (16GB is preferred). Overall, you can allocate more memory and CPU cores if your system permits to ensure smooth evaluation.
+4. Run the virtual machine. The username is `themis` and the password is `themis-benchmark`.
+5. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
 ## Getting Started (for Initial Review)
 
