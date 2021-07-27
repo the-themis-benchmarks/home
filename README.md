@@ -885,7 +885,7 @@ Themis can also benefit other research (e.g., fault localization, program repair
 
 [Zhendong Su](https://people.inf.ethz.ch/suz/), ETH Zurich, Switzerland
 
-We welcome any feedback or questions on Themis. Free feel to send emails, open issues or pull requests. We will actively maintain Themis
+We welcome any feedback or questions on Themis. Free feel to share your ideas, open issues or pull requests. We will actively maintain Themis
 to benefit our community.
 
 We appreciate the contributions from:
