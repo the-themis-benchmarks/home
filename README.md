@@ -8,7 +8,7 @@ for benchmarking automated GUI testing for Android and beyond.
 
 
 # Publication
-[1] "Benchmarking Automated GUI Testing for Android against Real-World Bugs". Ting Su, Jue Wang, Zhendong Su. *29th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering* (ESEC/FSE 2021)
+[1] "[Benchmarking Automated GUI Testing for Android against Real-World Bugs](https://tingsu.github.io/files/fse21-themis.pdf)". Ting Su, Jue Wang, Zhendong Su. *29th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering* (ESEC/FSE 2021)
 
 ```
 @inproceedings{themis,
