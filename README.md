@@ -6,6 +6,23 @@ Themis is a collection of real-world, reproducible crash bugs (collected from
 open-source Android apps) and a unified, extensible infrastructure 
 for benchmarking automated GUI testing for Android and beyond. 
 
+
+# Publication
+[1] "Benchmarking Automated GUI Testing for Android against Real-World Bugs". Ting Su, Jue Wang, Zhendong Su. *29th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering* (ESEC/FSE 2021)
+
+```
+@inproceedings{themis,
+  author    = {Ting Su and
+               Jue Wang and
+               Zhendong Su},
+  title     = {Benchmarking Automated GUI Testing for Android against Real-World Bugs},
+  booktitle = {Proceedings of 29th ACM Joint European Software Engineering Conference and Symposium 
+  		on the Foundations of Software Engineering (ESEC/FSE)},
+  year      = {2021},
+  pages     = {to appear}
+}
+```
+
 # 1. Contents of Themis
 
 ## Themis's bug dataset
@@ -824,7 +841,7 @@ pip3 install --upgrade --pre uiautomator2
 6. Install all the necessary dependecies required by the respective testing tools. Please see the README.md of each tool in its Themis's repository. 
 We provided the detailed building instructions.
 
-## Extend Themis for Future Research
+## Welcome your contribution: Extend Themis for Future Research
 
 ### 1. Add new crash bugs into Themis
 
