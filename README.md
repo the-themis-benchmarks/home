@@ -854,7 +854,7 @@ Take `ActivityDiary-1.1.8-debug-#118.apk` as an example, the basic steps to add 
 The basic steps to add such a bug into Themis's infrastructure include:
 * In `scripts/check_crash.py`, one should add the app name into list `ALL_APPS` and the crash signature (i.e., the crash type info and the partial crash trace  related to the app itself) into dict `app_crash_data`.
 
-*In the future, we plan to (1) add the crash bugs from other existing benchmarks, (2) add crash bugs with different levels of severity rather than only critical ones, and (3) add non-crashing bugs (e.g., UI bugs) into Themis. For non-crashing bugs, we can manually codify the bug-triggering condition into specific assertions in the app code so that Themis can be reused to evaluate the existing tools on finding non-crashing bugs by violating the assertions. We are already working on (2).*
+*In the future, we plan to (1) add the crash bugs from other existing benchmarks, (2) add crash bugs with different levels of severity rather than only critical ones.*
 
 ### 2. Add new testing tools into Themis
 
@@ -867,7 +867,7 @@ In fact, we already have successfully integrated [FastBot](https://github.com/by
 
 ### 3. Optimize and enhance existing supported tools
 
-In the accepted paper, **Section 4.2 and 4.3** point out many optimization opportunities and future research for improving existing testing tools. By using Themis, 
+In Themis's paper, **Section 4.2 and 4.3** point out many optimization opportunities and future research for improving existing testing tools. By using Themis, 
 
 * The tool authors or other researchers can debug/validate the tool improvement and evaluate/compare with new testing tools 
 * We can contribute new enhancement features to the original tools by pull requests because Themis forked the testing tools from their original repositories.
@@ -911,3 +911,12 @@ By leveraging the results, one can inspect the detailed coverage report generate
 
 Themis can also benefit other research (e.g., fault localization, program repair, etc.)
 
+## Main maintainers/contributors
+
+[Ting Su](https://tingsu.github.io/), East China Normal University, China
+
+[Jue Wang](https://scholar.google.com/citations?user=z_2j0xMAAAAJ), Nanjing University, China
+
+[Zhendong Su](https://people.inf.ethz.ch/suz/), ETH Zurich, Switzerland
+
+Enze Ma, Beijing Forestry University, China
