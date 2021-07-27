@@ -203,7 +203,7 @@ The directory structure of Themis is as follows:
 
 # 2. Instructions for Using Themis
 
-The instructions in this section was mainly used for artifact evaluation.
+The instructions in this section was used for artifact evaluation.
 In the artifact evaluation, we run Themis in Virtual Machine with all the required stuffs already installed and prepared. 
 You can follow the instructions in this section to get familar with Themis.
 You can download the VM image `Themis.ova` (15GB) from [this link](https://drive.google.com/file/d/14vFcjGQgTup8qwwsdZFF7XPubtHB5bgl/view?usp=sharing) on Google Drive.
@@ -805,7 +805,9 @@ pip3 install --upgrade --pre uiautomator2
 6. Install all the necessary dependecies required by the respective testing tools. Please see the README.md of each tool in its Themis's repository. 
 We provided the detailed building instructions.
 
-## Welcome your contribution: Extend Themis for Future Research
+## Welcome your contribution!
+
+## Extend Themis for our research community
 
 ### 1. Add new crash bugs into Themis
 
@@ -875,7 +877,7 @@ By leveraging the results, one can inspect the detailed coverage report generate
 
 Themis can also benefit other research (e.g., fault localization, program repair, etc.)
 
-## Main maintainers/contributors
+## Main maintainers
 
 [Ting Su](https://tingsu.github.io/), East China Normal University, China
 
@@ -883,4 +885,9 @@ Themis can also benefit other research (e.g., fault localization, program repair
 
 [Zhendong Su](https://people.inf.ethz.ch/suz/), ETH Zurich, Switzerland
 
-Enze Ma, Beijing Forestry University, China
+We welcome any feedback or questions on Themis. Free feel to send emails, open issues or pull requests. We will actively maintain Themis
+to benefit our community.
+
+We appreciate the contributions from:
+
+- Enze Ma, Beijing Forestry University, China
