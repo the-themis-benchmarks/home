@@ -201,9 +201,14 @@ The directory structure of Themis is as follows:
        |
        |--- app_N              The bugs collected from app_n.
 
-# 2. Instructions for Artifact Evaluation
+# 2. Instructions for Using Themis
 
-For artifact evaluation, we recommend you to run Themis in Virtual Machine. All the required stuffs are already installed and prepared. You can download the VM image `Themis.ova` (15GB) from [this link](https://drive.google.com/file/d/14vFcjGQgTup8qwwsdZFF7XPubtHB5bgl/view?usp=sharing) on Google Drive.
+The instructions in this section was mainly used for artifact evaluation.
+In the artifact evaluation, we run Themis in Virtual Machine with all the required stuffs already installed and prepared. 
+You can follow the instructions in this section to get familar with Themis.
+You can download the VM image `Themis.ova` (15GB) from [this link](https://drive.google.com/file/d/14vFcjGQgTup8qwwsdZFF7XPubtHB5bgl/view?usp=sharing) on Google Drive.
+
+For using Themis for your own research, we recommend you to build and run Themis on a native machine (see **3. Instructions for Reusing Themis**).
 
 ## Prerequisite
 
@@ -219,9 +224,9 @@ For artifact evaluation, we recommend you to run Themis in Virtual Machine. All 
 4. Run the virtual machine. The username is `themis` and the password is `themis-benchmark`.
 5. If you could not run the VM with "Nested VT-x/AMD-V" option enabled in VirtualBox, you should check whether the Hyper-V option is enabled. You can disable the Hyper-V option (see [this link](https://forums.virtualbox.org/viewtopic.php?f=1&t=62339) for more information about this).
 
-## Getting Started (for Initial Review)
+## Getting Started 
 
-Take the quick test to get familar with Themis and validate whether it is ready for evaluation.
+Take the quick test to get familar with Themis and validate whether it is ready.
 
 **Step 1. open a terminal and switch to Themis's scripts directory**
 
@@ -544,9 +549,9 @@ $ ls
 Please note that the outuput files of different testing tools may vary (but all the other tools have these similar types of output files like `Monkey`).
 
 
-## Whole Evaluation (for In-depth Review)
+## Detailed Instructions 
 
-**I. Validate the supported tools (Table 2 in the accepted paper)**
+**I. The supported tools**
 
 Themis now supports and maintains 6 state-of-the-art fully-automated testing tools for Android (see below). These tools can be cloned from Themis's repositories and are put under `the-themis-benchmark/tools`.
 
@@ -557,43 +562,11 @@ Themis now supports and maintains 6 state-of-the-art fully-automated testing too
 * `Q-testing`: https://github.com/the-themis-benchmarks/Q-testing
 * `TimeMachine`: https://github.com/the-themis-benchmarks/TimeMachine
 
-Note that these tools are the modified/enhanced versions of their originals because we coordinated with the authors of these tools to assure correct and rigorous setup (e.g., report the encountered tool bugs to the authors for fixing). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the accepted paper).
+Note that these tools are the modified/enhanced versions of their originals because we coordinated with the authors of these tools to assure correct and rigorous setup (e.g., report the encountered tool bugs to the authors for fixing). We tried our best efforts to minimize the bias and ensure that each tool is at "its best state" in bug finding (see **Section 3.2** in the Themis's paper).
 
 Specifically, we track the tool modifications to facilitate review and validation. We spent slight efforts to integrate `Monkey`, `Ape`, `Humanoid` and `Q-testing` into Themis. `Combodroid` was modifled by its author and intergrated into Themis, while `TimeMachine` was modified by us and later verified by its authors (view [this commit](https://github.com/the-themis-benchmarks/TimeMachine/commit/b5bafb28fae26cc0dff2e36599c1af6c166ce48c) to check all the modifications/enhancements made in `TimeMachine`).
 
-**II. Validate the bug dataset (Table 3 in the accepted paper)**
-
-Themis now contains *52* reproducible crash bugs. For each bug, you can view:
-* its metadata (e.g., original bug report, buggy app version) 
-* its bug data (stack trace, executable apk, bug-triggering script/video) 
-* its property (e.g., the Android SDKs on which the bug can be reproduced, does the app require network or login, does the bug involve changing system settings). We also give the minimal number of user actions to reproduce the bug (listed in Table 3 in the accepted paper).
-
-**III. Validate the bug finding results of these tools (Table 3, Table 4, Figure 1 in the accepted paper)**
-
-Our original evaluation setup (see **Section 3.3** in the accepted paper) is: 
-
-```
-We deployed our experiment on a 64-bit Ubuntu 18.04 machine (64
-cores, AMD 2990WX CPU, and 128GB RAM). We chose Android 7.1
-emulators (API level 25) since all selected tools support this version.
-Each emulator is configured with 2GB RAM, 1GB SDCard, 1GB
-internal storage, and X86 ABI image. Different types of external
-files (including PNGs/MP3s/PDFs/TXTs/DOCXs) are stored on the
-SDCard to facilitate file access from apps.
-
-We allocated one device (i.e., one emulator) for each bug/tool 
-in one run (one run required 6 hours), and repeated
-5 runs for each bug/tool. The whole evaluation took over
-52×5×6×7 = 10,920 machine hours (not including Sapienz). Due to
-Android’s limitation, we can only run 16 emulators in parallel on
-one physical machine. Thus, the evaluation took us around 28 days,
-in addition to around one week for deployment preparation.
-```
-
-*Considering the large evaluation cost, we recommend you to try running 1-2 tools on 1-2 bugs at your will to validate
-the artifact if you do not have enough resources/time. 
-Of course, to replicate the whole evaluation, we provide the instructions to follow and 
-all the data files of our evaluation for inspection.*
+**II. Running the supported tools**
 
 ** In the following, we take `Monkey` as a tool and `ActivityDiary-1.1.8-debug-#118.apk` as a target bug to illustrate 
 how to replicate the whole evaluation, and how to validate the artifact if you do not have enough resources/time** 
@@ -729,15 +702,6 @@ the start testing time (parsed) is: 2020-06-26 00:59:34
 
 </code></pre>
 </details>
-
-**How to validate**: You can validate the artifact by comparing the above testing results in **Step 2** with our original testing results 
-recorded in [this data file](https://github.com/the-themis-benchmarks/home/blob/master/Themis_evaluation_data.xlsx) (i.e., `the-themis-benchmark/Themis_evaluation_data.xlsx`). This data file gives the detailed testing results for each of the 52 bugs by all the testing tools.
-For example, `Monkey` did not found the target bug in `ActivityDiary-1.1.8-debug-#118.apk` (see column `Monkey` and 
-row `ActivityDiary`'s `#118` for the value `0/5`), while `Monkey` found the target bug in `AnkiDroid-debug-2.7beta1-#4451.apk` in one out of five run
-(see column `Monkey` and row `AnkiDroid`'s `#4451` for the value `1/5`).
-In this way, you can validate the data in **Table 3** (`*` indicates the tool finds the bug in at least one run) 
-and **Table 4** in the accepted paper (the breakdown of which bugs were successfully found in how many runs).  
-
 
 ### Notes
 
