@@ -120,6 +120,32 @@ def run_qtesting(apk, avd_serial, avd_name, output_dir, testing_time, screen_opt
     print('execute Q-testing: %s' % command)
     os.system(command)
 
+def run_fastbot(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
+    command = 'bash -x run_fastbot.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                                os.path.abspath(output_dir),
+                                                                testing_time,
+                                                                screen_option,
+                                                                login_script)
+    print('execute fastbot: %s' % command)
+    os.system(command)
+
+def run_newmonkey(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
+    command = 'bash -x run_newmonkey.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                                os.path.abspath(output_dir),
+                                                                testing_time,
+                                                                screen_option,
+                                                                login_script)
+    print('execute newmonkey: %s' % command)
+    os.system(command)
+
+def run_wetest(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
+    command = 'bash -x run_wetest.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                                os.path.abspath(output_dir),
+                                                                testing_time,
+                                                                screen_option,
+                                                                login_script)
+    print('execute wetest: %s' % command)
+    os.system(command)
 
 def get_all_apks(apk_list_file):
     file = open(apk_list_file, 'r')
@@ -239,6 +265,18 @@ def main(args: Namespace):
                 p.apply_async(run_qtesting, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
                                                   login_script,))
+            elif args.fastbot:
+                p.apply_async(run_fastbot, args=(current_apk, avd_serial, args.avd_name,
+                                                  args.o, args.time, screen_option,
+                                                  login_script,))
+            elif args.newmonkey:
+                p.apply_async(run_fastbot, args=(current_apk, avd_serial, args.avd_name,
+                                                  args.o, args.time, screen_option,
+                                                  login_script,))
+            elif args.wetest:
+                p.apply_async(run_fastbot, args=(current_apk, avd_serial, args.avd_name,
+                                                  args.o, args.time, screen_option,
+                                                  login_script,))                                                                          
             else:
                 pass
 
@@ -271,6 +309,9 @@ if __name__ == '__main__':
                     help="the idle time to wait before starting the fuzzing")
 
     # supported fuzzing tools
+    ap.add_argument('--wetest', default=False, action='store_true')
+    ap.add_argument('--newmonkey', default=False, action='store_true')
+    ap.add_argument('--fastbot', default=False, action='store_true')
     ap.add_argument('--monkey', default=False, action='store_true')
     ap.add_argument('--ape', default=False, action='store_true')
     ap.add_argument('--timemachine', default=False, action='store_true')
