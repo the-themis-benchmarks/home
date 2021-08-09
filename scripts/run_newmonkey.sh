@@ -8,7 +8,7 @@ TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
 
-FASTBOT_TOOL=../tools/
+NEWMONKEY_TOOL=../tools/
 
 # wait for the target device
 function wait_for_device(){
@@ -62,7 +62,7 @@ adb -s ${AVD_SERIAL} root
 
 current_date_time="`date "+%Y-%m-%d-%H-%M-%S"`"
 apk_file_name=`basename $APK_FILE`
-result_dir=$OUTPUT_DIR/$apk_file_name.fastbot.result.$AVD_SERIAL.$AVD_NAME\#$current_date_time
+result_dir=$OUTPUT_DIR/$apk_file_name.newmonkey.result.$AVD_SERIAL.$AVD_NAME\#$current_date_time
 mkdir -p $result_dir
 echo "** CREATING RESULT DIR (${AVD_SERIAL}): " $result_dir
 
@@ -72,7 +72,6 @@ then
     echo "** APP LOGIN (${AVD_SERIAL})"
 
     # enable if use the login script
-    sleep 5 # wait for a few seconds before installation to avoid such error: "adb: connect error for write: closed"
     adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
     echo "** INSTALL APP (${AVD_SERIAL})"
     python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
@@ -82,18 +81,16 @@ then
 
 else
     # install the app
-    sleep 5 # wait for a few seconds before installation to avoid such error: "adb: connect error for write: closed"
+    sleep 5
     adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
     echo "** INSTALL APP (${AVD_SERIAL})"
 fi
 
-sleep 15
-# install Fastbot
-adb -s $AVD_SERIAL push $FASTBOT_TOOL/monkeyq.jar /sdcard
-adb -s $AVD_SERIAL push $FASTBOT_TOOL/framework.jar /sdcard
+sleep 20
 
-echo "** INSTALL Fastbot (${AVD_SERIAL})"
-
+# install New Monkey
+adb -s $AVD_SERIAL install $NEWMONKEY_TOOL/NewMonkey-3.4.apk 
+echo "** INSTALL NewMonkey (${AVD_SERIAL})"
 # get app package
 app_package_name=`aapt dump badging $APK_FILE | grep package | awk '{print $2}' | sed s/name=//g | sed s/\'//g`
 echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name
@@ -103,19 +100,29 @@ echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E *:F *:S > $result_dir/logcat.log &
 
-# start coverage dumping
+# start coverage dumping   !! i think it is useless, and should be deleted
 echo "** START COVERAGE (${AVD_SERIAL}) "
 bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 
-# run fastbot
-echo "** RUN FASTBOT (${AVD_SERIAL})"
-adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/fastbot_testing_time_on_emulator.txt
-timeout $TEST_TIME adb -s $AVD_SERIAL shell CLASSPATH=/sdcard/monkeyq.jar:/sdcard/framework.jar exec app_process /system/bin com.android.commands.monkey.Monkey -p $app_package_name --agent robot --running-minutes 360  --throttle 200 -v -v --output-directory /sdcard/log --bugreport 1000000 2>&1 | tee $result_dir/fastbot.log 
-#timeout $TEST_TIME adb -s device_vendor_id shell CLASSPATH=/sdcard/monkeyq.jar:/sdcard/framework.jar exec app_process /system/bin com.android.commands.monkey.Monkey -p $app_package_name --agent robot --running-minutes duration(min) --throttle delay(ms) -v -v --output-directory /sdcard/xxx # folder for output directory --bugreport 1000000 2>&1 | tee $result_dir/fastbot.log # log printed when crash occurs 
-adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/fastbot_testing_time_on_emulator.txt
 
-# pull Fastbot's results
-echo "** PULL FASTBOT RESULTS (${AVD_SERIAL})"
+# run NewMonkey
+echo "** RUN NewMonkey (${AVD_SERIAL})"
+adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
+
+adb -s $AVD_SERIAL shell am start -n com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.activity.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
+adb shell pm grant com.tencent.newmonkey.newmonkeymobilewithnoroot android.permission.SYSTEM_ALERT_WINDOW
+adb shell settings put secure enabled_accessibility_services com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.core.frameworks.MonkeyService
+echo $app_package_name
+adb shell am broadcast --es packageName $app_package_name  com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
+sleep ${TEST_TIME}
+
+#停止monkey任务命令
+adb shell am broadcast --ez stopMonkey true com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
+
+adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
+
+# pull NewMonkey's results
+echo "** PULL NewMonkey RESULTS (${AVD_SERIAL})"
 adb -s $AVD_SERIAL pull /sdcard/crash-dump.log $result_dir/
 
 # stop coverage dumping
@@ -131,4 +138,3 @@ sleep 5
 adb -s $AVD_SERIAL emu kill
 
 echo "@@@@@@ Finish (${AVD_SERIAL}): " $app_package_name "@@@@@@@"
-
