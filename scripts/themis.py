@@ -122,8 +122,8 @@ def run_qtesting(apk, avd_serial, avd_name, output_dir, testing_time, screen_opt
 
 
 def run_fastbot(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_fastbot.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
-                                                               output_dir,
+    command = 'bash -x run_fastbot.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                               os.path.abspath(output_dir),
                                                                testing_time,
                                                                screen_option,
                                                                login_script)
@@ -274,11 +274,11 @@ def main(args: Namespace):
                                                  args.o, args.time, screen_option,
                                                  login_script,))
             elif args.newmonkey:
-                p.apply_async(run_fastbot, args=(current_apk, avd_serial, args.avd_name,
+                p.apply_async(run_newmonkey, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
                                                   login_script,))
             elif args.wetest:
-                p.apply_async(run_fastbot, args=(current_apk, avd_serial, args.avd_name,
+                p.apply_async(run_wetest, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
                                                   login_script,))                
             else:
