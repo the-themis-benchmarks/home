@@ -105,7 +105,7 @@ bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 
 # run WeTest
 echo "** RUN WeTest (${AVD_SERIAL})"
-adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/WeTest_testing_time_on_emulator.txt
+adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing_time_on_emulator.txt
 
 
 
