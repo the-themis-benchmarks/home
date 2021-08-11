@@ -36,7 +36,7 @@ do
     sleep 5
     # start the emulator
     avd_port=${AVD_SERIAL:9:13}
-    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS &
+    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS -wipe-data &
     sleep 5
     # wait for the emulator
     wait_for_device $AVD_SERIAL
@@ -72,9 +72,10 @@ then
     echo "** APP LOGIN (${AVD_SERIAL})"
 
     # enable if use the login script
-    # adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
-    # echo "** INSTALL APP (${AVD_SERIAL})"
-    # python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
+    sleep 5 # wait for a few seconds before installation to avoid such error: "adb: connect error for write: closed"
+    adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
+    echo "** INSTALL APP (${AVD_SERIAL})"
+    python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
 
     # enable if use the snapshot (already login, do not need to install the app)
     echo " *** Login SUCCESS ****" >> $result_dir/login.log
@@ -111,7 +112,7 @@ adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/WeTest_testing
 launchable_activity=$(aapt dump badging $APK_FILE | grep "launchable-activity" | awk '{print $2}' | sed s/name=//g | sed s/\'//g )
 
 
-timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name} ${launchable_activity}
+timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name} ${launchable_activity} | tee $result_dir/wetest.log 
 
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing_time_on_emulator.txt
 

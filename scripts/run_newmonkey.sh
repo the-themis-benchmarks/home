@@ -36,7 +36,7 @@ do
     sleep 5
     # start the emulator
     avd_port=${AVD_SERIAL:9:13}
-    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS &
+    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS -wipe-data &
     sleep 5
     # wait for the emulator
     wait_for_device $AVD_SERIAL
@@ -113,8 +113,8 @@ adb -s $AVD_SERIAL shell am start -n com.tencent.newmonkey.newmonkeymobilewithno
 adb shell pm grant com.tencent.newmonkey.newmonkeymobilewithnoroot android.permission.SYSTEM_ALERT_WINDOW
 adb shell settings put secure enabled_accessibility_services com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.core.frameworks.MonkeyService
 echo $app_package_name
-adb shell am broadcast --es packageName $app_package_name  com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
-sleep ${TEST_TIME}
+adb shell am broadcast --es packageName $app_package_name  com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver | tee $result_dir/newmonkey.log 
+sleep ${TEST_TIME} 
 
 #停止monkey任务命令
 adb shell am broadcast --ez stopMonkey true com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
