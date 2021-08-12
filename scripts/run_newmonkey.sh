@@ -109,15 +109,15 @@ bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 echo "** RUN NewMonkey (${AVD_SERIAL})"
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
 
-adb -s $AVD_SERIAL shell am start -n com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.activity.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER
-adb shell pm grant com.tencent.newmonkey.newmonkeymobilewithnoroot android.permission.SYSTEM_ALERT_WINDOW
-adb shell settings put secure enabled_accessibility_services com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.core.frameworks.MonkeyService
+adb -s $AVD_SERIAL shell am start -n com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.activity.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER | tee -i $result_dir/newmonkey.log
+adb -s $AVD_SERIAL shell pm grant com.tencent.newmonkey.newmonkeymobilewithnoroot android.permission.SYSTEM_ALERT_WINDOW
+adb -s $AVD_SERIAL shell settings put secure enabled_accessibility_services com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.core.frameworks.MonkeyService
 echo $app_package_name
-adb shell am broadcast --es packageName $app_package_name  com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver | tee $result_dir/newmonkey.log 
-sleep ${TEST_TIME} 
+adb -s $AVD_SERIAL shell am broadcast --es packageName $app_package_name  com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver  
+timeout ${TEST_TIME} adb logcat | tee $result_dir/newmonkey.log 
 
-#停止monkey任务命令
-adb shell am broadcast --ez stopMonkey true com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
+#stop NewMonkey
+adb -s $AVD_SERIAL shell am broadcast --ez stopMonkey true com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
 
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
 
