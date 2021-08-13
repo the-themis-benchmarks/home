@@ -8,7 +8,7 @@ TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
 
-WETEST_TOOL=../tools/
+WETEST_TOOL=../tools
 
 # wait for the target device
 function wait_for_device(){
@@ -112,7 +112,7 @@ adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing
 launchable_activity=$(aapt dump badging $APK_FILE | grep "launchable-activity" | awk '{print $2}' | sed s/name=//g | sed s/\'//g )
 
 
-timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name} ${launchable_activity} | tee $result_dir/wetest.log 
+timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name} ${launchable_activity} ${AVD_SERIAL} | tee $result_dir/wetest.log 
 
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing_time_on_emulator.txt
 
