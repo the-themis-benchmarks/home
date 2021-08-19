@@ -390,8 +390,8 @@ def main(args: Namespace):
             tool_name = "ape"
         elif args.combo:
             tool_name = "combodroid"
-        elif args.humandroid:
-            tool_name = "humandroid"
+        elif args.humanoid:
+            tool_name = "humanoid"
         elif args.stoat:
             tool_name = "stoat"
         elif args.qtesting:
@@ -463,7 +463,7 @@ if __name__ == '__main__':
     ap.add_argument('--ape', default=False, action='store_true')
     ap.add_argument('--timemachine', default=False, action='store_true')
     ap.add_argument('--combo', default=False, action='store_true')
-    ap.add_argument('--humandroid', default=False, action='store_true')
+    ap.add_argument('--humanoid', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')
     ap.add_argument('--stoat', default=False, action='store_true')
     ap.add_argument('--fastbot', default=False, action='store_true')
