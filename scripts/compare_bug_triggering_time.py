@@ -42,7 +42,7 @@ common_bugs_data = {
         'commons': ['2123']
     },
 
-    "monkey_humandroid" :{
+    "monkey_humanoid" :{
         'AnkiDroid': ['4707', '5756', '4977'],
         'geohashdroid': ['73'],
         'APhotoManager': ['116'],
@@ -91,7 +91,7 @@ common_bugs_data = {
     },
 
 
-    "ape_humandroid":  {
+    "ape_humanoid":  {
         'AnkiDroid': ['4707', '5756', '4977'],
         'APhotoManager': ['116'],
         'AmazeFileManager': ['1796'],
@@ -126,7 +126,7 @@ common_bugs_data = {
     },
 
 
-    "combo_humandroid": {
+    "combo_humanoid": {
         'AnkiDroid': ['5756', '4977'],
         'geohashdroid': ['73'],
         'APhotoManager': ['116'],
@@ -147,7 +147,7 @@ common_bugs_data = {
         'commons': ['2123']
     },
 
-    "timemachine_humandroid":  {
+    "timemachine_humanoid":  {
         'AnkiDroid': ['4707', '4977'],
         'APhotoManager': ['116'],
         'AmazeFileManager': ['1796'],
@@ -165,7 +165,7 @@ common_bugs_data = {
         'commons': ['2123']
     },
 
-    "humandroid_qtesting": {
+    "humanoid_qtesting": {
         'AnkiDroid': ['5756', '4977'],
         'geohashdroid': ['73'],
         'APhotoManager': ['116'],
@@ -259,6 +259,6 @@ if __name__ == '__main__':
 
     args = ap.parse_args()
 
-    tool_names = ['monkey', 'ape', 'combo', 'humandroid', 'timemachine', 'qtesting']
+    tool_names = ['monkey', 'ape', 'combo', 'humanoid', 'timemachine', 'qtesting']
     #tool_names = ['monkey', 'ape']
     generate_pairwise_bug_triggering_time_data(tool_names, args)
