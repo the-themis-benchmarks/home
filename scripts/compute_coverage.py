@@ -396,6 +396,12 @@ def main(args: Namespace):
             tool_name = "stoat"
         elif args.qtesting:
             tool_name = "qtesting"
+        elif args.fastbot:
+            tool_name = "fastbot"
+        elif args.wetest:
+            tool_name = "wetest"
+        elif args.newmonkey:
+            tool_name = "newmonkey"
         else:
             tool_name = ""
 
@@ -460,6 +466,9 @@ if __name__ == '__main__':
     ap.add_argument('--humandroid', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')
     ap.add_argument('--stoat', default=False, action='store_true')
+    ap.add_argument('--fastbot', default=False, action='store_true')
+    ap.add_argument('--wetest', default=False, action='store_true')
+    ap.add_argument('--newmonkey', default=False, action='store_true')
 
     ap.add_argument('--app', type=str, dest='app_name')
     ap.add_argument('--id', type=str, dest='issue_id')

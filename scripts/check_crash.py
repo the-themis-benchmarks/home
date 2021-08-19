@@ -9,12 +9,10 @@ import time
 from argparse import ArgumentParser, Namespace
 from typing import List, Dict, Set
 
-
 ALL_APPS = ['ActivityDiary', 'AmazeFileManager', 'and-bible', 'AnkiDroid', 'APhotoManager', 'commons',
             'collect', 'FirefoxLite', 'Frost', 'geohashdroid', 'MaterialFBook', 'nextcloud', 'Omni-Notes',
             'open-event-attendee-android', 'openlauncher', 'osmeditor4android', 'Phonograph', 'Scarlet-Notes',
             'sunflower', 'WordPress']
-
 
 app_crash_data = {
 
@@ -311,7 +309,7 @@ def get_app_name(testing_result_dir):
 def get_apk_info(testing_result_dir: str, app_name: str):
     base_name = os.path.basename(testing_result_dir)
     target_apk_file_name = str(base_name.split(".apk")[0]) + ".apk"
-    
+
     target_apk_file_path = os.path.join("../" + app_name, target_apk_file_name)
     get_app_package_name_cmd = "aapt dump badging " + target_apk_file_path + " | grep package | awk '{print $2}' | sed s/name=//g | sed s/\\'//g"
     app_package_name = ""
@@ -350,6 +348,10 @@ def main(args: Namespace):
         if args.app_name is not None and args.app_name != app_name:
             # skip unrelated apps if args.app_name is given
             continue
+
+        # if args.monkey and app_name == "ActivityDiary":
+        #    # TODO special check for Monkey's ActivityDiary [should be removed in the future]
+        #    continue
 
         print(args.app_name)
 
@@ -413,7 +415,7 @@ def main(args: Namespace):
                                                           "timemachine-output/run_time.log")
                     testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
 
-                if args.humanoid:
+                if args.humandroid:
                     # Humandroid
                     logcat_file_path = os.path.join(result_dir, "logcat.log")
                     login_file_path = os.path.join(result_dir, "login.log")
@@ -443,6 +445,30 @@ def main(args: Namespace):
                     login_file_path = os.path.join(result_dir, "login.log")
                     testing_time_file_path = os.path.join(result_dir,
                                                           "weighted_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+
+                if args.fastbot:
+                    # Fastbot
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "fastbot_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+                    
+                if args.wetest:
+                    # WeTest
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "wetest_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+                
+                if args.newmonkey:
+                    # Newmonkey
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "newmonkey_testing_time_on_emulator.txt")
                     testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
 
                 if os.path.exists(logcat_file_path) and os.path.exists(testing_time_file_path):
@@ -591,7 +617,7 @@ def main(args: Namespace):
                                     sub_exception_stack = sub_exception_stacks[local_time_label]
                                     for line in sub_exception_stack:
                                         if "at " in line and app_package_name in line:
-                                            line_without_time_label = line.replace(local_time_label+":", "").strip()
+                                            line_without_time_label = line.replace(local_time_label + ":", "").strip()
                                             uniqe_signature_of_crash_stack += line_without_time_label
 
                                     if uniqe_signature_of_crash_stack == "":
@@ -602,10 +628,13 @@ def main(args: Namespace):
                                     print("----")
 
                                     if apk_file_name not in other_crashes_signature_str_dict:
-                                        other_crashes_signature_str_dict[apk_file_name] = [uniqe_signature_of_crash_stack]
-                                        other_crashes_complete_exception_trace_dict[apk_file_name] = [sub_exception_stack]
+                                        other_crashes_signature_str_dict[apk_file_name] = [
+                                            uniqe_signature_of_crash_stack]
+                                        other_crashes_complete_exception_trace_dict[apk_file_name] = [
+                                            sub_exception_stack]
                                     else:
-                                        if uniqe_signature_of_crash_stack not in other_crashes_signature_str_dict[apk_file_name]:
+                                        if uniqe_signature_of_crash_stack not in other_crashes_signature_str_dict[
+                                            apk_file_name]:
                                             # check existence
                                             other_crashes_signature_str_dict[apk_file_name].append(
                                                 uniqe_signature_of_crash_stack)
@@ -628,7 +657,7 @@ def main(args: Namespace):
                                 for line in target_stack:
 
                                     if "at " in line and app_package_name in line:
-                                        line_without_time_label = line.replace(time_label+":", "").strip()
+                                        line_without_time_label = line.replace(time_label + ":", "").strip()
                                         uniqe_signature_of_crash_stack += line_without_time_label
 
                                 if uniqe_signature_of_crash_stack == "":
@@ -642,9 +671,11 @@ def main(args: Namespace):
                                     other_crashes_signature_str_dict[apk_file_name] = [uniqe_signature_of_crash_stack]
                                     other_crashes_complete_exception_trace_dict[apk_file_name] = [target_stack]
                                 else:
-                                    if uniqe_signature_of_crash_stack not in other_crashes_signature_str_dict[apk_file_name]:
+                                    if uniqe_signature_of_crash_stack not in other_crashes_signature_str_dict[
+                                        apk_file_name]:
                                         # check existence
-                                        other_crashes_signature_str_dict[apk_file_name].append(uniqe_signature_of_crash_stack)
+                                        other_crashes_signature_str_dict[apk_file_name].append(
+                                            uniqe_signature_of_crash_stack)
                                         other_crashes_complete_exception_trace_dict[apk_file_name].append(target_stack)
 
                             # print("--")
@@ -660,7 +691,6 @@ def main(args: Namespace):
 
                         # output to final result file
                         if args.final_result_csv_file_path is not None:
-
                             with open(args.final_result_csv_file_path, "a") as csv_file:
                                 writer = csv.writer(csv_file)
                                 writer.writerow([apk_file_name, issue_id, os.path.basename(result_dir),
@@ -702,7 +732,7 @@ def main(args: Namespace):
                                                                                                '%Y-%m-%d %H:%M:%S')
 
                                 tmp_time_duration_in_minutes = (
-                                                                           crash_triggering_datetime_obj - start_testing_datetime_obj).total_seconds() / 60
+                                                                       crash_triggering_datetime_obj - start_testing_datetime_obj).total_seconds() / 60
                                 crash_triggering_time_durations.append("{:.0f}".format(tmp_time_duration_in_minutes))
 
                                 number_of_matched_crash += 1
@@ -787,10 +817,13 @@ if __name__ == '__main__':
     ap.add_argument('--ape', default=False, action='store_true')
     ap.add_argument('--timemachine', default=False, action='store_true')
     ap.add_argument('--combo', default=False, action='store_true')
-    ap.add_argument('--humanoid', default=False, action='store_true')
+    ap.add_argument('--humandroid', default=False, action='store_true')
     ap.add_argument('--sapienz', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')
     ap.add_argument('--weighted', default=False, action='store_true')
+    ap.add_argument('--fastbot', default=False, action='store_true')
+    ap.add_argument('--wetest', default=False, action='store_true')
+    ap.add_argument('--newmonkey', default=False, action='store_true')
 
     ap.add_argument('--app', type=str, dest='app_name')
     ap.add_argument('--id', type=str, dest='issue_id')
