@@ -107,18 +107,15 @@ bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 echo "** RUN WeTest (${AVD_SERIAL})"
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing_time_on_emulator.txt
 
-
-
 launchable_activity=$(aapt dump badging $APK_FILE | grep "launchable-activity" | awk '{print $2}' | sed s/name=//g | sed s/\'//g )
-
 
 timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name} ${launchable_activity} ${AVD_SERIAL} | tee $result_dir/wetest.log 
 
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing_time_on_emulator.txt
 
 # pull WeTest's results
-echo "** PULL WeTest RESULTS (${AVD_SERIAL})"
-adb -s $AVD_SERIAL pull /sdcard/crash-dump.log $result_dir/
+# echo "** PULL WeTest RESULTS (${AVD_SERIAL})"
+# adb -s $AVD_SERIAL pull /sdcard/crash-dump.log $result_dir/
 
 # stop coverage dumping
 echo "** STOP COVERAGE (${AVD_SERIAL})"
