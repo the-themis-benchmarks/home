@@ -8,7 +8,7 @@ TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
 
-NEWMONKEY_TOOL=../tools/
+NEWMONKEY_TOOL=../tools
 
 # wait for the target device
 function wait_for_device(){
@@ -28,7 +28,6 @@ function wait_for_device(){
       OUT=`adb -s $avd_serial shell getprop init.svc.bootanim`
     done
 }
-
 RETRY_TIMES=5
 for i in $(seq 1 $RETRY_TIMES);
 do
@@ -40,7 +39,6 @@ do
     sleep 5
     # wait for the emulator
     wait_for_device $AVD_SERIAL
-
     # check whether the emualtor is online
     OUT=`adb -s $avd_serial shell getprop init.svc.bootanim`
     if [[ ${OUT:0:7}  != 'stopped' ]]
@@ -87,9 +85,8 @@ else
 fi
 
 sleep 20
-
 # install New Monkey
-adb -s $AVD_SERIAL install $NEWMONKEY_TOOL/NewMonkey-3.4.apk 
+adb -s $AVD_SERIAL install $NEWMONKEY_TOOL/NewMonkey-3.4.apk
 echo "** INSTALL NewMonkey (${AVD_SERIAL})"
 # get app package
 app_package_name=`aapt dump badging $APK_FILE | grep package | awk '{print $2}' | sed s/name=//g | sed s/\'//g`
@@ -99,42 +96,33 @@ echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E *:F *:S > $result_dir/logcat.log &
-
 # start coverage dumping   !! i think it is useless, and should be deleted
 echo "** START COVERAGE (${AVD_SERIAL}) "
 bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 
-
 # run NewMonkey
 echo "** RUN NewMonkey (${AVD_SERIAL})"
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
-
-adb -s $AVD_SERIAL shell am start -n com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.activity.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER | tee -i $result_dir/newmonkey.log
+adb -s $AVD_SERIAL shell am start -n com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.activity.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER 
 adb -s $AVD_SERIAL shell pm grant com.tencent.newmonkey.newmonkeymobilewithnoroot android.permission.SYSTEM_ALERT_WINDOW
 adb -s $AVD_SERIAL shell settings put secure enabled_accessibility_services com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.core.frameworks.MonkeyService
 echo $app_package_name
 adb -s $AVD_SERIAL shell am broadcast --es packageName $app_package_name  com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver  
-timeout ${TEST_TIME} adb logcat | tee $result_dir/newmonkey.log 
-
+timeout ${TEST_TIME} adb logcat | tee -i $result_dir/newmonkey.log
 #stop NewMonkey
 adb -s $AVD_SERIAL shell am broadcast --ez stopMonkey true com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
-
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
-
 # pull NewMonkey's results
-echo "** PULL NewMonkey RESULTS (${AVD_SERIAL})"
-adb -s $AVD_SERIAL pull /sdcard/crash-dump.log $result_dir/
+# echo "** PULL NewMonkey RESULTS (${AVD_SERIAL})"
+# adb -s $AVD_SERIAL pull /sdcard/crash-dump.log $result_dir/
 
 # stop coverage dumping
 echo "** STOP COVERAGE (${AVD_SERIAL})"
 kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
-
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"
 kill `ps aux | grep "${AVD_SERIAL} logcat" | grep -v grep | awk '{print $2}'`
-
 # stop and kill the emulator
 sleep 5
 adb -s $AVD_SERIAL emu kill
-
 echo "@@@@@@ Finish (${AVD_SERIAL}): " $app_package_name "@@@@@@@"
