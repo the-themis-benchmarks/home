@@ -36,7 +36,7 @@ do
     sleep 5
     # start the emulator
     avd_port=${AVD_SERIAL:9:13}
-    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS -wipe-data &
+    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS &
     sleep 5
     # wait for the emulator
     wait_for_device $AVD_SERIAL
@@ -112,10 +112,6 @@ launchable_activity=$(aapt dump badging $APK_FILE | grep "launchable-activity" |
 timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name} ${launchable_activity} ${AVD_SERIAL} | tee $result_dir/wetest.log 
 
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing_time_on_emulator.txt
-
-# pull WeTest's results
-# echo "** PULL WeTest RESULTS (${AVD_SERIAL})"
-# adb -s $AVD_SERIAL pull /sdcard/crash-dump.log $result_dir/
 
 # stop coverage dumping
 echo "** STOP COVERAGE (${AVD_SERIAL})"
