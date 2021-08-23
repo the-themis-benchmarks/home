@@ -36,7 +36,7 @@ do
     sleep 5
     # start the emulator
     avd_port=${AVD_SERIAL:9:13}
-    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS -wipe-data &
+    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS &
     sleep 5
     # wait for the emulator
     wait_for_device $AVD_SERIAL
