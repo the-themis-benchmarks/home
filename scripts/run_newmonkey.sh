@@ -35,7 +35,7 @@ do
     sleep 5
     # start the emulator
     avd_port=${AVD_SERIAL:9:13}
-    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS -wipe-data &
+    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS &
     sleep 5
     # wait for the emulator
     wait_for_device $AVD_SERIAL
@@ -106,15 +106,16 @@ adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_test
 adb -s $AVD_SERIAL shell am start -n com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.activity.MainActivity -a android.intent.action.MAIN -c android.intent.category.LAUNCHER 
 adb -s $AVD_SERIAL shell pm grant com.tencent.newmonkey.newmonkeymobilewithnoroot android.permission.SYSTEM_ALERT_WINDOW
 adb -s $AVD_SERIAL shell settings put secure enabled_accessibility_services com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.core.frameworks.MonkeyService
+
 echo $app_package_name
 adb -s $AVD_SERIAL shell am broadcast --es packageName $app_package_name  com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver  
-timeout ${TEST_TIME} adb logcat | tee -i $result_dir/newmonkey.log
+
+sleep $TEST_TIME
+
 #stop NewMonkey
 adb -s $AVD_SERIAL shell am broadcast --ez stopMonkey true com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
-# pull NewMonkey's results
-# echo "** PULL NewMonkey RESULTS (${AVD_SERIAL})"
-# adb -s $AVD_SERIAL pull /sdcard/crash-dump.log $result_dir/
+
 
 # stop coverage dumping
 echo "** STOP COVERAGE (${AVD_SERIAL})"
