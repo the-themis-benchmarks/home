@@ -7,6 +7,7 @@ OUTPUT_DIR=$4
 TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
+IS_SNAPSHOT=$8
 
 NEWMONKEY_TOOL=../tools
 
@@ -69,13 +70,17 @@ if [[ $LOGIN_SCRIPT != "" ]]
 then
     echo "** APP LOGIN (${AVD_SERIAL})"
 
-    # enable if use the login script
-    adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
-    echo "** INSTALL APP (${AVD_SERIAL})"
-    python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
+    if [[ $IS_SNAPSHOT != "True" ]]
+    then
+      # enable if use the login script
+      adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
+      echo "** INSTALL APP (${AVD_SERIAL})"
+      python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
 
-    # enable if use the snapshot (already login, do not need to install the app)
-    echo " *** Login SUCCESS ****" >> $result_dir/login.log
+    else
+      # enable if use the snapshot (already login, do not need to install the app)
+      echo " *** Login SUCCESS ****" >> $result_dir/login.log
+    fi
 
 else
     # install the app
@@ -86,7 +91,7 @@ fi
 
 sleep 20
 # install New Monkey
-adb -s $AVD_SERIAL install $NEWMONKEY_TOOL/NewMonkey-3.4.apk
+adb -s $AVD_SERIAL install -g $NEWMONKEY_TOOL/NewMonkey-3.4.apk
 echo "** INSTALL NewMonkey (${AVD_SERIAL})"
 # get app package
 app_package_name=`aapt dump badging $APK_FILE | grep package | awk '{print $2}' | sed s/name=//g | sed s/\'//g`
@@ -108,7 +113,24 @@ adb -s $AVD_SERIAL shell pm grant com.tencent.newmonkey.newmonkeymobilewithnoroo
 adb -s $AVD_SERIAL shell settings put secure enabled_accessibility_services com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.core.frameworks.MonkeyService
 
 echo $app_package_name
-adb -s $AVD_SERIAL shell am broadcast --es packageName $app_package_name  com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver  
+adb -s $AVD_SERIAL shell am broadcast --es packageName $app_package_name com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
+
+RETRY_TIMES=10
+for i in $(seq 1 $RETRY_TIMES);
+do
+    echo "wait when new monkey is running on (${AVD_SERIAL})..."
+    sleep 10
+    is_running=`adb -s $AVD_SERIAL shell ps | grep $app_package_name`
+    echo "is_running:${is_running}"
+    # validate whether the target app is running
+    if [[ $is_running != "" ]]
+    then
+      break
+    else
+      echo "*****resend new monkey intent ...******"
+      adb -s $AVD_SERIAL shell am broadcast --es packageName $app_package_name com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
+    fi
+done
 
 sleep $TEST_TIME
 
