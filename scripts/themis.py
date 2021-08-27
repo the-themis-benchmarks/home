@@ -73,10 +73,10 @@ def run_timemachine(apk, avd_serial, avd_name, output_dir, testing_time, screen_
 
 def run_humanoid(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
     command = 'bash -x run_humanoid.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
-                                                                  output_dir,
-                                                                  testing_time,
-                                                                  screen_option,
-                                                                  login_script)
+                                                                output_dir,
+                                                                testing_time,
+                                                                screen_option,
+                                                                login_script)
     print('execute humanoid: %s' % command)
     os.system(command)
 
@@ -121,31 +121,35 @@ def run_qtesting(apk, avd_serial, avd_name, output_dir, testing_time, screen_opt
     os.system(command)
 
 
-def run_fastbot(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_fastbot.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
-                                                               os.path.abspath(output_dir),
-                                                               testing_time,
-                                                               screen_option,
-                                                               login_script)
+def run_fastbot(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    command = 'bash -x run_fastbot.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                                  os.path.abspath(output_dir),
+                                                                  testing_time,
+                                                                  screen_option,
+                                                                  login_script,
+                                                                  is_snapshot)
     print('execute fastbot: %s' % command)
     os.system(command)
 
 
-def run_newmonkey(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_newmonkey.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
-                                                                os.path.abspath(output_dir),
-                                                                testing_time,
-                                                                screen_option,
-                                                                login_script)
+def run_newmonkey(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    command = 'bash -x run_newmonkey.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                                    os.path.abspath(output_dir),
+                                                                    testing_time,
+                                                                    screen_option,
+                                                                    login_script,
+                                                                    is_snapshot)
     print('execute newmonkey: %s' % command)
     os.system(command)
 
-def run_wetest(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_wetest.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
-                                                                os.path.abspath(output_dir),
-                                                                testing_time,
-                                                                screen_option,
-                                                                login_script)
+
+def run_wetest(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    command = 'bash -x run_wetest.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                                 os.path.abspath(output_dir),
+                                                                 testing_time,
+                                                                 screen_option,
+                                                                 login_script,
+                                                                 is_snapshot)
     print('execute wetest: %s' % command)
     os.system(command)
 
@@ -248,8 +252,8 @@ def main(args: Namespace):
                                                           login_script,))
             elif args.humanoid:
                 p.apply_async(run_humanoid, args=(current_apk, avd_serial, args.avd_name,
-                                                    args.o, args.time, screen_option,
-                                                    login_script,))
+                                                  args.o, args.time, screen_option,
+                                                  login_script,))
             elif args.weighted:
                 p.apply_async(run_weighted, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
@@ -272,15 +276,15 @@ def main(args: Namespace):
             elif args.fastbot:
                 p.apply_async(run_fastbot, args=(current_apk, avd_serial, args.avd_name,
                                                  args.o, args.time, screen_option,
-                                                 login_script,))
+                                                 login_script, args.snapshot,))
             elif args.newmonkey:
                 p.apply_async(run_newmonkey, args=(current_apk, avd_serial, args.avd_name,
-                                                  args.o, args.time, screen_option,
-                                                  login_script,))
+                                                   args.o, args.time, screen_option,
+                                                   login_script, args.snapshot,))
             elif args.wetest:
                 p.apply_async(run_wetest, args=(current_apk, avd_serial, args.avd_name,
-                                                  args.o, args.time, screen_option,
-                                                  login_script,))                
+                                                args.o, args.time, screen_option,
+                                                login_script, args.snapshot,))
             else:
                 pass
 
@@ -300,7 +304,7 @@ if __name__ == '__main__':
     ap.add_argument('--avd', type=str, dest='avd_name', help="the device name")
     ap.add_argument('--apk', type=str, dest='apk')
     ap.add_argument('-n', type=int, dest='number_of_devices', default=1,
-            help="number of emulators created for testing, default: 1")
+                    help="number of emulators created for testing, default: 1")
     ap.add_argument('--apk-list', type=str, dest='apk_list', help="list of apks under test")
     ap.add_argument('-o', required=True, help="output dir")
     ap.add_argument('--time', type=str, default='6h', help="the fuzzing time in hours (e.g., 6h), minutes (e.g., 6m),"
@@ -309,6 +313,9 @@ if __name__ == '__main__':
     ap.add_argument('--max-emu', type=int, default=16, help="the maximum allowed number of emulators")
     ap.add_argument('--no-headless', dest='no_headless', default=False, action='store_true', help="show gui")
     ap.add_argument('--login', type=str, dest='login_script', help="the script for app login")
+    ap.add_argument('--snapshot', default=False, action='store_true', help="use this option if the target app is "
+                                                                           "already installed in the emulator "
+                                                                           "and logged in")
     ap.add_argument('--wait', type=int, dest='idle_time',
                     help="the idle time to wait before starting the fuzzing")
 
