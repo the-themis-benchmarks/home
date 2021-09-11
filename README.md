@@ -153,13 +153,14 @@ optional arguments:
   --sapienz
   --qtesting
   --offset OFFSET       device offset number w.r.t emulator-5554
+  --snapshot            use this option if the target app is already installed in the emulator and logged in
 ```
 
 ### Implementation details
 
 The directory structure of Themis is as follows:
 
-    Themis
+        Themis
        |
        |--- esecfse2021-paper1009.pdf   the accepted paper of Themis
        |
@@ -179,6 +180,9 @@ The directory structure of Themis is as follows:
            |--- run_qtesting.sh
            |--- run_timemachine.sh
            |--- run_combodroid.sh
+           |--- run_fastbot.sh
+           |--- run_wetest.sh
+           |--- run_newmonkey.sh
            |
        |--- tools:                      the supported auotmated testing tools.
            |
@@ -193,6 +197,12 @@ The directory structure of Themis is as follows:
            |--- ComboDroid              the tool ComboDroid
            |
            |--- Monkey                  the tool Monkey
+           |
+           |--- Fastbot                 the tool Fastbot
+           |
+           |--- Wetest                  the tool Wetest
+           |
+           |--- NewMonkey               the tool NewMonkey
            |
        |--- app_1:             The bugs collected from app_1.
        |
