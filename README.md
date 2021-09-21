@@ -878,16 +878,13 @@ By leveraging the results, one can inspect the detailed coverage report generate
 
 Themis can also benefit other research (e.g., fault localization, program repair, etc.)
 
-## Main maintainers
+## Main maintainers/contributors
 
 [Ting Su](https://tingsu.github.io/), East China Normal University, China
 
 [Jue Wang](https://scholar.google.com/citations?user=z_2j0xMAAAAJ), Nanjing University, China
 
 [Zhendong Su](https://people.inf.ethz.ch/suz/), ETH Zurich, Switzerland
-
-We welcome any feedback or questions on Themis. Free feel to share your ideas, open issues or pull requests. We are actively maintaining Themis
-to benefit our community.
 
 We appreciate the contributions from:
 
@@ -896,3 +893,6 @@ We appreciate the contributions from:
 - Weigang He, East China Normal University, China
 
 - Shan Huang, East China Normal University, China
+
+We welcome any feedback or questions on Themis. Free feel to share your ideas, open issues or pull requests. We are actively maintaining Themis
+to benefit our community.
