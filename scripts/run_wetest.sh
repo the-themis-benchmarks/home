@@ -113,6 +113,8 @@ echo "** RUN WeTest (${AVD_SERIAL})"
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing_time_on_emulator.txt
 
 launchable_activity=$(aapt dump badging $APK_FILE | grep "launchable-activity" | awk '{print $2}' | sed s/name=//g | sed s/\'//g )
+#launchable_activity=$(aapt dump badging $APK_FILE | grep "launchable-activity" | awk '{print $2}' | sed s/name=//g | sed s/\'//g | grep "fr.free" )
+# special filter for commons
 
 timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name} ${launchable_activity} ${AVD_SERIAL} | tee $result_dir/wetest.log 
 
