@@ -174,15 +174,30 @@ def get_all_apks(apk_list_file):
     return apk_paths, apk_login_scripts
 
 
+def connect_ssl(device_id):
+    ip = "10.237.0." + str(device_id + 1)
+    port = 8888 - device_id + 1
+    cmd = "ssh -L %s:%s:5555 0a82da3dec00f43a2f45c004d252ae44@116.63.79.101 -i ../tools/KeyPair-6aa3.pem -o ServerAliveInterval=30 -Nf" % (port, ip)
+    os.system(cmd)
+    print(cmd)
+    return "127.0.0.1:" + str(port)
+
+
+def connect_adb(ip):
+    os.system("source ~/.bash_profile;adb connect " + ip)
+
+
 def main(args: Namespace):
     if not os.path.exists(args.o):
         os.mkdir(args.o)
 
     # allocate emulators for an apk
-    start_avd_serial = 5554 + args.offset * 2
+    start_avd_serial = args.offset if args.offset > 0 else 1
     avd_serial_list = []
     for apk_index in range(args.number_of_devices):
-        avd_serial = 'emulator-' + str(start_avd_serial + apk_index * 2)
+        avd_serial = connect_ssl(start_avd_serial + apk_index)
+        connect_adb(avd_serial)
+        # avd_serial = 'emulator-' + str(start_avd_serial + apk_index * 2)
         avd_serial_list.append(avd_serial)
         print('allocate emulators: %s' % avd_serial)
 

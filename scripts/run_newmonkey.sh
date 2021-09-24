@@ -29,32 +29,32 @@ function wait_for_device(){
       OUT=`adb -s $avd_serial shell getprop init.svc.bootanim`
     done
 }
-RETRY_TIMES=5
-for i in $(seq 1 $RETRY_TIMES);
-do
-    echo "try to start the emulator (${AVD_SERIAL})..."
-    sleep 5
-    # start the emulator
-    avd_port=${AVD_SERIAL:9:13}
-    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS &
-    sleep 5
-    # wait for the emulator
-    wait_for_device $AVD_SERIAL
-    # check whether the emualtor is online
-    OUT=`adb -s $avd_serial shell getprop init.svc.bootanim`
-    if [[ ${OUT:0:7}  != 'stopped' ]]
-    then
-        adb -s $avd_serial emu kill
-        echo "try to restart the emulator (${AVD_SERIAL})..."
-        if [[ $i == RETRY_TIMES ]]
-        then
-            echo "we give up the emulator (${AVD_SERIAL})..."
-            exit
-        fi
-    else
-        break
-    fi
-done
+#RETRY_TIMES=5
+#for i in $(seq 1 $RETRY_TIMES);
+#do
+#    echo "try to start the emulator (${AVD_SERIAL})..."
+#    sleep 5
+#    # start the emulator
+#    avd_port=${AVD_SERIAL:9:13}
+#    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS &
+#    sleep 5
+#    # wait for the emulator
+#    wait_for_device $AVD_SERIAL
+#    # check whether the emualtor is online
+#    OUT=`adb -s $avd_serial shell getprop init.svc.bootanim`
+#    if [[ ${OUT:0:7}  != 'stopped' ]]
+#    then
+#        adb -s $avd_serial emu kill
+#        echo "try to restart the emulator (${AVD_SERIAL})..."
+#        if [[ $i == RETRY_TIMES ]]
+#        then
+#            echo "we give up the emulator (${AVD_SERIAL})..."
+#            exit
+#        fi
+#    else
+#        break
+#    fi
+#done
 
 echo "  emulator (${AVD_SERIAL}) is booted!"
 adb -s ${AVD_SERIAL} root
