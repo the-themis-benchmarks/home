@@ -1,4 +1,4 @@
-This file describes how to test the apps with login by using the snapshot feature of Android emulator.
+This file describes how to test the apps that required login by using the snapshot feature of Android emulator.
 Please create a fresh emulator with 'Nexus 7' for each crash bug before do the following instructions.
 
 ```
@@ -177,3 +177,55 @@ $ adb -s emulator-5554 emu kill
 ```
 python3 themis.py --no-headless --avd Android7.1 --apk ../nextcloud/nextcloud-#5173.apk --time 10m -o ../monkey-results/ --login ../nextcloud/login-#5173.py --monkey --snapshot
 ```
+
+```
+We've tested the login process in different network connection situations.
+Due to the account issue, Frost cannot be tested in all threee industrial tools.
+
+1. connection with google access
+
+ commons/commons-2.11.0-#3244.apk                         success
+ commons/commons-2.9.0-#2123.apk                          success
+ commons/commons-2.6.7-#1391.apk     	                    success
+ commons/commons-2.6.7-#1385.apk                          success   
+ commons/commons-2.7.1-#1581.apk                          success
+ Frost/Frost-debug-2.2.1-#1323.apk                        fail(account issue)
+ MaterialFBook/MaterialFBook4.0.2-debug-#224.apk          no need for login
+ nextcloud/nextcloud-#5173.apk         		                success                 
+ nextcloud/nextcloud-#4026.apk          		              success
+ nextcloud/nextcloud-#4792.apk         		                success
+ nextcloud/nextcloud-#1918.apk                            success
+ WordPress/WordPress-vanilla-debug--#8659.apk             success
+ WordPress/WordPress-vanilla-debug--#7182.apk             success
+ WordPress/WordPress-vanilla-debug--#6530.apk             success
+ WordPress/WordPress-vanilla-debug--#11992.apk            success
+ WordPress/WordPress-vanilla-debug--#11135.apk            success
+ WordPress/WordPress-vanilla-debug--#10876.apk            success
+ WordPress/WordPress-vanilla-debug--#10547.apk            success
+ WordPress/WordPress-vanilla-debug--#10363.apk            success  
+ WordPress/WordPress-vanilla-debug--#10302.apk            no need for login
+ 
+ 
+ 
+2. connection without google access
+
+ commons/commons-2.11.0-#3244.apk                         fail
+ commons/commons-2.9.0-#2123.apk                          fail
+ commons/commons-2.6.7-#1391.apk     	                    fail
+ commons/commons-2.6.7-#1385.apk                          fail   
+ commons/commons-2.7.1-#1581.apk                          fail
+ Frost/Frost-debug-2.2.1-#1323.apk                        fail(account issue)
+ MaterialFBook/MaterialFBook4.0.2-debug-#224.apk          no need for login
+ nextcloud/nextcloud-#5173.apk         		                success                 
+ nextcloud/nextcloud-#4026.apk          		              success
+ nextcloud/nextcloud-#4792.apk         		                success
+ nextcloud/nextcloud-#1918.apk                            success
+ WordPress/WordPress-vanilla-debug--#8659.apk             success
+ WordPress/WordPress-vanilla-debug--#7182.apk             success
+ WordPress/WordPress-vanilla-debug--#6530.apk             success
+ WordPress/WordPress-vanilla-debug--#11992.apk            success
+ WordPress/WordPress-vanilla-debug--#11135.apk            success
+ WordPress/WordPress-vanilla-debug--#10876.apk            success
+ WordPress/WordPress-vanilla-debug--#10547.apk            success
+ WordPress/WordPress-vanilla-debug--#10363.apk            success  
+ WordPress/WordPress-vanilla-debug--#10302.apk            no need for login
