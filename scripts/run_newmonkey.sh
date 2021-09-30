@@ -93,6 +93,24 @@ sleep 20
 # install New Monkey
 adb -s $AVD_SERIAL install -g $NEWMONKEY_TOOL/NewMonkey-3.4.apk
 echo "** INSTALL NewMonkey (${AVD_SERIAL})"
+
+RETRY_TIMES=10
+for i in $(seq 1 $RETRY_TIMES);
+do
+    echo "wait when new monkey installing on (${AVD_SERIAL})..."
+    sleep 5
+    install_success=`adb -s $AVD_SERIAL shell pm list package | grep newmonkey`
+    echo "install_success:${install_success}"
+    # validate whether the target app is running
+    if [[ install_success != "" ]]
+    then
+      break
+    else
+      echo "*****reinstall new monkey apk ...******"
+      adb -s $AVD_SERIAL install -g $NEWMONKEY_TOOL/NewMonkey-3.4.apk
+    fi
+done
+
 # get app package
 app_package_name=`aapt dump badging $APK_FILE | grep package | awk '{print $2}' | sed s/name=//g | sed s/\'//g`
 echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name

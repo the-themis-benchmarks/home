@@ -3,6 +3,8 @@ import time
 from argparse import ArgumentParser, Namespace
 from multiprocessing.pool import ThreadPool
 
+import huawei_util
+
 
 def get_time_in_seconds(testing_time):
     if 'h' in testing_time:
@@ -194,11 +196,14 @@ def main(args: Namespace):
     # allocate emulators for an apk
     start_avd_serial = args.offset if args.offset > 0 else 1
     avd_serial_list = []
+    phone_index_name_map = {}
     for apk_index in range(args.number_of_devices):
         avd_serial = connect_ssl(start_avd_serial + apk_index)
         connect_adb(avd_serial)
         # avd_serial = 'emulator-' + str(start_avd_serial + apk_index * 2)
         avd_serial_list.append(avd_serial)
+        phone_index_name_map[avd_serial] = huawei_util.get_phone_name(start_avd_serial + apk_index)
+        print(phone_index_name_map[avd_serial])
         print('allocate emulators: %s' % avd_serial)
 
     if args.no_headless:
@@ -243,6 +248,16 @@ def main(args: Namespace):
             print("Now allocate the apk: %s on %s" % (current_apk, avd_serial))
             login_script = all_apks_login_scripts[apk_index]
             print("its login script: %s" % login_script)
+
+            # 重置云手机
+            phone_id = huawei_util.get_phones()[phone_index_name_map[avd_serial]]
+            print("reset phone " + phone_id)
+            huawei_util.reset_phone(phone_id)
+            # 请求发送后， 设备状态不会马上改变， 需要等一会
+            time.sleep(10)
+            while not huawei_util.phone_reset_finish(phone_id):
+                print("wait phone reset finish")
+                time.sleep(5)
 
             if args.monkey:
                 p.apply_async(run_monkey, args=(current_apk, avd_serial, args.avd_name,
