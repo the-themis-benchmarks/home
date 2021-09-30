@@ -29,32 +29,7 @@ function wait_for_device(){
       OUT=`adb -s $avd_serial shell getprop init.svc.bootanim`
     done
 }
-#RETRY_TIMES=5
-#for i in $(seq 1 $RETRY_TIMES);
-#do
-#    echo "try to start the emulator (${AVD_SERIAL})..."
-#    sleep 5
-#    # start the emulator
-#    avd_port=${AVD_SERIAL:9:13}
-#    emulator -port $avd_port -avd $AVD_NAME -read-only $HEADLESS &
-#    sleep 5
-#    # wait for the emulator
-#    wait_for_device $AVD_SERIAL
-#    # check whether the emualtor is online
-#    OUT=`adb -s $avd_serial shell getprop init.svc.bootanim`
-#    if [[ ${OUT:0:7}  != 'stopped' ]]
-#    then
-#        adb -s $avd_serial emu kill
-#        echo "try to restart the emulator (${AVD_SERIAL})..."
-#        if [[ $i == RETRY_TIMES ]]
-#        then
-#            echo "we give up the emulator (${AVD_SERIAL})..."
-#            exit
-#        fi
-#    else
-#        break
-#    fi
-#done
+
 
 echo "  emulator (${AVD_SERIAL}) is booted!"
 adb -s ${AVD_SERIAL} root
@@ -119,9 +94,7 @@ echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E *:F *:S > $result_dir/logcat.log &
-# start coverage dumping   !! i think it is useless, and should be deleted
-echo "** START COVERAGE (${AVD_SERIAL}) "
-bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
+
 
 # run NewMonkey
 echo "** RUN NewMonkey (${AVD_SERIAL})"
@@ -156,10 +129,6 @@ sleep $TEST_TIME
 adb -s $AVD_SERIAL shell am broadcast --ez stopMonkey true com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
 
-
-# stop coverage dumping
-echo "** STOP COVERAGE (${AVD_SERIAL})"
-kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"
 kill `ps aux | grep "${AVD_SERIAL} logcat" | grep -v grep | awk '{print $2}'`

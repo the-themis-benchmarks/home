@@ -368,10 +368,10 @@ if __name__ == '__main__':
 
     args = ap.parse_args()
 
-    if args.number_of_devices + args.offset > 16:
+    if args.number_of_devices + args.offset > 30:
         if not args.timemachine:
             # TimeMachine is allowed to run more than 16 instances due to it runs in the docker containers.
-            ap.error('n + offset should not be ge 16')
+            ap.error('n + offset should not be ge 30')
 
     if args.apk is None and args.apk_list is None:
         ap.error('please specify an apk or an apk list')
