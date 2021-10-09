@@ -1,0 +1,36 @@
+{
+    "app_name": "Commons",
+    "bug_id": "#1391",
+    "events": {
+        "1": {
+            "info": "Clicked \"Nearby\" in the drawer.",
+            "reason": "Can't open the drawer.",
+            "dependency": null
+        },
+        "2": {
+            "info": "Selected a place on the map and showed the bottom sheet.",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Clicked \"Setting\" in the drawer.",
+            "reason": "Can't open the drawer.",
+            "dependency": null
+        },
+        "4": {
+            "info": "Enabled the \"Night mode\" in the setting.",
+            "reason": null,
+            "dependency": "3"
+        },
+        "5": {
+            "info": "Back to \"Nearby\" again.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+        "2": "Cancelled a place on the map and hid the bottom sheet.",
+        "4": "Disabled the \"Night mode\" in the setting."
+    },
+    "all_events_happened": "Should keep the state of Event 2 and enable the \"Night mode\" when enter \"Nearby\" again."
+}

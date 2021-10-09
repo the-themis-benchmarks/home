@@ -1,0 +1,31 @@
+{
+    "app_name": "Commons",
+    "bug_id": "#1581",
+    "events": {
+        "1": {
+            "info": "Clicked \"Nearby\" in the drawer.",
+            "reason": "Can't open the drawer.",
+            "dependency": null
+        },
+        "2": {
+            "info": "Checked that GPS (location permission) is disabled.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Selected \"ENABLE GPS\" in the GPS requirement dialog.\nThis happens when the GPS is disabled.",
+            "reason": null,
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Selected \"OK\" in the another GPS requirement dialog.\nThis happens when the GPS is enabled but this app isn't granted with GPS permission.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+        "3": "Selected \"CANCEL\" in the GPS requirement dialog.\nThis happens when the GPS is disabled.",
+        "4": "Selected \"CANCEL\" in the another GPS requirement dialog.\nThis happens when the GPS is enabled but this app isn't granted with GPS permission."
+    },
+    "all_events_happened": "This crash requires that it's the first time to get permission from OS."
+}

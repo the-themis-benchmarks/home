@@ -1,0 +1,55 @@
+{
+    "app_name": "AndBible",
+    "bug_id": "#480",
+    "events": {
+        "1": {
+            "info": "Clicked \"OK\" in the \"Download a Bible from the internet\" dialog at StartupActivity.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Downloaded a book.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Clicked \"OK\" in \"Download Documents\"",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Opened the left drawer.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Clicked \"Manage Bookmark Labels\" in the drawer.",
+            "reason": null,
+            "dependency": null
+        },
+        "6": {
+            "info": "Clicked \"NEW LABEL\" in \"Manage Bookmark Labels\".",
+            "reason": null,
+            "dependency": null
+        },
+        "7": {
+            "info": "Created or edited a label.",
+            "reason": null,
+            "dependency": null
+        },
+        "8": {
+            "info": "Deleted a label.",
+            "reason": null,
+            "dependency": null
+        },
+        "9": {
+            "info": "Edited a empty label.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity."
+    },
+    "all_events_happened": null
+}

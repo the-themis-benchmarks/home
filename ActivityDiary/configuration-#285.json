@@ -1,0 +1,30 @@
+{
+    "app_name": "ActivityDairy",
+    "bug_id": "#285",
+    "events": {
+        "1": {
+            "info": "Opened the drawer.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked \"Setting\" in the drawer.",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Changed \"Location Service\" to Network or GPS in \"Setting\".",
+            "reason": null,
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Changed \"Update period\" to a unique character in \"Setting\".",
+            "reason": "Can't input unique characters like \"$\".",
+            "dependency": "2"
+        }
+    },
+    "warnings": {
+        
+    },
+    "all_events_happened": null
+}

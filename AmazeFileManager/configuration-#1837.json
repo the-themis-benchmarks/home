@@ -1,0 +1,20 @@
+{
+    "app_name": "AmazeFileManager",
+    "bug_id": "#1837",
+    "events": {
+        "1": {
+            "info": "Clicked \"Search\" button on the tool bar.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Search a string.",
+            "reason": null,
+            "dependency": "1"
+        }
+    },
+    "warnings" : {
+        
+    },
+    "all_events_happened": "No multiple files are searched."
+}

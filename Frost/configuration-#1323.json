@@ -1,0 +1,15 @@
+{
+    "app_name": "FrostForFacebook",
+    "bug_id": "#1323",
+    "events": {
+        "1": {
+            "info": "Reopened the app.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": "Should change device to \"Airplan mode\" and reopen the app."
+}

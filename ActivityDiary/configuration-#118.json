@@ -1,0 +1,45 @@
+{
+    "app_name": "ActivityDairy",
+    "bug_id": "#118",
+    "events": {
+        "1": {
+            "info": "Clicked an item in MainActivity.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked the fabAttachPicture.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Get a picture.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Open the drawer.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Clicked the \"Dairy\" in the drawer.",
+            "reason": null,
+            "dependency": "4"
+        },
+        "6": {
+            "info": "Long clicked an image in an activity entry.",
+            "reason": null,
+            "dependency": "5"
+        },
+        "7": {
+            "info": "Deleted an image in an activity entry.",
+            "reason": null,
+            "dependency": "6"
+        }
+    },
+    "warnings": {
+        "7": "Canceled to delete the image in an activity entry."
+    },
+    "all_events_happened": null
+}

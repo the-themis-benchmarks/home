@@ -1,0 +1,35 @@
+{
+    "app_name": "WordPress",
+    "bug_id": "#10547",
+    "events": {
+        "1": {
+            "info": "Selected the \"Blog Posts\".",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Selected page \"Drafts\" in post list.",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Clicked \"Edit\" in the post list.",
+            "reason": null,
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Selected \"Preview\" in options menu.",
+            "reason": null,
+            "dependency": "3"
+        },
+        "5": {
+            "info": "Pressed back.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": "Should enable \"Don't keep activities\"."
+}

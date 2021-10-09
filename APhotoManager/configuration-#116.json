@@ -1,0 +1,15 @@
+{
+    "app_name": "APhotoManager",
+    "bug_id": "#116",
+    "events": {
+        "1": {
+            "info": "Clicked the \"Setting\" in the options.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": null
+}

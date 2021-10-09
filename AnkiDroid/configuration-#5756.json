@@ -1,0 +1,50 @@
+{
+    "app_name": "AnkiDroid",
+    "bug_id": "#5756",
+    "events": {
+        "1": {
+            "info": "Clicked \"Add\" button in the fab.",
+            "reason": "Can't open the fab.",
+            "dependency": null
+        },
+        "2": {
+            "info": "Save or add a note",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Selected \"Create filtered deck\" in the menu.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Created a new filtered deck.",
+            "reason": null,
+            "dependency": "3"
+        },
+        "5": {
+            "info": "Switch order to \"Random\".",
+            "reason": null,
+            "dependency": "4"
+        },
+        "6": {
+            "info": "Switch order back to \"Oldest seen first\".",
+            "reason": null,
+            "dependency": "4"
+        },
+        "7": {
+            "info": "Go back from Options.",
+            "reason": null,
+            "dependency": "4"
+        },
+        "8": {
+            "info": "Selected a deck.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+        "4": "Canceled creating a new filtered deck."
+    },
+    "all_events_happened": "The Decker may be empty or the corresponding deck doesn't been selected."
+}

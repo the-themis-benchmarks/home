@@ -1,0 +1,45 @@
+{
+    "app_name": "WordPress",
+    "bug_id": "#6530",
+    "events": {
+        "1": {
+            "info": "Chose \"Try it\" to enable new editor.",
+            "reason": "Chose \"Not now\" instead.",
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked the \"Blog posts\" at the main.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Clicked the floating act button to create a new post.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Clicked the \"+\" to open media window.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Added media files to post.",
+            "reason": "Can't read media files.",
+            "dependency": "4"
+        },
+        "6": {
+            "info": "Pressed the Back button.",
+            "reason": null,
+            "dependency": null
+        },
+        "7": {
+            "info": "Pressed the \"Delete\" button in the post list card view.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+        "1": "Chose \"Not now\" to close the dialog. The crash wouldn't occur."
+    },
+    "all_events_happended": "Should delete the post when uploading."
+}

@@ -1,0 +1,51 @@
+{
+    "app_name": "AndBible",
+    "bug_id": "#703",
+    "events": {
+        "1": {
+            "info": "Clicked \"OK\" in the \"Download a Bible from the internet\" dialog at StartupActivity.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked \"Yes\" in \"Do you want to proceed to download documents?\" dialog \nor clicked \"download_do_not_ask\" in \"Do you want to proceed to download documents?\" dialog.",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Downloaded a book.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Click \"OK\" in \"Download Documents\".",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Long pressed chapterVerse.",
+            "reason": null,
+            "dependency": null
+        },
+        "6": {
+            "info": "Clicked myNoteAddEdit after longPress chapterVerse.",
+            "reason": null,
+            "dependency": "5"
+        },
+        "7": {
+            "info": "Clicked searchButton.",
+            "reason": null,
+            "dependency": null
+        },
+        "8": {
+            "info": "Clicked CREATE after click searchButton.",
+            "reason": null,
+            "dependency": "7"
+        }
+    },
+    "warnings": {
+        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
+        "2": "Clicked \"Cancel\" in \"Do you want to proceed to download documents?\" dialog."
+    },
+    "all_events_happened": null
+}

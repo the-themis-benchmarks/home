@@ -1,0 +1,50 @@
+{
+    "app_name": "ScarletNote",
+    "bug_id": "#114",
+    "steps": {
+        "1": {
+            "info": "Clicked \"Create New NoteBook\" on the right bottom.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Entered a notebook.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Clicked \"New note\" button on the right bottom.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Long clicked a note.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Clicked \"Locked Note\" in the note menu.",
+            "reason": null,
+            "dependency": "4"
+        },
+        "6": {
+            "info": "Clicked the menu on the left bottom.",
+            "reason": null,
+            "dependency": null
+        },
+        "7": {
+            "info": "Clicked \"Locked\" in the notebook menu.",
+            "reason": null,
+            "dependency": "6"
+        },
+        "8": {
+            "info": "Clicked the \"X\" on the left bottom to close the notebook.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+    
+    },
+    "all_steps_reached": null
+}

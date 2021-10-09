@@ -1,0 +1,11 @@
+{
+    "app_name": "MaterialFBook",
+    "bug_id": "#224",
+    "events": {
+
+    },
+    "warnings": {
+
+    },
+    "all_events_happended": "Should perform any long click."
+}

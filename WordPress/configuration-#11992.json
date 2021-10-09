@@ -1,0 +1,35 @@
+{
+    "app_name": "WordPress",
+    "bug_id": "#11992",
+    "events": {
+        "1": {
+            "info": "Selected the \"Reader\" page.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Selected back to the \"My site\" page",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Selected the \"Blog Posts\".",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Exited the \"Blog Posts\".",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Selected the \"Site Pages\".",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": "Should select the \"Reader\" page and enter \"Blog post\" or \"Site pages\" twice or once respectively. "
+}

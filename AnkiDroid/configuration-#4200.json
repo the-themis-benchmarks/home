@@ -1,0 +1,30 @@
+{
+    "app_name": "AnkiDroid",
+    "bug_id": "#4200",
+    "events": {
+        "1": {
+            "info": "Selected a decker.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Pressed \"Edit note\" button.",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Make any change in text editor.",
+            "reason": null,
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Pressed \"Save note\" button in NoteEditor.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+
+    },
+    "all_events_happened": "\"Don't keep activities\" options in developer mode haven't been enabled or text keep the same after change."
+}

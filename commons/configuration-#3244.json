@@ -1,0 +1,30 @@
+{
+    "app_name": "Commons",
+    "bug_id": "#3244",
+    "events": {
+        "1": {
+            "info": "Clicked \"Nearby\".",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked the \"Detail list\" in \"Nearby\".",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Selected a place in the nearby list.",
+            "reason": null,
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Clicked the \"Camera\" in nearby list item menu.",
+            "reason": null,
+            "dependency": "3"
+        }
+    },
+    "warnings" : {
+
+    },
+    "all_events_happened": "Should finish taking a photo."
+}

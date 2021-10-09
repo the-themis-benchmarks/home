@@ -1,0 +1,35 @@
+{
+    "app_name": "WordPress",
+    "bug_id": "#7182",
+    "events": {
+        "1": {
+            "info": "Pressed \"LOG IN\" in the welcome page.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked \"Log in to your site by entering your site address instead.\" in the email login page.",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Clicked \"NEXT\" in site address login.",
+            "reason": null,
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Changed screen to landscape.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Clicked \"NEXT\" in username and password login with landscape mode.",
+            "reason": null,
+            "dependency": "3"
+        }
+    },
+    "warnings" : {
+
+    },
+    "all_events_happened": "Should keep landscape mode when logining."
+}

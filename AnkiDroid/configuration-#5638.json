@@ -1,0 +1,20 @@
+{
+    "app_name": "AnkiDroid",
+    "bug_id": "#5638",
+    "events": {
+        "1": {
+            "info": "Clicked \"Add\" button in the fab.",
+            "reason": "Can't open fab.",
+            "dependency": null
+        },
+        "2": {
+            "info": "Input a string in the \"Front template\" TextEditor",
+            "reason": null,
+            "dependency": "1"
+        }
+    },
+    "warnings" : {
+
+    },
+    "all_events_happened": null
+}

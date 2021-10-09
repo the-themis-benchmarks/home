@@ -1,0 +1,30 @@
+{
+    "app_name": "FireFoxLite",
+    "bug_id": "#4942",
+    "events": {
+        "1": {
+            "info": "Clicked any site button.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Exited FireFoxLite.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Back to FireFoxLite.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Clicked [Tab tray].",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": "Should enable \"Don't keep activity\"."
+}

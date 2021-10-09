@@ -1,0 +1,25 @@
+{
+    "app_name": "Sunflower",
+    "bug_id": "#239",
+    "events": {
+        "1": {
+            "info": "Clicked the drawer on the left.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Selected \"Plant list\".",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Clicked two items at the same time.",
+            "reason": null,
+            "dependency": "2"
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": null
+}

@@ -1,0 +1,57 @@
+{
+    "app_name": "OsmEditer4Android",
+    "bug_id": "#637",
+    "events": {
+        "1": {
+            "info": "Clicked \"LOAD\" in \"Download at other location\".",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked the \"Gear\" to enter \"Preferences\".",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Clicked \"Validator preference\" in \"Preferences\".",
+            "reason": null,
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Clicked a \"Re-survey entry\".",
+            "reason": null,
+            "dependency": "3"
+        },
+        "5": {
+            "info": "Clicked \"DELETE\" in \"Edit re-survey entry\".",
+            "reason": null,
+            "dependency": "4"
+        },
+        "6": {
+            "info": "Clicked a \"Check entry\".",
+            "reason": null,
+            "dependency": null
+        },
+        "7": {
+            "info": "Clicked \"DELETE\" in \"Edit check entry\".",
+            "reason": null,
+            "dependency": "6"
+        },
+        "8": {
+            "info": "Set key, value and max age respectively.",
+            "reason": null,
+            "dependency": null
+        },
+        "9": {
+            "info": "Clicked \"Done\" in \"Validator ruleset Default\".",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+        "1": "Clicked \"GO TO MAP\" in \"Download at other location\"",
+        "5": "Clicked \"CANCEL\" or \"SAVE\" in \"Edit re-survey entry\".",
+        "7": "Clicked \"CANCEL\" or \"SAVE\" in \"Edit check entry\"."
+    },
+    "all_events_happened": null
+}

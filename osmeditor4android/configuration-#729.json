@@ -1,0 +1,40 @@
+{
+    "app_name": "OsmEditor4Android",
+    "bug_id": "#729",
+    "events": {
+        "1": {
+            "info": "Clicked the \"unlock\" floating button to unlock the map.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked a position on the map.",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Selected a item in the popup list.",
+            "reason": null,
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Turned to property editor.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Turned to \"Presets\" page in property editor.",
+            "reason": null,
+            "dependency": "4"
+        },
+        "6": {
+            "info": "Searched in preset fragment with any string.",
+            "reason": null,
+            "dependency": "5"
+        }
+    },
+    "warnings": {
+        "1": "Clicked the \"unlock\" floating button twice to lock the map."
+    },
+    "all_events_happened": null
+}

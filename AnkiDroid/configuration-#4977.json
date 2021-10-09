@@ -1,0 +1,20 @@
+{
+    "app_name": "AnkiDroid",
+    "bug_id": "#4977",
+    "events": {
+        "1": {
+            "info": "Clicked \"Get shared decks\" button in fab.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked \"Card browser\" in the drawer.",
+            "reason": "Can't open drawer.",
+            "dependency": null
+        }
+    },
+    "warnings" : {
+
+    },
+    "all_events_happened": null
+}

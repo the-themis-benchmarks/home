@@ -1,0 +1,36 @@
+{
+    "app_name": "AnkiDroid",
+    "bug_id": "#4451",
+    "events": {
+        "1": {
+            "info": "Clicked \"Gestures\" item in Preferences.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Enabled gestures.",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Clicked \"Reviewing\" item in Preferences.",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Set \"Fullscreen mode\" mode in Fullscreen Mode.",
+            "reason": null,
+            "dependency": "3"
+        },
+        "5": {
+            "info": "Select any Decker.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+        "2": "Disable gestures.",
+        "4": "Canceled \"Fullscreen mode\" mode in Fullscreen Mode."
+    },
+    "all_events_happened": null
+}

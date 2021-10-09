@@ -1,0 +1,30 @@
+{
+    "app_name": "Commons",
+    "bug_id": "#1385",
+    "events": {
+        "1": {
+            "info": "Clicked \"Nearby\" in the drawer.",
+            "reason": "Can't open the drawer.",
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked the \"Detail list\" in \"Nearby\".",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Changed the Nearby layout to landscape.",
+            "reason": "Can't rotate the screen.",
+            "dependency": null
+        },
+        "4": {
+            "info": "Changed the Nearby layout back to portrait as soon as possible.",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+
+    },
+    "all_events_happened": "Didn't rotate back the screen from landscape to portrait in time."
+}

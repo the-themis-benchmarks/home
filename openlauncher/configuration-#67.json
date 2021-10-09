@@ -1,0 +1,15 @@
+{
+    "app_name": "OpenLauncher",
+    "bug_id": "#67",
+    "events": {
+        "1": {
+            "info": "Clicked the \"Volume\" icon in the drawer",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": "Should open the \"Do not disturb\" pref in settings."
+}

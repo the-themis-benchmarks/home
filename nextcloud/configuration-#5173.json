@@ -1,0 +1,30 @@
+{
+    "app_name": "NextCloud",
+    "bug_id": "#5173",
+    "events": {
+        "1": {
+            "info": "Opened the drawer on the left.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Selected the \"Auto upload\" in drawer",
+            "reason": null,
+            "dependency": "1"
+        },
+        "3": {
+            "info": "Selected \"Set up a custom folder\" in menu",
+            "reason": "Can't open the menu on the right top.",
+            "dependency": "2"
+        },
+        "4": {
+            "info": "Selected \"Remote folder\" in \"Create new custom folder setup\".",
+            "reason": null,
+            "dependency": "3"
+        }
+    },
+    "warnings": {
+        "3": "Canceled the setup."
+    },
+    "all_events_happened": null
+}

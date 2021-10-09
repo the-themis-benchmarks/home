@@ -1,0 +1,20 @@
+{
+    "app_name": "NextCloud",
+    "bug_id": "#1918",
+    "events": {
+        "1": {
+            "info": " Clicked a photo in the list.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked the \"Send/Share\" button in menu of Previewimage.",
+            "reason": "Can't open the menu",
+            "dependency": "1"
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": null
+}

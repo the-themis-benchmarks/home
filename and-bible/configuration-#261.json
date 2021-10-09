@@ -1,0 +1,61 @@
+{
+    "app_name": "AndBible",
+    "bug_id": "#216",
+    "steps": {
+        "1": {
+            "info": "Clicked \"OK\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked \"OK\" to download a document (bible or book).",
+            "reason": null,
+            "dependency": null
+        },
+        "3": {
+            "info": "Select the document type to \"Book\" in \"Download Documents\".",
+            "reason": null,
+            "dependency": null
+        },
+        "4": {
+            "info": "Clicked \"OK\" in \"Download Documents\"after downloading documents.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Opened the left drawer.",
+            "reason": null,
+            "dependency": null
+        },
+        "6": {
+            "info": " Clicked \"Choose Document\" Button in the drawer.",
+            "reason": null,
+            "dependency": null
+        },
+        "7": {
+            "info": "Selected a document.",
+            "reason": null,
+            "dependency": "6"
+        },
+        "8": {
+            "info": "Selected a general book key.",
+            "reason": null,
+            "dependency": null
+        },
+        "9": {
+            "info": "Clicked the \"Find\" Button in the drawer.",
+            "reason": null,
+            "dependency": null
+        },
+        "10": {
+            "info": "Clicked \"CREATE\" in \"Search Index\".",
+            "reason": null,
+            "dependency": null
+        }
+    },
+    "warnings" : {
+        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
+        "2": "Clicked \"CANCEL\" to give up downloading a document (bible or book)."
+    },
+    "all_steps_reached": null
+}

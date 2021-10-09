@@ -1,0 +1,20 @@
+{
+    "app_name": "WordPress",
+    "bug_id": "#10302",
+    "events": {
+        "1": {
+            "info": "Pressed \"Log in or sign up with WordPress.com\" or \"Enter your existing site address\" in the welcome page.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked the \"Help\" button.",
+            "reason": null,
+            "dependency": "1"
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": null
+}
