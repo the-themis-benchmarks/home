@@ -69,8 +69,8 @@ class Analyzer:
 
                     if re.search("Event ", line, re.I):          # 匹配“event”字段
                         event_id = line[re.search("event ", line, re.I).span()[1]]    # Get event id
-                        self.event_counts[str(event_id)] += 1                         # The corresponding event count add 1
-                        self.last_event = event_id                                # Record the last event reached scanned
+                        self.event_counts[str(event_id)] += 1                   # The corresponding event count add 1
+                        self.last_event = event_id                              # Record the last event reached scanned
                         if event_id not in self.first_time:
                             self.first_time[event_id] = event_time - start_time   # Record the relative time
 

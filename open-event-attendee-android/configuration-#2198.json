@@ -1,0 +1,20 @@
+{
+    "app_name": "OpenEventAttendeeAndroid",
+    "bug_id": "#2198-medium",
+    "events": {
+        "1": {
+            "info": "Selected the \"Search\" in the bottom NavBar.",
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Clicked the \"And I'm up for\" text view. The crash will occur.",
+            "reason": null,
+            "dependency": "1"
+        }
+    },
+    "warnings": {
+
+    },
+    "all_events_happened": null
+}
