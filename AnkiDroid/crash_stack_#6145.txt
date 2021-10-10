@@ -1,0 +1,48 @@
+E AndroidRuntime: FATAL EXCEPTION: AsyncTask #3
+E AndroidRuntime: Process: com.ichi2.anki, PID: 6339
+E AndroidRuntime: java.lang.RuntimeException: An error occurred while executing doInBackground()
+E AndroidRuntime: 	at android.os.AsyncTask$3.done(AsyncTask.java:309)
+E AndroidRuntime: 	at java.util.concurrent.FutureTask.finishCompletion(FutureTask.java:354)
+E AndroidRuntime: 	at java.util.concurrent.FutureTask.setException(FutureTask.java:223)
+E AndroidRuntime: 	at java.util.concurrent.FutureTask.run(FutureTask.java:242)
+E AndroidRuntime: 	at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:234)
+E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1113)
+E AndroidRuntime: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:588)
+E AndroidRuntime: 	at java.lang.Thread.run(Thread.java:818)
+E AndroidRuntime: Caused by: java.lang.NullPointerException: Attempt to read from field 'java.lang.Object android.util.Pair.first' on a null object reference
+E AndroidRuntime: 	at com.ichi2.libanki.Note._fieldOrd(Note.java:200)
+E AndroidRuntime: 	at com.ichi2.libanki.Note.setItem(Note.java:210)
+E AndroidRuntime: 	at com.ichi2.libanki.AnkiPackageExporter._addDummyCollection(AnkiPackageExporter.java:446)
+E AndroidRuntime: 	at com.ichi2.libanki.AnkiPackageExporter.exportVerbatim(AnkiPackageExporter.java:358)
+E AndroidRuntime: 	at com.ichi2.libanki.AnkiPackageExporter.exportInto(AnkiPackageExporter.java:340)
+E AndroidRuntime: 	at com.ichi2.async.CollectionTask.doInBackgroundExportApkg(CollectionTask.java:1222)
+E AndroidRuntime: 	at com.ichi2.async.CollectionTask.doInBackground(CollectionTask.java:301)
+E AndroidRuntime: 	at com.ichi2.async.CollectionTask.doInBackground(CollectionTask.java:73)
+E AndroidRuntime: 	at android.os.AsyncTask$2.call(AsyncTask.java:295)
+E AndroidRuntime: 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+
+--- 4.4 ---
+
+E/AndroidRuntime(11202): FATAL EXCEPTION: AsyncTask #1
+E/AndroidRuntime(11202): Process: com.ichi2.anki, PID: 11202
+E/AndroidRuntime(11202): java.lang.RuntimeException: An error occured while executing doInBackground()
+E/AndroidRuntime(11202): 	at android.os.AsyncTask$3.done(AsyncTask.java:300)
+E/AndroidRuntime(11202): 	at java.util.concurrent.FutureTask.finishCompletion(FutureTask.java:355)
+E/AndroidRuntime(11202): 	at java.util.concurrent.FutureTask.setException(FutureTask.java:222)
+E/AndroidRuntime(11202): 	at java.util.concurrent.FutureTask.run(FutureTask.java:242)
+E/AndroidRuntime(11202): 	at android.os.AsyncTask$SerialExecutor$1.run(AsyncTask.java:231)
+E/AndroidRuntime(11202): 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1112)
+E/AndroidRuntime(11202): 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:587)
+E/AndroidRuntime(11202): 	at java.lang.Thread.run(Thread.java:841)
+E/AndroidRuntime(11202): Caused by: java.lang.NullPointerException
+E/AndroidRuntime(11202): 	at com.ichi2.libanki.Note._fieldOrd(Note.java:200)
+E/AndroidRuntime(11202): 	at com.ichi2.libanki.Note.setItem(Note.java:210)
+E/AndroidRuntime(11202): 	at com.ichi2.libanki.AnkiPackageExporter._addDummyCollection(AnkiPackageExporter.java:446)
+E/AndroidRuntime(11202): 	at com.ichi2.libanki.AnkiPackageExporter.exportVerbatim(AnkiPackageExporter.java:358)
+E/AndroidRuntime(11202): 	at com.ichi2.libanki.AnkiPackageExporter.exportInto(AnkiPackageExporter.java:340)
+E/AndroidRuntime(11202): 	at com.ichi2.async.CollectionTask.doInBackgroundExportApkg(CollectionTask.java:1222)
+E/AndroidRuntime(11202): 	at com.ichi2.async.CollectionTask.doInBackground(CollectionTask.java:301)
+E/AndroidRuntime(11202): 	at com.ichi2.async.CollectionTask.doInBackground(CollectionTask.java:73)
+E/AndroidRuntime(11202): 	at android.os.AsyncTask$2.call(AsyncTask.java:288)
+E/AndroidRuntime(11202): 	at java.util.concurrent.FutureTask.run(FutureTask.java:237)
+E/AndroidRuntime(11202): 	... 4 more
