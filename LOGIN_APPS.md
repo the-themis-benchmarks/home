@@ -1,6 +1,51 @@
 This file describes how to test the apps that required login by using the snapshot feature of Android emulator.
 Please create a fresh emulator with 'Nexus 7' for each crash bug before do the following instructions.
 
+Standard Test Procedure：
+```
+cd scripts/
+avdmanager create avd --force --name test1 --package 'system-images;android-25;google_apis;x86' --abi google_apis/x86 --sdcard 1024M --device "Nexus 7"
+```
+The name of avd can be self-defined.
+Remember to go to the folder of the created avd and find config.ini
+```
+vi config.ini
+```
+And add these lines.
+```
+disk.dataPartition.size=1024M
+vm.heapSize=256
+hw.ramSize=2048
+```
+Then start the emulator:
+```
+emulator -port 5554 -avd test1 -no-window &
+cd scripts/
+bash -x copy_dummy_documents.sh emulator-5554
+```
+Use adb deivces to check whther the emulator is online
+```
+cd test_apk_folder/
+adb -s emulator-5554 install -g apk_name
+python3 login_script.py emulator-5554 “Nexus 7”
+```
+This act will start the uiautomator2 for the login process ,make sure to check the results:LOGIN SUCCESS or LOGIN FAILED 
+When the login is successful, stop the emulator to save state.
+```
+adb -s emulator-5554 emu kill
+```
+The testing logic of loginned app is to use the feature of the read-only option of the emulators, and the --snapshot function ensures the test start with the loginned state
+The testing start with such paradigm:
+```
+python3 themis.py --avd test1 --apk ../apk_location/apk_name -o ../test
+_results_location/ --time 6h --repeat 5 --wait 1 --tool_name --snapshot --offset n
+```
+
+
+
+
+
+To instantiate the process:
 ```
 $ cd scripts/
 $ emulator -avd Android7.1 -no-window &
