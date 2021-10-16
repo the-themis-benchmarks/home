@@ -15,14 +15,14 @@ def print_title(title: str):
     print("*" * com_len + title + "*" * com_len)
 
 
-def init_counts(events):
+def init_counts(events: dict):
     res = dict()
     for event in events:
         res[event] = 0
     return res
 
 
-def file_exists(file_path):
+def file_exists(file_path: str):
     if not os.path.exists(file_path):
         print("file \'%s\' doesn't exists. Analysis terminated." % file_path)
         return False
@@ -31,7 +31,7 @@ def file_exists(file_path):
 
 class Analyzer:
 
-    def __init__(self, json_path):
+    def __init__(self, json_path: str):
         with open(json_path, "r", encoding="utf-8") as f:
             info = json.load(f)
             self.app_name = info["app_name"]     # Get the name of the app
@@ -43,12 +43,11 @@ class Analyzer:
             self.warnings = info["warnings"]    # Get all Warnings
             self.procedure = []                 # Maintain a list collecting the events analyzed
             self.last_event = None               # Record the last event analyzer has gone through
-            self.all_events_reached = info["all_events_reached"]
+            self.all_events_happened = info["all_events_happened"]
             self.first_time = dict()            # Record the time of first reaching event n
             self.delta = None
 
-    def analyze(self, log_path, time_path):
-
+    def analyze(self, log_path: str, time_path: str):
         # Process the time file
         if not file_exists(time_path):
             return False
@@ -80,10 +79,8 @@ class Analyzer:
 
         return True
 
-    def show_result(self, tool_name):
-
+    def show_result(self, tool_name: str):
         print_title("[ %s-%s (%s) ]" % (self.app_name, self.bug_id, tool_name))
-
         print_header("[ The statistics of each event ]")
         zero_count = 0      # Count up the events which are never reached
         for event in self.event_counts:
@@ -98,19 +95,19 @@ class Analyzer:
                    self.first_time[event], self.delta) +
                   " "*14 + "> event info: %s" % self.events[event]["info"])
             if self.warning_counts[event] > 0:
-                print(" "*14 + "> Warning info: %s" % self.warnings[event]["info"])
+                print(" "*14 + "> Warning info: %s" % self.warnings[event])
 
         if zero_count != 0:     # If there is any event that its `count` > 0
             print_header("[ Analysis of the missing events ]")
             for event in self.event_counts:
                 if self.event_counts[event] == 0:
-                    print(" "*10 + "[ %s ] event %s\n" % (self.bug_id, event) +
+                    print(" "*10 + "[ %s ] Event %s\n" % (self.bug_id, event) +
                           " "*14 + "> The possible reason: %s\n" % self.events[event]["reason"] +
                           " "*14 + "> The previous related events: %s" % self.events[event]["dependency"])
 
         if zero_count == 0:     # If there is not any event that its `count` > 0
             print_header("[ All events reached but crash doesn't occur ]")
-            print(" "*10 + "[ %s ] The possible reason for this: %s" % (self.bug_id, self.all_events_reached))
+            print(" "*10 + "[ %s ] The possible reason for this: %s" % (self.bug_id, self.all_events_happened))
 
         print_title("[ Analysis finished ]")
 
@@ -125,7 +122,7 @@ def main(log_dir: str):
         re.search(".result", base_dir).span()
 
     app_name, bug_id, tool_name = \
-        base_dir[first_pos[1]: second_pos[0]].split("-")[0],\
+        base_dir[first_pos[1]: second_pos[0]],\
         base_dir[second_pos[0]+1: third_pos[0]],\
         base_dir[third_pos[1]: forth_pos[0]]
 
@@ -152,4 +149,3 @@ if __name__ == "__main__":
     else:
         for i in range(1, len(sys.argv)):
             main(sys.argv[i])
-
