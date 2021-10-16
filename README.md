@@ -258,6 +258,9 @@ Here,
 * `--time 10m` allocates 10 minutes for the testing tool to find the bug 
 * `-o ../monkey-results/` specifies the output directory of testing results
 * `--monkey` specifies the testing tool
+* `--snapshot` use this option if the target app is already installed in the emulator and logged in
+
+**Notes: for apps that require login, please make reference to [LOGIN_APPS.md](https://github.com/the-themis-benchmarks/home/blob/industrial_tools_evaluation/LOGIN_APPS.md) 
 
 **Expected results:** you should see (1) an Android emulator is started, (2) the app `ActivityDiary` is installed and started, (3) Monkey is started to test the app, (4) the following sample texts are outputted on the terminal during testing, and (5) the emulator is automatically closed at the end.
 
