@@ -1,7 +1,7 @@
 {
     "app_name": "AmazeFileManager",
     "bug_id": "#1232",
-    "steps": {
+    "events": {
         "1": {
             "info": "Copied a internal file / files.",
             "reason": null,
