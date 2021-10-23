@@ -26,5 +26,5 @@
     "warnings" : {
 
     },
-    "all_steps_reached": "Should copy internal files to external storage."
+    "all_events_happened": "Should copy internal files to external storage."
 }

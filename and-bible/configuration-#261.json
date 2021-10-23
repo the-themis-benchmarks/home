@@ -57,5 +57,5 @@
         "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
         "2": "Clicked \"CANCEL\" to give up downloading a document (bible or book)."
     },
-    "all_steps_reached": null
+    "all_events_happened": null
 }
