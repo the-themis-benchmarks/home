@@ -101,9 +101,9 @@ echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E *:F *:S > $result_dir/logcat.log &
-# start coverage dumping   !! i think it is useless, and should be deleted
-echo "** START COVERAGE (${AVD_SERIAL}) "
-bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
+
+# copy dummy documents
+bash -x copy_dummy_documents.sh $avd_serial
 
 # run NewMonkey
 echo "** RUN NewMonkey (${AVD_SERIAL})"
@@ -138,13 +138,10 @@ sleep $TEST_TIME
 adb -s $AVD_SERIAL shell am broadcast --ez stopMonkey true com.tencent.newmonkey.newmonkeymobilewithnoroot/com.tencent.newmonkey.app.broadcast.AutoMonkeyReceiver
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/newmonkey_testing_time_on_emulator.txt
 
-
-# stop coverage dumping
-echo "** STOP COVERAGE (${AVD_SERIAL})"
-kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"
 kill `ps aux | grep "${AVD_SERIAL} logcat" | grep -v grep | awk '{print $2}'`
+
 # stop and kill the emulator
 sleep 5
 adb -s $AVD_SERIAL emu kill
