@@ -463,6 +463,22 @@ def main(args: Namespace):
                                                           "wetest_testing_time_on_emulator.txt")
                     testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
                 
+                if args.fastbot_new:
+                    # Fastbot
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "fastbot_new_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+                    
+                if args.wetest_new:
+                    # WeTest
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "wetest_new_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+                
                 if args.newmonkey:
                     # Newmonkey
                     logcat_file_path = os.path.join(result_dir, "logcat.log")
@@ -823,17 +839,19 @@ if __name__ == '__main__':
     ap.add_argument('--weighted', default=False, action='store_true')
     ap.add_argument('--fastbot', default=False, action='store_true')
     ap.add_argument('--wetest', default=False, action='store_true')
+    ap.add_argument('--fastbot_new', default=False, action='store_true')
+    ap.add_argument('--wetest_new', default=False, action='store_true')
     ap.add_argument('--newmonkey', default=False, action='store_true')
-
+                                                                                                           
     ap.add_argument('--app', type=str, dest='app_name')
     ap.add_argument('--id', type=str, dest='issue_id')
     ap.add_argument('--csv', type=str, dest='final_result_csv_file_path')
     ap.add_argument('--simple', default=False, action='store_true', dest='simple_format',
                     help="standard output in a simple format")
     ap.add_argument('--other_crashes', default=False, action='store_true', dest='other_crashes')
-
+                             
     args = ap.parse_args()
-
+                  
     if not os.path.exists(args.o):
         ap.error("Error: the output directory does not exist!")
 
