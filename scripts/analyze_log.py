@@ -4,6 +4,9 @@ import sys
 import json
 from datetime import datetime
 
+INIT_STATE = "state_0"
+FINAL_STATE = "Crash!"
+
 
 def print_header(header: str):
     com_len = int((80 - len(header)) / 2)
@@ -34,18 +37,52 @@ class Analyzer:
     def __init__(self, json_path: str):
         with open(json_path, "r", encoding="utf-8") as f:
             info = json.load(f)
-            self.app_name = info["app_name"]     # Get the name of the app
-            self.bug_id = info["bug_id"]         # Get the bug id of
-            self.events = info["events"]          # Get all events
-            self.total_event = len(self.events)   # Get the numbers of events
-            self.event_counts = init_counts(self.events)       # Init event counter
-            self.warning_counts = init_counts(self.events)    # Init warning counter
-            self.warnings = info["warnings"]    # Get all Warnings
-            self.procedure = []                 # Maintain a list collecting the events analyzed
-            self.last_event = None               # Record the last event analyzer has gone through
+            self.app_name = info["app_name"]                            # Get the name of the app
+            self.bug_id = info["bug_id"]                                # Get the bug id of
+            self.events = info["events"]                                # Get all events
+            self.total_event = len(self.events)                         # Get the numbers of events
+            self.event_counts = init_counts(self.events)                # Init event counter
+            self.warning_counts = init_counts(self.events)              # Init warning counter
+            self.warnings = info["warnings"]                            # Get all Warnings
             self.all_events_happened = info["all_events_happened"]
-            self.first_time = dict()            # Record the time of first reaching event n
-            self.delta = None
+            self.first_time = dict()                # Record the time of first reaching event n
+            self.delta = None                       # This is used to record the time span of testing
+
+            self.is_crashed = False                 # To show whether tester reaches the crash
+            self.crash_time = []                    # To Record the time of crash happening
+
+            self.state = INIT_STATE                  # Init the state of analysis automaton
+            self.states = [INIT_STATE]
+            self.tf = info["transition_function"]    # Get the automaton transition function
+            self.transition = []
+            self.transitions: dict = dict()         # Record the happened transition chains and its occurrence time
+
+    def is_valid_transition(self, event_id) -> bool:
+        if event_id in self.tf[self.state]:
+            return True
+        else:
+            return False
+
+    def record_transition(self):
+        if len(self.transition) > 1 and self.transition[1] != "eof":
+            key = str(self.transition)
+            if key in self.transitions:
+                self.transitions[key] += 1
+            else:
+                self.transitions[key] = 1
+        self.transition.clear()
+
+    def reset_automaton(self, is_eof: bool):                  # Reset the automaton
+        if is_eof:
+            self.transition.append("eof")
+        self.record_transition()
+        self.state = INIT_STATE
+        self.states.clear()
+
+    def transit_automation(self, event_id):     # Conduct a transition of the automaton
+        self.state = self.tf[self.state][event_id]
+        self.states.append(self.state)
+        self.transition.append(event_id)
 
     def analyze(self, log_path: str, time_path: str):
         # Process the time file
@@ -66,17 +103,37 @@ class Analyzer:
                     info = line.split(' ')
                     event_time = datetime.strptime("2021-" + info[0] + " " + info[1].split('.')[0], "%Y-%m-%d %H:%M:%S")
 
-                    if re.search("Event ", line, re.I):          # 匹配“event”字段
-                        event_id = line[re.search("event ", line, re.I).span()[1]]    # Get event id
-                        self.event_counts[str(event_id)] += 1                   # The corresponding event count add 1
-                        self.last_event = event_id                              # Record the last event reached scanned
-                        if event_id not in self.first_time:
-                            self.first_time[event_id] = event_time - start_time   # Record the relative time
+                    if re.search("Event ", line, re.I):          # If it's a "Event"
 
-                    if re.search("Warning ", line, re.I):       # 匹配“Warning”字段
+                        event_id = line[re.search("event ", line, re.I).span()[1]]    # To get event id
+                        self.event_counts[str(event_id)] += 1                   # The corresponding event count add 1
+
+                        if event_id not in self.first_time:     # Record the relative time of first occurrence
+                            self.first_time[event_id] = event_time - start_time
+
+                        if self.is_valid_transition(event_id):     # If this is a valid transition then do it
+                            # new_state = self.tf[self.state][event_id]
+                            # if new_state in self.states and new_state != self.state:
+                            #     self.record_transition()
+                            #     self.states.clear()
+                            self.transit_automation(event_id)
+                            if self.state == FINAL_STATE:
+                                self.record_transition()
+                                self.reset_automaton(False)
+                        else:   # If the current state doesn't have a valid transition through this event
+                            self.reset_automaton(False)
+                            if self.is_valid_transition(event_id):
+                                self.transit_automation(event_id)
+
+                    if re.search("Warning ", line, re.I):       # If it's a “Warning”
                         warning_id = line[re.search("Warning ", line, re.I).span()[1]]
                         self.warning_counts[warning_id] += 1
 
+                    if re.search("Crash!", line, re.I):
+                        self.is_crashed = True
+                        self.crash_time.append(event_time - start_time)
+
+            self.reset_automaton(True)
         return True
 
     def show_result(self, tool_name: str):
@@ -101,13 +158,26 @@ class Analyzer:
             print_header("[ Analysis of the missing events ]")
             for event in self.event_counts:
                 if self.event_counts[event] == 0:
-                    print(" "*10 + "[ %s ] Event %s\n" % (self.bug_id, event) +
-                          " "*14 + "> The possible reason: %s\n" % self.events[event]["reason"] +
-                          " "*14 + "> The previous related events: %s" % self.events[event]["dependency"])
+                    print(" "*10 + "[ %s ] Event %s" % (self.bug_id, event))
+                    print(" "*14 + "> The possible reason: %s" % self.events[event]["reason"])
+                    print(" "*14 + "> The previous related events: %s" % self.events[event]["dependency"])
 
-        if zero_count == 0:     # If there is not any event that its `count` > 0
+        if zero_count == 0 and not self.is_crashed:     # If there is not any event that its `count` > 0
             print_header("[ All events reached but crash doesn't occur ]")
             print(" "*10 + "[ %s ] The possible reason for this: %s" % (self.bug_id, self.all_events_happened))
+
+        if self.is_crashed:
+            print_header("[ The crash counts and times ]")
+            print(" "*10 + "[ %s ] Crash occurred %d times." % (self.bug_id, len(self.crash_time)))
+            print(" "*14 + "> The min time taken to reach the crash: %s" % str(self.crash_time[0]))
+
+        if len(self.transitions) != 0 and not self.is_crashed:
+            count = 1
+            print_header("[ Transitions happened in testing ]")
+            for transition in self.transitions:
+                print(" "*10 + "[Transition %d] %s" % (count, transition))
+                print(" "*14 + "Count: %s" % self.transitions[transition])
+                count += 1
 
         print_title("[ Analysis finished ]")
 
