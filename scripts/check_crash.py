@@ -697,7 +697,7 @@ def main(args: Namespace):
                                     crash_triggering_datetime_obj = datetime.datetime.strptime(matched_datetime_str,
                                                                                                '%Y-%m-%d-%H:%M:%S')
                                 else:
-                                    matched_datetime_str = "2020-" + time_label.split('.')[0]
+                                    matched_datetime_str = "{}-{}".format(start_testing_datetime_obj.year, time_label.split('.')[0])
                                     crash_triggering_datetime_obj = datetime.datetime.strptime(matched_datetime_str,
                                                                                                '%Y-%m-%d %H:%M:%S')
 
