@@ -32,5 +32,55 @@
         "2": "Disable gestures.",
         "4": "Canceled \"Fullscreen mode\" mode in Fullscreen Mode."
     },
-    "all_events_happened": null
+    "all_events_happened": null,
+    "transition_function": {
+        "state_0": {
+            "1": "state_1",
+            "3": "state_5"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_2",
+            "2": "state_2",
+            "3": "state_3"
+        },
+        "state_3": {
+            "1": "state_2",
+            "2": "state_2",
+            "3": "state_3",
+            "4": "state_4"
+        },
+        "state_4": {
+            "1": "state_4",
+            "2": "state_4",
+            "3": "state_4",
+            "4": "state_4",
+            "5": "Crash!"
+        },
+        "state_5": {
+            "3": "state_5",
+            "4": "state_6"
+        },
+        "state_6": {
+            "3": "state_6",
+            "4": "state_6",
+            "1": "state_7"
+        },
+        "state_7": {
+            "1": "state_7",
+            "2": "state_8",
+            "3": "state_6",
+            "4": "state_6"
+        },
+        "state_8": {
+            "1": "state_8",
+            "2": "state_8",
+            "3": "state_8",
+            "4": "state_8",
+            "5": "Crash!"
+        }
+    }
 }

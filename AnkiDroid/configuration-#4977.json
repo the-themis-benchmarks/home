@@ -16,5 +16,14 @@
     "warnings" : {
 
     },
-    "all_events_happened": null
+    "all_events_happened": null,
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "Crash!"
+        }
+    }
 }
