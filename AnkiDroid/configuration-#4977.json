@@ -8,9 +8,14 @@
             "dependency": null
         },
         "2": {
-            "info": "Clicked \"Card browser\" in the drawer.",
+            "info": "Opened the drawer.",
             "reason": "Can't open drawer.",
             "dependency": null
+        },
+        "3": {
+            "info": "Clicked \"Card browser\" in the drawer.",
+            "reason": "Can't open drawer.",
+            "dependency": "2"
         }
     },
     "warnings" : {
@@ -23,7 +28,13 @@
         },
         "state_1": {
             "1": "state_1",
-            "2": "Crash!"
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "2": "state_2",
+            "3": "Crash!"
         }
-    }
+    },
+    "regex": "11*2(2+11*2)*3"
 }

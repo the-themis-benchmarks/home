@@ -16,7 +16,7 @@
     "warnings" : {
 
     },
-    "all_events_happened": null,
+    "all_events_happened": "Special strings are needed to be input.",
     "transition_function": {
         "state_0": {
             "1": "state_1"
@@ -25,5 +25,6 @@
             "1": "state_1",
             "2": "Crash!"
         }
-    }
+    },
+    "regex": "11*2"
 }

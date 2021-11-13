@@ -14,12 +14,12 @@
         },
         "3": {
             "info": "Selected \"ENABLE GPS\" in the GPS requirement dialog.\nThis happens when the GPS is disabled.",
-            "reason": null,
+            "reason": "If this event shows ",
             "dependency": "2"
         },
         "4": {
             "info": "Selected \"OK\" in the another GPS requirement dialog.\nThis happens when the GPS is enabled but this app isn't granted with GPS permission.",
-            "reason": null,
+            "reason": "The occurrence of this event means tester refused to give the location permission to\napp in the OS dialog.",
             "dependency": null
         }
     },
@@ -27,5 +27,25 @@
         "3": "Selected \"CANCEL\" in the GPS requirement dialog.\nThis happens when the GPS is disabled.",
         "4": "Selected \"CANCEL\" in the another GPS requirement dialog.\nThis happens when the GPS is enabled but this app isn't granted with GPS permission."
     },
-    "all_events_happened": "This crash requires that it's the first time to get permission from OS."
+    "all_events_happened": "This crash requires that it's the first time to get location permission from OS\nwith GPS disabled.",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "2": "state_2",
+            "3": "state_3"
+        },
+        "state_3": {
+            "2": "state_2",
+            "3": "state_3",
+            "4": "Crash!"
+        }
+    },
+    "regex": "11*2(2+11*2)*3(3+2(2+11*2)*3)*4"
 }

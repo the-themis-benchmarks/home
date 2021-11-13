@@ -86,7 +86,7 @@ class Deriver:
         self.original_regex = regex
         self.derived_regex = regex
         self.derivatives = dict()
-        self.min_distance = 10000
+        self.min_distance = self.min_len()
 
     def derive(self, s: str) -> str:
         command = self.path + " -e \"" + self.derived_regex + "\" -x \"" + s + "\" -n 1"
@@ -187,7 +187,6 @@ class Analyzer:
                                     self.deriver.min_distance = 0
                                 else:                               # If the s^(-1)R is valid
                                     self.deriver.derived_regex = derived_regex
-                                    # print(self.deriver.derived_regex)
                                     self.deriver.min_distance = min(self.deriver.min_distance, self.deriver.min_len())
 
                     if re.search("Warning ", line, re.I):       # If it's a “Warning”
@@ -241,37 +240,40 @@ class Analyzer:
             print_header("[ The crash counts and times ]")
             print(" "*10 + "[ %s ] Crash occurred %d times." % (self.bug_id, len(self.crash_time)))
             print(" "*14 + "> The min time taken to reach the crash: %s" % str(self.crash_time[0]))
+        else:
+            # DFA
+            if args.dfa:
+                print_header("[ The deepest event tester have reached is %d ]" % self.dfa.max_event_id)
 
-        # DFA
-        if args.dfa:
-            print_header("[ The deepest event tester have reached is %d ]" % self.dfa.max_event_id)
+                if args.show_all and len(self.dfa.transitions) != 0:
+                    count = 1
+                    print_header("[ Transitions happened ]")
+                    for transition in self.dfa.transitions:
+                        print(" "*10 + "[Transition %d] %s" % (count, transition))
+                        print(" "*14 + "Count: %s" % self.dfa.transitions[transition])
+                        count += 1
 
-            if args.show_all and len(self.dfa.transitions) != 0 and not self.is_crashed:
-                count = 1
-                print_header("[ Transitions happened]")
-                for transition in self.dfa.transitions:
-                    print(" "*10 + "[Transition %d] %s" % (count, transition))
-                    print(" "*14 + "Count: %s" % self.dfa.transitions[transition])
-                    count += 1
+            # Derivative
+            if args.derivative:
+                print_header("[ The minimum distance to the crash is %d ]" % self.deriver.min_distance)
 
-        # Derivative
-        if args.derivative:
-            print_header("[ The minimum distance to the crash is %d ]" % self.deriver.min_distance)
-
-            if args.show_all and len(self.deriver.derivatives) != 0 and not self.is_crashed:
-                count = 1
-                print_header("[ Derived regexes ]")
-                for derived_regex in self.deriver.derivatives:
-                    print(" "*10 + "[Regex %d] %s" % (count, derived_regex))
-                    print(" "*14 + "Count: %d" % self.deriver.derivatives[derived_regex])
-                    count += 1
+                if args.show_all and len(self.deriver.derivatives) != 0:
+                    count = 1
+                    print_header("[ Derived regexes ]")
+                    for derived_regex in self.deriver.derivatives:
+                        print(" "*10 + "[Regex %d] %s" % (count, derived_regex))
+                        print(" "*14 + "Count: %d" % self.deriver.derivatives[derived_regex])
+                        count += 1
 
         print_title("[ Analysis finished ]")
 
 
 def main(args: Namespace):
 
-    log_dir = args.target_dir
+    log_dir: str = args.target_dir
+
+    if log_dir.endswith("/"):
+        log_dir = log_dir[:len(log_dir)-1]
 
     base_dir = os.path.basename(log_dir)
     first_pos, second_pos, third_pos, forth_pos = \
