@@ -18,11 +18,6 @@
             "dependency": null
         },
         "4": {
-            "info": "Exited the \"Blog Posts\".",
-            "reason": null,
-            "dependency": null
-        },
-        "5": {
             "info": "Selected the \"Site Pages\".",
             "reason": null,
             "dependency": null
@@ -31,5 +26,27 @@
     "warnings": {
 
     },
-    "all_events_happened": "Should select the \"Reader\" page and enter \"Blog post\" or \"Site pages\" twice or once respectively. "
+    "all_events_happened": "\"Don't keep activities\" should be enabled. Should select the \"Reader\" page and enter \"Blog post\" or \"Site pages\" twice or once respectively. ",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "2": "state_2",
+            "3": "state_3",
+            "4": "state_3"
+        },
+        "state_3": {
+            "1": "state_1",
+            "2": "state_3",
+            "3": "Crash!",
+            "4": "Crash!"
+        }
+    },
+    "regex": "11*2(2+11*2)*(3+4)(2+11*2(2+11*2)*(3+4))*(3+4)"
 }

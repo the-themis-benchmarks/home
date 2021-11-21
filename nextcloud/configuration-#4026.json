@@ -16,5 +16,15 @@
     "warnings": {
 
     },
-    "all_events_happened": null
+    "all_events_happened": "\"Don't keep activities\" should be enabled.",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "Crash!"
+        }
+    },
+    "regex": "11*2"
 }

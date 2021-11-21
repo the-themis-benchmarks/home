@@ -113,6 +113,9 @@ adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W Custo
 echo "** START COVERAGE (${AVD_SERIAL}) "
 bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 
+# copy dummy documents
+bash -x copy_dummy_documents.sh $avd_serial
+
 # run fastbot
 echo "** RUN FASTBOT (${AVD_SERIAL})"
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/fastbot_testing_time_on_emulator.txt
