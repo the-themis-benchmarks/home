@@ -18,8 +18,9 @@ for benchmarking automated GUI testing for Android and beyond.
   title     = {Benchmarking Automated GUI Testing for Android against Real-World Bugs},
   booktitle = {Proceedings of 29th ACM Joint European Software Engineering Conference and Symposium 
   		on the Foundations of Software Engineering (ESEC/FSE)},
+  pages     = {119--130},
   year      = {2021},
-  pages     = {to appear}
+  doi       = {10.1145/3468264.3468620}
 }
 ```
 
