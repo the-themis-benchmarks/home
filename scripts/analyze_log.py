@@ -86,22 +86,27 @@ class Deriver:
         self.original_regex = regex
         self.derived_regex = regex
         self.derivatives = dict()
-        self.min_distance = self.min_len()
+        self.distance_left = dict()     # To record the distance left when the result of derived regex
+                                        # is empty string of empty set
 
     def derive(self, s: str) -> str:
         command = self.path + " -e \"" + self.derived_regex + "\" -x \"" + s + "\" -n 1"
         derived_regex = call_regex(command)
-        if derived_regex != self.derived_regex:
-            self.record_regex()
         return derived_regex
 
     def min_len(self) -> int:
         command = self.path + " -e \"" + self.derived_regex + "\" -l"
         return int(call_regex(command))
 
+    def record_distance(self, distance: int):
+        if distance in self.distance_left:
+            self.distance_left[distance] += 1
+        else:
+            self.distance_left[distance] = 1
+
     def reset(self):
         if self.derived_regex != self.original_regex:
-            self.record_regex()
+            self.record_distance(self.min_len())
             self.derived_regex = self.original_regex
 
     def record_regex(self):
@@ -182,12 +187,12 @@ class Analyzer:
                                 if derived_regex != "P":
                                     self.deriver.derived_regex = derived_regex
                             else:
-                                if derived_regex == "E":            # If the s^(-1)R is empty string
+                                self.deriver.derived_regex = derived_regex
+                                if self.deriver.derived_regex == "E":
+                                    # If the s^(-1)R is empty string
                                     self.deriver.reset()
-                                    self.deriver.min_distance = 0
                                 else:                               # If the s^(-1)R is valid
-                                    self.deriver.derived_regex = derived_regex
-                                    self.deriver.min_distance = min(self.deriver.min_distance, self.deriver.min_len())
+                                    self.deriver.record_distance(self.deriver.min_len())
 
                     if re.search("Warning ", line, re.I):       # If it's a “Warning”
                         warning_id = line[re.search("Warning ", line, re.I).span()[1]]
@@ -214,15 +219,22 @@ class Analyzer:
             if self.event_counts[event] == 0:
                 self.first_time[event] = None
                 zero_count += 1
-            print(" "*10 + "[ %s ] Event %s/%d: %3d-%-3d. (%s/%s)\n" %
+            print(" "*10 + "[ %s ] Event %s/%d: %3d-%-3d. (%s/%s)" %
                   (self.bug_id, event,
                    self.total_event,
                    self.event_counts[event],
                    self.warning_counts[event],
-                   self.first_time[event], self.delta) +
-                  " "*14 + "> event info: %s" % self.events[event]["info"])
+                   self.first_time[event], self.delta))
+            print(" " * 14 + "> Event info: %s" % self.events[event]["info"])
             if self.warning_counts[event] > 0:
                 print(" "*14 + "> Warning info: %s" % self.warnings[event])
+
+            distance_left = len(self.event_counts) - int(event)
+            if args.derivative:
+                if distance_left in self.deriver.distance_left:
+                    print(" " * 14 + "> 1~%s occurred %s times." % (event, self.deriver.distance_left[distance_left]))
+                else:
+                    print(" " * 14 + "> 1~%s occurred %s times." % (event, 0))
 
         if zero_count != 0:     # If there is any event that its `count` > 0
             print_header("[ Analysis of the missing events ]")
@@ -254,16 +266,17 @@ class Analyzer:
                         count += 1
 
             # Derivative
-            if args.derivative:
-                print_header("[ The minimum distance to the crash is %d ]" % self.deriver.min_distance)
+            # if args.derivative:
+                # print_header("[ The minimum distance to the crash is %d ]" % self.deriver.min_distance)
+                #
+                # if args.show_all and len(self.deriver.derivatives) != 0:
+                #     count = 1
+                #     print_header("[ Derived regexes ]")
+                #     for derived_regex in self.deriver.derivatives:
+                #         print(" "*10 + "[Regex %d] %s" % (count, derived_regex))
+                #         print(" "*14 + "Count: %d" % self.deriver.derivatives[derived_regex])
+                #         count += 1
 
-                if args.show_all and len(self.deriver.derivatives) != 0:
-                    count = 1
-                    print_header("[ Derived regexes ]")
-                    for derived_regex in self.deriver.derivatives:
-                        print(" "*10 + "[Regex %d] %s" % (count, derived_regex))
-                        print(" "*14 + "Count: %d" % self.deriver.derivatives[derived_regex])
-                        count += 1
 
         print_title("[ Analysis finished ]")
 

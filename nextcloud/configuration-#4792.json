@@ -34,9 +34,9 @@
         }
     },
     "warnings": {
-        "3": "Canceled the setup.",
-        "4": "Canceled choosing a remote folder.",
-        "6": "Canceled creating a new folder."
+        "2": "Canceled the \"Auto upload\" setup.",
+        "3": "Canceled choosing a remote folder.",
+        "5": "Canceled creating a new folder."
     },
     "all_events_happened": null,
     "transition_function": {

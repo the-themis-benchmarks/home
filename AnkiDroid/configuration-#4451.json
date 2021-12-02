@@ -30,7 +30,7 @@
         "6": {
             "info": "Set \"Fullscreen mode\" mode in Fullscreen Mode.",
             "reason": null,
-            "dependency": "3, 5"
+            "dependency": "4, 5"
         },
         "7": {
             "info": "Select any Decker.",
@@ -39,8 +39,8 @@
         }
     },
     "warnings" : {
-        "2": "Disable gestures.",
-        "4": "Canceled \"Fullscreen mode\" mode in Fullscreen Mode."
+        "4": "Disable gestures.",
+        "6": "Canceled \"Fullscreen mode\" mode in Fullscreen Mode."
     },
     "all_events_happened": "Clicked a empty decker.",
     "transition_function": {
