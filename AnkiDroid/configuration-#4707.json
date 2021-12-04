@@ -13,14 +13,9 @@
             "dependency": "1"
         },
         "3": {
-            "info": "Clicked \"Add image\" button.",
-            "reason": null,
-            "dependency": "2"
-        },
-        "4": {
             "info": "Clicked \"Camera\" button.",
             "reason": null,
-            "dependency": "3"
+            "dependency": "2"
         }
     },
     "warnings" : {
@@ -38,14 +33,8 @@
         "state_2": {
             "1": "state_1",
             "2": "state_2",
-            "3": "state_3"
-        },
-        "state_3": {
-            "1": "state_1",
-            "2": "state_2",
-            "3": "state_3",
-            "4": "Crash!"
+            "3": "Crash!"
         }
     },
-    "regex": "11*2(2+11*2)*3(3+(2+11*2)(2+11*2)*3)*4"
+    "regex": "11*2(2+11*2)*3"
 }

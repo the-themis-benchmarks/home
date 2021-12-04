@@ -3,24 +3,24 @@
     "bug_id": "#2123",
     "events": {
         "1": {
-            "info": "Clicked \"explore\" in the drawer.",
+            "info": "Clicked \"Explore\" in the drawer.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked \"search\" in the explore.",
+            "info": "Clicked \"Search\" in the explore.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         },
         "3": {
             "info": "Input some chars in search box.",
             "reason": null,
-            "dependency": "2"
+            "dependency": "cd:2"
         },
         "4": {
             "info": "Clicked any item in search results.",
             "reason": "The inputs in Event 3 has no results.",
-            "dependency": "3"
+            "dependency": "cd:3"
         }
     },
     "warnings" : {

@@ -24,7 +24,7 @@
         }
     },
     "warnings": {
-        "3": "Canceled the setup."
+        "2": "Canceled the \"Auto upload\" setup."
     },
     "all_events_happened": null,
     "transition_function": {

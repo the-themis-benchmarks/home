@@ -8,19 +8,9 @@
             "dependency": null
         },
         "2": {
-            "info": "Opened the left drawer.",
+            "info": " paste in SD card.",
             "reason": null,
             "dependency": null
-        },
-        "3": {
-            "info": "Clicked the second item in the drawer.",
-            "reason": null,
-            "dependency": "2"
-        },
-        "4": {
-            "info": "Pasted the copied file/files.",
-            "reason": null,
-            "dependency": "3"
         }
     },
     "warnings" : {
