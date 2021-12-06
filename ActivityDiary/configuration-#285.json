@@ -26,7 +26,13 @@
             "info": "Changed \"Location Service\" to \"OFF\"",
             "reason": null,
             "dependency": "2"
+        },
+        "6": {
+            "info": "Event 6: Changed \"Update period\" to illegal value",
+            "reason": null,
+            "dependency": "3"
         }
+        
     },
     "warnings": {
         

@@ -36,6 +36,11 @@
             "info": "Deleted an image in an activity entry.",
             "reason": null,
             "dependency": "6"
+        },
+        "8": {
+            "info": "Deleted a image when the constrains are satisfied .",
+            "reason": null,
+            "dependency": "6"
         }
     },
     "warnings": {
