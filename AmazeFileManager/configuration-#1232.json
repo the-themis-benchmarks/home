@@ -3,18 +3,18 @@
     "bug_id": "#1232",
     "events": {
         "1": {
-            "info": "Copied a internal file / files.",
+            "info": "Copied a file / files.",
             "reason": null,
             "dependency": null
         },
         "2": {
             "info": " paste in SD card.",
             "reason": null,
-            "dependency": null
+            "dependency": 1
         }
     },
     "warnings" : {
 
     },
-    "all_events_happened": "Should copy internal files to external storage."
+    "all_events_happened": "Should files to external storage (SD card) and cutting files does not work."
 }

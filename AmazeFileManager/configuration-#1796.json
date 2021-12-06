@@ -3,12 +3,12 @@
     "bug_id": "#1796",
     "events": {
         "1": {
-            "info": "Cut/copied a folder or folders in the list.",
+            "info": "Cut a folder or folders in the list.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Pasted in the same directory of the cut directory.",
+            "info": "Event 2: Pasted a cut folder into itself.",
             "reason": null,
             "dependency": "1"
         }
@@ -16,5 +16,5 @@
     "warnings" : {
 
     },
-    "all_events_happened": "Should cut/copy only one folder into itself."
+    "all_events_happened": null
 }
