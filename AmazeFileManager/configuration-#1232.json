@@ -16,5 +16,5 @@
     "warnings" : {
 
     },
-    "all_events_happened": "Should files to external storage (SD card) and cutting files does not work."
+    "all_events_happened": "Should copy files (cutting files does not work) to external storage (SD card)."
 }
