@@ -10,7 +10,7 @@
         "2": {
             "info": "Clicked \"Yes\" in \"Do you want to proceed to download documents?\" dialog \nor clicked \"download_do_not_ask\" in \"Do you want to proceed to download documents?\" dialog.",
             "reason": null,
-            "dependency": "1"
+            "dependency": null
         },
         "3": {
             "info": "Downloaded a book.",
@@ -23,12 +23,12 @@
             "dependency": null
         },
         "5": {
-            "info": "Long pressed chapterVerse.",
+            "info": "Enter a editing note view.",
             "reason": null,
             "dependency": null
         },
         "6": {
-            "info": "Clicked myNoteAddEdit after longPress chapterVerse.",
+            "info": "Enter a bible view.",
             "reason": null,
             "dependency": "5"
         },
@@ -38,14 +38,15 @@
             "dependency": null
         },
         "8": {
-            "info": "Clicked CREATE after click searchButton.",
+            "info": "Click \"CANCEL\" to Search Index.",
             "reason": null,
             "dependency": "7"
         }
     },
     "warnings": {
         "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
-        "2": "Clicked \"Cancel\" in \"Do you want to proceed to download documents?\" dialog."
+        "2": "Clicked \"Cancel\" in \"Do you want to proceed to download documents?\" dialog.",
+        "8": "Clicked \"CANCEL\" to Search Index"
     },
     "all_events_happened": null
 }

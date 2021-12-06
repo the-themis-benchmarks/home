@@ -8,12 +8,12 @@
             "dependency": null
         },
         "2": {
-            "info": "Clicked \"OK\" to download a document (bible or book).",
+            "info": "Clicked \"OK\" to download a bible.",
             "reason": null,
             "dependency": null
         },
         "3": {
-            "info": "Select the document type to \"Book\" in \"Download Documents\".",
+            "info": "Clicked \"OK\" to download a book.",
             "reason": null,
             "dependency": null
         },
@@ -23,32 +23,32 @@
             "dependency": null
         },
         "5": {
-            "info": "Opened the left drawer.",
+            "info": "Go into \"Choose Document\" view.",
             "reason": null,
             "dependency": null
         },
         "6": {
-            "info": " Clicked \"Choose Document\" Button in the drawer.",
+            "info": "Selected a book.",
             "reason": null,
             "dependency": null
         },
         "7": {
-            "info": "Selected a document.",
-            "reason": null,
-            "dependency": "6"
-        },
-        "8": {
             "info": "Selected a general book key.",
             "reason": null,
             "dependency": null
         },
+        "8": {
+            "info": "Go into SearchIndex view.",
+            "reason": null,
+            "dependency": null
+        },
         "9": {
-            "info": "Clicked the \"Find\" Button in the drawer.",
+            "info": "Clicked \"CREATE\" in \"Search Index\".",
             "reason": null,
             "dependency": null
         },
         "10": {
-            "info": "Clicked \"CREATE\" in \"Search Index\".",
+            "info": "Select a document (not book)",
             "reason": null,
             "dependency": null
         }

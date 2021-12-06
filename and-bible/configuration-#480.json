@@ -18,38 +18,59 @@
             "dependency": null
         },
         "4": {
-            "info": "Opened the left drawer.",
+            "info": "Enter \"Manage Bookmark Labels\" view.",
             "reason": null,
             "dependency": null
         },
         "5": {
-            "info": "Clicked \"Manage Bookmark Labels\" in the drawer.",
+            "info": "Create a named label.",
             "reason": null,
             "dependency": null
         },
         "6": {
-            "info": "Clicked \"NEW LABEL\" in \"Manage Bookmark Labels\".",
+            "info": "Create a label with no name.",
             "reason": null,
             "dependency": null
         },
         "7": {
-            "info": "Created or edited a label.",
+            "info": "Edit a named label to another name.",
             "reason": null,
             "dependency": null
         },
         "8": {
-            "info": "Deleted a label.",
+            "info": "Edit a named label to unnamed.",
             "reason": null,
             "dependency": null
         },
         "9": {
-            "info": "Edited a empty label.",
+            "info": "Delete a named label.",
+            "reason": null,
+            "dependency": null
+        },
+        "10": {
+            "info": "Delete a unnamed label.",
+            "reason": null,
+            "dependency": null
+        },
+        "11": {
+            "info": "Edit a empty label.",
+            "reason": null,
+            "dependency": null
+        },
+        "12": {
+            "info": "Delete the last unnamed label.",
+            "reason": null,
+            "dependency": null
+        },
+        "13": {
+            "info": "Delete the last named label.",
             "reason": null,
             "dependency": null
         }
     },
     "warnings": {
-        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity."
+        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
+        "2": "Cancel to create or edit a label"
     },
     "all_events_happened": null
 }

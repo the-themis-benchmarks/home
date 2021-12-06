@@ -8,65 +8,50 @@
             "dependency": null
         },
         "2": {
-            "info": "Selected a book.",
+            "info": "Clicked \"OK\" to download a document (bible or book or dictionary or commentary).",
             "reason": null,
             "dependency": null
         },
         "3": {
-            "info": "Clicked \"OK\" to download a document(bible or book).",
-            "reason": null,
-            "dependency": null
-        },
-        "4": {
             "info": "Clicked \"OK\" in \"Download Documents\" after downloading documents.",
             "reason": null,
             "dependency": null
         },
-        "5": {
+        "4": {
             "info": "clicked \"New Tab\" in menu \"Tabs\".",
             "reason": null,
             "dependency": null
         },
-        "6": {
-            "info": "Set Current Document to a new book.",
+        "5": {
+            "info": "Set Current Document to a new bible/book/dictionary/commentary.",
             "reason": null,
             "dependency": null
         },
-        "7": {
+        "6": {
             "info": "Enter \"Choose Document\".",
             "reason": null,
             "dependency": null
         },
+        "7": {
+            "info": "Deleted a document.",
+            "reason": null,
+            "dependency": null
+        },
         "8": {
-            "info": "Selected documents to delete.",
+            "info": "Choose a tab to open.",
             "reason": null,
             "dependency": null
         },
         "9": {
-            "info": "Deleting a document.",
-            "reason": null,
-            "dependency": null
-        },
-        "10": {
-            "info": "Pressed back.",
-            "reason": null,
-            "dependency": null
-        },
-        "11": {
-            "info": "Clicked \"Switch to tab\" in menu \"Tabs\".",
-            "reason": null,
-            "dependency": null
-        },
-        "12": {
-            "info": "Selected a tab to open.",
-            "reason": null,
-            "dependency": null
+            "info": "Open the tab that file is deleted.",
+            "reason": "Should open the tab that file is deleted",
+            "dependency": "7"
         }
         
     },
     "warnings": {
         "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
-        "3": "Clicked \"CANCEL\" to give up downloading a document(bible or book)."
+        "3": "Clicked \"CANCEL\" to give up downloading a document (bible or book or dictionary or commentary)."
     },
     "all_events_happened": null
 }
