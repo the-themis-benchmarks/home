@@ -43,7 +43,7 @@
             "dependency": null
         },
         "9": {
-            "info": "Open the tab that file is deleted.",
+            "info": "Open the tab that dispalyed file is deleted.",
             "reason": "Should open the tab that file is deleted",
             "dependency": "7"
         }
