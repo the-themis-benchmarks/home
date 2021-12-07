@@ -10,16 +10,16 @@
         "2": {
             "info": "Clicked \"Setting\" in the menu.",
             "reason": null,
-            "depedency": "1"
+            "depedency": "cd:1"
         },
         "3": {
             "info": "Changed the language.",
             "reason": null,
-            "depedency": "2"
+            "depedency": "cd:2"
         }
     },
     "warnings": {
 
     },
-    "all_events_happened": null
+    "all_events_happened": "Change language to chinese will lead to crash."
 }

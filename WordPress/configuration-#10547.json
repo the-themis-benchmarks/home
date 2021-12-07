@@ -10,17 +10,17 @@
         "2": {
             "info": "Selected page \"Drafts\" in post list.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         },
         "3": {
             "info": "Go into EditPostActivity.",
             "reason": null,
-            "dependency": "2"
+            "dependency": "cd:2"
         },
         "4": {
             "info": "Selected \"Preview\" in options menu.",
             "reason": null,
-            "dependency": "3"
+            "dependency": "cd:3"
         }
     },
     "warnings": {

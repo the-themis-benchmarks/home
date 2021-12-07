@@ -10,7 +10,7 @@
         "2": {
             "info": "Checked the \"Globalhash!\" checkbox.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         }
     },
     "warnings": {
