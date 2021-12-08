@@ -20,7 +20,7 @@
         "4": {
             "info": "Clicked [Tab tray].",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:1"
         }
     },
     "warnings": {

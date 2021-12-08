@@ -10,7 +10,7 @@
         "2": {
             "info": "Clicked the \"Help\" button.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd1"
         }
     },
     "warnings": {

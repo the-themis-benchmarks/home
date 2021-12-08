@@ -10,23 +10,29 @@
         "2": {
             "info": "Clicked \"Setting\" in the drawer.",
             "reason": null,
-            "dependency": "1"
+            "dependency": null
         },
         "3": {
             "info": "Changed \"Location Service\" to \"Network\" or \"GPS\" in \"Setting\".",
             "reason": null,
-            "dependency": "2"
+            "dependency": null
         },
         "4": {
             "info": "Changed \"Update period\" to a unique character in \"Setting\".",
             "reason": "Can't input unique characters like \"$\".",
-            "dependency": "2"
+            "dependency": null
         },
         "5": {
             "info": "Changed \"Location Service\" to \"OFF\"",
             "reason": null,
-            "dependency": "2"
+            "dependency": null
+        },
+        "6": {
+            "info": "Event 6: Changed \"Update period\" to illegal value",
+            "reason": "Should change \"Update period\" to illegal value like '&%$#@' ",
+            "dependency": "4"
         }
+        
     },
     "warnings": {
         

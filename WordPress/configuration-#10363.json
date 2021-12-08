@@ -10,7 +10,7 @@
         "2": {
             "info": "Clicked the \"toggle_post_list_item_layout\" Buttom in the toolbar of PostsList.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         }
     },
     "warnings": {

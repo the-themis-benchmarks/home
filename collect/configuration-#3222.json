@@ -10,12 +10,12 @@
         "2": {
             "info": "Clicked the \"Form management\" in \"General Settings\".",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         },
         "3": {
             "info": "Disabled the \"Hide old form version\" in \"Form management\".",
             "reason": null,
-            "dependency": "2"
+            "dependency": "cd:2"
         },
         "4": {
             "info": "Back.",
@@ -26,10 +26,15 @@
             "info": "Clicked the \"Fill Blank Form\" in the main page.",
             "reason": null,
             "dependency": null
+        },
+        "6": {
+            "info": "Enabled the \"hide old form version\" in \"Form management\".",
+            "reason": null,
+            "dependency": "cd:2"
         }
     },
     "warnings": {
         "3": "Enabled the \"hide old form version\" in \"Form management\"."
     },
-    "all_events_happened": "Should keep the state of Event 3."
+    "all_events_happened": null
 }

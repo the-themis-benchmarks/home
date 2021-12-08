@@ -10,7 +10,7 @@
         "2": {
             "info": "Clicked \"Yes\" in \"Do you want to proceed to download documents?\" dialog \nor clicked \"download_do_not_ask\" in \"Do you want to proceed to download documents?\" dialog.",
             "reason": null,
-            "dependency": "1"
+            "dependency": null
         },
         "3": {
             "info": "Downloaded a book.",
@@ -33,7 +33,12 @@
             "dependency": "5"
         },
         "7": {
-            "info": "Clicked \"Back\" to save note.",
+            "info": "Save a note.",
+            "reason": null,
+            "dependency": null
+        },
+        "8": {
+            "info": "Edit a problematic note that should has text but not.",
             "reason": null,
             "dependency": null
         }

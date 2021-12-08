@@ -15,43 +15,34 @@
         "3": {
             "info": "Clicked \"Validator preference\" in \"Preferences\".",
             "reason": null,
-            "dependency": "2"
+            "dependency": "cd:2"
         },
         "4": {
-            "info": "Clicked a \"Re-survey entry\".",
+            "info": "Deleted a check_entry.",
             "reason": null,
-            "dependency": "3"
+            "dependency": "cd:3"
         },
         "5": {
-            "info": "Clicked \"DELETE\" in \"Edit re-survey entry\".",
+            "info": "Deleted the last check_entry.",
             "reason": null,
-            "dependency": "4"
+            "dependency": "cd:3"
         },
         "6": {
-            "info": "Clicked a \"Check entry\".",
-            "reason": null,
-            "dependency": null
-        },
-        "7": {
-            "info": "Clicked \"DELETE\" in \"Edit check entry\".",
-            "reason": null,
-            "dependency": "6"
-        },
-        "8": {
             "info": "Set key, value and max age respectively.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:3"
         },
-        "9": {
-            "info": "Clicked \"Done\" in \"Validator ruleset Default\".",
-            "reason": null,
-            "dependency": null
+        "7": {
+            "info": "Set illegal value to re-survey_entry and back from Preference.",
+            "reason": "Should set illegal value to re-survey_entry and back from Preference",
+            "dependency": "dd:6, cd:5"
         }
     },
     "warnings": {
         "1": "Clicked \"GO TO MAP\" in \"Download at other location\"",
-        "5": "Clicked \"CANCEL\" or \"SAVE\" in \"Edit re-survey entry\".",
-        "7": "Clicked \"CANCEL\" or \"SAVE\" in \"Edit check entry\"."
+        "4": "Clicked \"CANCEL\" or \"SAVE\" in \"Edit check entry\".",
+        "5": "Clicked \"CANCEL\" or \"SAVE\" in \"Edit check entry\"."
+
     },
     "all_events_happened": null
 }

@@ -10,12 +10,12 @@
         "2": {
             "info": "Selected \"Plant list\".",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         },
         "3": {
             "info": "Clicked two items at the same time.",
             "reason": null,
-            "dependency": "2"
+            "dependency": "cd:2"
         }
     },
     "warnings": {
