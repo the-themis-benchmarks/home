@@ -7,7 +7,7 @@ open-source Android apps) and a unified, extensible infrastructure
 for benchmarking automated GUI testing for Android and beyond. 
 
 
-# Publication
+# Publication ([Presentation Video](https://www.youtube.com/watch?v=ZDps3zx2pCY&t=15s))
 [1] "[Benchmarking Automated GUI Testing for Android against Real-World Bugs](https://tingsu.github.io/files/fse21-themis.pdf)". Ting Su, Jue Wang, Zhendong Su. *29th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering* (ESEC/FSE 2021)
 
 ```
@@ -24,8 +24,11 @@ for benchmarking automated GUI testing for Android and beyond.
 }
 ```
 
+
+
 # News
 
+### - We are now actively developping an automated analysis tool to understand the effectiveness of GUI testing tools. We will release the tool soon!
 ### - Themis is using by ByteDance's [FastBot](https://github.com/bytedance/Fastbot_Android) to evaluate and improve its bug finding abilities! (Nov. 2021）
 ### - Themis's paper was accepted to ESEC/FSE'21! (Aug. 2021）
 
