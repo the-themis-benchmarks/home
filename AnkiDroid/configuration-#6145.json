@@ -46,7 +46,7 @@
     "warnings" : {
         "4": "Change language to other language (not Chinese)",
         "6": "Disable the \"Experimental V2 Scheduler\".",
-        "7": "Selected \"Cancel\" in Export Dialog."
+        "8": "Selected \"Cancel\" in Export Dialog."
     },
     "all_events_happened": null,
     "transition_function": {

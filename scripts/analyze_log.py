@@ -277,7 +277,6 @@ class Analyzer:
                 #         print(" "*14 + "Count: %d" % self.deriver.derivatives[derived_regex])
                 #         count += 1
 
-
         print_title("[ Analysis finished ]")
 
 
@@ -298,7 +297,7 @@ def main(args: Namespace):
     app_name, bug_id, tool_name = \
         base_dir[first_pos[1]: second_pos[0]],\
         base_dir[second_pos[0]+1: third_pos[0]],\
-        base_dir[third_pos[1]: forth_pos[0]]
+        (base_dir[third_pos[1]: forth_pos[0]]).lower()
 
     json_path = os.path.join("..", app_name, "configuration-" + bug_id + ".json")       # Get the path of the json file
     analyzer = Analyzer(json_path, args)                                                      # Initialize an Analyzer
