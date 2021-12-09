@@ -10,7 +10,7 @@
         "2": {
             "info": "Event 2: Pasted a cut folder into itself.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:1"
         }
     },
     "warnings" : {
