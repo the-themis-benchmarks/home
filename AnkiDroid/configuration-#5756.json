@@ -13,7 +13,7 @@
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Switch order to \"Random\".",
+            "info": "Switch order to any other order.",
             "reason": null,
             "dependency": "cd:2"
         },
