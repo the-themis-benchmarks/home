@@ -23,8 +23,23 @@
             "dependency": "cd:1"
         }
     },
-    "warnings": {
-
+    "warnings": {},
+    "all_events_happened": "Should enable \"Don't keep activity\".",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "3": "state_3"
+        },
+        "state_3": {
+            "4": "Crash!",
+            "1": "state_1"
+        }
     },
-    "all_events_happened": "Should enable \"Don't keep activity\"."
+    "regex": "11*23(11*23)*4"
 }

@@ -18,8 +18,20 @@
             "depedency": "cd:2"
         }
     },
-    "warnings": {
-
+    "warnings": {},
+    "all_events_happened": "Change language to chinese will lead to crash.",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "3": "Crash!"
+        }
     },
-    "all_events_happened": "Change language to chinese will lead to crash."
+    "regex": "11*2(11*2)*3"
 }

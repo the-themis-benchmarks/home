@@ -21,5 +21,19 @@
     "warnings": {
 
     },
-    "all_events_happened": null
+    "all_events_happened": null,
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_2",
+            "3": "Crash!"
+        }
+    },
+    "regex": "11*2(11*2)*3"
 }

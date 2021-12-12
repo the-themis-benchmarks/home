@@ -11,5 +11,11 @@
     "warnings": {
 
     },
-    "all_events_happened": "Should change device to \"Airplan mode\" and reopen the app."
+    "all_events_happened": "Should change device to \"Airplan mode\" and reopen the app.",
+    "transition_function": {
+        "state_0": {
+            "1": "Crash!"
+        }
+    },
+    "regex": "1"
 }
