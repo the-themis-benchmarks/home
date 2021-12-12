@@ -8,7 +8,7 @@
             "dependency": null
         },
         "2": {
-            "info": "Event 2: Pasted a cut folder into itself.",
+            "info": "Pasted a cut folder into itself.",
             "reason": null,
             "dependency": "cd:1"
         }
@@ -16,5 +16,15 @@
     "warnings" : {
 
     },
-    "all_events_happened": null
+    "all_events_happened": null,
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "Crash!"
+        }
+    },
+    "regex": "11*2"
 }

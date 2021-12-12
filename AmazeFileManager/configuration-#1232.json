@@ -16,5 +16,16 @@
     "warnings" : {
 
     },
-    "all_events_happened": "Should copy files (cutting files does not work) to external storage (SD card)."
+    "all_events_happened": "Should copy files (cutting files does not work) to external storage (SD card).",
+    "transition_function": {
+        "state_0": {
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "Crash!"
+        }
+    },
+    "regex": "11*2"
+
 }

@@ -11,5 +11,12 @@
     "warnings": {
 
     },
-    "all_events_happened": null
+    "all_events_happened": null,
+    "transition_function": {
+        "state_0": {
+            "1": "Crash!"
+        }
+
+    },
+    "regex": "1"
 }
