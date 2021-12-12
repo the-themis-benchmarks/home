@@ -10,27 +10,27 @@
         "2": {
             "info": "Selected the \"Setting\" in the drawer.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         },
         "3": {
             "info": "Clicked \"AnkiDroid\" in Preferences.",
             "reason": null,
-            "dependency": "2"
+            "dependency": "cd:2"
         },
         "4": {
             "info": "Changed language to zh_CN.",
             "reason": null,
-            "dependency": "3"
+            "dependency": "cd:3"
         },
         "5": {
             "info": "Clicked \"Advanced\" in Preferences.",
             "reason": null,
-            "dependency": "2"
+            "dependency": "cd:2"
         },
         "6": {
             "info": "Enabled the \"Experimental V2 Scheduler\".",
             "reason": null,
-            "dependency": "5"
+            "dependency": "cd:5"
         },
         "7": {
             "info": "Selected \"Export collection\" in menu at DeckPicker",
@@ -40,7 +40,7 @@
         "8": {
             "info": "Selected \"OK\" in Export Dialog",
             "reason": null,
-            "dependency": "7"
+            "dependency": "cd:7"
         }
     },
     "warnings" : {

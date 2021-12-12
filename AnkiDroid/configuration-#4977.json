@@ -15,7 +15,7 @@
         "3": {
             "info": "Clicked \"Card browser\" in the drawer.",
             "reason": "Can't open drawer.",
-            "dependency": "2"
+            "dependency": "cd:2"
         }
     },
     "warnings" : {
@@ -24,7 +24,8 @@
     "all_events_happened": null,
     "transition_function": {
         "state_0": {
-            "1": "state_1"
+            "1": "state_1",
+            "2": "state_3"
         },
         "state_1": {
             "1": "state_1",
@@ -34,7 +35,12 @@
             "1": "state_1",
             "2": "state_2",
             "3": "Crash!"
+        },
+        "state_3": {
+            "1": "state_1",
+            "2": "state_3",
+            "3": "state_0"
         }
     },
-    "regex": "11*2(2+11*2)*3"
+    "regex": "(22*3)*(11*2(2+11*2)*3+22*11*2(2+11*2)*3)"
 }
