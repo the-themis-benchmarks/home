@@ -10,7 +10,7 @@
         "2": {
             "info": "Search a string.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:1"
         }
     },
     "warnings" : {

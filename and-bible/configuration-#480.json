@@ -15,57 +15,57 @@
         "3": {
             "info": "Clicked \"OK\" in \"Download Documents\"",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:1"
         },
         "4": {
             "info": "Enter \"Manage Bookmark Labels\" view.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:3"
         },
         "5": {
             "info": "Create a named label.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:4"
         },
         "6": {
             "info": "Create a label with no name.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:4"
         },
         "7": {
             "info": "Edit a named label to another name.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:5"
         },
         "8": {
             "info": "Edit a named label to unnamed.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:5"
         },
         "9": {
             "info": "Delete a named label.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:5, cd:7"
         },
         "10": {
             "info": "Delete a unnamed label.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:6, cd:8"
         },
-        "11": {
+        "11": { 
             "info": "Edit a empty label.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:6, cd:8"
         },
         "12": {
             "info": "Delete the last unnamed label.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:6， cd:8"
         },
         "13": {
             "info": "Delete the last named label.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:5, cd:7"
         }
     },
     "warnings": {

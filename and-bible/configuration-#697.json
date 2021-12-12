@@ -10,7 +10,7 @@
         "2": {
             "info": "Clicked \"Yes\" in \"Do you want to proceed to download documents?\" dialog \nor clicked \"download_do_not_ask\" in \"Do you want to proceed to download documents?\" dialog.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:1"
         },
         "3": {
             "info": "Downloaded a book.",
@@ -20,27 +20,27 @@
         "4": {
             "info": "Click \"OK\" in \"Download Documents\".",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:3"
         },
         "5": {
             "info": "Long pressed chapterVerse.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:4"
         },
         "6": {
             "info": "Clicked myNoteAddEdit after longPressing chapterVerse.",
             "reason": null,
-            "dependency": "5"
+            "dependency": "cd:5"
         },
         "7": {
             "info": "Save a note.",
             "reason": null,
-            "dependency": null
+            "dependency": "cd:6"
         },
         "8": {
             "info": "Edit a problematic note that should has text but not.",
             "reason": null,
-            "dependency": null
+            "dependency": "dd:5"
         }
     },
     "warnings": {
