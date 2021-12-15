@@ -29,6 +29,7 @@
             "2": "state_2"
         },
         "state_2": {
+            "1": "state_1",
             "2": "state_2",
             "3": "Crash!"
         }

@@ -54,7 +54,7 @@
         "state_2": {
             "1": "state_5",
             "3": "state_2",
-            "4": "state_5"
+            "4": "state_6"
         },
         "state_3": {
             "3": "state_3",
@@ -99,7 +99,8 @@
 
         },
         "state_12": {
-            "2": "state_11"
+            "2": "state_11",
+            "1": "state_10"
         },
         "state_13": {
             "6": "Crash!"

@@ -120,7 +120,8 @@
             "4": "state_8",
             "6": "state_8",
             "5": "state_7",
-            "b": "state_9"
+            "b": "state_9",
+            "c": "state_4"
         },
         "state_9": {
             "7": "Crash!"

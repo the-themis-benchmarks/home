@@ -75,7 +75,7 @@
         },
         "state_5": {
             "2": "state_5",
-            "3": "state_5",
+            "4": "state_5",
             "5": "state_6",
             "6": "state_7"
 
@@ -94,6 +94,7 @@
             "8": "state_9"
         },
         "state_9": {
+            "5":"state_6",
             "6": "state_7",
             "7": "state_8",
             "8": "state_8",
