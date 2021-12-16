@@ -51,7 +51,7 @@
     },
     "warnings": {
         "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
-        "3": "Clicked \"CANCEL\" to give up downloading a document (bible or book or dictionary or commentary)."
+        "2": "Clicked \"CANCEL\" to give up downloading a document (bible or book or dictionary or commentary)."
     },
     "all_events_happened": null,
     "transition_function": {
