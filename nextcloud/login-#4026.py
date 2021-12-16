@@ -29,18 +29,18 @@ if __name__ == '__main__':
     wait()
     out = d(className="android.widget.Button", resourceId="com.nextcloud.client:id/login").click()
     if not out:
-        print("SUCCESS")
+        print("login SUCCESS")
 
     wait()
     out = d(className="android.widget.EditText", resourceId="com.nextcloud.client:id/hostUrlInput").set_text(
         "https://shared02.opsone-cloud.ch/")
     if out:
-        print("SUCCESS")
+        print(" hostUrlInput SUCCESS")
 
     wait()
     out = d(className="android.widget.ImageButton", resourceId="com.nextcloud.client:id/testServerButton").click()
     if not out:
-        print("SUCCESS")
+        print("testServerButton SUCCESS")
 
     wait()
     if device_type == "humandroid":
@@ -50,22 +50,25 @@ if __name__ == '__main__':
     else:
         out = d.click(400, 600)
     if not out:
-        print("SUCCESS")
-
+        print("device type SUCCESS")
+    
+    wait()
+    d.xpath('//*[@resource-id="redirect-link"]/android.view.View[1]/android.widget.Button[1]').click()
+    
     wait()
     out = d(className="android.widget.EditText", resourceId="user").set_text("droid_fuzzing_2@163.com")
     if out:
-        print("SUCCESS")
+        print(" user SUCCESS")
 
     wait()
     out = d(className="android.widget.EditText", resourceId="password").set_text("droid.fuzzing")
     if out:
-        print("SUCCESS")
+        print("password SUCCESS")
 
     wait()
     out = d(className="android.widget.Button", resourceId="submit-form").click()
     if not out:
-        print("SUCCESS")
+        print("submit SUCCESS")
 
     wait()
     out = d(className="android.widget.Button", resourceId="").click()
