@@ -47,22 +47,22 @@
             "reason": null,
             "dependency": "cd:5, cd:7"
         },
-        "10": {
+        "a": {
             "info": "Delete a unnamed label.",
             "reason": null,
             "dependency": "cd:6, cd:8"
         },
-        "11": {
+        "b": {
             "info": "Edit a empty label.",
             "reason": null,
             "dependency": "cd:6, cd:8"
         },
-        "12": {
+        "c": {
             "info": "Delete the last unnamed label.",
             "reason": null,
             "dependency": "cd:6， cd:8"
         },
-        "13": {
+        "d": {
             "info": "Delete the last named label.",
             "reason": null,
             "dependency": "cd:5, cd:7"
@@ -70,7 +70,8 @@
     },
     "warnings": {
         "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
-        "2": "Cancel to create or edit a label"
+        "2": "Cancel to create or edit a label",
+        "6": "Warning 6: Cancel to create or edit a label "
     },
     "all_events_happened": null,
     "transition_function": {

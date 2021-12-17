@@ -1,21 +1,21 @@
 {
     "app_name": "FireFoxLite",
-    "bug_id": "#5058",
+    "bug_id": "#5085",
     "events": {
         "1": {
             "info": "Clicked the menu on the right bottom.",
             "reason": null,
-            "depedency": null
+            "dependency": null
         },
         "2": {
             "info": "Clicked \"Setting\" in the menu.",
             "reason": null,
-            "depedency": "cd:1"
+            "dependency": "cd:1"
         },
         "3": {
             "info": "Changed the language.",
             "reason": null,
-            "depedency": "cd:2"
+            "dependency": "cd:2"
         }
     },
     "warnings": {},

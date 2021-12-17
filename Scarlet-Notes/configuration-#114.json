@@ -1,7 +1,7 @@
 {
     "app_name": "ScarletNote",
     "bug_id": "#114",
-    "steps": {
+    "events": {
         "1": {
             "info": " Created a new notebook.",
             "reason": null,
@@ -39,7 +39,6 @@
         }
     },
     "warnings": {},
-    "all_steps_reached": null,
     "all_events_happened": null,
     "transition_function": {
         "state_0": {
