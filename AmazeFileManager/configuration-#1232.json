@@ -16,7 +16,7 @@
     "warnings" : {
 
     },
-    "all_events_happened": "Should copy files (cutting files does not work) to external storage (SD card).",
+    "all_events_happened": "When pasted a file in SD card, should give the permission",
     "transition_function": {
         "state_0": {
             "1": "state_1"
