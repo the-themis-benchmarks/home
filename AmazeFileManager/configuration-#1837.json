@@ -8,7 +8,7 @@
             "dependency": null
         },
         "2": {
-            "info": "Search a string.",
+            "info": "Inputted a  string in the searching bar and Searched it.",
             "reason": null,
             "dependency": "cd:1"
         }
