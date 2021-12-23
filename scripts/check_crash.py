@@ -140,10 +140,10 @@ app_crash_data = {
 
     'open-event-attendee-android': {
         '#2198': [
-            'org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt',
-            # special handling for combo, which discarded the line number on this case
-            # 'org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:127)',
-            'org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt']
+            "androidx.fragment.app.Fragment$InstantiationException: Unable to instantiate fragment org.fossasia.openevent.general.search.type.SearchTypeFragment: calling Fragment constructor caused an exception",
+            "org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:134)",
+            "org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt"
+            ]
     },
 
     'openlauncher': {
