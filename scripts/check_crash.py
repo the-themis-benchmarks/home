@@ -113,12 +113,18 @@ app_crash_data = {
 
     'FirefoxLite': {
 
-        '#4881': ['org.json.JSONException: End of input at character',
-                  'org.mozilla.rocket.util.JsonUtilsKt.toJsonArray(JsonUtils.kt',
-                  'org.mozilla.rocket.home.contenthub.data.ContentHubRepoKt.jsonStringToTypeList(ContentHubRepo.kt',
-                  'org.mozilla.rocket.home.contenthub.data.ContentHubRepo$getReadTypesLive$1.invoke(ContentHubRepo.kt',
-                  'org.mozilla.rocket.extension.LiveDataExtensionKt$sam$androidx_arch_core_util_Function$0.apply(LiveDataExtension.kt)',
-                  'org.mozilla.focus.activity.MainActivity.onStart(MainActivity.kt',
+        '#4881': ["java.lang.NullPointerException: Attempt to invoke virtual method 'void android.view.View.setVisibility(int)' on a null object reference",
+                  "org.mozilla.rocket.content.common.ui.ContentTabHelper$Observer.onEnterFullScreen(ContentTabHelper.kt",
+                  "org.mozilla.rocket.tabs.TabViewEngineObserver$onEnterFullScreen$1.invoke(TabViewEngineObserver.kt",
+                  "mozilla.components.support.base.observer.ObserverRegistry.notifyObservers(ObserverRegistry.kt",
+                  "at org.mozilla.rocket.tabs.Session.notifyObservers(Session.kt)",
+                  "at org.mozilla.rocket.tabs.TabViewEngineObserver.onEnterFullScreen(TabViewEngineObserver.kt:66)",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient$onEnterFullScreen$1.invoke(TabViewEngineSession.kt",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient$onEnterFullScreen$1.invoke(TabViewEngineSession.kt",
+                  "at mozilla.components.support.base.observer.ObserverRegistry.notifyObservers(ObserverRegistry.kt",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession.notifyObservers(TabViewEngineSession.kt)",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient.onEnterFullScreen(TabViewEngineSession.kt",
+                  "at org.mozilla.focus.webkit.FocusWebChromeClient.onShowCustomView(FocusWebChromeClient.java"
                   ],
 
         '#4942': [
