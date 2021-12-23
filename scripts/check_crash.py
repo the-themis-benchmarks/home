@@ -73,9 +73,13 @@ app_crash_data = {
         '#261': ['java.lang.StackOverflowError: stack size',
                  'org.crosswire.jsword.index.lucene.LuceneIndex.generateSearchIndexImpl(LuceneIndex.java'],
 
-        '#375': ['kotlin.TypeCastException: null cannot be cast to non-null type org.crosswire.jsword.book.Book',
-                 'net.bible.service.history.HistoryManager.setDumpString(HistoryManager.kt',
-                 'net.bible.android.view.activity.page.MainBibleActivity.openTab(MainBibleActivity.kt'],
+        '#375': ["kotlin.TypeCastException: null cannot be cast to non-null type org.crosswire.jsword.book.Book",
+                 "net.bible.service.history.HistoryManager.setDumpString(HistoryManager.kt",
+ 	             "net.bible.android.control.page.window.WindowRepository.restoreState(WindowRepository.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity.openTab(MainBibleActivity.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity.access$openTab(MainBibleActivity.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity$chooseTab$1.onClick(MainBibleActivity.kt"
+                 ],
 
         '#480': ['net.bible.service.db.bookmark.BookmarkDBAdapter.updateLabel(BookmarkDBAdapter.kt',
                  'net.bible.android.control.bookmark.BookmarkControl.saveOrUpdateLabel(BookmarkControl.kt',
