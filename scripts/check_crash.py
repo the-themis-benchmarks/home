@@ -202,8 +202,15 @@ app_crash_data = {
     },
 
     'osmeditor': {
-        '#637': [
-            "Attempt to invoke interface method 'java.util.Set java.util.Map.entrySet()' on a null object reference"],
+        '#637': ["java.lang.NullPointerException: Attempt to invoke interface method 'java.util.Set java.util.Map.entrySet()' on a null object reference",
+            "de.blau.android.validation.BaseValidator.validateElement(BaseValidator.java",
+            "de.blau.android.validation.BaseValidator.validate(BaseValidator.java",
+            "de.blau.android.osm.Way.validate(Way.java",
+            "de.blau.android.osm.OsmElement.hasProblem(OsmElement.java",
+            "de.blau.android.Map.paintWay(Map.java",
+            "de.blau.android.Map.paintOsmData(Map.java",
+            "de.blau.android.Map.onDraw(Map.java"
+            ],
 
         # '#705': [
         #    "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
