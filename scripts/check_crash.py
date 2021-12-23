@@ -118,7 +118,7 @@ app_crash_data = {
                   "org.mozilla.rocket.tabs.TabViewEngineObserver$onEnterFullScreen$1.invoke(TabViewEngineObserver.kt",
                   "mozilla.components.support.base.observer.ObserverRegistry.notifyObservers(ObserverRegistry.kt",
                   "at org.mozilla.rocket.tabs.Session.notifyObservers(Session.kt)",
-                  "at org.mozilla.rocket.tabs.TabViewEngineObserver.onEnterFullScreen(TabViewEngineObserver.kt:66)",
+                  "at org.mozilla.rocket.tabs.TabViewEngineObserver.onEnterFullScreen(TabViewEngineObserver.kt",
                   "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient$onEnterFullScreen$1.invoke(TabViewEngineSession.kt",
                   "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient$onEnterFullScreen$1.invoke(TabViewEngineSession.kt",
                   "at mozilla.components.support.base.observer.ObserverRegistry.notifyObservers(ObserverRegistry.kt",
@@ -141,7 +141,10 @@ app_crash_data = {
     'open-event-attendee-android': {
         '#2198': [
             "androidx.fragment.app.Fragment$InstantiationException: Unable to instantiate fragment org.fossasia.openevent.general.search.type.SearchTypeFragment: calling Fragment constructor caused an exception",
+            # for instrumented apk
             "org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:134)",
+            # for non-instrumented apk
+            #   "org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:127)"
             "org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt"
             ]
     },
@@ -198,15 +201,16 @@ app_crash_data = {
         '#637': [
             "Attempt to invoke interface method 'java.util.Set java.util.Map.entrySet()' on a null object reference"],
 
-        '#705': [
-            "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"],
+        # '#705': [
+        #    "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
+        #    "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
+        #    "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"],
 
         '#729': [
+            "java.lang.RuntimeException: An error occurred while executing doInBackground()",
             "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"]
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java)",
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java)"]
     },
 
     'Scarlet-Notes': {
