@@ -73,9 +73,13 @@ app_crash_data = {
         '#261': ['java.lang.StackOverflowError: stack size',
                  'org.crosswire.jsword.index.lucene.LuceneIndex.generateSearchIndexImpl(LuceneIndex.java'],
 
-        '#375': ['kotlin.TypeCastException: null cannot be cast to non-null type org.crosswire.jsword.book.Book',
-                 'net.bible.service.history.HistoryManager.setDumpString(HistoryManager.kt',
-                 'net.bible.android.view.activity.page.MainBibleActivity.openTab(MainBibleActivity.kt'],
+        '#375': ["kotlin.TypeCastException: null cannot be cast to non-null type org.crosswire.jsword.book.Book",
+                 "net.bible.service.history.HistoryManager.setDumpString(HistoryManager.kt",
+ 	             "net.bible.android.control.page.window.WindowRepository.restoreState(WindowRepository.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity.openTab(MainBibleActivity.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity.access$openTab(MainBibleActivity.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity$chooseTab$1.onClick(MainBibleActivity.kt"
+                 ],
 
         '#480': ['net.bible.service.db.bookmark.BookmarkDBAdapter.updateLabel(BookmarkDBAdapter.kt',
                  'net.bible.android.control.bookmark.BookmarkControl.saveOrUpdateLabel(BookmarkControl.kt',
@@ -113,12 +117,18 @@ app_crash_data = {
 
     'FirefoxLite': {
 
-        '#4881': ['org.json.JSONException: End of input at character',
-                  'org.mozilla.rocket.util.JsonUtilsKt.toJsonArray(JsonUtils.kt',
-                  'org.mozilla.rocket.home.contenthub.data.ContentHubRepoKt.jsonStringToTypeList(ContentHubRepo.kt',
-                  'org.mozilla.rocket.home.contenthub.data.ContentHubRepo$getReadTypesLive$1.invoke(ContentHubRepo.kt',
-                  'org.mozilla.rocket.extension.LiveDataExtensionKt$sam$androidx_arch_core_util_Function$0.apply(LiveDataExtension.kt)',
-                  'org.mozilla.focus.activity.MainActivity.onStart(MainActivity.kt',
+        '#4881': ["java.lang.NullPointerException: Attempt to invoke virtual method 'void android.view.View.setVisibility(int)' on a null object reference",
+                  "org.mozilla.rocket.content.common.ui.ContentTabHelper$Observer.onEnterFullScreen(ContentTabHelper.kt",
+                  "org.mozilla.rocket.tabs.TabViewEngineObserver$onEnterFullScreen$1.invoke(TabViewEngineObserver.kt",
+                  "mozilla.components.support.base.observer.ObserverRegistry.notifyObservers(ObserverRegistry.kt",
+                  "at org.mozilla.rocket.tabs.Session.notifyObservers(Session.kt)",
+                  "at org.mozilla.rocket.tabs.TabViewEngineObserver.onEnterFullScreen(TabViewEngineObserver.kt",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient$onEnterFullScreen$1.invoke(TabViewEngineSession.kt",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient$onEnterFullScreen$1.invoke(TabViewEngineSession.kt",
+                  "at mozilla.components.support.base.observer.ObserverRegistry.notifyObservers(ObserverRegistry.kt",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession.notifyObservers(TabViewEngineSession.kt)",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient.onEnterFullScreen(TabViewEngineSession.kt",
+                  "at org.mozilla.focus.webkit.FocusWebChromeClient.onShowCustomView(FocusWebChromeClient.java"
                   ],
 
         '#4942': [
@@ -134,10 +144,13 @@ app_crash_data = {
 
     'open-event-attendee-android': {
         '#2198': [
-            'org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt',
-            # special handling for combo, which discarded the line number on this case
-            # 'org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:127)',
-            'org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt']
+            "androidx.fragment.app.Fragment$InstantiationException: Unable to instantiate fragment org.fossasia.openevent.general.search.type.SearchTypeFragment: calling Fragment constructor caused an exception",
+            # for instrumented apk
+            "org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:134)",
+            # for non-instrumented apk
+            #   "org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:127)"
+            "org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt"
+            ]
     },
 
     'openlauncher': {
@@ -189,18 +202,26 @@ app_crash_data = {
     },
 
     'osmeditor': {
-        '#637': [
-            "Attempt to invoke interface method 'java.util.Set java.util.Map.entrySet()' on a null object reference"],
+        '#637': ["java.lang.NullPointerException: Attempt to invoke interface method 'java.util.Set java.util.Map.entrySet()' on a null object reference",
+            "de.blau.android.validation.BaseValidator.validateElement(BaseValidator.java",
+            "de.blau.android.validation.BaseValidator.validate(BaseValidator.java",
+            "de.blau.android.osm.Way.validate(Way.java",
+            "de.blau.android.osm.OsmElement.hasProblem(OsmElement.java",
+            "de.blau.android.Map.paintWay(Map.java",
+            "de.blau.android.Map.paintOsmData(Map.java",
+            "de.blau.android.Map.onDraw(Map.java"
+            ],
 
-        '#705': [
-            "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"],
+        # '#705': [
+        #    "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
+        #    "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
+        #    "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"],
 
         '#729': [
+            "java.lang.RuntimeException: An error occurred while executing doInBackground()",
             "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"]
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java)",
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java)"]
     },
 
     'Scarlet-Notes': {
