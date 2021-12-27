@@ -8,7 +8,7 @@
             "dependency": null
         },
         "2": {
-            "info": "Selected \"Plant list\".",
+            "info": "Go into \"Plant list\" view.",
             "reason": null,
             "dependency": "cd:1"
         },
