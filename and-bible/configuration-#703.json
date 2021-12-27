@@ -18,29 +18,24 @@
             "dependency": null
         },
         "4": {
-            "info": "Click \"OK\" in \"Download Documents\".",
+            "info": "Entered a editing note view.",
             "reason": null,
-            "dependency": "cd:3"
+            "dependency": null
         },
         "5": {
-            "info": "Enter a editing note view.",
+            "info": "Entered a bible view.",
             "reason": null,
-            "dependency": "cd:4"
+            "dependency": null
         },
         "6": {
-            "info": "Enter a bible view.",
-            "reason": null,
-            "dependency": "cd:4"
-        },
-        "7": {
             "info": "Clicked searchButton.",
             "reason": null,
-            "dependency": "cd:4"
+            "dependency": null
         },
-        "8": {
-            "info": "Click \"CREATE\" to Search Index.",
+        "7": {
+            "info": "Clicked \"CREATE\" to Search Index.",
             "reason": null,
-            "dependency": "cd:7"
+            "dependency": "cd:6"
         }
     },
     "warnings": {
@@ -54,6 +49,7 @@
             "1": "state_1"
         },
         "state_1": {
+            "1": "state_1",
             "2": "state_2"
         },
         "state_2": {
@@ -61,23 +57,19 @@
         },
         "state_3": {
             "3": "state_3",
-            "4": "state_4"
+            "4": "state_4",
+            "5": "state_3",
+            "6": "state_3",
+            "7": "state_3"
         },
         "state_4": {
-            "3": "state_4",
-            "6": "state_4",
-            "7": "state_4",
-            "5": "state_5"
+            "6": "state_5"
         },
         "state_5": {
-            "6": "state_4",
-            "7": "state_7"
-        },
-        "state_7": {
-            "6": "state_4",
-            "7": "state_7",
-            "8": "Crash!"
+            "5": "state_3",
+            "6": "state_5",
+            "7": "Crash!"
         }
     },
-    "regex": "1233*4(3+6+7)*5(6(3+6+7)*5)*7(7+6(3+6+7)*5(6(3+6+7)*5)*7)*8"
+    "regex": ""
 }
