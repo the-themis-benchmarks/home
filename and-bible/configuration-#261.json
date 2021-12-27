@@ -28,7 +28,7 @@
             "dependency": "cd:4"
         },
         "6": {
-            "info": "Selected a chapter of the book.",
+            "info": "Chosen a chapter of the book.",
             "reason": null,
             "dependency": "cd:5"
         },
@@ -59,6 +59,7 @@
             "1": "state_1"
         },
         "state_1": {
+            "1": "state_1",
             "3": "state_3",
             "2": "state_2"
         },
