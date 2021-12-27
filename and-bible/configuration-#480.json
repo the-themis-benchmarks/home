@@ -15,50 +15,50 @@
         "3": {
             "info": "Enter \"Manage Bookmark Labels\" view.",
             "reason": null,
-            "dependency": "cd:3"
+            "dependency": null
         },
         "4": {
-            "info": "Create a named label.",
+            "info": "Created a named label.",
             "reason": null,
-            "dependency": "cd:4"
+            "dependency": null
         },
         "5": {
-            "info": "Create a unnamed label.",
+            "info": "Created a unnamed label.",
             "reason": null,
-            "dependency": "cd:4"
+            "dependency": null
         },
         "6": {
-            "info": "Edit a named label to another name.",
+            "info": "Edited a named label to another name.",
             "reason": null,
-            "dependency": "cd:5"
+            "dependency": "dd:4"
         },
         "7": {
-            "info": "Edit a named label to unnamed.",
+            "info": "Edited a named label to unnamed.",
             "reason": null,
-            "dependency": "cd:5"
+            "dependency": "dd:4"
         },
         "8": {
-            "info": "Delete a named label.",
+            "info": "Deleted a named label.",
             "reason": null,
-            "dependency": "cd:5, cd:7"
+            "dependency": "dd:4"
         },
         "9": {
-            "info": "Delete a unnamed label.",
+            "info": "Deleted a unnamed label.",
             "reason": null,
-            "dependency": "cd:6, cd:8"
+            "dependency": "dd:5"
         },
         "a": {
-            "info": "Edit a empty label.",
+            "info": "Edited a empty label.",
             "reason": null,
             "dependency": "cd:6, cd:8"
         },
         "b": {
-            "info": "Delete the last unnamed label.",
+            "info": "Deleted the last unnamed label.",
             "reason": null,
             "dependency": "cd:6， cd:8"
         },
         "c": {
-            "info": "Delete the last named label.",
+            "info": "Deleted the last named label.",
             "reason": null,
             "dependency": "cd:5, cd:7"
         }
