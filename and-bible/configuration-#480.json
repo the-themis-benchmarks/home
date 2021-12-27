@@ -13,57 +13,52 @@
             "dependency": null
         },
         "3": {
-            "info": "Clicked \"OK\" in \"Download Documents\"",
-            "reason": null,
-            "dependency": "cd:1"
-        },
-        "4": {
             "info": "Enter \"Manage Bookmark Labels\" view.",
             "reason": null,
-            "dependency": "cd:3"
+            "dependency": null
+        },
+        "4": {
+            "info": "Created a named label.",
+            "reason": null,
+            "dependency": null
         },
         "5": {
-            "info": "Create a named label.",
+            "info": "Created a unnamed label.",
             "reason": null,
-            "dependency": "cd:4"
+            "dependency": null
         },
         "6": {
-            "info": "Create a label with no name.",
+            "info": "Edited a named label to another name.",
             "reason": null,
-            "dependency": "cd:4"
+            "dependency": "dd:4"
         },
         "7": {
-            "info": "Edit a named label to another name.",
+            "info": "Edited a named label to unnamed.",
             "reason": null,
-            "dependency": "cd:5"
+            "dependency": "dd:4"
         },
         "8": {
-            "info": "Edit a named label to unnamed.",
+            "info": "Deleted a named label.",
             "reason": null,
-            "dependency": "cd:5"
+            "dependency": "dd:4"
         },
         "9": {
-            "info": "Delete a named label.",
+            "info": "Deleted a unnamed label.",
             "reason": null,
-            "dependency": "cd:5, cd:7"
+            "dependency": "dd:5"
         },
         "a": {
-            "info": "Delete a unnamed label.",
+            "info": "Edited a empty label.",
             "reason": null,
             "dependency": "cd:6, cd:8"
         },
         "b": {
-            "info": "Edit a empty label.",
-            "reason": null,
-            "dependency": "cd:6, cd:8"
-        },
-        "c": {
-            "info": "Delete the last unnamed label.",
+            "info": "Deleted the last unnamed label.",
             "reason": null,
             "dependency": "cd:6， cd:8"
         },
-        "d": {
-            "info": "Delete the last named label.",
+        "c": {
+            "info": "Deleted the last named label.",
             "reason": null,
             "dependency": "cd:5, cd:7"
         }
@@ -71,7 +66,7 @@
     "warnings": {
         "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
         "2": "Cancel to create or edit a label",
-        "6": "Warning 6: Cancel to create or edit a label "
+        "5": "Cancel to create or edit a label "
     },
     "all_events_happened": null,
     "transition_function": {
@@ -86,47 +81,44 @@
             "3": "state_3"
         },
         "state_3": {
-            "3": "state_4"
+            "2": "state_3",
+            "3": "state_3",
+            "4": "state_5",
+            "5": "state_4"
         },
         "state_4": {
             "2": "state_4",
-            "4": "state_4",
-            "5": "state_6",
-            "6": "state_5"
+            "3": "state_4",
+            "4": "state_6",
+            "5": "state_4",
+            "b": "state_3"
         },
         "state_5": {
             "2": "state_5",
+            "3": "state_5",
             "4": "state_5",
-            "5": "state_7",
-            "6": "state_5",
-            "c": "state_4"
+            "5": "state_6",
+            "c": "state_3"
         },
         "state_6": {
             "2": "state_6",
+            "3": "state_6",
             "4": "state_6",
             "5": "state_6",
-            "6": "state_7",
-            "d": "state_4"
+            "b": "state_5",
+            "c": "state_7"
         },
         "state_7": {
             "2": "state_7",
+            "3": "state_7",
             "4": "state_7",
-            "5": "state_7",
-            "6": "state_7",
-            "c": "state_6",
-            "d": "state_8"
+            "5": "state_6",
+            "a": "state_8",
+            "b": "state_3"
         },
         "state_8": {
-            "2": "state_8",
-            "4": "state_8",
-            "6": "state_8",
-            "5": "state_7",
-            "b": "state_9",
-            "c": "state_4"
-        },
-        "state_9": {
-            "7": "Crash!"
+            "6": "Crash!"
         }
     },
-    "regex": "(122*34(2+4)*6(2+4+6+12(2+4)*6)*5+(122*34(2+4)*5+122*34(2+4)*6(2+4+6+12(2+4)*6)*12(2+4)*5)(2+4+5+13(2+4)*5+13(2+4)*6(2+4+6+12(2+4)*6)*12(2+4)*5)*(6+13(2+4)*6(2+4+6+12(2+4)*6)*5))(2+4+5+6+12(2+4+5+13(2+4)*5+13(2+4)*6(2+4+6+12(2+4)*6)*12(2+4)*5)*(6+13(2+4)*6(2+4+6+12(2+4)*6)*5))*13(2+4+6+(5+12(2+4)*6(2+4+6+12(2+4)*6)*5+(12(2+4)*5+12(2+4)*6(2+4+6+12(2+4)*6)*12(2+4)*5)(2+4+5+13(2+4)*5+13(2+4)*6(2+4+6+12(2+4)*6)*12(2+4)*5)*(6+13(2+4)*6(2+4+6+12(2+4)*6)*5))(2+4+5+6+12(2+4+5+13(2+4)*5+13(2+4)*6(2+4+6+12(2+4)*6)*12(2+4)*5)*(6+13(2+4)*6(2+4+6+12(2+4)*6)*5))*13)*117"
+    "regex": ""
 }
