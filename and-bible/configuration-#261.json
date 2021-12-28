@@ -1,6 +1,6 @@
 {
     "app_name": "AndBible",
-    "bug_id": "#216",
+    "bug_id": "#261",
     "events": {
         "1": {
             "info": "Clicked \"OK\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
