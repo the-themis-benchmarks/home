@@ -227,8 +227,8 @@ app_crash_data = {
         '#729': [
             "java.lang.RuntimeException: An error occurred while executing doInBackground()",
             "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java)",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java)"]
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java",
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java"]
     },
 
     'Scarlet-Notes': {
@@ -285,7 +285,7 @@ app_crash_data = {
     },
 
     'WordPress': {
-        
+
         '#6530': [
             "java.lang.NullPointerException: Attempt to invoke virtual method 'void org.wordpress.android.fluxc.model.PostModel.setDateLocallyChanged(java.lang.String)' on a null object reference",
             "org.wordpress.android.fluxc.store.PostStore.updatePost(PostStore.java",
