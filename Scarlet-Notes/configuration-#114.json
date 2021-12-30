@@ -3,7 +3,7 @@
     "bug_id": "#114",
     "events": {
         "1": {
-            "info": " Created a new notebook.",
+            "info": "Created a new notebook.",
             "reason": null,
             "dependency": null
         },

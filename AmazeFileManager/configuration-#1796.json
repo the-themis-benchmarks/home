@@ -3,12 +3,12 @@
     "bug_id": "#1796",
     "events": {
         "1": {
-            "info": "Cut a folder or folders in the list.",
+            "info": "Cut a folder or folders in the file list.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked \"Paste\" to paste a folder in path.",
+            "info": "Clicked \"Paste\" to paste a folder in some folder.",
             "reason": null,
             "dependency": "cd:1"
         },

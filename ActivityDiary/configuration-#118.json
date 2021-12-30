@@ -3,48 +3,48 @@
     "bug_id": "#118",
     "events": {
         "1": {
-            "info": "Clicked an item in MainActivity.",
+            "info": "Clicked an activity item on the main page.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked the fabAttachPicture.",
+            "info": "Clicked the button to take a picture.",
             "reason": null,
             "dependency": null
         },
         "3": {
-            "info": "Get a picture.",
+            "info": "Got a picture.",
             "reason": null,
             "dependency": "cd:2"
         },
         "4": {
-            "info": "Open the drawer.",
+            "info": "Opened the drawer.",
             "reason": null,
             "dependency": null
         },
         "5": {
-            "info": "Clicked the \"Dairy\" in the drawer.",
+            "info": "Clicked the \"Dairy\" option in the drawer.",
             "reason": null,
             "dependency": "cd:4"
         },
         "6": {
-            "info": "Long clicked an image in an activity entry.",
+            "info": "Long clicked a picture of an activity entry.",
             "reason": null,
             "dependency": "cd:5"
         },
         "7": {
-            "info": "Deleted an image in an activity entry.",
+            "info": "Deleted a picture of an activity entry.",
             "reason": null,
             "dependency": "cd:6"
         },
         "8": {
-            "info": "Deleted a image when the constrains are satisfied .",
-            "reason": "the deleted image should not be the first activity",
+            "info": "Deleted a picture when the first activity entry in the list does not have any picture.",
+            "reason":  "Deleted a picture when the first activity entry in the list does not have any picture.",
             "dependency": null
         }
     },
     "warnings": {
-        "7": "Canceled to delete the image in an activity entry."
+        "7": "Canceled to delete the picture of an activity entry."
     },
     "all_events_happened": null,
     "transition_function": {

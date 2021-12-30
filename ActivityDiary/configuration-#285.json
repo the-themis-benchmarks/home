@@ -8,7 +8,7 @@
             "dependency": null
         },
         "2": {
-            "info": "Clicked \"Setting\" in the drawer.",
+            "info": "Clicked the \"Setting\" option in the drawer.",
             "reason": null,
             "dependency": "cd:1"
         },
@@ -18,18 +18,18 @@
             "dependency": "cd:2"
         },
         "4": {
-            "info": "Changed \"Update period\" to a unique character in \"Setting\".",
-            "reason": "Can't input unique characters like \"$\".",
+            "info": "Changed the value of \"Update period\" in \"Setting\".",
+            "reason": "Did not change the value of \"Update period\" in \"Setting\".",
             "dependency": "cd:3"
         },
         "5": {
-            "info": "Changed \"Location Service\" to \"OFF\"",
+            "info": "Changed \"Location Service\" to \"OFF\".",
             "reason": null,
             "dependency": "cd:2"
         },
         "6": {
-            "info": "Event 6: Changed \"Update period\" to illegal value",
-            "reason": "Should change \"Update period\" to illegal value like '&%$#@' ",
+            "info": "Changed the value of \"Update period\" to an illegal one.",
+            "reason": "Should change \"Update period\" to an illegal (non-digital) value.",
             "dependency": "dd:4"
         }
     },

@@ -3,7 +3,7 @@
     "bug_id": "#261",
     "events": {
         "1": {
-            "info": "Clicked \"OK\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
+            "info": "Clicked \"OK\" in the \"Download a Bible from the Internet\" dialog when startup.",
             "reason": null,
             "dependency": null
         },
@@ -18,32 +18,32 @@
             "dependency": null
         },
         "4": {
-            "info": "Entered \"Choose Document\" view.",
+            "info": "Opened the drawer and clicked the \"Choose Document\" option.",
             "reason": null,
             "dependency": null
         },
         "5": {
-            "info": "Selected a book.",
+            "info": "Selected a downloaded book in the \"Choose Document\" view.",
             "reason": null,
             "dependency": "cd:4"
         },
         "6": {
-            "info": "Chosen a chapter of the book.",
+            "info": "Chose a chapter of a downloaded book.",
             "reason": null,
             "dependency": "cd:5"
         },
         "7": {
-            "info": "Entered SearchIndex view.",
+            "info": "Opened the drawer and clicked the \"Find\" option.",
             "reason": null,
             "dependency": null
         },
         "8": {
-            "info": "Clicked \"CREATE\" in \"Search Index\".",
+            "info": "Clicked \"CREATE\" in the \"Search Index\" page.",
             "reason": null,
             "dependency": "cd:7"
         },
         "9": {
-            "info": "Selected a document (not book)",
+            "info": "Selected other downloaded document (not a book) in the \"Choose Document\" view",
             "reason": null,
             "dependency": "cd:4"
         }

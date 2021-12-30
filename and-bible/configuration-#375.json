@@ -3,50 +3,50 @@
     "bug_id": "#375",
     "events": {
         "1": {
-            "info": "Clicked \"OK\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
+            "info": "Clicked \"OK\" in the \"Download a Bible from the Internet\" dialog when startup.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked \"OK\" to download a document (bible or book or dictionary or commentary).",
+            "info": "Clicked \"OK\" to download a document (bible/book/dictionary/commentary).",
             "reason": null,
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Clicked \"New Tab\" in menu \"Tabs\".",
+            "info": "Clicked \"New Tab\" in the menu \"Tabs\".",
             "reason": null,
             "dependency": "cd:3"
         },
         "4": {
-            "info": "Set Current Document to a new bible/book/dictionary/commentary.",
+            "info": "Switched the current document to another bible/book/dictionary/commentary.",
             "reason": null,
             "dependency": "cd:6"
         },
         "5": {
-            "info": "Entered \"Choose Document\" view.",
+            "info": "Entered the \"Choose Document\" page.",
             "reason": null,
             "dependency": "cd:4"
         },
         "6": {
-            "info": "Deleted a document.",
+            "info": "Deleted a document in the \"Choose Document\" page.",
             "reason": null,
             "dependency": "cd:4"
         },
         "7": {
-            "info": "Chosen a tab to open.",
+            "info": "Chose a tab to open.",
             "reason": null,
             "dependency": "cd:4"
         },
         "8": {
-            "info": "Opened the tab that dispalyed file is deleted.",
-            "reason": "Should open the tab that file is deleted",
+            "info": "Opened the tab where the dispalyed document is deleted.",
+            "reason": "Opened the tab where the dispalyed document is deleted.",
             "dependency": "dd:7"
         }
         
     },
     "warnings": {
-        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
-        "2": "Clicked \"CANCEL\" to give up downloading a document (bible or book or dictionary or commentary)."
+        "1": "Clicked \"CANCEL\" in the \"Download a Bible from the Internet\" dialog when startup.",
+        "2": "Clicked \"CANCEL\" to give up downloading a document (bible/book/dictionary/commentary)."
     },
     "all_events_happened": null,
     "transition_function": {
