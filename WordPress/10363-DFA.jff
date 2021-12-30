@@ -30,6 +30,11 @@
 		<transition>&#13;
 			<from>1</from>&#13;
 			<to>2</to>&#13;
+			<read>3</read>&#13;
+		</transition>&#13;
+		<transition>&#13;
+			<from>1</from>&#13;
+			<to>2</to>&#13;
 			<read>2</read>&#13;
 		</transition>&#13;
 	</automaton>&#13;
