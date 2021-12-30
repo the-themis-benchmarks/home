@@ -1,5 +1,5 @@
-# This file aims to do quick crash checking
-#   
+# This file aims to do quick crash checking.
+# Note that this file applies to both the non-intrumented APKs for all bugs.
 
 import csv
 import datetime
@@ -299,6 +299,7 @@ app_crash_data = {
         '#8659': [
             'Two different ViewHolders have the same stable ID. Stable IDs in your adapter MUST BE unique and SHOULD NOT change.'],
 
+        # not forward-ported 
         '#10302': [
             "java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String org.wordpress.android.fluxc.model.SiteModel.getMobileEditor()' on a null object reference",
             "org.wordpress.android.util.SiteUtils.isBlockEditorDefaultForNewPost(SiteUtils.java",
@@ -310,12 +311,13 @@ app_crash_data = {
             "org.wordpress.android.login.LoginEmailFragment.onHelp(LoginEmailFragment.java",
             "org.wordpress.android.login.LoginBaseFormFragment.onOptionsItemSelected(LoginBaseFormFragment.java"],
 
+        # not forward-ported 
         '#10363': ['java.lang.IllegalStateException: itemView.findViewById(R.id.container) must not be null',
                    'org.wordpress.android.ui.posts.PostListItemViewHolder.<init>(PostListItemViewHolder.kt',
                    'org.wordpress.android.ui.posts.PostListItemViewHolder$Compact.<init>(PostListItemViewHolder.kt',
                    'org.wordpress.android.ui.posts.adapters.PostListAdapter.onCreateViewHolder(PostListAdapter.kt'
                    ],
-
+        # not forward-ported 
         '#10547': [
             "java.lang.RuntimeException: Unable to start activity ComponentInfo{org.wordpress.android/org.wordpress.android.ui.posts.EditPostActivity}: java.lang.IllegalArgumentException: PostLoadingState wrong value 6",
             "org.wordpress.android.ui.posts.EditPostActivity$PostLoadingState.fromInt(EditPostActivity.java'"
@@ -324,6 +326,7 @@ app_crash_data = {
 
         '#10876': ['in WithSelect(WithDispatch(WithViewportMatch(WithPreferredColorScheme(Component))))'],
 
+        # not forward-ported 
         '#11135': [
             'java.lang.IllegalStateException: siteStore.getSiteBySiteI…t.getLong(EXTRA_SITE_ID)) must not be null',
             'org.wordpress.android.ui.CommentFullScreenDialogFragment.onCreateView(CommentFullScreenDialogFragment.kt'],
