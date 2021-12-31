@@ -1,4 +1,9 @@
-# This file aims to do quick crash checking
+# This file aims to do quick crash checking. 
+# Note that this file applies to both the instrumented and non-intrumented APKs for most bugs 
+#   because we ignore the concrete line numbers in the stack traces. 
+# But for some specific bugs of WordPress (i.e., WordPress-#11135/#10547/#10363), this file only applies to the
+#   corresponding intrumented APKs because these bugs are forward-ported (i.e. the app source code may has changed
+#   and as a result, the stack traces may also have changed).
 
 import csv
 import datetime
@@ -90,9 +95,11 @@ app_crash_data = {
             'net.bible.android.control.versification.sort.VersificationPrioritiser.getVersifications(VersificationPrioritiser.java',
             'net.bible.android.control.versification.sort.ConvertibleVerseRangeComparator$Builder.withMyNotes(ConvertibleVerseRangeComparator.java'],
 
-        '#703': ['org.crosswire.jsword.index.IndexStatus org.crosswire.jsword.book.Book.getIndexStatus()',
-                 'net.bible.android.view.activity.search.SearchIndexProgressStatus.jobFinished(SearchIndexProgressStatus.java',
-                 'net.bible.android.view.activity.base.ProgressActivityBase$initialiseView$uiUpdaterRunnable$1.run(ProgressActivityBase.kt']
+        '#703': ["java.lang.NullPointerException: Attempt to invoke interface method 'org.crosswire.jsword.index.IndexStatus org.crosswire.jsword.book.Book.getIndexStatus()' on a null object reference",
+                 "net.bible.android.view.activity.search.SearchIndexProgressStatus.jobFinished(SearchIndexProgressStatus.java",
+                 "net.bible.android.view.activity.base.ProgressActivityBase.updateProgress(ProgressActivityBase.kt",
+                 "net.bible.android.view.activity.base.ProgressActivityBase$initialiseView$uiUpdaterRunnable$1.run(ProgressActivityBase.kt"
+                 ]
     },
 
     'AmazeFileManager': {
@@ -220,8 +227,8 @@ app_crash_data = {
         '#729': [
             "java.lang.RuntimeException: An error occurred while executing doInBackground()",
             "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java)",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java)"]
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java",
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java"]
     },
 
     'Scarlet-Notes': {
@@ -278,31 +285,58 @@ app_crash_data = {
     },
 
     'WordPress': {
-        '#6530': ['org.wordpress.android.fluxc.store.PostStore.onAction(PostStore.java'],
+
+        '#6530': [
+            "java.lang.NullPointerException: Attempt to invoke virtual method 'void org.wordpress.android.fluxc.model.PostModel.setDateLocallyChanged(java.lang.String)' on a null object reference",
+            "org.wordpress.android.fluxc.store.PostStore.updatePost(PostStore.java",
+            "org.wordpress.android.fluxc.store.PostStore.onAction(PostStore.java"
+            ],
+
         '#7182': [
-            'org.wordpress.android.login.LoginUsernamePasswordFragment.onSiteChanged(LoginUsernamePasswordFragment.java'],
+            "java.lang.NullPointerException: Attempt to invoke virtual method 'void org.wordpress.android.ui.accounts.SmartLockHelper.saveCredentialsInSmartLock(java.lang.String, java.lang.String, java.lang.String, android.net.Uri)' on a null object reference",
+            "org.wordpress.android.ui.accounts.LoginActivity.saveCredentialsInSmartLock(LoginActivity.java",
+            "org.wordpress.android.login.LoginBaseFormFragment.saveCredentialsInSmartLock(LoginBaseFormFragment.java",
+            "org.wordpress.android.login.LoginUsernamePasswordFragment.finishLogin(LoginUsernamePasswordFragment.java",
+            "org.wordpress.android.login.LoginUsernamePasswordFragment.onSiteChanged(LoginUsernamePasswordFragment.java"
+            ],
+            
         '#8659': [
             'Two different ViewHolders have the same stable ID. Stable IDs in your adapter MUST BE unique and SHOULD NOT change.'],
-        '#10302': [
-            'org.wordpress.android.login.LoginBaseFormFragment.onOptionsItemSelected(LoginBaseFormFragment.java'],
 
-        '#10363': ['java.lang.IllegalStateException: itemView.findViewById(R.id.container) must not be null',
-                   'org.wordpress.android.ui.posts.PostListItemViewHolder.<init>(PostListItemViewHolder.kt',
-                   'org.wordpress.android.ui.posts.PostListItemViewHolder$Compact.<init>(PostListItemViewHolder.kt',
-                   'org.wordpress.android.ui.posts.adapters.PostListAdapter.onCreateViewHolder(PostListAdapter.kt'
+        # forward-ported 
+        '#10302': [
+            "java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String org.wordpress.android.fluxc.model.SiteModel.getMobileEditor()' on a null object reference",
+            "org.wordpress.android.util.SiteUtils.isBlockEditorDefaultForNewPost(SiteUtils.java",
+            "org.wordpress.android.ui.accounts.HelpActivity$Companion.createIntent(HelpActivity.kt",
+            "org.wordpress.android.ui.accounts.HelpActivity.createIntent(HelpActivity.kt)",
+            "org.wordpress.android.ui.ActivityLauncher.viewHelpAndSupport(ActivityLauncher.java",
+            "org.wordpress.android.ui.accounts.LoginActivity.viewHelpAndSupport(LoginActivity.java",
+            "org.wordpress.android.ui.accounts.LoginActivity.helpEmailScreen(LoginActivity.java",
+            "org.wordpress.android.login.LoginEmailFragment.onHelp(LoginEmailFragment.java",
+            "org.wordpress.android.login.LoginBaseFormFragment.onOptionsItemSelected(LoginBaseFormFragment.java"],
+
+        # forward-ported 
+        '#10363': ["java.lang.NullPointerException: itemView.findViewById(R.id.container) must not be null",
+                   "org.wordpress.android.ui.posts.PostListItemViewHolder.<init>(PostListItemViewHolder.kt",
+                   "org.wordpress.android.ui.posts.PostListItemViewHolder$Compact.<init>(PostListItemViewHolder.kt",
+                   "org.wordpress.android.ui.posts.adapters.PostListAdapter.onCreateViewHolder(PostListAdapter.kt"
                    ],
 
+        # forward-ported 
         '#10547': [
-            'start activity ComponentInfo{org.wordpress.android/org.wordpress.android.ui.posts.EditPostActivity}: java.lang.IllegalArgumentException: PostLoadingState wrong value 6',
-            'org.wordpress.android.ui.posts.EditPostActivity$PostLoadingState.fromInt(EditPostActivity.java',
-            'org.wordpress.android.ui.posts.EditPostActivity.onCreate(EditPostActivity.java'
+            "java.lang.RuntimeException: Unable to start activity ComponentInfo{org.wordpress.android/org.wordpress.android.ui.posts.EditPostActivity}: java.lang.RuntimeException: PostLoadingState wrong value 6",
+            "org.wordpress.android.ui.posts.editor.PostLoadingState$Companion.fromInt(PostLoadingState.kt",
+            "org.wordpress.android.ui.posts.editor.PostLoadingState.fromInt(PostLoadingState.kt)",
+            "org.wordpress.android.ui.posts.EditPostActivity.onCreate(EditPostActivity.java"
         ],
 
         '#10876': ['in WithSelect(WithDispatch(WithViewportMatch(WithPreferredColorScheme(Component))))'],
 
+        # forward-ported 
         '#11135': [
-            'java.lang.IllegalStateException: siteStore.getSiteBySiteI…t.getLong(EXTRA_SITE_ID)) must not be null',
-            'org.wordpress.android.ui.CommentFullScreenDialogFragment.onCreateView(CommentFullScreenDialogFragment.kt'],
+            "java.lang.NullPointerException",
+            "org.wordpress.android.ui.CommentFullScreenDialogFragment.onCreateView(CommentFullScreenDialogFragment.kt",
+            "org.wordpress.android.ui.CollapseFullScreenDialogFragment.onActivityCreated(CollapseFullScreenDialogFragment.java"],
 
         '#11992': [
             "java.lang.NullPointerException: Attempt to invoke virtual method 'boolean org.wordpress.android.ui.FilteredRecyclerView.isRefreshing()' on a null object reference",

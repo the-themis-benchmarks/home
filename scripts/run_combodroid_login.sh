@@ -132,6 +132,7 @@ sleep 2
 # start logcat
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
+adb -s $AVD_SERIAL logcat -G 10M
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E *:F *:S > $result_dir/logcat.log &
 
 # start coverage dumping
