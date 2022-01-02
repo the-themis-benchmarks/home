@@ -3,7 +3,7 @@
     "bug_id": "#5756",
     "events": {
         "1": {
-            "info": "Selected \"Create filtered deck\" in the menu.",
+            "info": "Selected the \"Create filtered deck\" option in the menu.",
             "reason": null,
             "dependency": null
         },
@@ -13,7 +13,7 @@
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Switch order to any other order.",
+            "info": "Changed \"cards selected by\" to any other option.",
             "reason": null,
             "dependency": "cd:2"
         },
@@ -31,7 +31,7 @@
     "warnings" : {
         "2": "Canceled creating a new filtered deck."
     },
-    "all_events_happened": "The Decker may be empty or the corresponding deck doesn't been selected.",
+    "all_events_happened": "The selected deck may be empty or the selected deck is not the filtered deck.",
     "transition_function": {
         "state_0": {
             "1": "state_1"

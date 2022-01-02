@@ -3,22 +3,22 @@
     "bug_id": "#6530",
     "events": {
         "1": {
-            "info": "Chose \"Try it\" to enable new editor.",
-            "reason": "Chose \"Not now\" instead.",
+            "info": "Selected the \"TRY IT\" in \"Try the new Editor\" dialog.",
+            "reason": "Selected the \"NOT NOW\" in \"Try the new Editor\" dialog.",
             "dependency": null
         },
         "2": {
-            "info": "Clicked the \"Blog posts\" at the main.",
+            "info": "Clicked the \"Blog posts\" in the main page.",
             "reason": null,
             "dependency": null
         },
         "3": {
-            "info": "Clicked the floating act button to create a new post.",
+            "info": "Clicked the FAB to create a new post in \"Posts\" page.",
             "reason": null,
             "dependency": null
         },
         "4": {
-            "info": "Clicked the \"+\" to open media window.",
+            "info": "Clicked the \"+\" icon at the bottom bar to open the media window.",
             "reason": null,
             "dependency": null
         },
@@ -28,20 +28,20 @@
             "dependency": "4"
         },
         "6": {
-            "info": "Pressed the Back button.",
+            "info": "Clicked the back button in post editor.",
             "reason": null,
             "dependency": null
         },
         "7": {
-            "info": "Pressed the \"Delete\" button in the post list card view.",
+            "info": "Clicked the \"Delete\" button in the list item in \"Posts\" page.",
             "reason": null,
             "dependency": null
         }
     },
-    "warnings" : {
-        "1": "Chose \"Not now\" to close the dialog. The crash wouldn't occur."
+    "warnings": {
+        "1": "Selected the \"TRY IT\" in \"Try the new Editor\" dialog."
     },
-    "all_events_happened": "Should delete the post when uploading.",
+    "all_events_happened": "Did not choose \"TRY IT\" or did not delete a post when it's uploading.",
     "transition_function": {
         "state_0": {
             "1": "state_1"
@@ -79,5 +79,5 @@
             "7": "Crash!"
         }
     },
-    "regex": "122*3(3+(6+2)2*3)*4(4+(3+(2+6)2*3)(3+(6+2)2*3)*4)*5(4+5+(3+22*3)(3+(6+2)2*3)*4(4+(3+(2+6)2*3)(3+(6+2)2*3)*4)*5)*6((3+22*3)(3+(6+2)2*3)*4(4+(3+(2+6)2*3)(3+(6+2)2*3)*4)*5(4+5+(3+22*3)(3+(6+2)2*3)*4(4+(3+(2+6)2*3)(3+(6+2)2*3)*4)*5)*6)*7"
+    "interesting_pairs": {"1": ["2"], "2": ["3"], "3": ["4"], "4": ["5"], "5": ["6"], "6": ["7"]}
 }

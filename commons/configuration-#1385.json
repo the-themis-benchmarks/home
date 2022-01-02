@@ -3,22 +3,22 @@
     "bug_id": "#1385",
     "events": {
         "1": {
-            "info": "Clicked \"Nearby\" in the drawer.",
+            "info": "Clicked the \"Nearby\" option in the drawer.",
             "reason": "Can't open the drawer.",
             "dependency": null
         },
         "2": {
-            "info": "Clicked the \"Detail list\" in \"Nearby\".",
+            "info": "Clicked the \"Detail list\" icon in the \"Nearby\" page.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         },
         "3": {
-            "info": "Changed the Nearby layout to landscape.",
+            "info": "Changed the \"Nearby\" page to landscape mode.",
             "reason": "Can't rotate the screen.",
             "dependency": null
         },
         "4": {
-            "info": "Changed the Nearby layout back to portrait as soon as possible.",
+            "info": "Changed the \"Nearby\" page back to portrait mode as soon as possible.",
             "reason": null,
             "dependency": null
         }
@@ -26,7 +26,7 @@
     "warnings" : {
 
     },
-    "all_events_happened": "Didn't rotate back the screen from landscape to portrait in time.",
+    "all_events_happened": "Did not change the screen mode from landscape to portrait as soon as possible.",
     "transition_function": {
         "state_0": {
             "1": "state_1"
@@ -48,5 +48,5 @@
             "3": "Crash!"
         }
     },
-    "regex": "11*2(2+11*2)*34+11*2(2+11*2)*43"
+    "interesting_pairs": {"1": ["2"], "2": ["3", "4"], "3": ["4"], "4": ["3"]}
 }

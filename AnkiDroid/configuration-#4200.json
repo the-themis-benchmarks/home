@@ -8,17 +8,17 @@
             "dependency": null
         },
         "2": {
-            "info": "Pressed \"Edit note\" button.",
+            "info": "Pressed the \"Edit note\" button.",
             "reason": null,
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Make any change in text editor.",
+            "info": "Made any change in text editor.",
             "reason": null,
             "dependency": "cd:2"
         },
         "4": {
-            "info": "Pressed \"Save note\" button in NoteEditor.",
+            "info": "Pressed the \"Save note\" button in card editor.",
             "reason": null,
             "dependency": "cd:2, dd:3"
         }
@@ -26,7 +26,7 @@
     "warnings" : {
 
     },
-    "all_events_happened": "\"Don't keep activities\" options in developer mode haven't been enabled or text keep the same after change.",
+    "all_events_happened": "The \"Don't keep activities\" option in the developer mode has not been enabled or the text has not been changed.",
     "transition_function": {
         "state_0": {
             "1": "state_1"
@@ -48,5 +48,5 @@
             "4": "Crash!"
         }
     },
-    "regex": "11*2(2+11*2)*3(3+(2+11*2)(2+11*2)*3)*4+(11*2(2+11*2)*4+11*2(2+11*2)*3(3+(2+11*2)(2+11*2)*3)*(2+11*2)(2+11*2)*4)((2+11*2)(2+11*2)*4+(2+11*2)(2+11*2)*3(3+(2+11*2)(2+11*2)*3)*(2+11*2)(2+11*2)*4)*(2+11*2)(2+11*2)*3(3+(2+11*2)(2+11*2)*3)*4"
+    "interesting_pairs": { "1": ["2"], "2": ["3"], "3": ["4"] }
 }

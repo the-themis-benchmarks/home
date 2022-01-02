@@ -1,24 +1,24 @@
 {
     "app_name": "OpenEventAttendeeAndroid",
-    "bug_id": "#2198-medium",
+    "bug_id": "#2198",
     "events": {
         "1": {
-            "info": "Selected the \"Search\" in the bottom NavBar.",
+            "info": "Selected the \"Search\" button at the bottom.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked the fabSearch in Search page.",
+            "info": "Clicked the FAB in the search page.",
             "reason": null,
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Clicked \"filter\" image button in search result page.",
+            "info": "Clicked the \"filter\" button in the search result page.",
             "reason": null,
             "dependency": "cd:2"
         },
         "4": {
-            "info": "Clicked the \"Category\" text view in search filter page.",
+            "info": "Clicked the \"Category\" textview in search filter page.",
             "reason": null,
             "dependency": "cd:3"
         }
@@ -47,5 +47,5 @@
             "4": "Crash!"
         }
     },
-    "regex": "11*2(2+11*2)*3(3+(2+11*2)(2+11*2)*3)*4"
+    "interesting_pairs": {"1": ["2"], "2": ["3"], "3": ["4"]}
 }

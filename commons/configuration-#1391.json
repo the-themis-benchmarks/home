@@ -3,18 +3,18 @@
     "bug_id": "#1391",
     "events": {
         "1": {
-            "info": "Clicked \"Nearby\" in the drawer.",
+            "info": "Selected the \"Nearby\" option in the drawer.",
             "reason": "Can't open the drawer.",
             "dependency": null
         },
         "2": {
             "info": "Selected a place on the map and showed the bottom sheet.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "cd:1"
         },
         "3": {
-            "info": "Clicked \"Setting\" in the drawer.",
-            "reason": "Can't open the drawer.",
+            "info": "Selected the \"Setting\" option in the drawer.",
+            "reason": "Cannot open the drawer.",
             "dependency": null
         },
         "4": {
@@ -23,7 +23,7 @@
             "dependency": "cd:3"
         },
         "5": {
-            "info": "Back to \"Nearby\" again.",
+            "info": "Back to the \"Nearby\" page again.",
             "reason": null,
             "dependency": null
         }
@@ -32,7 +32,7 @@
         "2": "Cancelled a place on the map and hid the bottom sheet.",
         "4": "Disabled the \"Night mode\" in the setting."
     },
-    "all_events_happened": "Should keep the state of Event 2 and enable the \"Night mode\" when enter \"Nearby\" again.",
+    "all_events_happened": "Should keep the state after doing Event 2 and enable the \"Night mode\" when enter \"Nearby\" again.",
     "transition_function": {
         "state_0": {
             "1": "state_1",
@@ -61,5 +61,5 @@
             "5": "Crash!"
         }
     },
-    "regex": "((1+5)(1+5)*3+(1+5)(1+5)*2(2+1(1+5)*2)*1(1+5)*3+(1+5)(1+5)*2(2+1(1+5)*2)*3(3+(2+(1+5)(1+5)*2)(2+1(1+5)*2)*3)*((1+5)(1+5)*3+(2+(1+5)(1+5)*2)(2+1(1+5)*2)*1(1+5)*3)+(1+5)(1+5)*2(2+1(1+5)*2)*3(3+(2+(1+5)(1+5)*2)(2+1(1+5)*2)*3)*4(4(3+(2+(1+5)(1+5)*2)(2+1(1+5)*2)*3)*4)*4(3+(2+(1+5)(1+5)*2)(2+1(1+5)*2)*3)*((1+5)(1+5)*3+(2+(1+5)(1+5)*2)(2+1(1+5)*2)*1(1+5)*3))*(1+5)(1+5)*2(2+1(1+5)*2)*3(3+(2+(1+5)(1+5)*2)(2+1(1+5)*2)*3)*4(4(3+(2+(1+5)(1+5)*2)(2+1(1+5)*2)*3)*4)*5"
+    "interesting_pairs": {"1": ["2"], "2": ["3"], "3": ["4"], "4": ["5"]}
 }
