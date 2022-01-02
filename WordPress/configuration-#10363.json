@@ -11,6 +11,11 @@
             "info": "Clicked the \"toggle_post_list_item_layout\" Buttom in the toolbar of PostsList.",
             "reason": null,
             "dependency": "cd:1"
+        },
+        "3": {
+            "info": "Clicked \"Search\" button in the \"Posts\" page",
+            "reason": null,
+            "dependency": "cd:1"
         }
     },
     "warnings": {
@@ -23,7 +28,8 @@
         },
         "state_1": {
             "1": "state_1",
-            "2": "Crash!"
+            "2": "Crash!",
+            "3": "Crash!"
         }
     },
     "regex": "11*2"

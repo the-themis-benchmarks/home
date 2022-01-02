@@ -8,9 +8,14 @@
             "dependency": null
         },
         "2": {
-            "info": "Pasted a cut folder into itself.",
+            "info": "Clicked \"Paste\" to paste a folder in path.",
             "reason": null,
             "dependency": "cd:1"
+        },
+        "3": {
+            "info": "Pasted a cut folder into itself.",
+            "reason": null,
+            "dependency": "cd:2, dd:2"
         }
     },
     "warnings" : {
@@ -23,7 +28,11 @@
         },
         "state_1": {
             "1": "state_1",
-            "2": "Crash!"
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "3": "Crash!"
         }
     },
     "regex": "11*2"

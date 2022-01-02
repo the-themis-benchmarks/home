@@ -8,9 +8,15 @@
             "dependency": null
         },
         "2": {
-            "info": "Search a string.",
+            "info": "Inputted a  string in the searching bar and Searched it.",
             "reason": null,
             "dependency": "cd:1"
+        },
+        "3": {
+            "info": "Event 3: Successfully searched many items",
+            "reason": null,
+            "dependency": "cd:2"
+
         }
     },
     "warnings" : {
@@ -23,9 +29,13 @@
         },
         "state_1": {
             "1": "state_1",
+            "2": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
             "2": "Crash!"
         }
 
     },
-    "regex": "11*2"
+    "regex": ""
 }

@@ -1,7 +1,7 @@
 {
     "app_name": "ScarletNote",
     "bug_id": "#114",
-    "steps": {
+    "events": {
         "1": {
             "info": " Created a new notebook.",
             "reason": null,
@@ -35,11 +35,10 @@
         "7": {
             "info": "Clicked \"Locked\" in the notebook menu and there exits at least one locked note.",
             "reason": null,
-            "dependency": "cd:2, cd:4"
+            "dependency": "cd:2, dd:4"
         }
     },
     "warnings": {},
-    "all_steps_reached": null,
     "all_events_happened": null,
     "transition_function": {
         "state_0": {

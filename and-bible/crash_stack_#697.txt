@@ -131,7 +131,7 @@ E CurrentPage: 	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolE
 E CurrentPage: 	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:588)
 E CurrentPage: 	at java.lang.Thread.run(Thread.java:818)
 
----- The third stack trace (This is the target one for the study) ----
+---- The third stack trace (This is the target one for our study) ----
 
 E AndroidRuntime: FATAL EXCEPTION: main
 E AndroidRuntime: Process: net.bible.android.activity, PID: 28032
