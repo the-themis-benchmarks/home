@@ -11,11 +11,11 @@
     "warnings": {
 
     },
-    "all_events_happened": "Should open the \"Do not disturb\" pref in settings.",
+    "all_events_happened": "Cannot enable the \"Do not disturb\" in settings.",
     "transition_function": {
         "state_0": {
             "1": "Crash!"
         }
     },
-    "regex": "1"
+    "interesting_pairs": {}
 }

@@ -3,29 +3,29 @@
     "bug_id": "#1581",
     "events": {
         "1": {
-            "info": "Clicked \"Nearby\" in the drawer.",
-            "reason": "Can't open the drawer.",
+            "info": "Selected the \"Nearby\" option in the drawer.",
+            "reason": "Cannot open the drawer.",
             "dependency": null
         },
         "2": {
             "info": "Checked that GPS (location permission) is disabled.",
-            "reason": null,
+            "reason": "The GPS is not disabled",
             "dependency": null
         },
         "3": {
-            "info": "Selected \"ENABLE GPS\" in the GPS requirement dialog.\nThis happens when the GPS is disabled.",
+            "info": "Selected \"ENABLE GPS\" in the GPS requirement dialog.\nThis happened when the GPS is disabled.",
             "reason": "If this event shows ",
             "dependency": "2"
         },
         "4": {
-            "info": "Selected \"OK\" in the another GPS requirement dialog.\nThis happens when the GPS is enabled but this app isn't granted with GPS permission.",
+            "info": "Selected \"OK\" in the another GPS requirement dialog.\nThis happened when the GPS is enabled but this app isn't granted with GPS permission.",
             "reason": "The occurrence of this event means tester refused to give the location permission to\napp in the OS dialog.",
             "dependency": null
         }
     },
     "warnings" : {
-        "3": "Selected \"CANCEL\" in the GPS requirement dialog.\nThis happens when the GPS is disabled.",
-        "4": "Selected \"CANCEL\" in the another GPS requirement dialog.\nThis happens when the GPS is enabled but this app isn't granted with GPS permission."
+        "3": "Selected the \"CANCEL\" in the GPS requirement dialog.\nThis happened when the GPS is disabled.",
+        "4": "Selected the \"CANCEL\" in the another GPS requirement dialog.\nThis happened when the GPS is enabled but this app isn't granted with GPS permission."
     },
     "all_events_happened": "This crash requires that it's the first time to get location permission from OS\nwith GPS disabled.",
     "transition_function": {
@@ -47,5 +47,5 @@
             "4": "Crash!"
         }
     },
-    "regex": "11*2(2+11*2)*3(3+2(2+11*2)*3)*4"
+    "interesting_pairs": {"1": ["2", "4"], "2": ["3"], "3": ["4"]}
 }

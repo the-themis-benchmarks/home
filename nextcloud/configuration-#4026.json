@@ -3,12 +3,12 @@
     "bug_id": "#4026",
     "events": {
         "1": {
-            "info": "Opened app NextCloud",
+            "info": "Opened the app NextCloud",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Enter NextCloud again.",
+            "info": "Returned back to the launcher and reopened NextCloud again.",
             "reason": null,
             "dependency": null
         }
@@ -16,7 +16,7 @@
     "warnings": {
 
     },
-    "all_events_happened": "\"Don't keep activities\" should be enabled.",
+    "all_events_happened": "The \"Don't keep activities\" option is not enabled.",
     "transition_function": {
         "state_0": {
             "1": "state_1"
@@ -26,5 +26,5 @@
             "2": "Crash!"
         }
     },
-    "regex": "11*2"
+    "interesting_pairs": {"1": ["2"]}
 }

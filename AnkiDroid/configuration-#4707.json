@@ -3,17 +3,17 @@
     "bug_id": "#4707",
     "events": {
         "1": {
-            "info": "Clicked \"Add\" button in the fab.",
+            "info": "Clicked the \"Add\" button in the FAB.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked \"Media\" button.",
+            "info": "Clicked the \"Media\" button.",
             "reason": null,
             "dependency": "1"
         },
         "3": {
-            "info": "Clicked \"Camera\" button.",
+            "info": "Clicked the \"Camera\" button.",
             "reason": null,
             "dependency": "2"
         }
@@ -36,5 +36,5 @@
             "3": "Crash!"
         }
     },
-    "regex": "11*2(2+11*2)*3"
+    "interesting_pairs": {"1": ["2"], "2": ["3"]}
 }
