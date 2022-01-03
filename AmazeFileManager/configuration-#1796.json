@@ -35,5 +35,5 @@
             "3": "Crash!"
         }
     },
-    "regex": "11*2"
+    "interesting_pairs": { "1": ["3"] }
 }
