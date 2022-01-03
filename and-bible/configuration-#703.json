@@ -71,5 +71,5 @@
             "7": "Crash!"
         }
     },
-    "regex": ""
+    "interesting_pairs": { "4": ["6"], "6": ["7"] }
 }

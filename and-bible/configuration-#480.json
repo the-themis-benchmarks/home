@@ -28,12 +28,12 @@
             "dependency": null
         },
         "6": {
-            "info": "Changed an non-empty label to an empty/non-empty one.",
+            "info": "Changed an empty/non-empty label to an empty/non-empty one.",
             "reason": null,
             "dependency": "dd:4"
         },
         "7": {
-            "info": "Changed an non-empty label to an empty one.",
+            "info": "Changed an empty/non-empty label to an empty one.",
             "reason": null,
             "dependency": "dd:4"
         },
@@ -119,5 +119,5 @@
             "6": "Crash!"
         }
     },
-    "regex": ""
+    "interesting_pairs": { "4": ["5"], "5": ["4"], "c": ["a"] }
 }

@@ -26,5 +26,5 @@
             "2": "Crash!"
         }
     },
-    "regex": "1"
+    "interesting_pairs": {"1": ["2"]}
 }
