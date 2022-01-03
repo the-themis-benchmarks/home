@@ -3,20 +3,20 @@
     "bug_id": "#5638",
     "events": {
         "1": {
-            "info": "Clicked \"Add\" button in the fab.",
+            "info": "Input a string in the \"Front Template\" text editor.",
             "reason": "Can't open fab.",
             "dependency": null
         },
         "2": {
-            "info": "Input a string in the \"Front template\" TextEditor",
+            "info": "Input an invalid string in the \"Front Template\" text editor.",
             "reason": null,
-            "dependency": "1"
+            "dependency": "dd:1"
         }
     },
     "warnings" : {
 
     },
-    "all_events_happened": "Special strings are needed to be input.",
+    "all_events_happened": "Cannot input a invalid string like \"&bsol;\"",
     "transition_function": {
         "state_0": {
             "1": "state_1"

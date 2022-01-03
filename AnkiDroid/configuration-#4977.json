@@ -3,7 +3,7 @@
     "bug_id": "#4977",
     "events": {
         "1": {
-            "info": "Clicked \"Get shared decks\" button in fab.",
+            "info": "Clicked the \"Get shared decks\" button in FAB.",
             "reason": null,
             "dependency": null
         },
@@ -13,7 +13,7 @@
             "dependency": null
         },
         "3": {
-            "info": "Clicked \"Card browser\" in the drawer.",
+            "info": "Clicked the \"Card browser\" option in the drawer.",
             "reason": "Can't open drawer.",
             "dependency": "cd:2"
         }
@@ -42,5 +42,5 @@
             "3": "state_0"
         }
     },
-    "regex": "(22*3)*(11*2(2+11*2)*3+22*11*2(2+11*2)*3)"
+    "interesting_pairs": {"1": ["2"], "2": ["3"]}
 }

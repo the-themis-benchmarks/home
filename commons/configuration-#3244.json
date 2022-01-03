@@ -3,31 +3,31 @@
     "bug_id": "#3244",
     "events": {
         "1": {
-            "info": "Clicked \"Nearby\".",
+            "info": "Selected the \"Nearby\" in main page.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked the \"Detail list\" in \"Nearby\".",
+            "info": "Clicked the \"Detail list\" icon in \"Nearby\" page.",
             "reason": null,
             "dependency": "1"
         },
         "3": {
-            "info": "Selected a place in the nearby list.",
+            "info": "Selected a place in the detail list.",
             "reason": null,
             "dependency": "2"
         },
         "4": {
-            "info": "Clicked the \"Camera\" in nearby list item menu.",
+            "info": "Clicked the \"Camera\" icon in detail list item menu.",
             "reason": null,
             "dependency": "3"
         }
     },
     "warnings" : {
-        "2": "Closed the \"Nearby list\" menu.",
-        "3": "Closed the place entry opened in Event 3 in the nearby list."
+        "2": "Closed the \"Detail list\" menu.",
+        "3": "Closed the place entry opened in Event 3 in the detail list."
     },
-    "all_events_happened": "Should finish taking a photo.",
+    "all_events_happened": "Cannot take a photo using system camera.",
     "transition_function": {
         "state_0": {
             "1": "state_1"
@@ -48,5 +48,5 @@
             "4": "Crash!"
         }
     },
-    "regex":"11*2(1+2)*3(3+2+1(1+2)*3)*4"
+    "interesting_pairs": {"1": ["2"], "2": ["3"], "3": ["4"]}
 }

@@ -8,9 +8,9 @@
             "dependency": null
         },
         "2": {
-            "info": "Clicked the \"Send/Share\" button in menu of Previewimage.",
+            "info": "Clicked the \"Send/Share\" option in the menu of the preview page.",
             "reason": "Can't open the menu",
-            "dependency": "1"
+            "dependency": "cd:1"
         }
     },
     "warnings": {
@@ -26,5 +26,5 @@
             "2": "Crash!"
         }
     },
-    "regex": "11*2"
+    "interesting_pairs": {"1": ["2"]}
 }

@@ -3,22 +3,22 @@
     "bug_id": "#11992",
     "events": {
         "1": {
-            "info": "Selected the \"Reader\" page.",
+            "info": "Selected the \"Reader\" at the bottom navigation bar.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Selected back to the \"My site\" page",
+            "info": "Selected the \"My site\" at the bottom navigation bar",
             "reason": null,
             "dependency": null
         },
         "3": {
-            "info": "Selected the \"Blog Posts\".",
+            "info": "Selected the \"Blog Posts\" in \"My Site\" page.",
             "reason": null,
             "dependency": null
         },
         "4": {
-            "info": "Selected the \"Site Pages\".",
+            "info": "Selected the \"Site Pages\" in \"My Site\" page.",
             "reason": null,
             "dependency": null
         }
@@ -26,7 +26,7 @@
     "warnings": {
 
     },
-    "all_events_happened": "\"Don't keep activities\" should be enabled. Should select the \"Reader\" page and enter \"Blog post\" or \"Site pages\" twice or once respectively. ",
+    "all_events_happened": "Cannot enable the \"Don't keep activities\" in setting. Should select the \"Reader\" page and enter \"Blog post\" or \"Site pages\" twice or once respectively. ",
     "transition_function": {
         "state_0": {
             "1": "state_1"
@@ -48,5 +48,5 @@
             "4": "Crash!"
         }
     },
-    "regex": "11*2(2+11*2)*(3+4)(2+11*2(2+11*2)*(3+4))*(3+4)"
+    "interesting_pairs": {"1": ["2"], "2": ["3", "4"], "3": ["3", "4"], "4": ["3", "4"]}
 }
