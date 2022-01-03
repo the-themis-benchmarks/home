@@ -3,7 +3,7 @@
     "bug_id": "#116",
     "events": {
         "1": {
-            "info": "Clicked the \"Setting\" in the options.",
+            "info": "Clicked the \"Setting\" option in the menu of the main page.",
             "reason": null,
             "dependency": null
         }

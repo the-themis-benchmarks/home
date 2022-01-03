@@ -3,7 +3,7 @@
     "bug_id": "#3222",
     "events": {
         "1": {
-            "info": "Clicked the \"General Settings\" in the options.",
+            "info": "Clicked the \"General Settings\" in the menu of the main page.",
             "reason": null,
             "dependency": null
         },
@@ -13,7 +13,7 @@
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Disabled the \"Hide old form version\" in \"Form management\".",
+            "info": "Unchecked the \"Hide old form versions\" checkbox in \"Form management\".",
             "reason": null,
             "dependency": "cd:2"
         },
@@ -23,13 +23,13 @@
             "dependency": null
         },
         "5": {
-            "info": "Enabled the \"hide old form version\" in \"Form management\" ( is also Warning 3).",
+            "info": "Checked the \"hide old form versions\" checkbox in \"Form management\" (this is a Warning for Event 3).",
             "reason": null,
             "dependency": "cd:2"
         }
     },
     "warnings": {
-        "3": "Enabled the \"hide old form version\" in \"Form management\"."
+        "3": "Checked the \"hide old form versions\" checkbox in \"Form management\"."
     },
     "all_events_happened": null,
     "transition_function": {
@@ -56,5 +56,5 @@
             "4":"Crash!"
         }
     },
-    "regex": "(5+14+12(42)*44+12(42)*3(6(42)*3)*6(42)*44+(12(42)*3(6(42)*3)*42+12(42)*3(6(42)*3)*44(14)*12)((4+3(42)*3(6(42)*3)*4)2+(4+3(42)*3(6(42)*3)*4)4(14)*12)*(3(42)*44+3(42)*3(6(42)*3)*6(42)*44))*(12(42)*3(6(42)*3)*44(14)*5+(12(42)*3(6(42)*3)*42+12(42)*3(6(42)*3)*44(14)*12)((4+3(42)*3(6(42)*3)*4)2+(4+3(42)*3(6(42)*3)*4)4(14)*12)*(4+3(42)*3(6(42)*3)*4)4(14)*5)"
+    "regex": ""
 }

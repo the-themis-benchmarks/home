@@ -3,19 +3,24 @@
     "bug_id": "#10363",
     "events": {
         "1": {
-            "info": "Selected the \"Blog Posts\".",
+            "info": "Clicked the \"Posts\" button on the main page.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked the \"toggle_post_list_item_layout\" Buttom in the toolbar of PostsList.",
+            "info": "Clicked the \"toggle post list item\" button on the toolbar of \"Posts List\".",
             "reason": null,
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Clicked \"Search\" button in the \"Posts\" page",
+            "info": "Clicked the \"Search\" button on the toolbar of \"Posts List\" page", 
             "reason": null,
             "dependency": "cd:1"
+        },
+        "4": {
+            "info": "Inputted a string on the searching bar of \"Posts List\" page", 
+            "reason": null,
+            "dependency": "cd:3"
         }
     },
     "warnings": {
@@ -29,7 +34,13 @@
         "state_1": {
             "1": "state_1",
             "2": "Crash!",
-            "3": "Crash!"
+            "3": "state_2"
+        },
+        "state_2": {
+            "1": "state_1",
+            "3": "state_2",
+            "2": "Crash!",
+            "4": "Crash!"
         }
     },
     "regex": "11*2"

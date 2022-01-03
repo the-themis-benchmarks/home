@@ -8,12 +8,12 @@
             "dependency": null
         },
         "2": {
-            "info": "Inputted a  string in the searching bar and Searched it.",
+            "info": "Inputted a string in the searching bar and Searched it.",
             "reason": null,
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Event 3: Successfully searched many items",
+            "info": "The search succeeded and multiple entries returned.",
             "reason": null,
             "dependency": "cd:2"
 
@@ -22,7 +22,7 @@
     "warnings" : {
         
     },
-    "all_events_happened": "No multiple files are searched.",
+    "all_events_happened": "No multiple entries are returned.",
     "transition_function": {
         "state_0": {
             "1": "state_1"

@@ -13,27 +13,27 @@
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Create a New note.",
+            "info": "Created a new note.",
             "reason": null,
             "dependency": null
         },
         "4": {
-            "info": "Clicked \"Locked Note\" in the note menu.",
+            "info": "Clicked the \"Lock Note\" option in the note's menu (by longpressing on the note).",
             "reason": null,
             "dependency": "cd:3"
         },
         "5": {
-            "info": "Pressed Back.",
+            "info": "Pressed BACK.",
             "reason": null,
             "dependency": "cd:2"
         },
         "6": {
-            "info": "Clicked the \"X\" on the left bottom to close the notebook.",
+            "info": "Clicked the \"X\" icon on the left bottom to close the notebook.",
             "reason": null,
             "dependency": "cd:2"
         },
         "7": {
-            "info": "Clicked \"Locked\" in the notebook menu and there exits at least one locked note.",
+            "info": "Clicked the \"Locked\" option in the main menu (at least one locked note exists).",
             "reason": null,
             "dependency": "cd:2, dd:4"
         }
@@ -47,63 +47,65 @@
         },
         "state_1": {
             "1": "state_1",
-            "2": "state_4",
-            "3": "state_3"
+            "5": "state_1",
+            "2": "state_7",
+            "3": "state_4"
         },
         "state_2": {
-            "1": "state_5",
+            "1": "state_4",
             "3": "state_2",
-            "4": "state_6"
+            "5": "state_2",
+            "4": "state_3"
         },
         "state_3": {
             "3": "state_3",
-            "4": "state_7"
+            "4": "state_3",
+            "1": "state_5"
         },
         "state_4": {
-            "5": "state_1",
-            "6": "state_1",
-            "3": "state_8"
+            "1": "state_4",
+            "3": "state_4",
+            "5": "state_4",
+            "4": "state_6",
+            "2": "state_8"
         },
         "state_5": {
             "1": "state_5",
-            "2": "state_9"
+            "2": "state_9",
+            "3": "state_5",
+            "4": "state_5"
         },
         "state_6": {
-            "1": "state_10",
-            "4": "state_6"
+            "1": "state_6",
+            "3": "state_6",
+            "4": "state_6",
+            "5": "state_6",
+            "2": "state_9"
         },
         "state_7": {
-            "4": "state_7",
-            "2": "state_11"
+            "1": "state_7",
+            "3": "state_8",
+            "5": "state_1",
+            "6": "state_1"
         },
         "state_8": {
+            "1": "state_8",
             "3": "state_8",
-            "4": "state_11"
+            "4": "state_9",
+            "5": "state_4",
+            "6": "state_4"
         },
         "state_9": {
-            "4": "state_11",
-            "5":"state_5",
-            "6":"state_5"
+            "1": "state_9",
+            "3": "state_9",
+            "4": "state_9",
+            "7": "state_10",
+            "5":"state_6",
+            "6":"state_6"
         },
         "state_10": {
-            "1": "state_10",
-            "2": "state_11"
-        },
-        "state_11": {
-            "1": "state_11",
-            "3": "state_11",
-            "5": "state_12",
-            "6": "state_12",
-            "7": "state_13"
-
-        },
-        "state_12": {
-            "2": "state_11",
-            "1": "state_10"
-        },
-        "state_13": {
             "6": "Crash!"
         }
     },
-    "regex": "(((11*33*4+11*2((6+5)1*2)*(6+5)1*33*4)4*2+11*2((6+5)1*2)*33*4+33*11*2((6+5)1*2)*4+33*44*11*2)(1+3)*7+((11*33*4+11*2((6+5)1*2)*(6+5)1*33*4)4*2+11*2((6+5)1*2)*33*4+33*11*2((6+5)1*2)*4+33*44*11*2)(1+3)*(6+5)((2+44*2+11*2)(1+3)*(6+5))*(2+44*2+11*2)(1+3)*7)6"
+    "regex": ""
 }

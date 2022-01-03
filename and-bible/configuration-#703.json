@@ -3,7 +3,7 @@
     "bug_id": "#703",
     "events": {
         "1": {
-            "info": "Clicked \"OK\" in the \"Download a Bible from the internet\" dialog at StartupActivity.",
+            "info": "Clicked \"OK\" in the \"Download a Bible from the internet\" dialog when startup.",
             "reason": null,
             "dependency": null
         },
@@ -13,34 +13,34 @@
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Downloaded a book.",
+            "info": "Clicked \"OK\" to download a book.",
             "reason": null,
             "dependency": null
         },
         "4": {
-            "info": "Entered a editing note view.",
+            "info": "Entered the note-editing page.",
             "reason": null,
             "dependency": null
         },
         "5": {
-            "info": "Entered a bible view.",
+            "info": "Entered the main reading page.",
             "reason": null,
             "dependency": null
         },
         "6": {
-            "info": "Clicked searchButton.",
+            "info": "Clicked the search button.",
             "reason": null,
             "dependency": null
         },
         "7": {
-            "info": "Clicked \"CREATE\" to Search Index.",
+            "info": "Clicked \"CREATE\" in the \"Search Index\" page.",
             "reason": null,
             "dependency": "cd:6"
         }
     },
     "warnings": {
-        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
-        "2": "Clicked \"Cancel\" in \"Do you want to proceed to download documents?\" dialog.",
+        "1": "Clicked \"CANCEL\" in the \"Download a Bible from the Internet\" dialog when startup.",
+        "2": "Clicked \"CANCEL\" in the \"Do you want to proceed to download documents?\" dialog.",
         "8": "Clicked \"CANCEL\" to Search Index"
     },
     "all_events_happened": null,

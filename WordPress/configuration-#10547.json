@@ -3,23 +3,23 @@
     "bug_id": "#10547",
     "events": {
         "1": {
-            "info": "Selected the \"Blog Posts\".",
+            "info": "Selected the \"Posts\" button on the main page.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Entered EditPostActivity.",
+            "info": "Entered the post-editing page.",
             "reason": null,
             "dependency": null
         },
         "3": {
-            "info": "Selected \"Preview\" in options menu.",
+            "info": "Selected the \"Preview\" option in the option menu.", 
             "reason": null,
             "dependency": "cd:2"
         }
     },
     "warnings": {},
-    "all_events_happened": "Should enable \"Don't keep activities\".",
+    "all_events_happened": "The \"Don't keep activities\" option is not enabled.",
     "transition_function": {
         "state_0": {
             "1": "state_1"

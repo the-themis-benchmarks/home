@@ -3,7 +3,7 @@
     "bug_id": "#10302",
     "events": {
         "1": {
-            "info": "Pressed \"Log in or sign up with WordPress.com\" or \"Enter your existing site address\" in the welcome page.",
+            "info": "Pressed the \"Log in or sign up with WordPress.com\" button or the \"Enter your existing site address\" button in the welcome page.",
             "reason": null,
             "dependency": null
         },

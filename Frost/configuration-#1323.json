@@ -3,7 +3,12 @@
     "bug_id": "#1323",
     "events": {
         "1": {
-            "info": "Reopened the app.",
+            "info": "Reopened the app.", 
+            "reason": null,
+            "dependency": null
+        },
+        "2": {
+            "info": "Reopened the app after opening \"Airplane mode\".", 
             "reason": null,
             "dependency": null
         }
@@ -11,10 +16,14 @@
     "warnings": {
 
     },
-    "all_events_happened": "Should change device to \"Airplan mode\" and reopen the app.",
+    "all_events_happened": "Should change device to \"Airplane mode\" and reopen the app.",
     "transition_function": {
         "state_0": {
-            "1": "Crash!"
+            "1": "state_1"
+        },
+        "state_1": {
+            "1": "state_1",
+            "2": "Crash!"
         }
     },
     "regex": "1"

@@ -3,7 +3,7 @@
     "bug_id": "#697",
     "events": {
         "1": {
-            "info": "Clicked \"OK\" in the \"Download a Bible from the internet\" dialog at StartupActivity.",
+            "info": "Clicked \"OK\" in the \"Download a Bible from the Internet\" dialog when startup.",
             "reason": null,
             "dependency": null
         },
@@ -13,39 +13,39 @@
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Downloaded a book.",
+            "info": "Clicked \"OK\" to download a book.",
             "reason": null,
             "dependency": null
         },
         "4": {
-            "info": "Long pressed chapterVerses.",
+            "info": "Long pressed some text lines.",
             "reason": null,
             "dependency": null
         },
         "5": {
-            "info": "Clicked myNoteAddEdit after longPressing chapterVerse.",
+            "info": "Clicked the \"pencil\" icon to add a note after long pressing some text lines.",
             "reason": null,
             "dependency": "cd:4"
         },
         "6": {
-            "info": "Saved a note.",
+            "info": "Edited and saved a note by pressing BACK.",
             "reason": null,
             "dependency": "cd:5"
         },
         "7": {
-            "info": "Edited a problematic note that should has text but not.",
+            "info": "Edited and saved a problematic note which should has texts but not.",
             "reason": null,
             "dependency": "dd:4"
         },
         "8": {
-            "info": "Clicked \"My Note\" in the drawer",
+            "info": "Opened the drawer and clicked the \"My Note\" option",
             "reason": null,
             "dependency": null
         }
     },
     "warnings": {
-        "1": "Clicked \"Cancel\" in the \"Download a Bible from the Internet\" dialog at StartupActivity.",
-        "2": "Clicked \"Cancel\" in \"Do you want to proceed to download documents?\" dialog."
+        "1": "Clicked \"CANCEL\" in the \"Download a Bible from the Internet\" dialog when startup.",
+        "2": "Clicked \"CANCEL\" in \"Do you want to proceed to download documents?\" dialog."
     },
     "all_events_happened": null,
     "transition_function": {

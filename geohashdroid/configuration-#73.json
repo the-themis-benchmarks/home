@@ -3,7 +3,7 @@
     "bug_id": "#73",
     "events": {
         "1": {
-            "info": "Clicked the \"GRATICULE\" on the bottom.",
+            "info": "Clicked the \"GRATICULE\" at the bottom.",
             "reason": null,
             "dependency": null
         },

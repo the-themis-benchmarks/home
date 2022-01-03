@@ -3,12 +3,12 @@
     "bug_id": "#5085",
     "events": {
         "1": {
-            "info": "Clicked the menu on the right bottom.",
+            "info": "Opened the menu on the right bottom.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked \"Setting\" in the menu.",
+            "info": "Clicked the \"Setting\" option in the menu.",
             "reason": null,
             "dependency": "cd:1"
         },
@@ -19,7 +19,7 @@
         }
     },
     "warnings": {},
-    "all_events_happened": "Change language to chinese will lead to crash.",
+    "all_events_happened": null,
     "transition_function": {
         "state_0": {
             "1": "state_1"

@@ -3,12 +3,12 @@
     "bug_id": "#239",
     "events": {
         "1": {
-            "info": "Clicked the drawer on the left.",
+            "info": "Opened the drawer.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Go into \"Plant list\" view.",
+            "info": "Went into the \"Plant list\" page.",
             "reason": null,
             "dependency": "cd:1"
         },

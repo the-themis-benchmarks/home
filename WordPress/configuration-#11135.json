@@ -8,12 +8,12 @@
             "dependency": null
         },
         "2": {
-            "info": "Clicked the \"reader_activity_comment_list\".",
+            "info": "Clicked the \"comment\" icon of a site.",
             "reason": null,
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Clicked \"button_expand\"",
+            "info": "Clicked the \"expand\" icon at the buttom.",
             "reason": null,
             "dependency": "cd:2"
         }

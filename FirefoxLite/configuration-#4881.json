@@ -3,17 +3,17 @@
     "bug_id": "#4881",
     "events": {
         "1": {
-            "info": "Clicked shopping button on the left bottom.",
+            "info": "Clicked the shopping button on the left bottom.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Searched a keyword.",
+            "info": "Inputted a keyword and clicked the \"Search\" icon on the keyboard.",
             "reason": null,
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Entered full screen.",
+            "info": "Entered the full screen mode of a playing video.",
             "reason": null,
             "dependency": "cd:2"
         }

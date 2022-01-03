@@ -3,17 +3,17 @@
     "bug_id": "#745",
     "events": {
         "1": {
-            "info": "Go into editNote.",
+            "info": "Went into the note-editing page.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Get a picture.",
+            "info": "Loaded a picture or a video (from the camera or file system).", 
             "reason": null,
             "dependency": "cd:1"
         },
         "3": {
-            "info": "Clicked the picture in the note.",
+            "info": "Clicked the picture or the video in the note.",
             "reason": null,
             "dependency": "cd:2"
         }

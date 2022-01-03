@@ -3,28 +3,28 @@
     "bug_id": "#4942",
     "events": {
         "1": {
-            "info": "Clicked any site button.",
+            "info": "Entered the web page by (1) clicking any site button in the main page, (2) clicking one website in the tab tray, or (3) searching in the main page.",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Exited FireFoxLite.",
+            "info": "Returned back to the launcher.",
             "reason": null,
             "dependency": null
         },
         "3": {
-            "info": "Back to FireFoxLite.",
+            "info": "Went back to FireFoxLite.",
             "reason": null,
             "dependency": null
         },
         "4": {
-            "info": "Clicked [Tab tray].",
+            "info": "Clicked the tab tray.",
             "reason": null,
             "dependency": "cd:1"
         }
     },
     "warnings": {},
-    "all_events_happened": "Should enable \"Don't keep activity\".",
+    "all_events_happened": "The \"Don't keep activity\" option is not enabled.",
     "transition_function": {
         "state_0": {
             "1": "state_1",

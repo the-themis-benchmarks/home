@@ -3,12 +3,12 @@
     "bug_id": "#637",
     "events": {
         "1": {
-            "info": "Clicked \"LOAD\" in \"Download at other location\".",
+            "info": "Clicked the \"LOAD\" button in \"Download at other location\".",
             "reason": null,
             "dependency": null
         },
         "2": {
-            "info": "Clicked the \"Gear\" to enter \"Preferences\".",
+            "info": "Clicked the \"Gear\" icon to enter \"Preferences\".",
             "reason": null,
             "dependency": null
         },
@@ -18,12 +18,12 @@
             "dependency": "cd:2"
         },
         "4": {
-            "info": "Deleted a check_entry.",
+            "info": "Deleted a check entry.",
             "reason": null,
             "dependency": "cd:3"
         },
         "5": {
-            "info": "Deleted the last check_entry.",
+            "info": "Deleted the last check entry.",
             "reason": null,
             "dependency": "cd:3"
         },
