@@ -35,5 +35,5 @@
             "3": "Crash!"
         }
     },
-    "interesting_pairs": { "1": ["3"] }
+    "interesting_pairs": { "1": ["2"], "2": ["3"] }
 }
