@@ -122,7 +122,7 @@ app_crash_data = {
                   'com.bumptech.glide.integration.recyclerview.RecyclerToListViewScrollListener.onScrolled(RecyclerToListViewScrollListener.java']
     },
 
-    'FirefoxLite': {
+    'FireFoxLite': {
 
         '#4881': ["java.lang.NullPointerException: Attempt to invoke virtual method 'void android.view.View.setVisibility(int)' on a null object reference",
                   "org.mozilla.rocket.content.common.ui.ContentTabHelper$Observer.onEnterFullScreen(ContentTabHelper.kt",
@@ -193,15 +193,9 @@ app_crash_data = {
     },
 
     'Omni-Notes': {
-        '#745': ['ACRA caught a NoSuchMethodError for it.feio.android.omninotes',
-                 'No virtual method fitCenter()Lcom/bumptech/glide/request/RequestOptions',
-                 'it.feio.android.simplegallery.GalleryPagerFragment.onCreateView(GalleryPagerFragment.java']
-    },
-
-    'OmniNotes': {
-        '#745': ['ACRA caught a NoSuchMethodError for it.feio.android.omninotes',
-                 'No virtual method fitCenter()Lcom/bumptech/glide/request/RequestOptions',
-                 'it.feio.android.simplegallery.GalleryPagerFragment.onCreateView(GalleryPagerFragment.java']
+        '#745': ["it.feio.android.omninotes.alpha",
+                 "java.lang.NoSuchMethodError: No virtual method fitCenter()Lcom/bumptech/glide/request/RequestOptions; in class Lcom/bumptech/glide/request/RequestOptions; or its super classes (declaration of 'com.bumptech.glide.request.RequestOptions' appears in",
+                 "it.feio.android.simplegallery.GalleryPagerFragment.onCreateView(GalleryPagerFragment.java"]
     },
 
     'Phonograph': {
