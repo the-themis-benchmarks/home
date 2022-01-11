@@ -16,12 +16,12 @@ if __name__ == '__main__':
     device_type = sys.argv[2]
     d = u2.connect(avd_serial)
     # d.WAIT_FOR_DEVICE_TIMEOUT = 70
-    d.app_start("fr.free.nrw.commons")
+    d.app_start("fr.free.nrw.commons.beta")
     wait()
     current_app = d.app_current()
     print(current_app)
     while True:
-        if current_app['package'] == "fr.free.nrw.commons" and \
+        if current_app['package'] == "fr.free.nrw.commons.beta" and \
                 ".WelcomeActivity" in current_app['activity']:
             break
         time.sleep(2)
@@ -40,17 +40,17 @@ if __name__ == '__main__':
     print("swipe left")
 
     wait()
-    out = d(className="android.widget.Button", resourceId="fr.free.nrw.commons:id/finishTutorialButton").click()
+    out = d(className="android.widget.Button", resourceId="fr.free.nrw.commons.beta:id/finishTutorialButton").click()
     if not out:
         print("SUCCESS")
 
     wait()
-    out = d(className="android.widget.EditText", resourceId="fr.free.nrw.commons:id/login_username").set_text("DroidFuzzing1")
+    out = d(className="android.widget.EditText", resourceId="fr.free.nrw.commons.beta:id/login_username").set_text("DroidFuzzing1")
     if out:
         print("SUCCESS")
 
     wait()
-    out = d(className="android.widget.EditText", resourceId="fr.free.nrw.commons:id/login_password").set_text("droid.fuzzing1")
+    out = d(className="android.widget.EditText", resourceId="fr.free.nrw.commons.beta:id/login_password").set_text("droid.fuzzing1")
     if out:
         print("SUCCESS")
 
@@ -59,7 +59,7 @@ if __name__ == '__main__':
         d.press("back")
 
     wait()
-    out = d(className="android.widget.Button", resourceId="fr.free.nrw.commons:id/login_button").click()
+    out = d(className="android.widget.Button", resourceId="fr.free.nrw.commons.beta:id/login_button").click()
     if not out:
         print("SUCCESS")
 
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     current_app = d.app_current()
     print(current_app['package'])
     print(current_app['activity'])
-    if current_app['package'] == "fr.free.nrw.commons" and \
+    if current_app['package'] == "fr.free.nrw.commons.beta" and \
             "contributions.MainActivity" in current_app['activity']:
         print("****Login SUCCESS******")
     else:
