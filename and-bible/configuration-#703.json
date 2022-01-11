@@ -41,7 +41,7 @@
     "warnings": {
         "1": "Clicked \"CANCEL\" in the \"Download a Bible from the Internet\" dialog when startup.",
         "2": "Clicked \"CANCEL\" in the \"Do you want to proceed to download documents?\" dialog.",
-        "8": "Clicked \"CANCEL\" to Search Index"
+        "7": "Clicked \"CANCEL\" to Search Index"
     },
     "all_events_happened": null,
     "transition_function": {
