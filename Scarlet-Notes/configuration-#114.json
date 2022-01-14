@@ -23,16 +23,11 @@
             "dependency": "cd:3"
         },
         "5": {
-            "info": "Pressed BACK.",
-            "reason": null,
-            "dependency": "cd:2"
-        },
-        "6": {
             "info": "Clicked the \"X\" icon on the left bottom to close the notebook.",
             "reason": null,
             "dependency": "cd:2"
         },
-        "7": {
+        "6": {
             "info": "Clicked the \"Locked\" option in the main menu (at least one locked note exists).",
             "reason": null,
             "dependency": "cd:2, dd:4"
@@ -43,64 +38,58 @@
     "transition_function": {
         "state_0": {
             "1": "state_1",
-            "3": "state_2"
+            "3": "state_3"
         },
         "state_1": {
             "1": "state_1",
-            "5": "state_1",
             "2": "state_2",
             "3": "state_4"
         },
         "state_2": {
             "1": "state_2",
             "3": "state_5",
-            "5": "state_1",
-            "6": "state_1"
+            "2": "state_2"
         },
         "state_3": {
             "1": "state_4",
             "3": "state_3",
-            "4": "state_6",
-            "5": "state_3"
+            "4": "state_6"
         },
         "state_4": {
             "1": "state_4",
             "2": "state_5",
             "3": "state_4",
-            "4": "state_7",
-            "5": "state_4"
+            "4": "state_7"
         },
         "state_5": {
             "1": "state_5",
+            "2": "state_5",
             "3": "state_5",
             "4": "state_8",
-            "5": "state_4",
-            "6": "state_4"
+            "5": "state_4"
         },
         "state_6": {
             "1": "state_7",
             "3": "state_6",
-            "4": "state_6",
-            "5": "state_6"
+            "4": "state_6"
         },
         "state_7": {
             "1": "state_7",
             "3": "state_7",
             "4": "state_7",
-            "5": "state_7",
             "2": "state_8"
         },
         "state_8": {
             "1": "state_8",
+            "2": "state_8",
             "3": "state_8",
             "4": "state_8",
             "5": "state_7",
-            "6": "state_7",
-            "7": "state_9"
+            "6": "state_9"
         },
         "state_9": {
-            "6": "Crash!"
+            "5": "Crash!"
         }
     },
-    "interesting_pairs": {"1":["1","2","3","5"],"2": ["1","3","6","7"], "3":["1","2","3","4","6"],"4":["1","2","3","4","6"],"6":["1","2","3","4"],"7": ["6"]}
+    "interesting_pairs": {"1":["1","2","3","4","5"],"2": ["1","3","4","5","6"], "3":["1","2","3","4","5"],"4":["1","2","3","4","5"],"5":["1","2","3","4"],"6": ["5"]}
 }
