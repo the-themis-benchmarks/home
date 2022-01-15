@@ -208,8 +208,6 @@ class Analyzer:
             self.last_time = None
             self.warning_pairs = init_counts(self.events)
 
-            self.distances_record = dict()
-
             self.is_crashed = False  # To show whether tester reaches the crash
             self.crash_time = None  # To Record the time of crash happening
 
@@ -219,6 +217,10 @@ class Analyzer:
                 if success:
                     self.fa = converter.dfa_from_json()
                     converter.delete_converted_json()
+
+            self.distances_record = None
+            if self.fa is not None:
+                self.distances_record = {self.fa.distances[self.fa.current_state]: 1}
 
             if "interesting_pairs" in info:
                 self.ip = info["interesting_pairs"]
@@ -336,16 +338,17 @@ class Analyzer:
                         if event_id not in self.first_time:
                             self.first_time[event_id] = event_time - start_time
 
+                        ''' Count the interesting pairs '''
+                        if self.interesting_pairs is not None and self.last_event is not None and \
+                                (self.last_event + event_id) in self.interesting_pairs:
+                            self.interesting_pairs[self.last_event + event_id] += 1
+                        self.last_event = event_id
+
                         ''' Compute the transition of the converted DFA '''
                         if self.fa is not None:
+
                             if self.fa.validate_event(event_id):  # If this is a valid transition then do it
                                 self.fa.do_event(event_id)
-
-                                ''' Count the interesting pairs '''
-                                if self.interesting_pairs is not None and self.last_event is not None and (
-                                        self.last_event + event_id) in self.interesting_pairs:
-                                    self.interesting_pairs[self.last_event + event_id] += 1
-                                self.last_event = event_id
 
                                 distance = self.fa.now_distance()
                                 if distance in self.distances_record:
@@ -369,7 +372,7 @@ class Analyzer:
                         while line[pos] != ":":
                             warning_id += line[pos]
                             pos += 1
-                        event_id = event_id.strip()
+                        warning_id = warning_id.strip()
                         if not ("a" <= warning_id <= "z") and int(warning_id) >= 10:
                             warning_id = chr(int(warning_id) - 10 + 97)
                         if warning_id not in self.warning_counts:
@@ -489,7 +492,7 @@ class Analyzer:
             metrics["pairs_coverage"] = ("%3.2f" % (metrics["covered_pairs"] * 100 / len(self.interesting_pairs.keys()))) + "%"
             metrics["covered_pairs"] = str(metrics["covered_pairs"])
 
-        if len(self.distances_record) == 0:
+        if self.distances_record is None:
             metrics["min_distance"] = "None"
         else:
             metrics["min_distance"] = str(min(sorted(self.distances_record.keys())))
@@ -505,6 +508,7 @@ class Analyzer:
                  metrics["covered_events"], metrics["all_events"], metrics["events_coverage"],
                  metrics["covered_pairs"], metrics["all_pairs"], metrics["pairs_coverage"],
                  metrics["min_distance"]))
+        print("%s / %s / %s" % (metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"]))
 
 
 def main(args: Namespace):
