@@ -30,6 +30,11 @@ def print_error(e: str):
     print("[  Error  ] %s" % e)
 
 
+def print_waring(w: str):
+    """ Print the warning info """
+    print("[ Warning ] %s" % w)
+
+
 def init_counts(events: dict):
     """ Init a map to count """
     res = dict()
@@ -57,7 +62,7 @@ class MyDFA(DFA):
 
     def validate_event(self, event) -> bool:
         """ To validate an event """
-        if event in self.transitions[self.current_state]:
+        if event in self.transitions[self.current_state] and self.transitions[self.current_state][event] != "{}":
             return True
         else:
             return False
@@ -191,7 +196,6 @@ class Analyzer:
             self.events: dict = info["events"]  # Get all events
             self.warnings: dict = info["warnings"]  # Get all Warnings
             self.all_events_happened: str = info["all_events_happened"]
-            # self.has_fa = len(info["transition_function"]) != 0
 
             self.total_event = len(self.events)  # Get the numbers of events
             self.event_counts = init_counts(self.events)  # Init event counter
@@ -226,7 +230,7 @@ class Analyzer:
                 self.interesting_pairs = self.load_ip_from_dfa()
 
     def load_ip_manually(self):
-        if self.ip is not None:  # Get the intesesting pairs
+        if self.ip is not None:  # Get the interesting pairs
             ip: dict = dict()
             raw_ip: dict = self.ip
             for prev in raw_ip:
@@ -294,16 +298,37 @@ class Analyzer:
 
                 if re.search("Themis", line):  # Search "Themis"
 
-                    """ Get the arrival time """
+                    ''' Get the arrival time '''
                     event_time = self.delta
 
-                    if re.search("Event ", line, re.I):  # If it's a "Event"
+                    ''' Get the type of this line '''
+                    match_event = re.search("Event ", line, re.I)
+                    match_warning = re.search("Warning ", line, re.I)
+                    line_type = ""
+                    if match_event is None and match_warning is not None:
+                        line_type = "Warning"
+                    if match_event is not None and match_warning is None:
+                        line_type = "Event"
+                    if match_event is not None and match_warning is not None and match_event.span() < match_warning.span():
+                        line_type = "Event"
+                    if match_event is not None and match_warning is not None and match_event.span() > match_warning.span():
+                        line_type = "Warning"
 
-                        event_id = line[re.search("event ", line, re.I).span()[1]]  # To get event id
+                    if line_type == "Event":  # If it's a "Event"
+                        ''' Get event id and count it '''
+                        pos = match_event.span()[1]
+                        event_id = line[pos]  # To get event id
+                        if event_id == ":":
+                            continue
+                        pos += 1
+                        while line[pos] != ":":
+                            event_id += line[pos]
+                            pos += 1
+                        event_id = event_id.strip()
+                        if not ("a" <= event_id <= "z") and int(event_id) >= 10:
+                            event_id = chr(int(event_id) - 10 + 97)
                         if event_id not in self.event_counts:
                             continue
-                        if int(event_id) >= 10:
-                            event_id = chr(int(event_id) - 10 + 97)
                         self.event_counts[str(event_id)] += 1  # The corresponding event count add 1
                         self.last_time = event_time
 
@@ -312,31 +337,41 @@ class Analyzer:
                             self.first_time[event_id] = event_time - start_time
 
                         ''' Compute the transition of the converted DFA '''
-                        if self.fa.validate_event(event_id):  # If this is a valid transition then do it
-                            old_state = self.fa.current_state
-                            self.fa.do_event(event_id)
+                        if self.fa is not None:
+                            if self.fa.validate_event(event_id):  # If this is a valid transition then do it
+                                self.fa.do_event(event_id)
 
-                            ''' Count the interesting pairs '''
-                            if self.interesting_pairs is not None and self.last_event is not None and (
-                                    self.last_event + event_id) in self.interesting_pairs:
-                                self.interesting_pairs[self.last_event + event_id] += 1
-                            self.last_event = event_id
+                                ''' Count the interesting pairs '''
+                                if self.interesting_pairs is not None and self.last_event is not None and (
+                                        self.last_event + event_id) in self.interesting_pairs:
+                                    self.interesting_pairs[self.last_event + event_id] += 1
+                                self.last_event = event_id
 
-                            distance = self.fa.now_distance()
-                            if distance in self.distances_record:
-                                self.distances_record[distance] += 1
-                            else:
-                                self.distances_record[distance] = 1
-                            if self.fa.current_state in self.fa.final_states:
-                                self.fa.reset_current_state()
-                        else:  # If the current state doesn't have a valid transition through this event
-                            if not args.wait:
-                                self.fa.reset_current_state()
-                                if self.fa.validate_event(event_id):
-                                    self.fa.do_event(event_id)
+                                distance = self.fa.now_distance()
+                                if distance in self.distances_record:
+                                    self.distances_record[distance] += 1
+                                else:
+                                    self.distances_record[distance] = 1
+                                if self.fa.current_state in self.fa.final_states:
+                                    self.fa.reset_current_state()
+                            else:  # If the current state doesn't have a valid transition through this event
+                                if not args.wait:
+                                    self.fa.reset_current_state()
+                                    if self.fa.validate_event(event_id):
+                                        self.fa.do_event(event_id)
 
-                    if re.search("Warning ", line, re.I):  # If it's a “Warning”
-                        warning_id = line[re.search("Warning ", line, re.I).span()[1]]
+                    if line_type == "Warning":  # If it's a “Warning”
+                        pos = match_warning.span()[1]
+                        warning_id = line[pos]  # To get event id
+                        if warning_id == ":":
+                            continue
+                        pos += 1
+                        while line[pos] != ":":
+                            warning_id += line[pos]
+                            pos += 1
+                        event_id = event_id.strip()
+                        if not ("a" <= warning_id <= "z") and int(warning_id) >= 10:
+                            warning_id = chr(int(warning_id) - 10 + 97)
                         if warning_id not in self.warning_counts:
                             continue
                         self.warning_counts[warning_id] += 1
@@ -351,9 +386,10 @@ class Analyzer:
                         if self.crash_time is None:
                             self.crash_time = event_time - start_time
 
-            self.fa.reset_current_state()
+            if self.fa is not None:
+                self.fa.reset_current_state()
 
-        """ If no finish time in time files, use the last line log time to compute the time interval """
+        ''' If no finish time in time files, use the last line log time to compute the time interval '''
         if end_time is None:
             self.delta = self.delta - start_time
         else:
@@ -377,8 +413,7 @@ class Analyzer:
                           self.event_counts[event],
                           self.warning_counts[event],
                           self.first_time[event], self.delta))
-                print(" " * 14 + "> Event info: %s"
-                         % self.events[event]["info"])
+                print(" " * 14 + "> Event info: %s" % self.events[event]["info"])
                 if self.warning_counts[event] > 0:
                     if event in self.warning_pairs:
                         print(" " * 14 + "> Warning info: %s [immediately occurrence (<1s): %d]"
@@ -500,9 +535,10 @@ def main(args: Namespace):
     ''' Load the NFA file '''
     nfa_path = os.path.join("..", app_name, bug_id[1:] + "-NFA.jff")
     if not file_exists(nfa_path):
-        print_error("%s does not exists! Analysis aborted." % nfa_path)
-        return False
-    print_info("THE NFA FILE:\n    > %s" % nfa_path)
+        print_waring("No NFA the use. Analyzer will only count events.")
+        nfa_path = None
+    else:
+        print_info("THE NFA FILE:\n    > %s" % nfa_path)
 
     ''' Initialize an Analyzer '''
     analyzer = Analyzer(json_path, args, nfa_path)
@@ -532,6 +568,7 @@ if __name__ == "__main__":
 
     parser.add_argument("-w", "--wait", action="store_true", default=False, help="let the FA wait at the current state when mismatching")
     parser.add_argument("-m", "--manual", action="store_true", default=False, help="Manually specify the interesting pairs")
+    parser.add_argument("-d", "--detail", action="store_true", default=False, help="Show more details")
 
     parser.add_argument("target_dir", help="the output logs dir that to be analyzed")
 
