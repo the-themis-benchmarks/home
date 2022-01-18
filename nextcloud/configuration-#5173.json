@@ -16,25 +16,25 @@
             "info": "Selected the \"Remote folder\" option in the \"Create new custom folder setup\" dialog.",
             "reason": null,
             "dependency": "cd:2"
+        },
+        "4": {
+            "info": "Clicked the overflow icon of a file item.",
+            "reason": null,
+            "dependency": null
+        },
+        "5": {
+            "info": "Clicked the \"Move\" in popup menu of file item.",
+            "reason": null,
+            "dependency": "cd:4"
+        },
+        "6": {
+            "info": "Clicked the \"Copy\" in popup menu of file item.",
+            "reason": null,
+            "dependency": "cd:4"
         }
     },
     "warnings": {
         "3": "Canceled the \"Auto upload\" setup."
     },
-    "all_events_happened": null,
-    "transition_function": {
-        "state_0": {
-            "1": "state_1"
-        },
-        "state_1": {
-            "1": "state_1",
-            "2": "state_2"
-        },
-        "state_2": {
-            "1": "state_1",
-            "2": "state_2",
-            "3": "Crash!"
-        }
-    },
-    "interesting_pairs": {"1": ["2"], "2": ["3"]}
+    "all_events_happened": null
 }
