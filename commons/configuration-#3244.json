@@ -21,6 +21,11 @@
             "info": "Clicked the \"Camera\" icon in detail list item menu.",
             "reason": null,
             "dependency": "3"
+        },
+        "5": {
+            "info": "Took a photo using system camera and returned a picture.",
+            "reason": null,
+            "dependency": "4"
         }
     },
     "warnings" : {
@@ -48,5 +53,5 @@
             "4": "Crash!"
         }
     },
-    "interesting_pairs": {"1": ["2"], "2": ["3"], "3": ["4"]}
+    "interesting_pairs": {"1": ["2", "3"], "2": ["1", "2", "3", "4"], "3": ["1", "3" ,"4"]}
 }

@@ -42,5 +42,5 @@
             "3": "state_0"
         }
     },
-    "interesting_pairs": {"1": ["2"], "2": ["3"]}
+    "interesting_pairs": {"1": ["1", "2"], "2": ["3"]}
 }

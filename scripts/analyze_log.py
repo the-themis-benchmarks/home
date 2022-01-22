@@ -3,11 +3,9 @@ import os.path
 import re
 import json
 from datetime import datetime
+import subprocess
 from automata.fa.dfa import DFA
 from automata.fa.nfa import NFA
-
-INIT_STATE = "state_0"
-FINAL_STATE = "Crash!"
 
 
 def print_header(header: str):
@@ -32,6 +30,11 @@ def print_error(e: str):
     print("[  Error  ] %s" % e)
 
 
+def print_waring(w: str):
+    """ Print the warning info """
+    print("[ Warning ] %s" % w)
+
+
 def init_counts(events: dict):
     """ Init a map to count """
     res = dict()
@@ -40,12 +43,9 @@ def init_counts(events: dict):
     return res
 
 
-def file_exists(file_path: str):
+def file_exists(file_path: str) -> bool:
     """ Check whether the file exists """
-    if not os.path.exists(file_path):
-        print_error("file \'%s\' doesn't exists. Analysis terminated." % file_path)
-        return False
-    return True
+    return os.path.exists(file_path)
 
 
 class MyDFA(DFA):
@@ -62,7 +62,7 @@ class MyDFA(DFA):
 
     def validate_event(self, event) -> bool:
         """ To validate an event """
-        if event in self.transitions[self.current_state]:
+        if event in self.transitions[self.current_state] and self.transitions[self.current_state][event] != "{}":
             return True
         else:
             return False
@@ -81,7 +81,7 @@ class MyDFA(DFA):
             states.remove('{}')
         final_state = self.final_states.copy().pop()
 
-        """ Init the DFA graph """
+        ''' Init the DFA graph '''
         graph = dict()
         for state_from in states:
             if state_from == '{}':
@@ -95,14 +95,14 @@ class MyDFA(DFA):
                 else:
                     graph[state_from][state_to] = 1000
 
-        """ Floyd algorithm """
+        ''' Floyd algorithm '''
         for i in states:
             for j in states:
                 for k in states:
                     if graph[j][i] + graph[i][k] < graph[j][k]:
                         graph[j][k] = graph[j][i] + graph[i][k]
 
-        """ Get the shortest distance from every state in the DFA to the final state """
+        ''' Get the shortest distance from every state in the DFA to the final state '''
         ret = dict()
         for i in states:
             graph[i][i] = 0
@@ -111,9 +111,83 @@ class MyDFA(DFA):
         return ret
 
 
+class Converter:
+
+    def __init__(self, nfa_path: str):
+        self.nfa_path = nfa_path
+        self.json_path = "./converted_json.json"
+
+    def get_converted_json(self) -> bool:
+        putflap_path = "../tools/putflap.jar"
+        command = "java -jar " + putflap_path + " convert -t json " + self.nfa_path
+        print("[ Converter ] Executing  \"%s\"" % command)
+        p = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        p.wait()
+        if p.poll() == 0:
+            print("[ Converter ] Conversion succeeded!")
+            return True
+        else:
+            print("[ Converter ] Conversion failed.")
+            return False
+
+    def dfa_from_json(self) -> MyDFA:
+        with open(self.json_path, "r", encoding="utf-8") as f:
+            info = json.load(f)
+            raw_states = info["conversions"][0]["result"]["states"]
+            raw_transitions = info["conversions"][0]["result"]["transitions"]
+        init_state = None
+        final_states, states, transitions, names, input_symbols = set(), set(), dict(), dict(), set()
+        for state in raw_states:
+            states.add(state["name"])
+            names[state["id"]] = state["name"]
+            if state["type"] == "INITIAL":
+                init_state = state["name"]
+            if state["type"] == "FINAL":
+                final_states.add(state["name"])
+
+        for transition in raw_transitions:
+            from_name = names[transition["from"]]
+            to_name = names[transition["to"]]
+            char = transition["read"]
+            input_symbols.add(char)
+            if from_name not in transitions:
+                transitions[from_name] = {char: {to_name}}
+            else:
+                transitions[from_name][char] = {to_name}
+
+        for fn in final_states:
+            if fn not in transitions:
+                transitions[fn] = dict()
+
+        # print("    < Init State > %s" % init_state)
+        # print("    < Final States > %s" % str(final_states))
+        # print("    < All states > %s" % str(states))
+        # print("    < All Transitions > ")
+        # for f in sorted(transitions.keys()):
+        #     print("        %3s : %s" % (f, str(transitions[f])))
+
+        dfa = MyDFA.from_nfa(NFA(
+            states=states,
+            input_symbols=input_symbols,
+            transitions=transitions,
+            initial_state=init_state,
+            final_states=final_states
+        ))
+
+        print("[ Converter ] Loading json succeeded.")
+        return dfa
+
+    def delete_converted_json(self):
+        os.remove(self.json_path)
+
+
 class Analyzer:
 
-    def __init__(self, json_path: str, args: Namespace):
+    def __init__(self, json_path: str, args: Namespace, nfa_path: str):
+
+        converter = None
+        if nfa_path is not None:
+            converter = Converter(nfa_path)
 
         with open(json_path, "r", encoding="utf-8") as f:
             info = json.load(f)
@@ -122,17 +196,6 @@ class Analyzer:
             self.events: dict = info["events"]  # Get all events
             self.warnings: dict = info["warnings"]  # Get all Warnings
             self.all_events_happened: str = info["all_events_happened"]
-            self.has_fa = len(info["transition_function"]) != 0
-
-            if "interesting_pairs" in info:  # Get the intesesting pairs
-                self.interesting_pairs: dict = dict()
-                ip: dict = info["interesting_pairs"]
-                for prev in ip:
-                    for next in ip[prev]:
-                        self.interesting_pairs[prev + next] = 0
-            else:
-                print_info("No interesting pairs needed to count.")
-                self.interesting_pairs = None
 
             self.total_event = len(self.events)  # Get the numbers of events
             self.event_counts = init_counts(self.events)  # Init event counter
@@ -145,42 +208,77 @@ class Analyzer:
             self.last_time = None
             self.warning_pairs = init_counts(self.events)
 
-            self.distances_record = dict()
-
             self.is_crashed = False  # To show whether tester reaches the crash
             self.crash_time = None  # To Record the time of crash happening
 
-            if self.has_fa:
-                states = set(info["transition_function"].keys())
-                states.add(FINAL_STATE)
-                if args.dfa:  # use DFA
-                    transitions = info["transition_function"]
-                    transitions[FINAL_STATE] = dict()
-                    self.fa = MyDFA(
-                        states=states,
-                        input_symbols=set(self.events.keys()),
-                        transitions=transitions,
-                        initial_state=INIT_STATE,
-                        final_states={FINAL_STATE},
-                        allow_partial=True
-                    )
-                if args.nfa:  # use NFA
-                    self.fa = MyDFA.from_nfa(NFA(
-                        states=states,
-                        input_symbols=set(self.events.keys()),
-                        transitions=info["transition_function"],
-                        initial_state=INIT_STATE,
-                        final_states={FINAL_STATE},
-                    ))
+            self.fa = None
+            if converter is not None:
+                success = converter.get_converted_json()
+                if success:
+                    self.fa = converter.dfa_from_json()
+                    converter.delete_converted_json()
+
+            self.distances_record = None
+            if self.fa is not None:
+                self.distances_record = {self.fa.distances[self.fa.current_state]: 1}
+
+            if "interesting_pairs" in info:
+                self.ip = info["interesting_pairs"]
+            else:
+                self.ip = None
+            if args.manual:
+                self.interesting_pairs = self.load_ip_manually()
+            else:
+                self.interesting_pairs = self.load_ip_from_dfa()
+
+    def load_ip_manually(self):
+        if self.ip is not None:  # Get the interesting pairs
+            ip: dict = dict()
+            raw_ip: dict = self.ip
+            for prev in raw_ip:
+                for next in raw_ip[prev]:
+                    if (prev + next) not in ip:
+                        ip[prev + next] = 0
+            if len(ip) == 0:
+                print_info("No interesting pairs needed to count.")
+                return None
+            else:
+                return ip
+        else:
+            print_info("No interesting pairs needed to count.")
+            return None
+
+    def load_ip_from_dfa(self):
+        if self.fa is not None:
+            ip: dict = dict()
+            for state in self.fa.transitions.keys():
+                for prev in self.fa.transitions[state].keys():
+                    if prev != '' and self.fa.transitions[state][prev] != "{}":
+                        to = self.fa.transitions[state][prev]
+                        for next in self.fa.transitions[to].keys():
+                            if next != '' and self.fa.transitions[to][next] != "{}" and (prev + next) not in ip:
+                                ip[prev + next] = 0
+            if len(ip) == 0:
+                print_info("No interesting pairs needed to count.")
+                return None
+            else:
+                return ip
+        else:
+            print_info("No interesting pairs needed to count.")
+            return None
+
 
     def analyze(self, log_path: str, time_path: str, args: Namespace):
         """ Process the time file """
         if not file_exists(time_path):
             return False
+
+        year = "2021-"
         with open(time_path, "r", encoding="utf-8") as f:
             ''' Get the time of beginning '''
             try:
                 start_time = datetime.strptime(f.readline().split("\n")[0], "%Y-%m-%d-%H:%M:%S")
+                year = str(start_time.year) + "-"
             except ValueError:
                 print("[ Error ] The time value is not correct in: %s" % time_path)
                 return False
@@ -198,36 +296,59 @@ class Analyzer:
 
                 if not line.startswith('---'):
                     info = line.split(' ')
-                    self.delta = datetime.strptime("2021-" + info[0] + " " + info[1].split('.')[0], "%Y-%m-%d %H:%M:%S")
+                    self.delta = datetime.strptime(year + info[0] + " " + info[1].split('.')[0], "%Y-%m-%d %H:%M:%S")
 
                 if re.search("Themis", line):  # Search "Themis"
 
-                    """ Get the arrival time """
+                    ''' Get the arrival time '''
                     event_time = self.delta
 
-                    if re.search("Event ", line, re.I):  # If it's a "Event"
+                    ''' Get the type of this line '''
+                    match_event = re.search("Event ", line, re.I)
+                    match_warning = re.search("Warning ", line, re.I)
+                    line_type = ""
+                    if match_event is None and match_warning is not None:
+                        line_type = "Warning"
+                    if match_event is not None and match_warning is None:
+                        line_type = "Event"
+                    if match_event is not None and match_warning is not None and match_event.span() < match_warning.span():
+                        line_type = "Event"
+                    if match_event is not None and match_warning is not None and match_event.span() > match_warning.span():
+                        line_type = "Warning"
 
-                        event_id = line[re.search("event ", line, re.I).span()[1]]  # To get event id
+                    if line_type == "Event":  # If it's a "Event"
+                        ''' Get event id and count it '''
+                        pos = match_event.span()[1]
+                        event_id = line[pos]  # To get event id
+                        if event_id == ":":
+                            continue
+                        pos += 1
+                        while line[pos] != ":":
+                            event_id += line[pos]
+                            pos += 1
+                        event_id = event_id.strip()
+                        if not ("a" <= event_id <= "z") and int(event_id) >= 10:
+                            event_id = chr(int(event_id) - 10 + 97)
                         if event_id not in self.event_counts:
                             continue
-                        if int(event_id) >= 10:
-                            event_id = chr(int(event_id) - 10 + 97)
                         self.event_counts[str(event_id)] += 1  # The corresponding event count add 1
                         self.last_time = event_time
 
-                        if event_id not in self.first_time:  # Record the relative time of first occurrence
+                        ''' Record the relative time of first occurrence '''
+                        if event_id not in self.first_time:
                             self.first_time[event_id] = event_time - start_time
 
-                        if self.has_fa and args.dfa:  # When input configuration file is a DFA
-                            if self.fa.validate_event(event_id):  # If this is a valid transition then do it
-                                old_state = self.fa.current_state
-                                self.fa.do_event(event_id)
+                        ''' Count the interesting pairs '''
+                        if self.interesting_pairs is not None and self.last_event is not None and \
+                                (self.last_event + event_id) in self.interesting_pairs:
+                            self.interesting_pairs[self.last_event + event_id] += 1
+                        self.last_event = event_id
 
-                                if old_state != self.fa.current_state:  # Count the ip
-                                    if self.interesting_pairs is not None and self.last_event is not None and (
-                                            self.last_event + event_id) in self.interesting_pairs:
-                                        self.interesting_pairs[self.last_event + event_id] += 1
-                                    self.last_event = event_id  # If there is a transition then update the last event
+                        ''' Compute the transition of the converted DFA '''
+                        if self.fa is not None:
+
+                            if self.fa.validate_event(event_id):  # If this is a valid transition then do it
+                                self.fa.do_event(event_id)
 
                                 distance = self.fa.now_distance()
                                 if distance in self.distances_record:
@@ -242,12 +363,18 @@ class Analyzer:
                                     if self.fa.validate_event(event_id):
                                         self.fa.do_event(event_id)
 
-                        if self.has_fa and args.nfa:  # When input configuration file is a NFA
-                            # TODO: Complete the procedure when dealing a NFA-input
-                            pass
-
-                    if re.search("Warning ", line, re.I):  # If it's a “Warning”
-                        warning_id = line[re.search("Warning ", line, re.I).span()[1]]
+                    if line_type == "Warning":  # If it's a “Warning”
+                        pos = match_warning.span()[1]
+                        warning_id = line[pos]  # To get event id
+                        if warning_id == ":":
+                            continue
+                        pos += 1
+                        while line[pos] != ":":
+                            warning_id += line[pos]
+                            pos += 1
+                        warning_id = warning_id.strip()
+                        if not ("a" <= warning_id <= "z") and int(warning_id) >= 10:
+                            warning_id = chr(int(warning_id) - 10 + 97)
                         if warning_id not in self.warning_counts:
                             continue
                         self.warning_counts[warning_id] += 1
@@ -262,14 +389,10 @@ class Analyzer:
                         if self.crash_time is None:
                             self.crash_time = event_time - start_time
 
-            if self.has_fa and args.dfa:
+            if self.fa is not None:
                 self.fa.reset_current_state()
 
-            if self.has_fa and args.nfa:
-                # TODO: Complete the procedure when dealing a NFA-input
-                pass
-
-        """ If no finish time in time files, use the last line log time to compute the time interval """
+        ''' If no finish time in time files, use the last line log time to compute the time interval '''
         if end_time is None:
             self.delta = self.delta - start_time
         else:
@@ -293,8 +416,7 @@ class Analyzer:
                           self.event_counts[event],
                           self.warning_counts[event],
                           self.first_time[event], self.delta))
-                print(" " * 14 + "> Event info: %s"
-                         % self.events[event]["info"])
+                print(" " * 14 + "> Event info: %s" % self.events[event]["info"])
                 if self.warning_counts[event] > 0:
                     if event in self.warning_pairs:
                         print(" " * 14 + "> Warning info: %s [immediately occurrence (<1s): %d]"
@@ -303,7 +425,7 @@ class Analyzer:
                         print(" " * 14 + "> Warning info: %s"
                                  % self.warnings[event])
 
-        if zero_count != 0:  # If there is any event that its `count` > 0
+        if args.detail and zero_count != 0:  # If there is any event that its `count` > 0
             print_header("[ Analysis of the missing events ]")
             for event in self.event_counts:
                 if self.event_counts[event] == 0:
@@ -319,14 +441,14 @@ class Analyzer:
             print_header("[ The first time of crash ]")
             print(" " * 10 + "[ %s ] The min time taken to reach the crash: %s" % (self.bug_id, str(self.crash_time)))
 
-        if self.interesting_pairs is not None:
+        if args.detail and self.interesting_pairs is not None:
             print_header(" [ The count of interesting pairs ] ")
-            for pair in self.interesting_pairs:
+            for pair in sorted(self.interesting_pairs.keys()):
                 print(" " * 10 + "[ %s ] (%s, %s) : %4d times" % (
                     self.bug_id, pair[0], pair[1], self.interesting_pairs[pair]))
 
         ''' DFA '''
-        if self.has_fa and args.dfa and len(self.distances_record) != 0:
+        if args.detail and self.fa is not None and len(self.distances_record) != 0:
             print_header("[ The minimum distance to the crash when testing ]")
             distances = sorted(self.distances_record.keys())
             for distance in distances:
@@ -344,7 +466,7 @@ class Analyzer:
 
         metrics = dict()
 
-        if self.events is None:
+        if self.events is None or len(self.events) == 0:
             metrics["covered_events"] = "None"
             metrics["all_events"] = "None"
             metrics["events_coverage"] = "None"
@@ -357,7 +479,7 @@ class Analyzer:
             metrics["events_coverage"] = ("%.2f" % (metrics["covered_events"] * 100 / len(self.events.keys()))) + "%"
             metrics["covered_events"] = str(metrics["covered_events"])
 
-        if self.interesting_pairs is None:
+        if self.interesting_pairs is None or len(self.interesting_pairs) == 0:
             metrics["covered_pairs"] = "None"
             metrics["all_pairs"] = "None"
             metrics["pairs_coverage"] = "None"
@@ -370,7 +492,7 @@ class Analyzer:
             metrics["pairs_coverage"] = ("%3.2f" % (metrics["covered_pairs"] * 100 / len(self.interesting_pairs.keys()))) + "%"
             metrics["covered_pairs"] = str(metrics["covered_pairs"])
 
-        if len(self.distances_record) == 0:
+        if self.distances_record is None:
             metrics["min_distance"] = "None"
         else:
             metrics["min_distance"] = str(min(sorted(self.distances_record.keys())))
@@ -380,15 +502,17 @@ class Analyzer:
     def show_metrics(self):
         print_header("[ COVERAGE METRICS ]")
         metrics = self.prepare_metrics()
-        print(" "*10 + "           Event Coverage(%)     Event-Pair Coverage(%)    Min Distance")
+        print(" "*10 + "          Event Coverage(%)     Event-Pair Coverage(%)    Min Distance")
         print(" "*10 + "[ %s ]   %2s/%-2s(%s)            %2s/%-2s(%s)              %2s"
               % (self.bug_id,
                  metrics["covered_events"], metrics["all_events"], metrics["events_coverage"],
                  metrics["covered_pairs"], metrics["all_pairs"], metrics["pairs_coverage"],
                  metrics["min_distance"]))
+        print("%s / %s / %s / %s" % (metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"], self.is_crashed))
 
 
 def main(args: Namespace):
+
     log_dir: str = args.target_dir
 
     if log_dir.endswith("/"):
@@ -406,32 +530,56 @@ def main(args: Namespace):
         base_dir[second_pos[0] + 1: third_pos[0]], \
         (base_dir[third_pos[1]: forth_pos[0]]).lower()
 
+    ''' Load the configuration file '''
     json_path = os.path.join("..", app_name, "configuration-" + bug_id + ".json")  # Get the path of the json file
-    analyzer = Analyzer(json_path, args)  # Initialize an Analyzer
+    if not file_exists(json_path):
+        print_error("%s does not exists! Analysis aborted." % json_path)
+        return False
 
+    ''' Load the NFA file '''
+    nfa_path = os.path.join("..", app_name, bug_id[1:] + "-NFA.jff")
+    if not file_exists(nfa_path):
+        print_waring("No NFA the use. Analyzer will only count events.")
+        nfa_path = None
+    else:
+        print_info("THE NFA FILE:\n    > %s" % nfa_path)
+
+    ''' Initialize an Analyzer '''
+    analyzer = Analyzer(json_path, args, nfa_path)
+
+    ''' Load the log file '''
     log_path = os.path.join(log_dir, "logcat.log")
+    if not file_exists(log_path):
+        print_error("%s does not exists! Analysis aborted." % log_path)
+        return False
     print_info("THE LOG FILE:\n    > %s" % log_path)
+
+    ''' Load the time file '''
     time_path = os.path.join(log_dir, tool_name + "_testing_time_on_emulator.txt")
+    if not file_exists(time_path):
+        print_error("%s does not exists! Analysis aborted." % time_path)
+        return False
     print_info("THE TIME FILE:\n    > %s" % time_path)
 
-    if analyzer.analyze(log_path, time_path, args):  # Start analyzing log
+    ''' Start analyzing log '''
+    if analyzer.analyze(log_path, time_path, args):
         analyzer.show_result(tool_name)
 
 
 if __name__ == "__main__":
+
     parser = ArgumentParser(prog="Log Analyzer", usage="to analyze the output logs of running testers.")
 
-    parser.add_argument("-d", "--dfa", action="store_true", default=False, help="use dfa style configuration file")
-    parser.add_argument("-n", "--nfa", action="store_true", default=False, help="use nfa style configuration file")
-    parser.add_argument("-w", "--wait", action="store_true", default=False,
-                       help="let the fa wait at the current state when mismatching")
+    parser.add_argument("-w", "--wait", action="store_true", default=False, help="let the FA wait at the current state when mismatching")
+    parser.add_argument("-m", "--manual", action="store_true", default=False, help="Manually specify the interesting pairs")
+    parser.add_argument("-d", "--detail", action="store_true", default=False, help="Show more details")
 
     parser.add_argument("target_dir", help="the output logs dir that to be analyzed")
 
     args = parser.parse_args()
-    print_info("ARGUMENTS:\n    > Use DFA? [%s]\n" % args.dfa
-              + "    > Use NFA? [%s]\n" % args.nfa
-              + "    > Target directory: [%s]\n" % args.target_dir
-              + "    > Do wait when matching? [%s]" % args.wait)
+    print_info("ARGUMENTS:\n"
+            + "    > Target directory: [%s]\n" % args.target_dir
+            + "    > Do count all pairs in DFA? [%s]\n" % args.manual
+            + "    > Do wait when matching? [%s]" % args.wait)
 
     main(args)
