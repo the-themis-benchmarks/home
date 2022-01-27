@@ -7,8 +7,9 @@ OUTPUT_DIR=$4
 TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
+IS_SNAPSHOT=$8
 
-APE_TOOL=../tools/ape-bin
+APE_TOOL=../tools/
 
 # wait for the target device
 function wait_for_device(){
@@ -71,13 +72,19 @@ if [[ $LOGIN_SCRIPT != "" ]]
 then
     echo "** APP LOGIN (${AVD_SERIAL})"
 
-    # enable if use the login script
-    # adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
-    # echo "** INSTALL APP (${AVD_SERIAL})"
-    # python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
+    if [[ $IS_SNAPSHOT != "True" ]]
+    then
 
-    # enable if use the snapshot (already login, do not need to install the app)
-    echo " *** Login SUCCESS ****" >> $result_dir/login.log
+      # enable if use the login script
+      sleep 5 # wait for a few seconds before installation to avoid such error: "adb: connect error for write: closed"
+      adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
+      echo "** INSTALL APP (${AVD_SERIAL})"
+      python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
+
+    else
+      # enable if use the snapshot (already login, do not need to install the app)
+      echo " *** Login SUCCESS ****" >> $result_dir/login.log
+    fi
 
 else
     # install the app
@@ -86,7 +93,7 @@ else
     echo "** INSTALL APP (${AVD_SERIAL})"
 fi
 
-sleep 20
+sleep 15
 
 # install Ape
 adb -s $AVD_SERIAL push $APE_TOOL/ape.jar /data/local/tmp/
@@ -100,11 +107,10 @@ echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
 adb -s $AVD_SERIAL logcat -G 10M
-adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E *:F *:S > $result_dir/logcat.log &
+adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E Themis:I *:F *:S > $result_dir/logcat.log &
 
-# start coverage dumping
-echo "** START COVERAGE (${AVD_SERIAL}) "
-bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
+# copy dummy documents
+bash -x copy_dummy_documents.sh $avd_serial
 
 # run Ape
 echo "** RUN APE (${AVD_SERIAL})"
@@ -115,12 +121,9 @@ timeout $TEST_TIME adb -s $AVD_SERIAL shell CLASSPATH=/data/local/tmp/ape.jar /s
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/ape_testing_time_on_emulator.txt
 
 # pull Ape's results
-echo "** PULL APE RESULTS (${AVD_SERIAL})"
-adb -s $AVD_SERIAL pull /sdcard/sata-${app_package_name}-ape-sata-running-minutes-360 $result_dir/
+#echo "** PULL APE RESULTS (${AVD_SERIAL})"
+#adb -s $AVD_SERIAL pull /sdcard/sata-${app_package_name}-ape-sata-running-minutes-360 $result_dir/
 
-# stop coverage dumping
-echo "** STOP COVERAGE (${AVD_SERIAL})"
-kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
 
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"
