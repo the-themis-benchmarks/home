@@ -1,6 +1,5 @@
 #!/bin/bash
 
-
 APK_FILE=$1 # e.g., xx.apk
 AVD_SERIAL=$2 # e.g., emulator-5554
 AVD_NAME=$3 # e.g., base
@@ -8,6 +7,7 @@ OUTPUT_DIR=`realpath $4`
 TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
+IS_SNAPSHOT=$8
 
 COMBO_DIR=../tools/combodroid
 
@@ -116,24 +116,20 @@ echo "serial = ${port}" >> $config_file
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
 adb -s $AVD_SERIAL logcat -G 10M
-adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E *:F *:S > $result_dir/logcat.log &
+adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E Themis:I *:F *:S > $result_dir/logcat.log &
 
-# start coverage dumping
-echo "** START COVERAGE (${AVD_SERIAL}) "
-bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
+# copy dummy documents
+bash -x copy_dummy_documents.sh $avd_serial
 
 # run combodroid
 echo "** RUN COMBODROID (${AVD_SERIAL})"
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H-%M-%S" >> $result_dir/combo_testing_time_on_emulator.txt
+
 # jump to combodroid's dir
 cd $COMBO_DIR
 config_file_name=`basename $config_file`
 timeout $TEST_TIME ./ComboDroid.sh $config_file_name 2>&1 | tee $result_dir/combodroid.log 
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H-%M-%S" >> $result_dir/combo_testing_time_on_emulator.txt
-
-# stop coverage dumping
-echo "** STOP COVERAGE (${AVD_SERIAL})"
-kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
 
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"
