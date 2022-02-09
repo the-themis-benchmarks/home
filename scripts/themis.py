@@ -19,7 +19,7 @@ def get_time_in_seconds(testing_time):
 
 
 def run_monkey(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script,is_snapshot):
-    command = 'bash -x run_monkey.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+    command = 'bash -x run_monkey.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                               output_dir,
                                                               testing_time,
                                                               screen_option,
@@ -30,7 +30,7 @@ def run_monkey(apk, avd_serial, avd_name, output_dir, testing_time, screen_optio
 
 
 def run_ape(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script,is_snapshot):
-    command = 'bash run_ape.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+    command = 'bash run_ape.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                         output_dir,
                                                         testing_time,
                                                         screen_option,
@@ -51,7 +51,7 @@ def run_combodroid(apk, avd_serial, avd_name, output_dir, testing_time, screen_o
 
 
 def run_combodroid_login(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    command = 'bash -x run_combodroid_login.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+    command = 'bash -x run_combodroid_login.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                                         output_dir,
                                                                         testing_time,
                                                                         screen_option,
@@ -85,7 +85,7 @@ def run_humanoid(apk, avd_serial, avd_name, output_dir, testing_time, screen_opt
 
 
 def run_weighted(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    command = 'bash -x run_weighted.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+    command = 'bash -x run_weighted.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                                 output_dir,
                                                                 testing_time,
                                                                 screen_option,
@@ -96,7 +96,7 @@ def run_weighted(apk, avd_serial, avd_name, output_dir, testing_time, screen_opt
 
 
 def run_stoat(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    command = 'bash -x run_stoat.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+    command = 'bash -x run_stoat.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
                                                              os.path.abspath(output_dir),
                                                              testing_time,
                                                              screen_option,
@@ -107,7 +107,7 @@ def run_stoat(apk, avd_serial, avd_name, output_dir, testing_time, screen_option
 
 
 def run_sapienz(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    command = 'bash -x run_sapienz.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+    command = 'bash -x run_sapienz.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
                                                                os.path.abspath(output_dir),
                                                                testing_time,
                                                                screen_option,
@@ -118,7 +118,8 @@ def run_sapienz(apk, avd_serial, avd_name, output_dir, testing_time, screen_opti
 
 
 def run_qtesting(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    command = 'bash -x run_qtesting.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+    print("run_qtesting")
+    command = 'bash -x run_qtesting.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
                                                                 os.path.abspath(output_dir),
                                                                 testing_time,
                                                                 screen_option,
