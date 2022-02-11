@@ -122,7 +122,7 @@ app_crash_data = {
                   'com.bumptech.glide.integration.recyclerview.RecyclerToListViewScrollListener.onScrolled(RecyclerToListViewScrollListener.java']
     },
 
-    'FireFoxLite': {
+    'FirefoxLite': {
 
         '#4881': ["java.lang.NullPointerException: Attempt to invoke virtual method 'void android.view.View.setVisibility(int)' on a null object reference",
                   "org.mozilla.rocket.content.common.ui.ContentTabHelper$Observer.onEnterFullScreen(ContentTabHelper.kt",

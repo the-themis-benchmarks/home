@@ -18,22 +18,24 @@ def get_time_in_seconds(testing_time):
     return testing_time_in_secs
 
 
-def run_monkey(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_monkey.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+def run_monkey(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script,is_snapshot):
+    command = 'bash -x run_monkey.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                               output_dir,
                                                               testing_time,
                                                               screen_option,
-                                                              login_script)
+                                                              login_script,
+                                                              is_snapshot)
     print('execute monkey: %s' % command)
     os.system(command)
 
 
-def run_ape(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash run_ape.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+def run_ape(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script,is_snapshot):
+    command = 'bash run_ape.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                         output_dir,
                                                         testing_time,
                                                         screen_option,
-                                                        login_script)
+                                                        login_script,
+                                                        is_snapshot)
     print('execute ape: %s' % command)
     os.system(command)
 
@@ -48,12 +50,13 @@ def run_combodroid(apk, avd_serial, avd_name, output_dir, testing_time, screen_o
     os.system(command)
 
 
-def run_combodroid_login(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_combodroid_login.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+def run_combodroid_login(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    command = 'bash -x run_combodroid_login.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                                         output_dir,
                                                                         testing_time,
                                                                         screen_option,
-                                                                        login_script)
+                                                                        login_script,
+                                                                        is_snapshot)
     print('execute combodroid with login: %s' % command)
     os.system(command)
 
@@ -81,42 +84,47 @@ def run_humanoid(apk, avd_serial, avd_name, output_dir, testing_time, screen_opt
     os.system(command)
 
 
-def run_weighted(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_weighted.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+def run_weighted(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    command = 'bash -x run_weighted.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                                 output_dir,
                                                                 testing_time,
                                                                 screen_option,
-                                                                login_script)
+                                                                login_script,
+                                                                is_snapshot)
     print('execute weighted exploration: %s' % command)
     os.system(command)
 
 
-def run_stoat(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_stoat.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+def run_stoat(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    command = 'bash -x run_stoat.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
                                                              os.path.abspath(output_dir),
                                                              testing_time,
                                                              screen_option,
-                                                             login_script)
+                                                             login_script,
+                                                             is_snapshot)
     print('execute stoat: %s' % command)
     os.system(command)
 
 
-def run_sapienz(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_sapienz.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+def run_sapienz(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    command = 'bash -x run_sapienz.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
                                                                os.path.abspath(output_dir),
                                                                testing_time,
                                                                screen_option,
-                                                               login_script)
+                                                               login_script,
+                                                               is_snapshot)
     print('execute sapienz: %s' % command)
     os.system(command)
 
 
-def run_qtesting(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
-    command = 'bash -x run_qtesting.sh %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+def run_qtesting(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    print("run_qtesting")
+    command = 'bash -x run_qtesting.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
                                                                 os.path.abspath(output_dir),
                                                                 testing_time,
                                                                 screen_option,
-                                                                login_script)
+                                                                login_script,
+                                                                is_snapshot)
     print('execute Q-testing: %s' % command)
     os.system(command)
 
@@ -254,11 +262,11 @@ def main(args: Namespace):
             if args.monkey:
                 p.apply_async(run_monkey, args=(current_apk, avd_serial, args.avd_name,
                                                 args.o, args.time, screen_option,
-                                                login_script,))
+                                                login_script,args.snapshot,))
             elif args.ape:
                 p.apply_async(run_ape, args=(current_apk, avd_serial, args.avd_name,
                                              args.o, args.time, screen_option,
-                                             login_script,))
+                                             login_script,args.snapshot,))
             elif args.timemachine:
                 avd_port = avd_serial.split('-')[1]
                 p.apply_async(run_timemachine, args=(current_apk, avd_serial, args.avd_name,
@@ -267,11 +275,11 @@ def main(args: Namespace):
             elif args.combo:
                 p.apply_async(run_combodroid, args=(current_apk, avd_serial, args.avd_name,
                                                     args.o, args.time, screen_option,
-                                                    login_script,))
+                                                    login_script,args.snapshot,))
             elif args.combo_login:
                 p.apply_async(run_combodroid_login, args=(current_apk, avd_serial, args.avd_name,
                                                           args.o, args.time, screen_option,
-                                                          login_script,))
+                                                          login_script,args.snapshot,))
             elif args.humanoid:
                 p.apply_async(run_humanoid, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
@@ -279,21 +287,21 @@ def main(args: Namespace):
             elif args.weighted:
                 p.apply_async(run_weighted, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
-                                                  login_script,))
+                                                  login_script,args.snapshot,))
 
             elif args.stoat:
                 p.apply_async(run_stoat, args=(current_apk, avd_serial, args.avd_name,
                                                args.o, args.time, screen_option,
-                                               login_script,))
+                                               login_script,args.snapshot,))
             elif args.sapienz:
                 p.apply_async(run_sapienz, args=(current_apk, avd_serial, args.avd_name,
                                                  args.o, args.time, screen_option,
-                                                 login_script,))
+                                                 login_script,args.snapshot,))
 
             elif args.qtesting:
                 p.apply_async(run_qtesting, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
-                                                  login_script,))
+                                                  login_script,args.snapshot,))
 
             elif args.fastbot:
                 p.apply_async(run_fastbot, args=(current_apk, avd_serial, args.avd_name,

@@ -21,6 +21,11 @@
             "info": "Clicked the \"Camera\" icon in detail list item menu.",
             "reason": null,
             "dependency": "3"
+        },
+        "5": {
+            "info": "Took a photo using system camera and returned a picture.",
+            "reason": null,
+            "dependency": "4"
         }
     },
     "warnings" : {

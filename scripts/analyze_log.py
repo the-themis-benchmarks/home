@@ -425,7 +425,7 @@ class Analyzer:
                         print(" " * 14 + "> Warning info: %s"
                                  % self.warnings[event])
 
-        if zero_count != 0:  # If there is any event that its `count` > 0
+        if args.detail and zero_count != 0:  # If there is any event that its `count` > 0
             print_header("[ Analysis of the missing events ]")
             for event in self.event_counts:
                 if self.event_counts[event] == 0:
@@ -441,14 +441,14 @@ class Analyzer:
             print_header("[ The first time of crash ]")
             print(" " * 10 + "[ %s ] The min time taken to reach the crash: %s" % (self.bug_id, str(self.crash_time)))
 
-        if self.interesting_pairs is not None:
+        if args.detail and self.interesting_pairs is not None:
             print_header(" [ The count of interesting pairs ] ")
             for pair in sorted(self.interesting_pairs.keys()):
                 print(" " * 10 + "[ %s ] (%s, %s) : %4d times" % (
                     self.bug_id, pair[0], pair[1], self.interesting_pairs[pair]))
 
         ''' DFA '''
-        if self.fa is not None and len(self.distances_record) != 0:
+        if args.detail and self.fa is not None and len(self.distances_record) != 0:
             print_header("[ The minimum distance to the crash when testing ]")
             distances = sorted(self.distances_record.keys())
             for distance in distances:
@@ -508,7 +508,7 @@ class Analyzer:
                  metrics["covered_events"], metrics["all_events"], metrics["events_coverage"],
                  metrics["covered_pairs"], metrics["all_pairs"], metrics["pairs_coverage"],
                  metrics["min_distance"]))
-        print("%s / %s / %s" % (metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"]))
+        print("%s / %s / %s / %s" % (metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"], self.is_crashed))
 
 
 def main(args: Namespace):

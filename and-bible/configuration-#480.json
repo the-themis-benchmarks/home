@@ -28,12 +28,12 @@
             "dependency": null
         },
         "6": {
-            "info": "Changed an empty/non-empty label to an empty/non-empty one.",
+            "info": "Changed an empty/non-empty label to a non-empty one.",
             "reason": null,
             "dependency": "dd:4"
         },
         "7": {
-            "info": "Changed an empty/non-empty label to an empty one.",
+            "info": "Deleted the first label.",
             "reason": null,
             "dependency": "dd:4"
         },
