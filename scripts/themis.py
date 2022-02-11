@@ -126,7 +126,6 @@ def run_sapienz(apk, avd_serial, avd_name, output_dir, testing_time, screen_opti
 
 
 def run_qtesting(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    print("run_qtesting")
     command = 'bash -x run_qtesting.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
                                                                 os.path.abspath(output_dir),
                                                                 testing_time,
