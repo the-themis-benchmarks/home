@@ -1,15 +1,14 @@
 #!/bin/bash
 
-APK_FILE=$1 # e.g., xx.apk
+APK_FILE=`realpath $1` # e.g., xx.apk
 AVD_SERIAL=$2 # e.g., emulator-5554
 AVD_NAME=$3 # e.g., base
 OUTPUT_DIR=`realpath $4`
 TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
-IS_SNAPSHOT=$8
 
-COMBO_DIR=../tools/combodroid
+TOOL_DIR=../tools/Genie
 
 # wait for the target device
 function wait_for_device(){
@@ -63,7 +62,7 @@ adb -s ${AVD_SERIAL} root
 
 current_date_time="`date "+%Y-%m-%d-%H-%M-%S"`"
 apk_file_name=`basename $APK_FILE`
-result_dir=$OUTPUT_DIR/$apk_file_name.combodroid.result.$AVD_SERIAL.$AVD_NAME\#$current_date_time
+result_dir=$OUTPUT_DIR/$apk_file_name.weighted.result.$AVD_SERIAL.$AVD_NAME\#$current_date_time
 mkdir -p $result_dir
 echo "** CREATING RESULT DIR (${AVD_SERIAL}): " $result_dir
 
@@ -76,7 +75,15 @@ sleep 2
 if [[ $LOGIN_SCRIPT != "" ]]
 then
     echo "** APP LOGIN (${AVD_SERIAL})"
-    python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
+
+    # enable if use the login script
+    # adb -s $AVD_SERIAL install -g $APK_FILE &> $result_dir/install.log
+    # echo "** INSTALL APP (${AVD_SERIAL})"
+    # python3 $LOGIN_SCRIPT ${AVD_SERIAL} 2>&1 | tee $result_dir/login.log
+
+    # enable if use the snapshot (already login, do not need to install the app)
+    echo " *** Login SUCCESS ****" >> $result_dir/login.log
+
 fi
 sleep 2
 
@@ -84,52 +91,33 @@ sleep 2
 app_package_name=`aapt dump badging $APK_FILE | grep package | awk '{print $2}' | sed s/name=//g | sed s/\'//g`
 echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name
 
-### create config file before running combodroid
-config_file=$COMBO_DIR/"Config_"${apk_file_name%.apk}-${AVD_SERIAL}".txt"
-rm -rf $config_file
-touch $config_file
-echo "subject-dir = subjects" >> $config_file
-unique_apk_file_name=${apk_file_name%.*}-$AVD_SERIAL".apk"
-mkdir -p $COMBO_DIR/subjects
-cp $APK_FILE $COMBO_DIR/subjects/$unique_apk_file_name
-echo "apk-name = ${unique_apk_file_name}" >> $config_file
-echo "instrument-output-dir = temp" >> $config_file
-android_home=`printenv ANDROID_HOME`
-echo "androidSDK-dir = ${android_home}" >> $config_file
-echo "android-platform-version = 30" >> $config_file
-echo "android-buildtool-version = 30.0.3" >> $config_file
-real_path_of_combo=`realpath $COMBO_DIR`
-echo "keystore-path = ${real_path_of_combo}/testKeyStore.jks" >> $config_file
-echo "key-alias = combodroid" >> $config_file
-echo "key-password = combodroid" >> $config_file
-echo "package-name = ${app_package_name}" >> $config_file
-echo "ComboDroid-type = alpha" >> $config_file
-echo "trace-directory = traces" >> $config_file
-echo "running-minutes = 360" >> $config_file
-echo "modeling-minutes = 180" >> $config_file
-port=${AVD_SERIAL##*-}
-echo "serial = ${port}" >> $config_file
-
-### end
-
 # start logcat
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
-adb -s $AVD_SERIAL logcat -G 10M
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E Themis:I *:F *:S > $result_dir/logcat.log &
+
+# start coverage dumping
+# echo "** START COVERAGE (${AVD_SERIAL}) "
+# bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 
 # copy dummy documents
 bash -x copy_dummy_documents.sh $avd_serial
 
-# run combodroid
-echo "** RUN COMBODROID (${AVD_SERIAL})"
-adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H-%M-%S" >> $result_dir/combo_testing_time_on_emulator.txt
+# run Stoat's Weighted
+echo "** RUN Weighted (${AVD_SERIAL})"
+adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/weighted_testing_time_on_emulator.txt
+cd ${TOOL_DIR} || exit
+if [[ $LOGIN_SCRIPT != "" ]]
+then
+    python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
+else
+    python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
+fi
+adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/weighted_testing_time_on_emulator.txt
 
-# jump to combodroid's dir
-cd $COMBO_DIR
-config_file_name=`basename $config_file`
-timeout $TEST_TIME ./ComboDroid.sh $config_file_name 2>&1 | tee $result_dir/combodroid.log 
-adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H-%M-%S" >> $result_dir/combo_testing_time_on_emulator.txt
+# stop coverage dumping
+# echo "** STOP COVERAGE (${AVD_SERIAL})"
+# kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
 
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"
