@@ -8,6 +8,7 @@ from automata.fa.dfa import DFA
 from automata.fa.nfa import NFA
 
 
+
 def print_header(header: str):
     """ Print the header of each section """
     com_len = int((100 - len(header)) / 2)
@@ -291,6 +292,7 @@ class Analyzer:
         """ Process the log file """
         if not file_exists(log_path):
             return False
+
         with open(log_path, "r", encoding="utf-8") as f:
             for line in f:
 
@@ -399,10 +401,10 @@ class Analyzer:
             self.delta = end_time - start_time
         return True
 
-    def show_result(self, tool_name: str):
+    def show_result(self, tool_name: str) -> dict:
         print_title("[ %s-%s (%s) ]" % (self.app_name, self.bug_id, tool_name))
 
-        """ Basic module """
+        ''' Basic module '''
         zero_count = 0  # Count up the events which are never reached
         if len(self.events) != 0:
             print_header("[ The statistics of each event ]")
@@ -425,6 +427,7 @@ class Analyzer:
                         print(" " * 14 + "> Warning info: %s"
                                  % self.warnings[event])
 
+        ''' Detail module '''
         if args.detail and zero_count != 0:  # If there is any event that its `count` > 0
             print_header("[ Analysis of the missing events ]")
             for event in self.event_counts:
@@ -457,9 +460,12 @@ class Analyzer:
                            distance, self.fa.distances[self.fa.initial_state],
                            self.distances_record[distance]))
 
-        self.show_metrics()
-
+        result = dict()
+        result["metrics"] = self.show_metrics()
+        
         print_title("[ Analysis finished ]")
+
+        return result
 
     def prepare_metrics(self) -> dict:
         """ Prepare the metrics of estimation results """
@@ -499,7 +505,7 @@ class Analyzer:
 
         return metrics
 
-    def show_metrics(self):
+    def show_metrics(self,) -> str:
         print_header("[ COVERAGE METRICS ]")
         metrics = self.prepare_metrics()
         print(" "*10 + "          Event Coverage(%)     Event-Pair Coverage(%)    Min Distance")
@@ -508,10 +514,10 @@ class Analyzer:
                  metrics["covered_events"], metrics["all_events"], metrics["events_coverage"],
                  metrics["covered_pairs"], metrics["all_pairs"], metrics["pairs_coverage"],
                  metrics["min_distance"]))
-        print("%s / %s / %s / %s" % (metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"], self.is_crashed))
+        return "%s / %s / %s / %s" % (metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"], self.is_crashed)
 
 
-def main(args: Namespace):
+def main(args: Namespace) -> dict:
 
     log_dir: str = args.target_dir
 
@@ -534,7 +540,7 @@ def main(args: Namespace):
     json_path = os.path.join("..", app_name, "configuration-" + bug_id + ".json")  # Get the path of the json file
     if not file_exists(json_path):
         print_error("%s does not exists! Analysis aborted." % json_path)
-        return False
+        return dict()
 
     ''' Load the NFA file '''
     nfa_path = os.path.join("..", app_name, bug_id[1:] + "-NFA.jff")
@@ -551,19 +557,25 @@ def main(args: Namespace):
     log_path = os.path.join(log_dir, "logcat.log")
     if not file_exists(log_path):
         print_error("%s does not exists! Analysis aborted." % log_path)
-        return False
+        return dict()
     print_info("THE LOG FILE:\n    > %s" % log_path)
 
     ''' Load the time file '''
     time_path = os.path.join(log_dir, tool_name + "_testing_time_on_emulator.txt")
     if not file_exists(time_path):
         print_error("%s does not exists! Analysis aborted." % time_path)
-        return False
+        return dict()
     print_info("THE TIME FILE:\n    > %s" % time_path)
 
     ''' Start analyzing log '''
+    result = dict()
     if analyzer.analyze(log_path, time_path, args):
-        analyzer.show_result(tool_name)
+        result: dict = analyzer.show_result(tool_name)
+        result["app_name"] = app_name
+        result["bug_id"] = bug_id
+        result["tool_name"] = tool_name
+
+    return result
 
 
 if __name__ == "__main__":
@@ -573,6 +585,7 @@ if __name__ == "__main__":
     parser.add_argument("-w", "--wait", action="store_true", default=False, help="let the FA wait at the current state when mismatching")
     parser.add_argument("-m", "--manual", action="store_true", default=False, help="Manually specify the interesting pairs")
     parser.add_argument("-d", "--detail", action="store_true", default=False, help="Show more details")
+    parser.add_argument("-a", "--all", action="store_true", default=False, help="Parse the argument `target_dir` as the parent dir of result dirs")
 
     parser.add_argument("target_dir", help="the output logs dir that to be analyzed")
 
@@ -580,6 +593,39 @@ if __name__ == "__main__":
     print_info("ARGUMENTS:\n"
             + "    > Target directory: [%s]\n" % args.target_dir
             + "    > Do count all pairs in DFA? [%s]\n" % args.manual
-            + "    > Do wait when matching? [%s]" % args.wait)
+            + "    > Do wait when matching? [%s]" % args.wait
+            + "    > Use the parent dir? [%s]" % args.all)
 
-    main(args)
+    if args.all:
+        parent_dir = args.target_dir
+        results = dict()
+        with os.scandir(parent_dir) as dirs:
+
+            for sub_dir in dirs:
+                if sub_dir.name.find("instrumented-") == -1:
+                    continue
+                args.target_dir = os.path.join(parent_dir, sub_dir.name)
+                result = main(args)
+                app_name, bug_id, tool_name = result["app_name"], result["bug_id"], result["tool_name"]
+
+                if tool_name not in results:
+                    results[tool_name] = dict()
+                if app_name not in results[tool_name]:
+                    results[tool_name][app_name] = dict()
+                if bug_id not in results[tool_name][app_name]:
+                    results[tool_name][app_name][bug_id] = []
+
+                results[tool_name][app_name][bug_id].append(result["metrics"])
+
+        tools = sorted(results.keys())
+        for tool in tools:
+            print("[%s]" % tool)
+            apps = sorted(results[tool].keys())
+            for app in apps:
+                print("    [%s]" % app)
+                bugs = results[tool][app].keys()
+                for bug in bugs:
+                    metrics = results[tool][app][bug]
+                    print("        [%4s] %s" % (bug, str(metrics)))
+    else:
+        main(args)
