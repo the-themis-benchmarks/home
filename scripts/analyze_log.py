@@ -8,7 +8,6 @@ from automata.fa.dfa import DFA
 from automata.fa.nfa import NFA
 
 
-
 def print_header(header: str):
     """ Print the header of each section """
     com_len = int((100 - len(header)) / 2)
@@ -47,6 +46,20 @@ def init_counts(events: dict):
 def file_exists(file_path: str) -> bool:
     """ Check whether the file exists """
     return os.path.exists(file_path)
+
+
+def get_name(tool_name: str) -> str:
+    if tool_name == "combodroid":
+        return "combo"
+    else:
+        return tool_name
+
+
+def get_time_format(tool_name: str) -> str:
+    if tool_name == "combodroid":
+        return "%Y-%m-%d-%H-%M-%S"
+    else:
+        return "%Y-%m-%d-%H:%M:%S"
 
 
 class MyDFA(DFA):
@@ -269,7 +282,7 @@ class Analyzer:
             return None
 
 
-    def analyze(self, log_path: str, time_path: str, args: Namespace):
+    def analyze(self, log_path: str, time_path: str, tool_name: str, args: Namespace) -> bool:
         """ Process the time file """
         if not file_exists(time_path):
             return False
@@ -278,14 +291,14 @@ class Analyzer:
         with open(time_path, "r", encoding="utf-8") as f:
             ''' Get the time of beginning '''
             try:
-                start_time = datetime.strptime(f.readline().split("\n")[0], "%Y-%m-%d-%H:%M:%S")
+                start_time = datetime.strptime(f.readline().split("\n")[0], get_time_format(tool_name))
                 year = str(start_time.year) + "-"
             except ValueError:
                 print("[ Error ] The time value is not correct in: %s" % time_path)
                 return False
             ''' Get the time of finishing '''
             try:
-                end_time = datetime.strptime(f.readline().split("\n")[0], "%Y-%m-%d-%H:%M:%S")
+                end_time = datetime.strptime(f.readline().split("\n")[0], get_time_format(tool_name))
             except ValueError:
                 end_time = None
 
@@ -561,7 +574,8 @@ def main(args: Namespace) -> dict:
     print_info("THE LOG FILE:\n    > %s" % log_path)
 
     ''' Load the time file '''
-    time_path = os.path.join(log_dir, tool_name + "_testing_time_on_emulator.txt")
+
+    time_path = os.path.join(log_dir, get_name(tool_name) + "_testing_time_on_emulator.txt")
     if not file_exists(time_path):
         print_error("%s does not exists! Analysis aborted." % time_path)
         return dict()
@@ -569,7 +583,7 @@ def main(args: Namespace) -> dict:
 
     ''' Start analyzing log '''
     result = dict()
-    if analyzer.analyze(log_path, time_path, args):
+    if analyzer.analyze(log_path, time_path, tool_name, args):
         result: dict = analyzer.show_result(tool_name)
         result["app_name"] = app_name
         result["bug_id"] = bug_id
@@ -601,11 +615,20 @@ if __name__ == "__main__":
         results = dict()
         with os.scandir(parent_dir) as dirs:
 
-            for sub_dir in dirs:
-                if sub_dir.name.find("instrumented-") == -1:
+            sorted_dirs = []
+            for sud_dir in dirs:
+                sorted_dirs.append(sud_dir.name)
+
+            for sub_dir in sorted(sorted_dirs):
+
+                if sub_dir.find("instrumented-") == -1:
                     continue
-                args.target_dir = os.path.join(parent_dir, sub_dir.name)
+
+                args.target_dir = os.path.join(parent_dir, sub_dir)
                 result = main(args)
+                if len(result) == 0:    # No valid result
+                    continue
+
                 app_name, bug_id, tool_name = result["app_name"], result["bug_id"], result["tool_name"]
 
                 if tool_name not in results:
