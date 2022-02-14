@@ -33,17 +33,17 @@
             "dependency": "cd:1"
         },
         "7": {
-            "info": "Loaded a picture or a video (from the camera or file system).", 
+            "info": "Got a video from the camera.", 
             "reason": null,
             "dependency": "cd:1"
         },
         "8": {
-            "info": "Loaded a picture or a video (from the camera or file system).", 
+            "info": "Attached a file (image or video).", 
             "reason": null,
             "dependency": "cd:1"
         },
         "9": {
-            "info": "Loaded a picture or a video (from the camera or file system).", 
+            "info": "Got a picture from the sketch.", 
             "reason": null,
             "dependency": "cd:1"
         },
