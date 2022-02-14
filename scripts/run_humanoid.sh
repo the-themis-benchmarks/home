@@ -70,7 +70,7 @@ echo "** CREATING RESULT DIR (${AVD_SERIAL}): " $result_dir
 
 sleep 2
 # login if necessary
-if [[ $LOGIN_SCRIPT != "" ]
+if [[ $LOGIN_SCRIPT != "" ]]
 then
     echo "** APP LOGIN (${AVD_SERIAL})"
 
