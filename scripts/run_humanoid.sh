@@ -70,7 +70,7 @@ echo "** CREATING RESULT DIR (${AVD_SERIAL}): " $result_dir
 
 sleep 2
 # login if necessary
-if [[ $LOGIN_SCRIPT != "" ]]
+if [[ $LOGIN_SCRIPT != "" ]
 then
     echo "** APP LOGIN (${AVD_SERIAL})"
 
@@ -93,11 +93,14 @@ echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
 adb -s $AVD_SERIAL logcat -G 10M
-adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E *:F *:S > $result_dir/logcat.log &
+adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E Themis:I *:F *:S > $result_dir/logcat.log &
+
+# copy dummy documents
+bash -x copy_dummy_documents.sh $avd_serial
 
 # start coverage dumping
-echo "** START COVERAGE (${AVD_SERIAL}) "
-bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
+# echo "** START COVERAGE (${AVD_SERIAL}) "
+# bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 
 # run humandroid
 echo "** RUN Humandroid (${AVD_SERIAL})"
@@ -111,8 +114,8 @@ fi
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/humandroid_testing_time_on_emulator.txt
 
 # stop coverage dumping
-echo "** STOP COVERAGE (${AVD_SERIAL})"
-kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
+# echo "** STOP COVERAGE (${AVD_SERIAL})"
+# kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
 
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"
