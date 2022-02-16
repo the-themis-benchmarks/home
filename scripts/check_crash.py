@@ -899,7 +899,7 @@ if __name__ == '__main__':
     ap.add_argument('--fastbot_new', default=False, action='store_true')
     ap.add_argument('--wetest_new', default=False, action='store_true')
     ap.add_argument('--newmonkey', default=False, action='store_true')
-    ap.add_argument('--droidbot', default=False, action='store_true'
+    ap.add_argument('--droidbot', default=False, action='store_true')
                                                                                                            
     ap.add_argument('--app', type=str, dest='app_name')
     ap.add_argument('--id', type=str, dest='issue_id')
