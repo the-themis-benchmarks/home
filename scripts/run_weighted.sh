@@ -110,9 +110,9 @@ adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/weighted_testi
 cd ${TOOL_DIR} || exit
 if [[ $LOGIN_SCRIPT != "" ]]
 then
-    timeout $TEST_TIME python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
+    python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
 else
-    timeout $TEST_TIME python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
+    python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
 fi
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/weighted_testing_time_on_emulator.txt
 
