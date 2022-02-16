@@ -94,6 +94,7 @@ echo "** PROCESSING APP (${AVD_SERIAL}): " $app_package_name
 # start logcat
 echo "** START LOGCAT (${AVD_SERIAL}) "
 adb -s $AVD_SERIAL logcat -c
+adb -s $AVD_SERIAL logcat -G 10M
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E Themis:I *:F *:S > $result_dir/logcat.log &
 
 # start coverage dumping
@@ -109,9 +110,9 @@ adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/weighted_testi
 cd ${TOOL_DIR} || exit
 if [[ $LOGIN_SCRIPT != "" ]]
 then
-    python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
+    timeout $TEST_TIME python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
 else
-    python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
+    timeout $TEST_TIME python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
 fi
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/weighted_testing_time_on_emulator.txt
 
