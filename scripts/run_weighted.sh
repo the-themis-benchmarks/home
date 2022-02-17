@@ -8,7 +8,7 @@ TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
 
-TOOL_DIR=../tools/Genie
+TOOL_DIR=../tools/Genie/Genie
 
 # wait for the target device
 function wait_for_device(){
@@ -110,9 +110,9 @@ adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/weighted_testi
 cd ${TOOL_DIR} || exit
 if [[ $LOGIN_SCRIPT != "" ]]
 then
-    python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
+    timeout $TEST_TIME python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -keep_app -keep_env -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
 else
-    python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
+    timeout $TEST_TIME python3 -m droidbot.start -d $AVD_SERIAL -a $APK_FILE -o $result_dir -timeout 21600 -count 100000 -policy weighted -grant_perm -is_emulator 2>&1 | tee $result_dir/weighted.log
 fi
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/weighted_testing_time_on_emulator.txt
 
