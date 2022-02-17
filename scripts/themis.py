@@ -93,12 +93,12 @@ def run_droidbot(apk, avd_serial, avd_name, output_dir, testing_time, screen_opt
     os.system(command)
 
 def run_weighted(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    command = 'bash -x run_weighted.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
-                                                                output_dir,
-                                                                testing_time,
-                                                                screen_option,
-                                                                login_script,
-                                                                is_snapshot)
+    command = 'bash -x run_weighted.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                             os.path.abspath(output_dir),
+                                                             testing_time,
+                                                             screen_option,
+                                                             login_script,
+                                                             is_snapshot)
     print('execute weighted exploration: %s' % command)
     os.system(command)
 
@@ -300,7 +300,7 @@ def main(args: Namespace):
             elif args.weighted:
                 p.apply_async(run_weighted, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
-                                                  login_script,args.snapshot,))
+                                                  login_script, args.snapshot,))
 
             elif args.stoat:
                 p.apply_async(run_stoat, args=(current_apk, avd_serial, args.avd_name,
