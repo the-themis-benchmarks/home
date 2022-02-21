@@ -7,7 +7,7 @@ OUTPUT_DIR=`realpath $4`
 TEST_TIME=$5 # e.g., 10s, 10m, 10h
 HEADLESS=$6 # e.g., -no-window
 LOGIN_SCRIPT=$7 # the script for app login via uiautomator2
-IS_SNAPSHOT=$8
+
 
 COMBO_DIR=../tools/combodroid
 

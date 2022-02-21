@@ -282,7 +282,7 @@ def main(args: Namespace):
             elif args.combo:
                 p.apply_async(run_combodroid, args=(current_apk, avd_serial, args.avd_name,
                                                     args.o, args.time, screen_option,
-                                                    login_script,args.snapshot,))
+                                                    login_script,))
             elif args.combo_login:
                 p.apply_async(run_combodroid_login, args=(current_apk, avd_serial, args.avd_name,
                                                           args.o, args.time, screen_option,
