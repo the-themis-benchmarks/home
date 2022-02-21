@@ -44,12 +44,12 @@ if __name__ == '__main__':
         print("SUCCESS")
 
     wait()
-    out = d(className="android.widget.EditText", resourceId="fr.free.nrw.commons.debug:id/loginUsername").set_text("DroidFuzzing4")
+    out = d(className="android.widget.EditText", resourceId="fr.free.nrw.commons.debug:id/loginUsername").set_text("DroidFuzzing7")
     if out:
         print("SUCCESS")
 
     wait()
-    out = d(className="android.widget.EditText", resourceId="fr.free.nrw.commons.debug:id/loginPassword").set_text("droid.fuzzing4")
+    out = d(className="android.widget.EditText", resourceId="fr.free.nrw.commons.debug:id/loginPassword").set_text("droid123")
     if out:
         print("SUCCESS")
 
