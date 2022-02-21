@@ -145,6 +145,7 @@ class Converter:
             return False
 
     def dfa_from_json(self) -> MyDFA:
+        """ get the DFA from the .json file converted from .jff """
         with open(self.json_path, "r", encoding="utf-8") as f:
             info = json.load(f)
             raw_states = info["conversions"][0]["result"]["states"]
@@ -332,6 +333,7 @@ class Analyzer:
                         line_type = "Warning"
 
                     if line_type == "Event":  # If it's a "Event"
+
                         ''' Get event id and count it '''
                         pos = match_event.span()[1]
                         event_id = line[pos]  # To get event id
@@ -360,7 +362,7 @@ class Analyzer:
                         self.last_event = event_id
 
                         ''' Compute the transition of the converted DFA '''
-                        if self.fa is not None:
+                        if self.fa is not None and event_id in self.fa.input_symbols: # if this event is not in the DFA, skip it
 
                             if self.fa.validate_event(event_id):  # If this is a valid transition then do it
                                 self.fa.do_event(event_id)
