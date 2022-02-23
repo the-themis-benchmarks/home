@@ -91,6 +91,7 @@ class MyDFA(DFA):
     def _shortest_distances(self) -> dict:
         """ Compute the shortest distance from every state to the final state """
         states = self.states
+        print(self.final_states)
         if '{}' in states:
             states.remove('{}')
         final_state = self.final_states.copy().pop()
@@ -168,7 +169,10 @@ class Converter:
             if from_name not in transitions:
                 transitions[from_name] = {char: {to_name}}
             else:
-                transitions[from_name][char] = {to_name}
+                if char not in transitions[from_name]:
+                    transitions[from_name][char] = {to_name}
+                else:
+                    transitions[from_name][char].add(to_name)
 
         for fn in final_states:
             if fn not in transitions:
@@ -282,7 +286,6 @@ class Analyzer:
             print_info("No interesting pairs needed to count.")
             return None
 
-
     def analyze(self, log_path: str, time_path: str, tool_name: str, args: Namespace) -> bool:
         """ Process the time file """
         if not file_exists(time_path):
@@ -362,7 +365,7 @@ class Analyzer:
                         self.last_event = event_id
 
                         ''' Compute the transition of the converted DFA '''
-                        if self.fa is not None and event_id in self.fa.input_symbols: # if this event is not in the DFA, skip it
+                        if self.fa is not None and event_id in self.fa.input_symbols:  # if this event is not in the DFA, skip it
 
                             if self.fa.validate_event(event_id):  # If this is a valid transition then do it
                                 self.fa.do_event(event_id)
@@ -428,19 +431,19 @@ class Analyzer:
                     self.first_time[event] = None
                     zero_count += 1
                 print(" " * 10 + "[ %s ] Event %s/%d: %3d-%-3d. (%s/%s)" %
-                         (self.bug_id, event,
-                          self.total_event,
-                          self.event_counts[event],
-                          self.warning_counts[event],
-                          self.first_time[event], self.delta))
+                      (self.bug_id, event,
+                       self.total_event,
+                       self.event_counts[event],
+                       self.warning_counts[event],
+                       self.first_time[event], self.delta))
                 print(" " * 14 + "> Event info: %s" % self.events[event]["info"])
                 if self.warning_counts[event] > 0:
                     if event in self.warning_pairs:
                         print(" " * 14 + "> Warning info: %s [immediately occurrence (<1s): %d]"
-                                 % (self.warnings[event], self.warning_pairs[event]))
+                              % (self.warnings[event], self.warning_pairs[event]))
                     else:
                         print(" " * 14 + "> Warning info: %s"
-                                 % self.warnings[event])
+                              % self.warnings[event])
 
         ''' Detail module '''
         if args.detail and zero_count != 0:  # If there is any event that its `count` > 0
@@ -471,13 +474,13 @@ class Analyzer:
             distances = sorted(self.distances_record.keys())
             for distance in distances:
                 print(" " * 10 + "[ %s ] Min distance %s/%s (%d times)"
-                        % (self.bug_id,
-                           distance, self.fa.distances[self.fa.initial_state],
-                           self.distances_record[distance]))
+                      % (self.bug_id,
+                         distance, self.fa.distances[self.fa.initial_state],
+                         self.distances_record[distance]))
 
         result = dict()
         result["metrics"] = self.show_metrics()
-        
+
         print_title("[ Analysis finished ]")
 
         return result
@@ -510,7 +513,8 @@ class Analyzer:
             for pair in self.interesting_pairs.keys():
                 if self.interesting_pairs[pair] != 0:
                     metrics["covered_pairs"] += 1
-            metrics["pairs_coverage"] = ("%3.2f" % (metrics["covered_pairs"] * 100 / len(self.interesting_pairs.keys()))) + "%"
+            metrics["pairs_coverage"] = ("%3.2f" % (
+                        metrics["covered_pairs"] * 100 / len(self.interesting_pairs.keys()))) + "%"
             metrics["covered_pairs"] = str(metrics["covered_pairs"])
 
         if self.distances_record is None:
@@ -520,20 +524,20 @@ class Analyzer:
 
         return metrics
 
-    def show_metrics(self,) -> str:
+    def show_metrics(self, ) -> str:
         print_header("[ COVERAGE METRICS ]")
         metrics = self.prepare_metrics()
-        print(" "*10 + "          Event Coverage(%)     Event-Pair Coverage(%)    Min Distance")
-        print(" "*10 + "[ %s ]   %2s/%-2s(%s)            %2s/%-2s(%s)              %2s"
+        print(" " * 10 + "          Event Coverage(%)     Event-Pair Coverage(%)    Min Distance")
+        print(" " * 10 + "[ %s ]   %2s/%-2s(%s)            %2s/%-2s(%s)              %2s"
               % (self.bug_id,
                  metrics["covered_events"], metrics["all_events"], metrics["events_coverage"],
                  metrics["covered_pairs"], metrics["all_pairs"], metrics["pairs_coverage"],
                  metrics["min_distance"]))
-        return "%s / %s / %s / %s" % (metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"], self.is_crashed)
+        return "%s / %s / %s / %s" % (
+        metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"], self.is_crashed)
 
 
 def main(args: Namespace) -> dict:
-
     log_dir: str = args.target_dir
 
     if log_dir.endswith("/"):
@@ -598,19 +602,22 @@ if __name__ == "__main__":
 
     parser = ArgumentParser(prog="Log Analyzer", usage="to analyze the output logs of running testers.")
 
-    parser.add_argument("-w", "--wait", action="store_true", default=False, help="let the FA wait at the current state when mismatching")
-    parser.add_argument("-m", "--manual", action="store_true", default=False, help="Manually specify the interesting pairs")
+    parser.add_argument("-w", "--wait", action="store_true", default=False,
+                        help="let the FA wait at the current state when mismatching")
+    parser.add_argument("-m", "--manual", action="store_true", default=False,
+                        help="Manually specify the interesting pairs")
     parser.add_argument("-d", "--detail", action="store_true", default=False, help="Show more details")
-    parser.add_argument("-a", "--all", action="store_true", default=False, help="Parse the argument `target_dir` as the parent dir of result dirs")
+    parser.add_argument("-a", "--all", action="store_true", default=False,
+                        help="Parse the argument `target_dir` as the parent dir of result dirs")
 
     parser.add_argument("target_dir", help="the output logs dir that to be analyzed")
 
     args = parser.parse_args()
     print_info("ARGUMENTS:\n"
-            + "    > Target directory: [%s]\n" % args.target_dir
-            + "    > Do count all pairs in DFA? [%s]\n" % args.manual
-            + "    > Do wait when matching? [%s]" % args.wait
-            + "    > Use the parent dir? [%s]" % args.all)
+               + "    > Target directory: [%s]\n" % args.target_dir
+               + "    > Do count all pairs in DFA? [%s]\n" % args.manual
+               + "    > Do wait when matching? [%s]" % args.wait
+               + "    > Use the parent dir? [%s]" % args.all)
 
     if args.all:
         parent_dir = args.target_dir
@@ -628,7 +635,7 @@ if __name__ == "__main__":
 
                 args.target_dir = os.path.join(parent_dir, sub_dir)
                 result = main(args)
-                if len(result) == 0:    # No valid result
+                if len(result) == 0:  # No valid result
                     continue
 
                 app_name, bug_id, tool_name = result["app_name"], result["bug_id"], result["tool_name"]
