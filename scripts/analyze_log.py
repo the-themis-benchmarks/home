@@ -91,7 +91,6 @@ class MyDFA(DFA):
     def _shortest_distances(self) -> dict:
         """ Compute the shortest distance from every state to the final state """
         states = self.states
-        print(self.final_states)
         if '{}' in states:
             states.remove('{}')
         final_state = self.final_states.copy().pop()
