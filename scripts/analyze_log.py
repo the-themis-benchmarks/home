@@ -61,6 +61,14 @@ def get_time_format(tool_name: str) -> str:
     else:
         return "%Y-%m-%d-%H:%M:%S"
 
+def get_name(tool_name: str) -> str:
+    if tool_name == "combodroid":
+        return "combo"
+    elif tool_name == "droidbot.dfs.greedy":
+        return "droidbot"
+    else:
+        return tool_name
+
 
 class MyDFA(DFA):
 
