@@ -115,8 +115,8 @@ adb -s $AVD_SERIAL logcat -G 10M
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E Themis:I *:F *:S > $result_dir/logcat.log &
 
 # start coverage dumping
-echo "** START COVERAGE (${AVD_SERIAL}) "
-bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
+# echo "** START COVERAGE (${AVD_SERIAL}) "
+# bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 
 # copy dummy documents
 bash -x copy_dummy_documents.sh $avd_serial
@@ -133,8 +133,8 @@ echo "** PULL FASTBOT RESULTS (${AVD_SERIAL})"
 adb -s $AVD_SERIAL pull /sdcard/crash-dump.log $result_dir/
 
 # stop coverage dumping
-echo "** STOP COVERAGE (${AVD_SERIAL})"
-kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
+# echo "** STOP COVERAGE (${AVD_SERIAL})"
+# kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
 
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"

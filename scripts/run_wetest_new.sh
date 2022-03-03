@@ -106,8 +106,8 @@ adb -s $AVD_SERIAL logcat -G 10M
 adb -s $AVD_SERIAL logcat AndroidRuntime:E CrashAnrDetector:D System.err:W CustomActivityOnCrash:E ACRA:E WordPress-EDITOR:E Themis:I *:F *:S > $result_dir/logcat.log &
 
 # start coverage dumping
-echo "** START COVERAGE (${AVD_SERIAL}) "
-bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
+# echo "** START COVERAGE (${AVD_SERIAL}) "
+# bash dump_coverage.sh $AVD_SERIAL $app_package_name $result_dir &
 
 # copy dummy documents
 bash -x copy_dummy_documents.sh $avd_serial
@@ -118,13 +118,16 @@ adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing
 
 launchable_activity=$(aapt dump badging $APK_FILE | grep "launchable-activity" | awk '{print $2}' | sed s/name=//g | sed s/\'//g )
 
-timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name}  ${AVD_SERIAL} | tee $result_dir/wetest.log 
+# timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main ${apk_file_name} ${app_package_name}  ${AVD_SERIAL} | tee $result_dir/wetest.log 
+#  This line above is for test_main released in 2021.9
+
+timeout ${TEST_TIME} ./${WETEST_TOOL}/test_main_mar ${apk_file_name} ${app_package_name}  ${AVD_SERIAL} | tee $result_dir/wetest.log 
 
 adb -s $AVD_SERIAL shell date "+%Y-%m-%d-%H:%M:%S" >> $result_dir/wetest_testing_time_on_emulator.txt
 
 # stop coverage dumping
-echo "** STOP COVERAGE (${AVD_SERIAL})"
-kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
+# echo "** STOP COVERAGE (${AVD_SERIAL})"
+# kill `ps aux | grep "dump_coverage.sh ${AVD_SERIAL}" | grep -v grep |  awk '{print $2}'`
 
 # stop logcat
 echo "** STOP LOGCAT (${AVD_SERIAL})"
