@@ -61,6 +61,7 @@ def get_time_format(tool_name: str) -> str:
     else:
         return "%Y-%m-%d-%H:%M:%S"
 
+
 def get_name(tool_name: str) -> str:
     if tool_name == "combodroid":
         return "combo"
@@ -303,6 +304,7 @@ class Analyzer:
             ''' Get the time of beginning '''
             try:
                 start_time = datetime.strptime(f.readline().split("\n")[0], get_time_format(tool_name))
+                self.delta = start_time
                 year = str(start_time.year) + "-"
             except ValueError:
                 print("[ Error ] The time value is not correct in: %s" % time_path)
@@ -665,6 +667,36 @@ if __name__ == "__main__":
                 bugs = results[tool][app].keys()
                 for bug in bugs:
                     metrics = results[tool][app][bug]
-                    print("        [%4s] %s" % (bug, str(metrics)))
+                    print("        [%s] %s" % (bug, str(metrics)))
+                    max_EC, max_EPC, min_MD = 0, 0, 1000
+                    for metric in metrics:
+                        metric_record = metric.split('/')
+
+                        EC = None
+                        if metric_record[0].strip() == "None":
+                            max_EC = None
+                        else:
+                            EC = float(metric_record[0][:-2].strip())
+
+                        EPC = None
+                        if metric_record[1].strip() == "None":
+                            max_EPC = None
+                        else:
+                            EPC = float(metric_record[1][:-2].strip())
+                        MD = None
+                        if metric_record[2].strip() == "None":
+                            min_MD = None
+                        else:
+                            MD = int(metric_record[2].strip())
+
+                        if EC is not None and EC > max_EC:
+                            max_EC = EC
+                        if EPC is not None and EPC > max_EPC:
+                            max_EPC = EPC
+                        if MD is not None and MD < min_MD:
+                            min_MD = MD
+
+                    print("        [%s-best] %s" % (bug, str(max_EC) + " & " + str(max_EPC) + " & " + str(min_MD)))
+
     else:
         main(args)
