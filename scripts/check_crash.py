@@ -58,7 +58,7 @@ app_crash_data = {
 
         '#118': ['java.lang.IllegalArgumentException: position (',
                  'de.rampro.activitydiary.ui.generic.DetailRecyclerViewAdapter.getDiaryImageIdAt(DetailRecyclerViewAdapter.java',
-                 'de.rampro.activitydiary.ui.history.HistoryRecyclerViewAdapter$1.onClick(HistoryRecyclerViewAdapter.java'],
+                 'de.rampro.activitydiary.ui.history.HistoryRecyclerViewAdapter'],
 
         '#285': ['java.lang.NumberFormatException: For input string',
                  'de.rampro.activitydiary.ui.settings.SettingsActivity.updateLocationAge(SettingsActivity.java',
