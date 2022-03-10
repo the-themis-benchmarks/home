@@ -5,7 +5,7 @@ import time
 import uiautomator2 as u2
 
 
-def wait(seconds=10):
+def wait(seconds=3):
     for i in range(0, seconds):
         print("wait 1 second ..")
         time.sleep(1)
@@ -52,6 +52,9 @@ if __name__ == '__main__':
     if not out:
         print("SUCCESS")
 
+    wait()
+    d.xpath('//*[@resource-id="redirect-link"]/android.view.View[1]/android.widget.Button[1]').click()
+    
     wait()
     out = d(className="android.widget.EditText", resourceId="user").set_text("droid_fuzzing_1@163.com")
     if out:
