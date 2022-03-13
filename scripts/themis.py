@@ -83,14 +83,22 @@ def run_humanoid(apk, avd_serial, avd_name, output_dir, testing_time, screen_opt
     print('execute humanoid: %s' % command)
     os.system(command)
 
-
-def run_weighted(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    command = 'bash -x run_weighted.sh %s %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
+def run_droidbot(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script):
+    command = 'bash -x run_droidbot.sh %s %s %s %s %s %s %s' % (apk, avd_serial, avd_name,
                                                                 output_dir,
                                                                 testing_time,
                                                                 screen_option,
-                                                                login_script,
-                                                                is_snapshot)
+                                                                login_script)
+    print('execute droidbot: %s' % command)
+    os.system(command)
+
+def run_weighted(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
+    command = 'bash -x run_weighted.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
+                                                             os.path.abspath(output_dir),
+                                                             testing_time,
+                                                             screen_option,
+                                                             login_script,
+                                                             is_snapshot)
     print('execute weighted exploration: %s' % command)
     os.system(command)
 
@@ -118,7 +126,6 @@ def run_sapienz(apk, avd_serial, avd_name, output_dir, testing_time, screen_opti
 
 
 def run_qtesting(apk, avd_serial, avd_name, output_dir, testing_time, screen_option, login_script, is_snapshot):
-    print("run_qtesting")
     command = 'bash -x run_qtesting.sh %s %s %s %s %s %s %s %s' % (os.path.abspath(apk), avd_serial, avd_name,
                                                                 os.path.abspath(output_dir),
                                                                 testing_time,
@@ -275,7 +282,7 @@ def main(args: Namespace):
             elif args.combo:
                 p.apply_async(run_combodroid, args=(current_apk, avd_serial, args.avd_name,
                                                     args.o, args.time, screen_option,
-                                                    login_script,args.snapshot,))
+                                                    login_script,))
             elif args.combo_login:
                 p.apply_async(run_combodroid_login, args=(current_apk, avd_serial, args.avd_name,
                                                           args.o, args.time, screen_option,
@@ -284,10 +291,16 @@ def main(args: Namespace):
                 p.apply_async(run_humanoid, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
                                                   login_script,))
+
+            elif args.droidbot:
+                p.apply_async(run_droidbot, args=(current_apk, avd_serial, args.avd_name,
+                                                  args.o, args.time, screen_option,
+                                                  login_script,))
+            
             elif args.weighted:
                 p.apply_async(run_weighted, args=(current_apk, avd_serial, args.avd_name,
                                                   args.o, args.time, screen_option,
-                                                  login_script,args.snapshot,))
+                                                  login_script, args.snapshot,))
 
             elif args.stoat:
                 p.apply_async(run_stoat, args=(current_apk, avd_serial, args.avd_name,
@@ -364,6 +377,7 @@ if __name__ == '__main__':
     ap.add_argument('--combo', default=False, action='store_true')
     ap.add_argument('--combo-login', default=False, dest='combo_login', action='store_true')
     ap.add_argument('--humanoid', default=False, action='store_true')
+    ap.add_argument('--droidbot', default=False, action='store_true')
     ap.add_argument('--stoat', default=False, action='store_true')
     ap.add_argument('--sapienz', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')

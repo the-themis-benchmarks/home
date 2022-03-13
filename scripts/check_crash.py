@@ -58,7 +58,7 @@ app_crash_data = {
 
         '#118': ['java.lang.IllegalArgumentException: position (',
                  'de.rampro.activitydiary.ui.generic.DetailRecyclerViewAdapter.getDiaryImageIdAt(DetailRecyclerViewAdapter.java',
-                 'de.rampro.activitydiary.ui.history.HistoryRecyclerViewAdapter$1.onClick(HistoryRecyclerViewAdapter.java'],
+                 'de.rampro.activitydiary.ui.history.HistoryRecyclerViewAdapter'],
 
         '#285': ['java.lang.NumberFormatException: For input string',
                  'de.rampro.activitydiary.ui.settings.SettingsActivity.updateLocationAge(SettingsActivity.java',
@@ -469,7 +469,15 @@ def main(args: Namespace):
                     logcat_file_path = os.path.join(result_dir, "logcat.log")
                     login_file_path = os.path.join(result_dir, "login.log")
                     testing_time_file_path = os.path.join(result_dir,
-                                                          "humanoid_testing_time_on_emulator.txt")
+                                                          "humandroid_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+
+                if args.droidbot:
+                    # Droidbot
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "droidbot_testing_time_on_emulator.txt")
                     testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
 
                 if args.sapienz:
@@ -891,6 +899,7 @@ if __name__ == '__main__':
     ap.add_argument('--fastbot_new', default=False, action='store_true')
     ap.add_argument('--wetest_new', default=False, action='store_true')
     ap.add_argument('--newmonkey', default=False, action='store_true')
+    ap.add_argument('--droidbot', default=False, action='store_true')
                                                                                                            
     ap.add_argument('--app', type=str, dest='app_name')
     ap.add_argument('--id', type=str, dest='issue_id')

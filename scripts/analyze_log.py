@@ -48,6 +48,29 @@ def file_exists(file_path: str) -> bool:
     return os.path.exists(file_path)
 
 
+def get_name(tool_name: str) -> str:
+    if tool_name == "combodroid":
+        return "combo"
+    else:
+        return tool_name
+
+
+def get_time_format(tool_name: str) -> str:
+    if tool_name == "combodroid":
+        return "%Y-%m-%d-%H-%M-%S"
+    else:
+        return "%Y-%m-%d-%H:%M:%S"
+
+
+def get_name(tool_name: str) -> str:
+    if tool_name == "combodroid":
+        return "combo"
+    elif tool_name == "droidbot.dfs.greedy":
+        return "droidbot"
+    else:
+        return tool_name
+
+
 class MyDFA(DFA):
 
     def __init__(self, *, states, input_symbols, transitions,
@@ -131,6 +154,7 @@ class Converter:
             return False
 
     def dfa_from_json(self) -> MyDFA:
+        """ get the DFA from the .json file converted from .jff """
         with open(self.json_path, "r", encoding="utf-8") as f:
             info = json.load(f)
             raw_states = info["conversions"][0]["result"]["states"]
@@ -153,7 +177,10 @@ class Converter:
             if from_name not in transitions:
                 transitions[from_name] = {char: {to_name}}
             else:
-                transitions[from_name][char] = {to_name}
+                if char not in transitions[from_name]:
+                    transitions[from_name][char] = {to_name}
+                else:
+                    transitions[from_name][char].add(to_name)
 
         for fn in final_states:
             if fn not in transitions:
@@ -267,8 +294,7 @@ class Analyzer:
             print_info("No interesting pairs needed to count.")
             return None
 
-
-    def analyze(self, log_path: str, time_path: str, args: Namespace):
+    def analyze(self, log_path: str, time_path: str, tool_name: str, args: Namespace) -> bool:
         """ Process the time file """
         if not file_exists(time_path):
             return False
@@ -277,20 +303,22 @@ class Analyzer:
         with open(time_path, "r", encoding="utf-8") as f:
             ''' Get the time of beginning '''
             try:
-                start_time = datetime.strptime(f.readline().split("\n")[0], "%Y-%m-%d-%H:%M:%S")
+                start_time = datetime.strptime(f.readline().split("\n")[0], get_time_format(tool_name))
+                self.delta = start_time
                 year = str(start_time.year) + "-"
             except ValueError:
                 print("[ Error ] The time value is not correct in: %s" % time_path)
                 return False
             ''' Get the time of finishing '''
             try:
-                end_time = datetime.strptime(f.readline().split("\n")[0], "%Y-%m-%d-%H:%M:%S")
+                end_time = datetime.strptime(f.readline().split("\n")[0], get_time_format(tool_name))
             except ValueError:
                 end_time = None
 
         """ Process the log file """
         if not file_exists(log_path):
             return False
+
         with open(log_path, "r", encoding="utf-8") as f:
             for line in f:
 
@@ -317,6 +345,7 @@ class Analyzer:
                         line_type = "Warning"
 
                     if line_type == "Event":  # If it's a "Event"
+
                         ''' Get event id and count it '''
                         pos = match_event.span()[1]
                         event_id = line[pos]  # To get event id
@@ -345,7 +374,7 @@ class Analyzer:
                         self.last_event = event_id
 
                         ''' Compute the transition of the converted DFA '''
-                        if self.fa is not None:
+                        if self.fa is not None and event_id in self.fa.input_symbols:  # if this event is not in the DFA, skip it
 
                             if self.fa.validate_event(event_id):  # If this is a valid transition then do it
                                 self.fa.do_event(event_id)
@@ -399,10 +428,10 @@ class Analyzer:
             self.delta = end_time - start_time
         return True
 
-    def show_result(self, tool_name: str):
+    def show_result(self, tool_name: str) -> dict:
         print_title("[ %s-%s (%s) ]" % (self.app_name, self.bug_id, tool_name))
 
-        """ Basic module """
+        ''' Basic module '''
         zero_count = 0  # Count up the events which are never reached
         if len(self.events) != 0:
             print_header("[ The statistics of each event ]")
@@ -411,20 +440,21 @@ class Analyzer:
                     self.first_time[event] = None
                     zero_count += 1
                 print(" " * 10 + "[ %s ] Event %s/%d: %3d-%-3d. (%s/%s)" %
-                         (self.bug_id, event,
-                          self.total_event,
-                          self.event_counts[event],
-                          self.warning_counts[event],
-                          self.first_time[event], self.delta))
+                      (self.bug_id, event,
+                       self.total_event,
+                       self.event_counts[event],
+                       self.warning_counts[event],
+                       self.first_time[event], self.delta))
                 print(" " * 14 + "> Event info: %s" % self.events[event]["info"])
                 if self.warning_counts[event] > 0:
                     if event in self.warning_pairs:
                         print(" " * 14 + "> Warning info: %s [immediately occurrence (<1s): %d]"
-                                 % (self.warnings[event], self.warning_pairs[event]))
+                              % (self.warnings[event], self.warning_pairs[event]))
                     else:
                         print(" " * 14 + "> Warning info: %s"
-                                 % self.warnings[event])
+                              % self.warnings[event])
 
+        ''' Detail module '''
         if args.detail and zero_count != 0:  # If there is any event that its `count` > 0
             print_header("[ Analysis of the missing events ]")
             for event in self.event_counts:
@@ -453,13 +483,16 @@ class Analyzer:
             distances = sorted(self.distances_record.keys())
             for distance in distances:
                 print(" " * 10 + "[ %s ] Min distance %s/%s (%d times)"
-                        % (self.bug_id,
-                           distance, self.fa.distances[self.fa.initial_state],
-                           self.distances_record[distance]))
+                      % (self.bug_id,
+                         distance, self.fa.distances[self.fa.initial_state],
+                         self.distances_record[distance]))
 
-        self.show_metrics()
+        result = dict()
+        result["metrics"] = self.show_metrics()
 
         print_title("[ Analysis finished ]")
+
+        return result
 
     def prepare_metrics(self) -> dict:
         """ Prepare the metrics of estimation results """
@@ -489,7 +522,8 @@ class Analyzer:
             for pair in self.interesting_pairs.keys():
                 if self.interesting_pairs[pair] != 0:
                     metrics["covered_pairs"] += 1
-            metrics["pairs_coverage"] = ("%3.2f" % (metrics["covered_pairs"] * 100 / len(self.interesting_pairs.keys()))) + "%"
+            metrics["pairs_coverage"] = ("%3.2f" % (
+                        metrics["covered_pairs"] * 100 / len(self.interesting_pairs.keys()))) + "%"
             metrics["covered_pairs"] = str(metrics["covered_pairs"])
 
         if self.distances_record is None:
@@ -499,20 +533,20 @@ class Analyzer:
 
         return metrics
 
-    def show_metrics(self):
+    def show_metrics(self, ) -> str:
         print_header("[ COVERAGE METRICS ]")
         metrics = self.prepare_metrics()
-        print(" "*10 + "          Event Coverage(%)     Event-Pair Coverage(%)    Min Distance")
-        print(" "*10 + "[ %s ]   %2s/%-2s(%s)            %2s/%-2s(%s)              %2s"
+        print(" " * 10 + "          Event Coverage(%)     Event-Pair Coverage(%)    Min Distance")
+        print(" " * 10 + "[ %s ]   %2s/%-2s(%s)            %2s/%-2s(%s)              %2s"
               % (self.bug_id,
                  metrics["covered_events"], metrics["all_events"], metrics["events_coverage"],
                  metrics["covered_pairs"], metrics["all_pairs"], metrics["pairs_coverage"],
                  metrics["min_distance"]))
-        print("%s / %s / %s / %s" % (metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"], self.is_crashed))
+        return "%s / %s / %s / %s" % (
+        metrics["events_coverage"], metrics["pairs_coverage"], metrics["min_distance"], self.is_crashed)
 
 
-def main(args: Namespace):
-
+def main(args: Namespace) -> dict:
     log_dir: str = args.target_dir
 
     if log_dir.endswith("/"):
@@ -534,7 +568,7 @@ def main(args: Namespace):
     json_path = os.path.join("..", app_name, "configuration-" + bug_id + ".json")  # Get the path of the json file
     if not file_exists(json_path):
         print_error("%s does not exists! Analysis aborted." % json_path)
-        return False
+        return dict()
 
     ''' Load the NFA file '''
     nfa_path = os.path.join("..", app_name, bug_id[1:] + "-NFA.jff")
@@ -551,35 +585,118 @@ def main(args: Namespace):
     log_path = os.path.join(log_dir, "logcat.log")
     if not file_exists(log_path):
         print_error("%s does not exists! Analysis aborted." % log_path)
-        return False
+        return dict()
     print_info("THE LOG FILE:\n    > %s" % log_path)
 
     ''' Load the time file '''
-    time_path = os.path.join(log_dir, tool_name + "_testing_time_on_emulator.txt")
+
+    time_path = os.path.join(log_dir, get_name(tool_name) + "_testing_time_on_emulator.txt")
     if not file_exists(time_path):
         print_error("%s does not exists! Analysis aborted." % time_path)
-        return False
+        return dict()
     print_info("THE TIME FILE:\n    > %s" % time_path)
 
     ''' Start analyzing log '''
-    if analyzer.analyze(log_path, time_path, args):
-        analyzer.show_result(tool_name)
+    result = dict()
+    if analyzer.analyze(log_path, time_path, tool_name, args):
+        result: dict = analyzer.show_result(tool_name)
+        result["app_name"] = app_name
+        result["bug_id"] = bug_id
+        result["tool_name"] = tool_name
+
+    return result
 
 
 if __name__ == "__main__":
 
     parser = ArgumentParser(prog="Log Analyzer", usage="to analyze the output logs of running testers.")
 
-    parser.add_argument("-w", "--wait", action="store_true", default=False, help="let the FA wait at the current state when mismatching")
-    parser.add_argument("-m", "--manual", action="store_true", default=False, help="Manually specify the interesting pairs")
+    parser.add_argument("-w", "--wait", action="store_true", default=False,
+                        help="let the FA wait at the current state when mismatching")
+    parser.add_argument("-m", "--manual", action="store_true", default=False,
+                        help="Manually specify the interesting pairs")
     parser.add_argument("-d", "--detail", action="store_true", default=False, help="Show more details")
+    parser.add_argument("-a", "--all", action="store_true", default=False,
+                        help="Parse the argument `target_dir` as the parent dir of result dirs")
 
     parser.add_argument("target_dir", help="the output logs dir that to be analyzed")
 
     args = parser.parse_args()
     print_info("ARGUMENTS:\n"
-            + "    > Target directory: [%s]\n" % args.target_dir
-            + "    > Do count all pairs in DFA? [%s]\n" % args.manual
-            + "    > Do wait when matching? [%s]" % args.wait)
+               + "    > Target directory: [%s]\n" % args.target_dir
+               + "    > Do count all pairs in DFA? [%s]\n" % args.manual
+               + "    > Do wait when matching? [%s]" % args.wait
+               + "    > Use the parent dir? [%s]" % args.all)
 
-    main(args)
+    if args.all:
+        parent_dir = args.target_dir
+        results = dict()
+        with os.scandir(parent_dir) as dirs:
+
+            sorted_dirs = []
+            for sud_dir in dirs:
+                sorted_dirs.append(sud_dir.name)
+
+            for sub_dir in sorted(sorted_dirs):
+
+                if sub_dir.find("instrumented-") == -1:
+                    continue
+
+                args.target_dir = os.path.join(parent_dir, sub_dir)
+                result = main(args)
+                if len(result) == 0:  # No valid result
+                    continue
+
+                app_name, bug_id, tool_name = result["app_name"], result["bug_id"], result["tool_name"]
+
+                if tool_name not in results:
+                    results[tool_name] = dict()
+                if app_name not in results[tool_name]:
+                    results[tool_name][app_name] = dict()
+                if bug_id not in results[tool_name][app_name]:
+                    results[tool_name][app_name][bug_id] = []
+
+                results[tool_name][app_name][bug_id].append(result["metrics"])
+
+        tools = sorted(results.keys())
+        for tool in tools:
+            print("[%s]" % tool)
+            apps = sorted(results[tool].keys())
+            for app in apps:
+                print("    [%s]" % app)
+                bugs = results[tool][app].keys()
+                for bug in bugs:
+                    metrics = results[tool][app][bug]
+                    print("        [%s] %s" % (bug, str(metrics)))
+                    max_EC, max_EPC, min_MD = 0, 0, 1000
+                    for metric in metrics:
+                        metric_record = metric.split('/')
+
+                        EC = None
+                        if metric_record[0].strip() == "None":
+                            max_EC = None
+                        else:
+                            EC = float(metric_record[0][:-2].strip())
+
+                        EPC = None
+                        if metric_record[1].strip() == "None":
+                            max_EPC = None
+                        else:
+                            EPC = float(metric_record[1][:-2].strip())
+                        MD = None
+                        if metric_record[2].strip() == "None":
+                            min_MD = None
+                        else:
+                            MD = int(metric_record[2].strip())
+
+                        if EC is not None and EC > max_EC:
+                            max_EC = EC
+                        if EPC is not None and EPC > max_EPC:
+                            max_EPC = EPC
+                        if MD is not None and MD < min_MD:
+                            min_MD = MD
+
+                    print("        [%s-best] %s" % (bug, str(max_EC) + " & " + str(max_EPC) + " & " + str(min_MD)))
+
+    else:
+        main(args)
