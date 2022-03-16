@@ -159,6 +159,7 @@ class Converter:
             info = json.load(f)
             raw_states = info["conversions"][0]["result"]["states"]
             raw_transitions = info["conversions"][0]["result"]["transitions"]
+        print("[ Convertor ] The NFA has %d states and %d edges." % (len(raw_states), len(raw_transitions)))
         init_state = None
         final_states, states, transitions, names, input_symbols = set(), set(), dict(), dict(), set()
         for state in raw_states:
