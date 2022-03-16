@@ -54,6 +54,10 @@ if __name__ == '__main__':
     if not out:
         print("SUCCESS")
 
+#     wait()
+#     d.xpath('//*[@resource-id="redirect-link"]/android.view.View[1]/android.widget.Button[1]').click()
+#  for Humanoid pixel_xl
+
     wait()
     out = d(className="android.widget.EditText", resourceId="user").set_text("droid_fuzzing_5@163.com")
     if out:

@@ -24,6 +24,7 @@
         }
     },
     "warnings" : {
+        "2": "Didn't turn to the location setting page.",
         "3": "Selected the \"CANCEL\" in the GPS requirement dialog.\nThis happened when the GPS is disabled.",
         "4": "Selected the \"CANCEL\" in the another GPS requirement dialog.\nThis happened when the GPS is enabled but this app isn't granted with GPS permission."
     },
