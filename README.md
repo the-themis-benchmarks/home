@@ -758,7 +758,7 @@ python3 themis.py --no-headless --avd Android7.1 --apk ../nextcloud/nextcloud-#5
 
 Here, 
 * `--login ../nextcloud/login-#5173.py` specifies the login script (which will be executed before GUI testing) 
-* In practice, we use the emulator snapshot to save the app login state directly.
+* In practice, we use the emulator snapshot to save the app login state directly (see [``LOGIN_APPS.md``](https://github.com/the-themis-benchmarks/home/tree/master/LOGIN_APPS.md) for details).
 
 # 3. Instructions for Reusing Themis
 
