@@ -28,7 +28,6 @@ for benchmarking automated GUI testing for Android and beyond.
 
 # News
 
-#### - Themis is using by ByteDance's [FastBot](https://github.com/bytedance/Fastbot_Android) to evaluate and improve its bug finding abilities. See the release note of FastBot: "add some new GUI fuzzing & mutation features (inspired/supported by Themis)"
 #### - Themis's paper was accepted to ESEC/FSE'21! 
 #### - We released Themis's dataset and infrastructure！
 
