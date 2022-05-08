@@ -1,6 +1,8 @@
-This file gives the detailed information (w.r.t the bug information in ``README.md``) for each bug maintained by Themis. 
-- In Column "Bug Info", "bug report" refers to the link of original bug report, "buggy code" refers to the buggy code repository maintained by us, and "bug data" refers to the bug data in the master branch.
-- In Column "Note", we indicate the difficult level of triggering the bug from our own human perspective (but it may not be true for automated GUI testing tools as we found during the tool evaluation).
+This file provides more detailed information (compared to the bug information provided in ``README.md``) for each bug maintained by Themis. 
+- In Column "Bug Info", "bug report" refers to the link of original bug report, "buggy code" refers to the buggy code repository maintained by us, and "bug data" refers to the bug data in the master branch. *Note that "buggy code" refers to a specific branch created by us, which contains the buggy code version. This buggy code version was successfully instrumented by Jacoco and 
+compiled into an executable APK file at the time of our study.* In fact, this is the way by which we obtained the buggy APK.
+Thus, one can checkout this buggy code version if he/she wants to recompile the buggy version and do additional customizations (e.g., adding self-defined code instrumentation). 
+- In Column "Note", we indicate the difficult level (``difficult``, ``medium``, ``easy``) of triggering the bug from our human subjective perspective. Note that this information may not be true for automated GUI testing tools. Because some bugs can be easily triggered by a GUI testing tool, which we human may think it is difficult to be triggered, and vice versa.
 
 
 ## List of Reproducible Cases
