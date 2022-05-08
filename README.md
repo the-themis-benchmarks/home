@@ -51,7 +51,7 @@ For each bug, we provide:
 
 - Metadata for supporting evaluation (e.g., app login scripts and configuration files used by Themis for code coverage computation)
 
-- The app source code w.r.t each bug 
+- The app source code w.r.t each bug (refer to [``PROJECTS.md``](https://github.com/the-themis-benchmarks/home/tree/master/PROJECTS.md))
 
 
 ### List of crash bugs
