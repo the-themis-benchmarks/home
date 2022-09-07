@@ -7,6 +7,9 @@ open-source Android apps) and a unified, extensible infrastructure
 for benchmarking automated GUI testing for Android and beyond. 
 
 
+*You can find more about our work on testing/analyzing Android apps at this [website](https://tingsu.github.io/files/mobile-app-analysis.html)*.
+
+
 # Publication ([Presentation Video](https://www.youtube.com/watch?v=ZDps3zx2pCY&t=15s))
 [1] "[Benchmarking Automated GUI Testing for Android against Real-World Bugs](https://tingsu.github.io/files/fse21-themis.pdf)". Ting Su, Jue Wang, Zhendong Su. *29th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering* (ESEC/FSE 2021) 
 
