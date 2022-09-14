@@ -7,7 +7,7 @@ open-source Android apps) and a unified, extensible infrastructure
 for benchmarking automated GUI testing for Android and beyond. 
 
 
-*You can find more about our work on testing/analyzing Android apps at this [website](https://tingsu.github.io/files/mobile-app-analysis.html)*.
+*You can find more about our work on testing/analyzing Android apps at this [website](mobile-app-analysis.github.io)*.
 
 
 # Publication ([Presentation Video](https://www.youtube.com/watch?v=ZDps3zx2pCY&t=15s))
