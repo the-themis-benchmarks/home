@@ -1,4 +1,9 @@
-# This file aims to do quick crash checking
+# This file aims to do quick crash checking. 
+# Note that this file applies to both the instrumented and non-intrumented APKs for most bugs 
+#   because we ignore the concrete line numbers in the stack traces. 
+# But for some specific bugs of WordPress (i.e., WordPress-#11135/#10547/#10363), this file only applies to the
+#   corresponding intrumented APKs because these bugs are forward-ported (i.e. the app source code may has changed
+#   and as a result, the stack traces may also have changed).
 
 import csv
 import datetime
@@ -9,12 +14,10 @@ import time
 from argparse import ArgumentParser, Namespace
 from typing import List, Dict, Set
 
-
 ALL_APPS = ['ActivityDiary', 'AmazeFileManager', 'and-bible', 'AnkiDroid', 'APhotoManager', 'commons',
             'collect', 'FirefoxLite', 'Frost', 'geohashdroid', 'MaterialFBook', 'nextcloud', 'Omni-Notes',
             'open-event-attendee-android', 'openlauncher', 'osmeditor4android', 'Phonograph', 'Scarlet-Notes',
             'sunflower', 'WordPress']
-
 
 app_crash_data = {
 
@@ -75,9 +78,13 @@ app_crash_data = {
         '#261': ['java.lang.StackOverflowError: stack size',
                  'org.crosswire.jsword.index.lucene.LuceneIndex.generateSearchIndexImpl(LuceneIndex.java'],
 
-        '#375': ['kotlin.TypeCastException: null cannot be cast to non-null type org.crosswire.jsword.book.Book',
-                 'net.bible.service.history.HistoryManager.setDumpString(HistoryManager.kt',
-                 'net.bible.android.view.activity.page.MainBibleActivity.openTab(MainBibleActivity.kt'],
+        '#375': ["kotlin.TypeCastException: null cannot be cast to non-null type org.crosswire.jsword.book.Book",
+                 "net.bible.service.history.HistoryManager.setDumpString(HistoryManager.kt",
+ 	             "net.bible.android.control.page.window.WindowRepository.restoreState(WindowRepository.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity.openTab(MainBibleActivity.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity.access$openTab(MainBibleActivity.kt",
+ 	             "net.bible.android.view.activity.page.MainBibleActivity$chooseTab$1.onClick(MainBibleActivity.kt"
+                 ],
 
         '#480': ['net.bible.service.db.bookmark.BookmarkDBAdapter.updateLabel(BookmarkDBAdapter.kt',
                  'net.bible.android.control.bookmark.BookmarkControl.saveOrUpdateLabel(BookmarkControl.kt',
@@ -88,9 +95,11 @@ app_crash_data = {
             'net.bible.android.control.versification.sort.VersificationPrioritiser.getVersifications(VersificationPrioritiser.java',
             'net.bible.android.control.versification.sort.ConvertibleVerseRangeComparator$Builder.withMyNotes(ConvertibleVerseRangeComparator.java'],
 
-        '#703': ['org.crosswire.jsword.index.IndexStatus org.crosswire.jsword.book.Book.getIndexStatus()',
-                 'net.bible.android.view.activity.search.SearchIndexProgressStatus.jobFinished(SearchIndexProgressStatus.java',
-                 'net.bible.android.view.activity.base.ProgressActivityBase$initialiseView$uiUpdaterRunnable$1.run(ProgressActivityBase.kt']
+        '#703': ["java.lang.NullPointerException: Attempt to invoke interface method 'org.crosswire.jsword.index.IndexStatus org.crosswire.jsword.book.Book.getIndexStatus()' on a null object reference",
+                 "net.bible.android.view.activity.search.SearchIndexProgressStatus.jobFinished(SearchIndexProgressStatus.java",
+                 "net.bible.android.view.activity.base.ProgressActivityBase.updateProgress(ProgressActivityBase.kt",
+                 "net.bible.android.view.activity.base.ProgressActivityBase$initialiseView$uiUpdaterRunnable$1.run(ProgressActivityBase.kt"
+                 ]
     },
 
     'AmazeFileManager': {
@@ -115,12 +124,18 @@ app_crash_data = {
 
     'FirefoxLite': {
 
-        '#4881': ['org.json.JSONException: End of input at character',
-                  'org.mozilla.rocket.util.JsonUtilsKt.toJsonArray(JsonUtils.kt',
-                  'org.mozilla.rocket.home.contenthub.data.ContentHubRepoKt.jsonStringToTypeList(ContentHubRepo.kt',
-                  'org.mozilla.rocket.home.contenthub.data.ContentHubRepo$getReadTypesLive$1.invoke(ContentHubRepo.kt',
-                  'org.mozilla.rocket.extension.LiveDataExtensionKt$sam$androidx_arch_core_util_Function$0.apply(LiveDataExtension.kt)',
-                  'org.mozilla.focus.activity.MainActivity.onStart(MainActivity.kt',
+        '#4881': ["java.lang.NullPointerException: Attempt to invoke virtual method 'void android.view.View.setVisibility(int)' on a null object reference",
+                  "org.mozilla.rocket.content.common.ui.ContentTabHelper$Observer.onEnterFullScreen(ContentTabHelper.kt",
+                  "org.mozilla.rocket.tabs.TabViewEngineObserver$onEnterFullScreen$1.invoke(TabViewEngineObserver.kt",
+                  "mozilla.components.support.base.observer.ObserverRegistry.notifyObservers(ObserverRegistry.kt",
+                  "at org.mozilla.rocket.tabs.Session.notifyObservers(Session.kt)",
+                  "at org.mozilla.rocket.tabs.TabViewEngineObserver.onEnterFullScreen(TabViewEngineObserver.kt",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient$onEnterFullScreen$1.invoke(TabViewEngineSession.kt",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient$onEnterFullScreen$1.invoke(TabViewEngineSession.kt",
+                  "at mozilla.components.support.base.observer.ObserverRegistry.notifyObservers(ObserverRegistry.kt",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession.notifyObservers(TabViewEngineSession.kt)",
+                  "at org.mozilla.rocket.tabs.TabViewEngineSession$ChromeClient.onEnterFullScreen(TabViewEngineSession.kt",
+                  "at org.mozilla.focus.webkit.FocusWebChromeClient.onShowCustomView(FocusWebChromeClient.java"
                   ],
 
         '#4942': [
@@ -136,10 +151,13 @@ app_crash_data = {
 
     'open-event-attendee-android': {
         '#2198': [
-            'org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt',
-            # special handling for combo, which discarded the line number on this case
-            # 'org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:127)',
-            'org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt']
+            "androidx.fragment.app.Fragment$InstantiationException: Unable to instantiate fragment org.fossasia.openevent.general.search.type.SearchTypeFragment: calling Fragment constructor caused an exception",
+            # for instrumented apk
+            "org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:134)",
+            # for non-instrumented apk
+            #   "org.fossasia.openevent.general.search.SearchFilterFragment$setFilters$3.onClick(SearchFilterFragment.kt:127)"
+            "org.fossasia.openevent.general.search.type.SearchTypeFragment.<init>(SearchTypeFragment.kt"
+            ]
     },
 
     'openlauncher': {
@@ -191,18 +209,26 @@ app_crash_data = {
     },
 
     'osmeditor': {
-        '#637': [
-            "Attempt to invoke interface method 'java.util.Set java.util.Map.entrySet()' on a null object reference"],
+        '#637': ["java.lang.NullPointerException: Attempt to invoke interface method 'java.util.Set java.util.Map.entrySet()' on a null object reference",
+            "de.blau.android.validation.BaseValidator.validateElement(BaseValidator.java",
+            "de.blau.android.validation.BaseValidator.validate(BaseValidator.java",
+            "de.blau.android.osm.Way.validate(Way.java",
+            "de.blau.android.osm.OsmElement.hasProblem(OsmElement.java",
+            "de.blau.android.Map.paintWay(Map.java",
+            "de.blau.android.Map.paintOsmData(Map.java",
+            "de.blau.android.Map.onDraw(Map.java"
+            ],
 
-        '#705': [
-            "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"],
+        # '#705': [
+        #    "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
+        #    "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
+        #    "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"],
 
         '#729': [
+            "java.lang.RuntimeException: An error occurred while executing doInBackground()",
             "android.view.ViewRootImpl$CalledFromWrongThreadException: Only the original thread that created a view hierarchy can touch its views",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:258)",
-            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java:244)"]
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java",
+            "de.blau.android.propertyeditor.PresetFragment$3.doInBackground(PresetFragment.java"]
     },
 
     'Scarlet-Notes': {
@@ -259,31 +285,58 @@ app_crash_data = {
     },
 
     'WordPress': {
-        '#6530': ['org.wordpress.android.fluxc.store.PostStore.onAction(PostStore.java'],
+
+        '#6530': [
+            "java.lang.NullPointerException: Attempt to invoke virtual method 'void org.wordpress.android.fluxc.model.PostModel.setDateLocallyChanged(java.lang.String)' on a null object reference",
+            "org.wordpress.android.fluxc.store.PostStore.updatePost(PostStore.java",
+            "org.wordpress.android.fluxc.store.PostStore.onAction(PostStore.java"
+            ],
+
         '#7182': [
-            'org.wordpress.android.login.LoginUsernamePasswordFragment.onSiteChanged(LoginUsernamePasswordFragment.java'],
+            "java.lang.NullPointerException: Attempt to invoke virtual method 'void org.wordpress.android.ui.accounts.SmartLockHelper.saveCredentialsInSmartLock(java.lang.String, java.lang.String, java.lang.String, android.net.Uri)' on a null object reference",
+            "org.wordpress.android.ui.accounts.LoginActivity.saveCredentialsInSmartLock(LoginActivity.java",
+            "org.wordpress.android.login.LoginBaseFormFragment.saveCredentialsInSmartLock(LoginBaseFormFragment.java",
+            "org.wordpress.android.login.LoginUsernamePasswordFragment.finishLogin(LoginUsernamePasswordFragment.java",
+            "org.wordpress.android.login.LoginUsernamePasswordFragment.onSiteChanged(LoginUsernamePasswordFragment.java"
+            ],
+            
         '#8659': [
             'Two different ViewHolders have the same stable ID. Stable IDs in your adapter MUST BE unique and SHOULD NOT change.'],
-        '#10302': [
-            'org.wordpress.android.login.LoginBaseFormFragment.onOptionsItemSelected(LoginBaseFormFragment.java'],
 
-        '#10363': ['java.lang.IllegalStateException: itemView.findViewById(R.id.container) must not be null',
-                   'org.wordpress.android.ui.posts.PostListItemViewHolder.<init>(PostListItemViewHolder.kt',
-                   'org.wordpress.android.ui.posts.PostListItemViewHolder$Compact.<init>(PostListItemViewHolder.kt',
-                   'org.wordpress.android.ui.posts.adapters.PostListAdapter.onCreateViewHolder(PostListAdapter.kt'
+        # forward-ported 
+        '#10302': [
+            "java.lang.NullPointerException: Attempt to invoke virtual method 'java.lang.String org.wordpress.android.fluxc.model.SiteModel.getMobileEditor()' on a null object reference",
+            "org.wordpress.android.util.SiteUtils.isBlockEditorDefaultForNewPost(SiteUtils.java",
+            "org.wordpress.android.ui.accounts.HelpActivity$Companion.createIntent(HelpActivity.kt",
+            "org.wordpress.android.ui.accounts.HelpActivity.createIntent(HelpActivity.kt)",
+            "org.wordpress.android.ui.ActivityLauncher.viewHelpAndSupport(ActivityLauncher.java",
+            "org.wordpress.android.ui.accounts.LoginActivity.viewHelpAndSupport(LoginActivity.java",
+            "org.wordpress.android.ui.accounts.LoginActivity.helpEmailScreen(LoginActivity.java",
+            "org.wordpress.android.login.LoginEmailFragment.onHelp(LoginEmailFragment.java",
+            "org.wordpress.android.login.LoginBaseFormFragment.onOptionsItemSelected(LoginBaseFormFragment.java"],
+
+        # forward-ported 
+        '#10363': ["java.lang.NullPointerException: itemView.findViewById(R.id.container) must not be null",
+                   "org.wordpress.android.ui.posts.PostListItemViewHolder.<init>(PostListItemViewHolder.kt",
+                   "org.wordpress.android.ui.posts.PostListItemViewHolder$Compact.<init>(PostListItemViewHolder.kt",
+                   "org.wordpress.android.ui.posts.adapters.PostListAdapter.onCreateViewHolder(PostListAdapter.kt"
                    ],
 
+        # forward-ported 
         '#10547': [
-            'start activity ComponentInfo{org.wordpress.android/org.wordpress.android.ui.posts.EditPostActivity}: java.lang.IllegalArgumentException: PostLoadingState wrong value 6',
-            'org.wordpress.android.ui.posts.EditPostActivity$PostLoadingState.fromInt(EditPostActivity.java',
-            'org.wordpress.android.ui.posts.EditPostActivity.onCreate(EditPostActivity.java'
+            "java.lang.RuntimeException: Unable to start activity ComponentInfo{org.wordpress.android/org.wordpress.android.ui.posts.EditPostActivity}: java.lang.RuntimeException: PostLoadingState wrong value 6",
+            "org.wordpress.android.ui.posts.editor.PostLoadingState$Companion.fromInt(PostLoadingState.kt",
+            "org.wordpress.android.ui.posts.editor.PostLoadingState.fromInt(PostLoadingState.kt)",
+            "org.wordpress.android.ui.posts.EditPostActivity.onCreate(EditPostActivity.java"
         ],
 
         '#10876': ['in WithSelect(WithDispatch(WithViewportMatch(WithPreferredColorScheme(Component))))'],
 
+        # forward-ported 
         '#11135': [
-            'java.lang.IllegalStateException: siteStore.getSiteBySiteI…t.getLong(EXTRA_SITE_ID)) must not be null',
-            'org.wordpress.android.ui.CommentFullScreenDialogFragment.onCreateView(CommentFullScreenDialogFragment.kt'],
+            "java.lang.NullPointerException",
+            "org.wordpress.android.ui.CommentFullScreenDialogFragment.onCreateView(CommentFullScreenDialogFragment.kt",
+            "org.wordpress.android.ui.CollapseFullScreenDialogFragment.onActivityCreated(CollapseFullScreenDialogFragment.java"],
 
         '#11992': [
             "java.lang.NullPointerException: Attempt to invoke virtual method 'boolean org.wordpress.android.ui.FilteredRecyclerView.isRefreshing()' on a null object reference",
@@ -311,7 +364,7 @@ def get_app_name(testing_result_dir):
 def get_apk_info(testing_result_dir: str, app_name: str):
     base_name = os.path.basename(testing_result_dir)
     target_apk_file_name = str(base_name.split(".apk")[0]) + ".apk"
-    
+
     target_apk_file_path = os.path.join("../" + app_name, target_apk_file_name)
     get_app_package_name_cmd = "aapt dump badging " + target_apk_file_path + " | grep package | awk '{print $2}' | sed s/name=//g | sed s/\\'//g"
     app_package_name = ""
@@ -350,6 +403,10 @@ def main(args: Namespace):
         if args.app_name is not None and args.app_name != app_name:
             # skip unrelated apps if args.app_name is given
             continue
+
+        # if args.monkey and app_name == "ActivityDiary":
+        #    # TODO special check for Monkey's ActivityDiary [should be removed in the future]
+        #    continue
 
         print(args.app_name)
 
@@ -414,11 +471,11 @@ def main(args: Namespace):
                     testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
 
                 if args.humanoid:
-                    # Humandroid
+                    # Humanoid
                     logcat_file_path = os.path.join(result_dir, "logcat.log")
                     login_file_path = os.path.join(result_dir, "login.log")
                     testing_time_file_path = os.path.join(result_dir,
-                                                          "humandroid_testing_time_on_emulator.txt")
+                                                          "humanoid_testing_time_on_emulator.txt")
                     testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
 
                 if args.sapienz:
@@ -443,6 +500,46 @@ def main(args: Namespace):
                     login_file_path = os.path.join(result_dir, "login.log")
                     testing_time_file_path = os.path.join(result_dir,
                                                           "weighted_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+
+                if args.fastbot:
+                    # Fastbot
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "fastbot_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+                    
+                if args.wetest:
+                    # WeTest
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "wetest_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+                
+                if args.fastbot_new:
+                    # Fastbot
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "fastbot_new_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+                    
+                if args.wetest_new:
+                    # WeTest
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "wetest_new_testing_time_on_emulator.txt")
+                    testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
+                
+                if args.newmonkey:
+                    # Newmonkey
+                    logcat_file_path = os.path.join(result_dir, "logcat.log")
+                    login_file_path = os.path.join(result_dir, "login.log")
+                    testing_time_file_path = os.path.join(result_dir,
+                                                          "newmonkey_testing_time_on_emulator.txt")
                     testing_time_datetime_str = '%Y-%m-%d-%H:%M:%S'
 
                 if os.path.exists(logcat_file_path) and os.path.exists(testing_time_file_path):
@@ -591,7 +688,7 @@ def main(args: Namespace):
                                     sub_exception_stack = sub_exception_stacks[local_time_label]
                                     for line in sub_exception_stack:
                                         if "at " in line and app_package_name in line:
-                                            line_without_time_label = line.replace(local_time_label+":", "").strip()
+                                            line_without_time_label = line.replace(local_time_label + ":", "").strip()
                                             uniqe_signature_of_crash_stack += line_without_time_label
 
                                     if uniqe_signature_of_crash_stack == "":
@@ -602,10 +699,13 @@ def main(args: Namespace):
                                     print("----")
 
                                     if apk_file_name not in other_crashes_signature_str_dict:
-                                        other_crashes_signature_str_dict[apk_file_name] = [uniqe_signature_of_crash_stack]
-                                        other_crashes_complete_exception_trace_dict[apk_file_name] = [sub_exception_stack]
+                                        other_crashes_signature_str_dict[apk_file_name] = [
+                                            uniqe_signature_of_crash_stack]
+                                        other_crashes_complete_exception_trace_dict[apk_file_name] = [
+                                            sub_exception_stack]
                                     else:
-                                        if uniqe_signature_of_crash_stack not in other_crashes_signature_str_dict[apk_file_name]:
+                                        if uniqe_signature_of_crash_stack not in other_crashes_signature_str_dict[
+                                            apk_file_name]:
                                             # check existence
                                             other_crashes_signature_str_dict[apk_file_name].append(
                                                 uniqe_signature_of_crash_stack)
@@ -628,7 +728,7 @@ def main(args: Namespace):
                                 for line in target_stack:
 
                                     if "at " in line and app_package_name in line:
-                                        line_without_time_label = line.replace(time_label+":", "").strip()
+                                        line_without_time_label = line.replace(time_label + ":", "").strip()
                                         uniqe_signature_of_crash_stack += line_without_time_label
 
                                 if uniqe_signature_of_crash_stack == "":
@@ -642,9 +742,11 @@ def main(args: Namespace):
                                     other_crashes_signature_str_dict[apk_file_name] = [uniqe_signature_of_crash_stack]
                                     other_crashes_complete_exception_trace_dict[apk_file_name] = [target_stack]
                                 else:
-                                    if uniqe_signature_of_crash_stack not in other_crashes_signature_str_dict[apk_file_name]:
+                                    if uniqe_signature_of_crash_stack not in other_crashes_signature_str_dict[
+                                        apk_file_name]:
                                         # check existence
-                                        other_crashes_signature_str_dict[apk_file_name].append(uniqe_signature_of_crash_stack)
+                                        other_crashes_signature_str_dict[apk_file_name].append(
+                                            uniqe_signature_of_crash_stack)
                                         other_crashes_complete_exception_trace_dict[apk_file_name].append(target_stack)
 
                             # print("--")
@@ -660,7 +762,6 @@ def main(args: Namespace):
 
                         # output to final result file
                         if args.final_result_csv_file_path is not None:
-
                             with open(args.final_result_csv_file_path, "a") as csv_file:
                                 writer = csv.writer(csv_file)
                                 writer.writerow([apk_file_name, issue_id, os.path.basename(result_dir),
@@ -697,12 +798,12 @@ def main(args: Namespace):
                                     crash_triggering_datetime_obj = datetime.datetime.strptime(matched_datetime_str,
                                                                                                '%Y-%m-%d-%H:%M:%S')
                                 else:
-                                    matched_datetime_str = "2020-" + time_label.split('.')[0]
+                                    matched_datetime_str = "{}-{}".format(start_testing_datetime_obj.year, time_label.split('.')[0])
                                     crash_triggering_datetime_obj = datetime.datetime.strptime(matched_datetime_str,
                                                                                                '%Y-%m-%d %H:%M:%S')
 
                                 tmp_time_duration_in_minutes = (
-                                                                           crash_triggering_datetime_obj - start_testing_datetime_obj).total_seconds() / 60
+                                                                       crash_triggering_datetime_obj - start_testing_datetime_obj).total_seconds() / 60
                                 crash_triggering_time_durations.append("{:.0f}".format(tmp_time_duration_in_minutes))
 
                                 number_of_matched_crash += 1
@@ -791,16 +892,21 @@ if __name__ == '__main__':
     ap.add_argument('--sapienz', default=False, action='store_true')
     ap.add_argument('--qtesting', default=False, action='store_true')
     ap.add_argument('--weighted', default=False, action='store_true')
-
+    ap.add_argument('--fastbot', default=False, action='store_true')
+    ap.add_argument('--wetest', default=False, action='store_true')
+    ap.add_argument('--fastbot_new', default=False, action='store_true')
+    ap.add_argument('--wetest_new', default=False, action='store_true')
+    ap.add_argument('--newmonkey', default=False, action='store_true')
+                                                                                                           
     ap.add_argument('--app', type=str, dest='app_name')
     ap.add_argument('--id', type=str, dest='issue_id')
     ap.add_argument('--csv', type=str, dest='final_result_csv_file_path')
     ap.add_argument('--simple', default=False, action='store_true', dest='simple_format',
                     help="standard output in a simple format")
     ap.add_argument('--other_crashes', default=False, action='store_true', dest='other_crashes')
-
+                             
     args = ap.parse_args()
-
+                  
     if not os.path.exists(args.o):
         ap.error("Error: the output directory does not exist!")
 

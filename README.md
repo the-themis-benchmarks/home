@@ -7,8 +7,14 @@ open-source Android apps) and a unified, extensible infrastructure
 for benchmarking automated GUI testing for Android and beyond. 
 
 
-# Publication
-[1] "[Benchmarking Automated GUI Testing for Android against Real-World Bugs](https://tingsu.github.io/files/fse21-themis.pdf)". Ting Su, Jue Wang, Zhendong Su. *29th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering* (ESEC/FSE 2021)
+*You can find more about our work on testing/analyzing Android apps at this [website](mobile-app-analysis.github.io)*.
+
+
+# Publication ([Presentation Video](https://www.youtube.com/watch?v=ZDps3zx2pCY&t=15s))
+[1] "[Benchmarking Automated GUI Testing for Android against Real-World Bugs](https://tingsu.github.io/files/fse21-themis.pdf)". Ting Su, Jue Wang, Zhendong Su. *29th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering* (ESEC/FSE 2021) 
+
+![Screenshot from 2022-08-02 10-05-25](https://user-images.githubusercontent.com/3156978/182276229-8597f37c-7aa2-4a95-9eda-5c0c8bac65f2.png)
+
 
 ```
 @inproceedings{themis,
@@ -18,10 +24,18 @@ for benchmarking automated GUI testing for Android and beyond.
   title     = {Benchmarking Automated GUI Testing for Android against Real-World Bugs},
   booktitle = {Proceedings of 29th ACM Joint European Software Engineering Conference and Symposium 
   		on the Foundations of Software Engineering (ESEC/FSE)},
+  pages     = {119--130},
   year      = {2021},
-  pages     = {to appear}
+  doi       = {10.1145/3468264.3468620}
 }
 ```
+
+
+
+# News
+
+#### - Themis's paper was accepted to ESEC/FSE'21! 
+#### - We released Themis's dataset and infrastructure！
 
 # 1. Contents of Themis
 
@@ -43,7 +57,7 @@ For each bug, we provide:
 
 - Metadata for supporting evaluation (e.g., app login scripts and configuration files used by Themis for code coverage computation)
 
-- The app source code w.r.t each bug 
+- The app source code w.r.t each bug (refer to [``PROJECTS.md``](https://github.com/the-themis-benchmarks/home/tree/master/PROJECTS.md))
 
 
 ### List of crash bugs
@@ -114,13 +128,14 @@ deployed on a given machine with one line of command.
 Tool Name | Venue | Open-source | Main Technique | Need App Code? | Need App Instrumentation? | Supported SDKs | Implementation Basis 
 --- | --- | --- | --- | --- | --- | --- | --- | 
 [Monkey](https://developer.android.com/studio/test/monkey?hl=en) | - | yes | Random Testing | no | no | Any | -
+[Sapienz](https://github.com/Rhapsod/sapienz) | ISSTA'16 | no | Search-based | no | no | 4.4 | Monkey-based
+[Stoat](https://github.com/tingsu/Stoat) | FSE'17 | yes | Model-based | no | no | Any | A3E-based 
 [Ape](https://github.com/tianxiaogu/ape) | ICSE'19 | yes | Model-based | no | no | 6.0/7.1 | Monkey-based
 [Humanoid](https://github.com/yzygitzh/Humanoid) | ASE'19 | yes | Deep learning-based | no | no | Any | DroidBot-based
 [ComboDroid](https://github.com/skull591/ComboDroid-Artifact) | ICSE'20 | yes | Model-based | no | yes | 6.0/7.1 | Monkey-based
 [TimeMachine](https://github.com/DroidTest/TimeMachine) | ICSE'20 | yes | State-based | no | yes | 4.4/7.1 | Monkey-based
 [Q-testing](https://github.com/anlalalu/Q-testing) | ISSTA'20 | no | reinforcement learning-based | no | no | 4.4/7.1/9.0 | -
-[Stoat](https://github.com/tingsu/Stoat) | FSE'17 | yes | Model-based | no | no | Any | A3E-based 
-[Sapienz](https://github.com/Rhapsod/sapienz) | ISSTA'16 | no | Search-based | no | no | 4.4 | Monkey-based
+
  
 
 ### The command line for deployment:
@@ -749,7 +764,7 @@ python3 themis.py --no-headless --avd Android7.1 --apk ../nextcloud/nextcloud-#5
 
 Here, 
 * `--login ../nextcloud/login-#5173.py` specifies the login script (which will be executed before GUI testing) 
-* In practice, we use the emulator snapshot to save the app login state directly.
+* In practice, we use the emulator snapshot to save the app login state directly (see [``LOGIN_APPS.md``](https://github.com/the-themis-benchmarks/home/tree/master/LOGIN_APPS.md) for details).
 
 # 3. Instructions for Reusing Themis
 
@@ -877,7 +892,7 @@ By leveraging the results, one can inspect the detailed coverage report generate
 
 Themis can also benefit other research (e.g., fault localization, program repair, etc.)
 
-## Main maintainers
+## Main maintainers/contributors
 
 [Ting Su](https://tingsu.github.io/), East China Normal University, China
 
@@ -885,11 +900,13 @@ Themis can also benefit other research (e.g., fault localization, program repair
 
 [Zhendong Su](https://people.inf.ethz.ch/suz/), ETH Zurich, Switzerland
 
-We welcome any feedback or questions on Themis. Free feel to share your ideas, open issues or pull requests. We are actively maintaining Themis
-to benefit our community.
-
 We appreciate the contributions from:
 
 - Enze Ma, Beijing Forestry University, China
 
 - Weigang He, East China Normal University, China
+
+- Shan Huang, East China Normal University, China
+
+We welcome any feedback or questions on Themis. Free feel to share your ideas, open issues or pull requests. We are actively maintaining Themis
+to benefit our community.
