@@ -1,0 +1,40 @@
+05-30 11:24:05.803  2957  2957 I ListPopupWindow: Could not find method setEpicenterBounds(Rect) on PopupWindow. Oh well.
+05-30 11:24:07.058  2957  2984 D OpenGLRenderer: endAllStagingAnimators on 0xaf824980 (MenuPopupWindow$MenuDropDownListView) with handle 0xaf7dc480
+05-30 11:24:10.192  2957  2957 D AndroidRuntime: Shutting down VM
+05-30 11:24:10.193  2957  2957 E AndroidRuntime: FATAL EXCEPTION: main
+05-30 11:24:10.193  2957  2957 E AndroidRuntime: Process: net.gsantner.markor, PID: 2957
+05-30 11:24:10.193  2957  2957 E AndroidRuntime: java.lang.NoClassDefFoundError: Failed resolution of: Ljava/util/function/Consumer;
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at org.apache.commons.io.IOUtils.closeQuietly(IOUtils.java:345)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at org.apache.commons.io.IOUtils.closeQuietly(IOUtils.java:498)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at other.writeily.model.WrMarkorSingleton.copyFile(WrMarkorSingleton.java:73)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at other.writeily.model.WrMarkorSingleton.moveFile(WrMarkorSingleton.java:97)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at other.writeily.model.WrMarkorSingleton.moveFile(WrMarkorSingleton.java:94)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at other.writeily.model.WrMarkorSingleton.moveSelectedNotes(WrMarkorSingleton.java:132)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at net.gsantner.opoc.ui.FilesystemViewerFragment$1.onFsViewerSelected(FilesystemViewerFragment.java:579)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at net.gsantner.opoc.ui.FilesystemViewerDialog.onFsViewerSelected(FilesystemViewerDialog.java:218)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at net.gsantner.opoc.ui.FilesystemViewerAdapter.onClick(FilesystemViewerAdapter.java:355)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at net.gsantner.opoc.ui.FilesystemViewerDialog.onClicked(FilesystemViewerDialog.java:190)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at net.gsantner.opoc.ui.FilesystemViewerDialog_ViewBinding$2.doClick(FilesystemViewerDialog_ViewBinding.java:59)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at butterknife.internal.DebouncingOnClickListener.onClick(DebouncingOnClickListener.java:22)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at android.view.View.performClick(View.java:5204)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at android.view.View$PerformClick.run(View.java:21153)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at android.os.Handler.handleCallback(Handler.java:739)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at android.os.Handler.dispatchMessage(Handler.java:95)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at android.os.Looper.loop(Looper.java:148)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at android.app.ActivityThread.main(ActivityThread.java:5654)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at java.lang.reflect.Method.invoke(Native Method)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at com.android.internal.os.ZygoteInit$MethodAndArgsCaller.run(ZygoteInit.java:759)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:649)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime: Caused by: java.lang.ClassNotFoundException: Didn't find class "java.util.function.Consumer" on path: DexPathList[[zip file "/data/app/net.gsantner.markor-1/base.apk"],nativeLibraryDirectories=[/data/app/net.gsantner.markor-1/lib/x86, /vendor/lib, /system/lib]]
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at dalvik.system.BaseDexClassLoader.findClass(BaseDexClassLoader.java:56)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at java.lang.ClassLoader.loadClass(ClassLoader.java:511)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        at java.lang.ClassLoader.loadClass(ClassLoader.java:469)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        ... 21 more
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        Suppressed: java.lang.ClassNotFoundException: java.util.function.Consumer
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:                at java.lang.Class.classForName(Native Method)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:                at java.lang.BootClassLoader.findClass(ClassLoader.java:781)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:                at java.lang.BootClassLoader.loadClass(ClassLoader.java:841)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:                at java.lang.ClassLoader.loadClass(ClassLoader.java:504)
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:                ... 22 more
+05-30 11:24:10.193  2957  2957 E AndroidRuntime:        Caused by: java.lang.NoClassDefFoundError: Class not found using the boot class loader; no stack trace available
+05-30 11:24:10.195   703  1093 W ActivityManager:   Force finishing activity net.gsantner.markor/.activity.MainActivity
