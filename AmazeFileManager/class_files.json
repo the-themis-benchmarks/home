@@ -30,6 +30,24 @@
 		"sourcefiles": ["AmazeFileManager-#1232/app/src/main/java/",
 						"AmazeFileManager-#1232/commons_compress_7z/src/main/java/"
 		]
+	},
+
+	"AmazeFileManager-3.6.1-#2647.apk": {
+		"classfiles": ["AmazeFileManager-#2647/app/build/intermediates/javac/fdroidDebug/classes/",
+						"AmazeFileManager-#2647/commons_compress_7z/build/intermediates/javac/debug/classes/"
+		],
+		"sourcefiles": ["AmazeFileManager-#2647/app/src/main/java/",
+						"AmazeFileManager-#2647/commons_compress_7z/src/main/java/"
+		]
+	},
+
+	"AmazeFileManager-3.7.0-#3333.apk": {
+		"classfiles": ["AmazeFileManager-#3333/app/build/intermediates/javac/fdroidDebug/classes/",
+						"AmazeFileManager-#3333/commons_compress_7z/build/intermediates/javac/debug/classes/"
+		],
+		"sourcefiles": ["AmazeFileManager-#3333/app/src/main/java/",
+						"AmazeFileManager-#3333/commons_compress_7z/src/main/java/"
+		]
 	}
 
 }
