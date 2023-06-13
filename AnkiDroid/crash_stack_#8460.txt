@@ -1,0 +1,15 @@
+FATAL EXCEPTION: main
+    Process: com.ichi2.anki, PID: 8167
+    java.lang.NullPointerException: Attempt to invoke virtual method 'android.view.View android.view.View.findViewById(int)' on a null object reference
+        at com.ichi2.anki.CardBrowser.lambda$onCollectionLoaded$2$CardBrowser(CardBrowser.java:673)
+        at com.ichi2.anki.-$$Lambda$CardBrowser$cpk2FDlr72riVUwAw9LYnTvoqho.onItemLongClick(Unknown Source:6)
+        at android.widget.AbsListView.performLongPress(AbsListView.java:3302)
+        at android.widget.AbsListView$CheckForLongPress.run(AbsListView.java:3217)
+        at android.os.Handler.handleCallback(Handler.java:938)
+        at android.os.Handler.dispatchMessage(Handler.java:99)
+        at android.os.Looper.loopOnce(Looper.java:201)
+        at android.os.Looper.loop(Looper.java:288)
+        at android.app.ActivityThread.main(ActivityThread.java:7839)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:548)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:1003)
