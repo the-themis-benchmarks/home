@@ -1,0 +1,21 @@
+java.lang.RuntimeException: Error receiving broadcast Intent { act=loadlist flg=0x10 (has extras) } in com.amaze.filemanager.ui.fragments.MainFragment$2@e15acdd
+	at android.app.LoadedApk$ReceiverDispatcher$Args.lambda$-android_app_LoadedApk$ReceiverDispatcher$Args_52497(LoadedApk.java:1323)
+	at android.app.-$Lambda$aS31cHIhRx41653CMnd4gZqshIQ.$m$7(Unknown Source:4)
+	at android.app.-$Lambda$aS31cHIhRx41653CMnd4gZqshIQ.run(Unknown Source:39)
+	at android.os.Handler.handleCallback(Handler.java:790)
+	at android.os.Handler.dispatchMessage(Handler.java:99)
+	at android.os.Looper.loop(Looper.java:164)
+	at android.app.ActivityThread.main(ActivityThread.java:6494)
+	at java.lang.reflect.Method.invoke(Native Method)
+	at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:438)
+	at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:807)
+Caused by: java.lang.NullPointerException: Attempt to invoke virtual method 'void com.amaze.filemanager.ui.fragments.TabFragment.setPagingEnabled(boolean)' on a null object reference
+	at com.amaze.filemanager.ui.activities.MainActivity.setPagingEnabled(MainActivity.java:1441)
+	at com.amaze.filemanager.utils.MainActivityActionMode.onDestroyActionMode(MainActivityActionMode.kt:435)
+	at androidx.appcompat.app.AppCompatDelegateImpl$ActionModeCallbackWrapperV9.onDestroyActionMode(AppCompatDelegateImpl.java:2708)
+	at androidx.appcompat.view.StandaloneActionMode.finish(StandaloneActionMode.java:112)
+	at com.amaze.filemanager.ui.fragments.MainFragment.loadlist(MainFragment.java:611)
+	at com.amaze.filemanager.ui.fragments.MainFragment.updateList(MainFragment.java:1217)
+	at com.amaze.filemanager.ui.fragments.MainFragment$2.onReceive(MainFragment.java:389)
+	at android.app.LoadedApk$ReceiverDispatcher$Args.lambda$-android_app_LoadedApk$ReceiverDispatcher$Args_52497(LoadedApk.java:1313)
+	... 9 more

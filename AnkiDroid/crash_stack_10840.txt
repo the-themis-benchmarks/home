@@ -1,0 +1,23 @@
+05-30 03:44:33.661  2465  2465 E AndroidRuntime: Process: com.google.android.apps.nexuslauncher, PID: 2465
+05-30 03:44:33.661  2465  2465 E AndroidRuntime: java.lang.RuntimeException: Unable to resume activity {com.google.android.apps.nexuslauncher/com.google.
+android.apps.nexuslauncher.NexusLauncherActivity}: java.util.ConcurrentModificationException
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.ActivityThread.performResumeActivity(ActivityThread.java:4205)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.ActivityThread.handleResumeActivity(ActivityThread.java:4237)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.servertransaction.ResumeActivityItem.execute(ResumeActivityItem.java:52)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.servertransaction.TransactionExecutor.executeLifecycleState(TransactionExecutor.ja
+va:176)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.servertransaction.TransactionExecutor.execute(TransactionExecutor.java:97)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.ActivityThread$H.handleMessage(ActivityThread.java:2016)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.os.Handler.dispatchMessage(Handler.java:107)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.os.Looper.loop(Looper.java:214)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.ActivityThread.main(ActivityThread.java:7356)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at java.lang.reflect.Method.invoke(Native Method)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:492)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:930)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime: Caused by: java.util.ConcurrentModificationException
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at java.util.ArrayList$Itr.next(ArrayList.java:860)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at com.android.launcher3.Launcher.onResume(SourceFile:6)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.Instrumentation.callActivityOnResume(Instrumentation.java:1446)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.Activity.performResume(Activity.java:7939)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        at android.app.ActivityThread.performResumeActivity(ActivityThread.java:4195)
+05-30 03:44:33.661  2465  2465 E AndroidRuntime:        ... 11 more

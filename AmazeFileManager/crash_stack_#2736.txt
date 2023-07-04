@@ -1,0 +1,21 @@
+com.amaze.filemanager.debug E/class com.amaze.filemanager.crashreport.ErrorActivity: java.lang.NullPointerException: Attempt to invoke virtual method 'boolean androidx.preference.PreferenceFragmentCompat.onOptionsItemSelected(android.view.MenuItem)' on a null object reference
+        at com.amaze.filemanager.ui.activities.PreferencesActivity.onOptionsItemSelected(PreferencesActivity.java:138)
+        at android.app.Activity.onMenuItemSelected(Activity.java:3543)
+        at androidx.fragment.app.FragmentActivity.onMenuItemSelected(FragmentActivity.java:340)
+        at androidx.appcompat.app.AppCompatActivity.onMenuItemSelected(AppCompatActivity.java:228)
+        at androidx.appcompat.view.WindowCallbackWrapper.onMenuItemSelected(WindowCallbackWrapper.java:109)
+        at androidx.appcompat.view.WindowCallbackWrapper.onMenuItemSelected(WindowCallbackWrapper.java:109)
+        at androidx.appcompat.widget.ToolbarWidgetWrapper$1.onClick(ToolbarWidgetWrapper.java:188)
+        at android.view.View.performClick(View.java:6597)
+        at android.view.View.performClickInternal(View.java:6574)
+        at android.view.View.access$3100(View.java:778)
+        at android.view.View$PerformClick.run(View.java:25885)
+        at android.os.Handler.handleCallback(Handler.java:873)
+        at android.os.Handler.dispatchMessage(Handler.java:99)
+        at android.os.Looper.loop(Looper.java:193)
+        at android.app.ActivityThread.main(ActivityThread.java:6669)
+        at java.lang.reflect.Method.invoke(Native Method)
+        at com.android.internal.os.RuntimeInit$MethodAndArgsCaller.run(RuntimeInit.java:493)
+        at com.android.internal.os.ZygoteInit.main(ZygoteInit.java:858)
+com.amaze.filemanager.debug E/eglCodecCommon: GoldfishAddressSpaceHostMemoryAllocator: ioctl_ping failed for device_type=5, ret=-1
+
