@@ -12,15 +12,6 @@ For issue #3333
 
 - Need to put more than two .zip/.rar/.gz/.apk...(>500MB) files in "Download" folder.
 
-For issue #3304
-
-- Only behaves as a crash on Android 7.1.
-- Has no script due to the search function, which requires a click on keyboard to take effect. (The keboard varies depending on the state of the emulator)
-
-For issue #3207
-
-- Has no script due to the search function, which requires a click on keyboard to take effect. (The keboard varies depending on the state of the emulator)
-
 For issue #2736
 
 - Has no script, this bug is related to the 'split screen' feature which is supported only after Android 7.0.
