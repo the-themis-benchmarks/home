@@ -30,12 +30,36 @@ for benchmarking automated GUI testing for Android and beyond.
 }
 ```
 
+[1] "[Automata-Based Trace Analysis for Aiding Diagnosing {GUI} Testing Tools for Android](https://tingsu.github.io/files/fse21-themis.pdf)". Enze Ma, Shan Huang, Weigang He, Ting Su*, Jue Wang, Huiyu Liu, Geguang Pu, Zhendong Su. *31th ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering* (ESEC/FSE 2023) 
+
+Tool: [DDroid](https://github.com/DDroid-Android/home)
+
+```
+@inproceedings{DDroid,
+  author       = {Enze Ma and
+                  Shan Huang and
+                  Weigang He and
+                  Ting Su and
+                  Jue Wang and
+                  Huiyu Liu and
+                  Geguang Pu and
+                  Zhendong Su},
+  title        = {Automata-Based Trace Analysis for Aiding Diagnosing {GUI} Testing
+                  Tools for Android},
+  booktitle    = {Proceedings of the 31st {ACM} Joint European Software Engineering
+                  Conference and Symposium on the Foundations of Software Engineering (ESEC/FSE)},
+  pages        = {592--604},
+  year         = {2023},
+  doi          = {10.1145/3611643.3616361}
+}
+```
 
 
 # News
 
 #### - Themis's paper was accepted to ESEC/FSE'21! 
 #### - We released Themis's dataset and infrastructure！
+#### - DDroid's paper was accepted to ESEC/FSE'23! 
 
 # 1. Contents of Themis
 
